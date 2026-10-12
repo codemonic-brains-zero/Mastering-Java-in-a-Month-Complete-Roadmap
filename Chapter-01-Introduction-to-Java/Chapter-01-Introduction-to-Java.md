@@ -221,6 +221,8 @@ The output changes because the source code changed and the updated source was co
 - **Launcher (`java`):** starts the Java Virtual Machine to execute the class.
 - **Console / output panel:** displays text printed by your program and any runtime messages.
 - **Eclipse Console:** shows the program output after you use **Run As > Java Application**. The exact panels and menu wording may vary slightly by Eclipse version.
+<!-- INLINE_JAVA_EDITOR -->
+
 ## 12. Compilation and execution
 Compilation and execution are separate steps. javac Main.java compiles source code. java Main launches the compiled class; omit the .class extension. An IDE can automate these steps, but understanding them helps you diagnose problems.
 
