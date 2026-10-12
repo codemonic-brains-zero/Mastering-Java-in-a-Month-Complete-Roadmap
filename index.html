@@ -121,6 +121,67 @@ button{margin:.15rem .2rem .15rem 0!important}
 @media(max-width:900px){main{gap:1.25rem!important;margin-top:1.25rem!important}.chapter{padding:1.25rem!important}}
 @media(max-width:600px){header h1{margin:1rem 0 1.2rem!important}.chapter h2{margin-top:2.25rem!important}.chapter p{margin-bottom:1rem!important}.chapter li{margin:.35rem 0!important}}
 
+
+/* GLOWING FREE-SPACE REDESIGN */
+:root{--green:#66ffb5;--cyan:#67eaff;--pink:#ff65d8;--glow:rgba(75,255,177,.38)}
+html{
+ background-color:#05070d!important;
+ background-image:
+ radial-gradient(ellipse at 50% 0%,rgba(31,255,162,.16),transparent 48%),
+ radial-gradient(ellipse at 95% 35%,rgba(93,73,255,.12),transparent 38%),
+ linear-gradient(rgba(102,255,181,.035) 1px,transparent 1px),
+ linear-gradient(90deg,rgba(102,255,181,.035) 1px,transparent 1px)!important;
+ background-size:auto,auto,38px 38px,38px 38px!important;
+}
+body{width:100%!important;max-width:none!important;line-height:1.75!important}
+header{
+ padding:clamp(3.5rem,8vw,7rem) max(5vw,calc((100vw - 1440px)/2)) clamp(3rem,6vw,5rem)!important;
+ background:linear-gradient(120deg,rgba(5,13,15,.98),rgba(8,15,25,.94) 58%,rgba(20,9,29,.96))!important;
+ box-shadow:0 0 45px rgba(69,255,173,.10),0 22px 75px #0008!important;
+}
+header h1{text-shadow:0 0 12px rgba(69,255,173,.32),0 0 38px rgba(69,255,173,.17)!important}
+header .tag{box-shadow:0 0 18px rgba(69,255,173,.12)!important}
+main{
+ width:min(1440px,94vw)!important;
+ grid-template-columns:minmax(0,1.6fr) minmax(340px,.85fr)!important;
+ gap:clamp(1.25rem,2.4vw,2.5rem)!important;
+ margin:clamp(1.5rem,3vw,3rem) auto 5rem!important;
+}
+.chapter,.playground{
+ background:linear-gradient(145deg,rgba(10,19,25,.97),rgba(6,12,18,.96))!important;
+ border:1px solid rgba(102,255,181,.26)!important;
+ box-shadow:0 0 0 1px rgba(102,255,181,.025),0 0 28px rgba(69,255,173,.075),0 24px 70px rgba(0,0,0,.34)!important;
+}
+.chapter{padding:clamp(1.5rem,3vw,3rem)!important}
+.chapter:before{box-shadow:0 4px 18px rgba(69,255,173,.035)!important}
+.chapter h1,.chapter h2,.chapter h3{ text-shadow:0 0 16px rgba(102,255,181,.10)!important}
+.chapter h2{border-bottom-color:rgba(102,255,181,.28)!important}
+.chapter a{ text-shadow:0 0 10px rgba(103,234,255,.22)!important}
+.playground{
+ position:sticky!important;top:1.25rem!important;
+ padding:clamp(1.25rem,2vw,1.75rem)!important;
+}
+.playground h2,.playground h3{color:#eafff5!important;text-shadow:0 0 14px rgba(102,255,181,.24)!important}
+#source,.CodeMirror,.cm-editor{
+ box-shadow:inset 0 0 22px rgba(69,255,173,.035),0 0 20px rgba(69,255,173,.045)!important;
+}
+#output,.output,.output-panel{
+ box-shadow:inset 0 0 18px rgba(76,233,255,.055),0 0 18px rgba(76,233,255,.075)!important;
+}
+button,.button{
+ box-shadow:0 0 13px rgba(69,255,173,.075)!important;
+}
+button:hover,.button:hover{
+ box-shadow:0 0 9px rgba(69,255,173,.38),0 0 24px rgba(69,255,173,.19)!important;
+}
+input:focus,select:focus,textarea:focus,#source:focus{
+ outline:1px solid rgba(102,255,181,.8)!important;
+ box-shadow:0 0 0 3px rgba(102,255,181,.10),0 0 20px rgba(69,255,173,.14)!important;
+}
+pre{box-shadow:inset 0 0 20px rgba(69,255,173,.035),0 0 16px rgba(69,255,173,.045)!important}
+@media(min-width:1500px){main{width:min(1500px,94vw)!important;grid-template-columns:minmax(0,1.7fr) minmax(360px,.8fr)!important}}
+@media(max-width:900px){main{width:94vw!important;grid-template-columns:minmax(0,1fr)!important}.playground{position:relative!important;top:auto!important}}
+
 </style>
 </head>
 <body>
