@@ -449,15 +449,12 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
 @media(max-width:600px){header.hero-header{padding:1.5rem 4vw!important}.hero-layout{gap:1rem!important}.hero-copy p:nth-of-type(2){display:none!important}.hero-header .playground{padding:.7rem!important}.hero-header #sourceEditor{height:155px!important}.hero-header .editor-toolbar{align-items:center!important}}
 
 
-/* MOVE ONLY THE CODE EDITOR: keep compiler controls/output at chapter marker */
+/* MOVE THE COMPLETE PLAYGROUND BESIDE THE CHAPTER HEADING */
 .hero-layout{grid-template-columns:minmax(0,1fr) minmax(340px,.85fr)!important;align-items:center!important}
-.hero-editor-dock{position:relative;z-index:2;min-width:0;width:100%;max-width:620px;margin:0 auto;padding:clamp(.65rem,1.3vw,1rem);background:linear-gradient(160deg,rgba(12,25,27,.98),rgba(7,12,18,.98));border:1px solid #34745a;border-radius:12px;box-shadow:0 18px 55px #0008,0 0 28px #45ffad10}
-.hero-editor-label{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:.55rem;color:#45ffad;font:600 9px ui-monospace,monospace;letter-spacing:.12em}
-.hero-editor-placeholder{height:190px;display:grid;place-items:center;color:#8eafa0;font:12px ui-monospace,monospace}
-.hero-editor-dock #sourceEditor{height:190px!important;min-height:140px!important;width:100%!important;font-size:12px!important}
-#playground #sourceEditor{height:360px;min-height:260px}
-@media(max-width:900px){.hero-layout{grid-template-columns:minmax(0,1fr)!important}.hero-editor-dock{max-width:none}.hero-editor-dock #sourceEditor{height:180px!important}}
-@media(max-width:600px){.hero-editor-dock #sourceEditor{height:155px!important}}
+.hero-editor-dock{position:relative;z-index:2;min-width:0;width:100%;max-width:760px;margin:0 auto} .hero-header .playground{position:relative!important;top:auto!important;grid-column:auto!important;grid-row:auto!important;width:100%!important;max-width:none!important;margin:0!important;min-width:0!important}
+.hero-header .playground #sourceEditor{height:300px!important;min-height:260px!important;width:100%!important;font-size:13px!important}
+@media(max-width:900px){.hero-layout{grid-template-columns:minmax(0,1fr)!important}.hero-editor-dock{max-width:none}.hero-header .playground #sourceEditor{height:280px!important}}
+@media(max-width:600px){.hero-header .playground #sourceEditor{height:240px!important}}
 </style>
 </head>
 <body>
@@ -508,8 +505,7 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
       <p>The editor is built into this learning page; GitHub's own Markdown preview cannot run interactive editors.</p>
     </div>
     <div class="hero-editor-dock" id="heroEditorDock" aria-label="Java code editor">
-      <div class="hero-editor-label"><span>LIVE CODE EDITOR</span><span>JAVA · MAIN.JAVA</span></div>
-      <div class="hero-editor-placeholder">Initialising editor…</div>
+      
     </div>
   </div>
 </header>
@@ -653,7 +649,7 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
       chapter.innerHTML = renderPart(parts[0]);
       addChapterBlueprints();
       animateChapterEntrance();
-      chapter.appendChild(playground);
+      heroEditorDock.appendChild(playground);
       const after = document.createElement('div');
       after.innerHTML = renderPart(parts.slice(1).join(marker));
       while(after.firstChild) chapter.appendChild(after.firstChild);
@@ -663,20 +659,15 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
       chapter.innerHTML = renderPart(md);
       addChapterBlueprints();
       animateChapterEntrance();
-      chapter.appendChild(playground);
+      heroEditorDock.appendChild(playground);
     }
     chapter.appendChild(sourceLink);
   }).catch(function(error){
     chapter.innerHTML = '<p class="status error">Chapter notes could not be loaded. You can still use the editor below. Open the <a href="https://github.com/codemonic-brains-zero/Mastering-Java-in-a-Month-Complete-Roadmap/blob/main/Chapter-01-Introduction-to-Java/Chapter-01-Introduction-to-Java.md">Markdown chapter on GitHub</a> instead.</p>';
-    chapter.appendChild(playground);
+    heroEditorDock.appendChild(playground);
     chapter.appendChild(sourceLink);
   });
   const heroEditorDock = document.getElementById('heroEditorDock');
-  const sourceEditorElement = document.getElementById('sourceEditor');
-  if(heroEditorDock && sourceEditorElement){
-    const placeholder = heroEditorDock.querySelector('.hero-editor-placeholder');
-    if(placeholder) placeholder.replaceWith(sourceEditorElement);
-  }
   if(window.ace){
     editor = ace.edit('sourceEditor');
     requestAnimationFrame(function(){ if(editor) editor.resize(); });
