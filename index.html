@@ -182,6 +182,21 @@ pre{box-shadow:inset 0 0 20px rgba(69,255,173,.035),0 0 16px rgba(69,255,173,.04
 @media(min-width:1500px){main{width:min(1500px,94vw)!important;grid-template-columns:minmax(0,1.7fr) minmax(360px,.8fr)!important}}
 @media(max-width:900px){main{width:94vw!important;grid-template-columns:minmax(0,1fr)!important}.playground{position:relative!important;top:auto!important}}
 
+
+/* EDITOR LAYOUT FIX: keep the playground in document flow and prevent clipping */
+#chapter{min-width:0!important;overflow:visible!important}
+#playground,.playground{position:static!important;top:auto!important;float:none!important;clear:both!important;display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important;grid-column:auto!important;align-self:stretch!important;margin:2rem 0!important;overflow:visible!important}
+#playground *,.playground *{box-sizing:border-box}
+.CodeMirror{width:100%!important;max-width:100%!important;height:auto!important;min-height:300px!important;overflow:hidden!important;border-radius:8px!important}
+.CodeMirror-scroll{min-height:300px!important;max-height:65vh!important;overflow:auto!important}
+.CodeMirror-sizer{min-width:0!important}
+.CodeMirror-lines{padding:8px 0!important}
+#source{display:block;width:100%!important;max-width:100%!important;min-height:320px!important;white-space:pre!important;overflow:auto!important;box-sizing:border-box!important}
+#output{max-width:100%!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important;overflow-x:auto!important}
+#chapter .markdown-source-link{display:block!important;margin:2.5rem 0 0!important;padding:1rem 0 0!important;border-top:1px solid rgba(102,255,181,.22)!important;overflow-wrap:anywhere!important}
+#chapter .markdown-source-link a{display:inline-block!important;max-width:100%!important;line-height:1.7!important}
+@media(max-width:900px){#playground,.playground{position:static!important;margin:1.5rem 0!important} .CodeMirror{min-height:260px!important}.CodeMirror-scroll{min-height:260px!important}}
+
 </style>
 </head>
 <body>
@@ -212,7 +227,6 @@ pre{box-shadow:inset 0 0 20px rgba(69,255,173,.035),0 0 16px rgba(69,255,173,.04
     <pre id="output" class="output">Your program's output will appear here.</pre>
     <p class="note">Execution uses a public third-party service and may be rate-limited or temporarily unavailable. Do not submit passwords, API keys, personal information, or sensitive code. Programs run in a sandbox with service-defined limits.</p>
   </section>
-  <p><a href="https://github.com/codemonic-brains-zero/Mastering-Java-in-a-Month-Complete-Roadmap/blob/main/Chapter-01-Introduction-to-Java/Chapter-01-Introduction-to-Java.md">View the original Markdown file on GitHub ↗</a></p>
 </main>
 <footer>Mastering Java in a Month · Chapter 1</footer>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -225,6 +239,9 @@ pre{box-shadow:inset 0 0 20px rgba(69,255,173,.035),0 0 16px rgba(69,255,173,.04
   const marker = '<!-- INLINE_JAVA_EDITOR -->';
   const chapter = document.getElementById('chapter');
   const playground = document.getElementById('playground');
+  const sourceLink = document.createElement('p');
+  sourceLink.className = 'markdown-source-link';
+  sourceLink.innerHTML = '<a href="https://github.com/codemonic-brains-zero/Mastering-Java-in-a-Month-Complete-Roadmap/blob/main/Chapter-01-Introduction-to-Java/Chapter-01-Introduction-to-Java.md">View the original Markdown file on GitHub ↗</a>';
   const defaultCode = document.getElementById('source').value;
   const languageSelect = document.getElementById('language');
   const templates = {
