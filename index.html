@@ -86,6 +86,41 @@ footer{color:#769587!important}
 @media(max-width:900px){main{grid-template-columns:minmax(0,1fr)!important;width:min(760px,92vw)!important} .chapter,.playground{grid-column:1!important}.playground{position:relative!important;top:auto!important;grid-row:1!important}}
 @media(max-width:600px){header{padding:3rem 5vw 2.5rem!important}main{width:92vw!important;margin:1rem auto 3rem!important;gap:1rem!important}.playground{padding:.85rem!important}.editor-toolbar{align-items:flex-start!important}}
 
+
+/* SPACING FIX: restore generous, consistent rhythm across the whole page */
+html{scroll-behavior:smooth}
+body{line-height:1.75!important}
+header{padding-top:clamp(3.5rem,8vw,7rem)!important;padding-bottom:clamp(3rem,6vw,5rem)!important}
+header .tag{margin-bottom:1rem!important}
+header h1{margin:1.15rem 0 1.4rem!important}
+header p{margin:1rem 0!important}
+main{gap:clamp(1.25rem,3vw,2.25rem)!important;margin:clamp(1.5rem,4vw,3.5rem) auto 5rem!important}
+.chapter{padding:clamp(1.35rem,3vw,2.75rem)!important}
+.chapter>*+*{margin-top:1.15rem!important}
+.chapter h1{margin:0 0 1.5rem!important}
+.chapter h2{margin:3rem 0 1.1rem!important;padding-bottom:.75rem!important}
+.chapter h3{margin:2.1rem 0 .8rem!important}
+.chapter h4{margin:1.6rem 0 .65rem!important}
+.chapter p{margin:0 0 1.15rem!important;line-height:1.9!important}
+.chapter ul,.chapter ol{margin:1rem 0 1.5rem!important;padding-left:1.65rem!important}
+.chapter li{margin:.45rem 0!important;padding-left:.2rem!important;line-height:1.8!important}
+.chapter li>ul,.chapter li>ol{margin:.5rem 0 .8rem!important}
+.chapter blockquote{margin:1.5rem 0!important;padding:1rem 1.25rem!important;border-left:3px solid #45ffad!important;background:#0a1714!important;border-radius:0 8px 8px 0!important}
+.chapter pre{margin:1.4rem 0 1.8rem!important;padding:1.25rem!important;line-height:1.75!important}
+.chapter table{width:100%!important;border-collapse:separate!important;border-spacing:0!important;margin:1.5rem 0 2rem!important}
+.chapter th,.chapter td{padding:.8rem 1rem!important;border-bottom:1px solid #294638!important;text-align:left!important}
+.chapter img{max-width:100%!important;height:auto!important;border-radius:8px!important}
+.chapter hr{margin:2.5rem 0!important}
+.playground{padding:clamp(1rem,2vw,1.5rem)!important}
+.playground h2{margin:.4rem 0 .85rem!important}
+.playground>p{margin:0 0 1.25rem!important;line-height:1.8!important}
+.editor-toolbar{margin:1rem 0!important;padding:.9rem!important;gap:.8rem!important}
+#source{display:block!important;margin:1rem 0 1.25rem!important;padding:1rem 1.1rem!important;line-height:1.8!important}
+#output{display:block!important;margin:.85rem 0 0!important;padding:1rem!important;line-height:1.8!important}
+button{margin:.15rem .2rem .15rem 0!important}
+@media(max-width:900px){main{gap:1.25rem!important;margin-top:1.25rem!important}.chapter{padding:1.25rem!important}}
+@media(max-width:600px){header h1{margin:1rem 0 1.2rem!important}.chapter h2{margin-top:2.25rem!important}.chapter p{margin-bottom:1rem!important}.chapter li{margin:.35rem 0!important}}
+
 </style>
 </head>
 <body>
