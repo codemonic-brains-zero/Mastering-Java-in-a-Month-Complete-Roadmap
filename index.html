@@ -8,29 +8,31 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css">
   <style>
-    :root{color-scheme:dark;--bg:#050907;--panel:#0a130d;--line:#1b4a2a;--text:#d9ffe3;--muted:#8bb99a;--accent:#39ff78;--green:#39ff78}
-    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#0b1a10 0%,var(--bg) 60%);color:var(--text);font:16px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace}
-    header{padding:30px clamp(16px,5vw,64px);background:linear-gradient(135deg,#07150b,#030604);border-bottom:1px solid var(--line);box-shadow:0 5px 28px #39ff780b}
+    :root{color-scheme:dark;--bg:rgba(0,0,0,.88);--panel:rgba(0,0,0,.62);--line:rgba(0,255,65,.38);--text:#00ff41;--muted:#00c832;--accent:#00ff41;--green:#00ff41}
+    *{box-sizing:border-box}html{background:#000}body{margin:0;background:rgba(0,0,0,.84);color:var(--text);font:16px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace}
+    header{padding:30px clamp(16px,5vw,64px);background:rgba(0,0,0,.68);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);box-shadow:none}
     header:before{content:"root@mastering-java:~$ ./learn --chapter 01";display:block;color:var(--green);font-size:.82rem;letter-spacing:.03em;margin-bottom:12px}
-    header p{color:var(--muted);margin:6px 0}h1{font-size:clamp(1.8rem,4vw,2.5rem);line-height:1.2;margin:8px 0;color:#baffca;text-shadow:0 0 16px #39ff7820}
+    header p{color:var(--muted);margin:6px 0}h1{font-size:clamp(1.8rem,4vw,2.5rem);line-height:1.2;margin:8px 0;color:#00ff41;text-shadow:none}
     main{max-width:1050px;margin:auto;padding:24px clamp(14px,3vw,30px) 48px}
-    .chapter{overflow-wrap:anywhere}.chapter h2,.chapter h3{margin-top:1.8em;line-height:1.35;color:#75ff9c;border-bottom:1px solid #173d23;padding-bottom:7px}
-    .chapter h2:before{content:"// ";color:#3da85d}.chapter h3{color:#b2ffc5;border-bottom:0}.chapter a{color:#68ff91;text-decoration-color:#287c42}
-    .chapter p,.chapter li,.chapter td{color:#d1e9d8}.chapter strong{color:#f0fff3}
-    .chapter pre{overflow:auto;background:#030805;border:1px solid var(--line);border-radius:8px;padding:14px;box-shadow:inset 0 0 20px #39ff7808}
-    .chapter code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:#9affb2}.chapter :not(pre)>code{background:#0c1c11;border:1px solid #153d22;padding:2px 5px;border-radius:4px}
-    .chapter table{border-collapse:collapse;display:block;overflow-x:auto;width:100%}.chapter th,.chapter td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}.chapter th{background:#0d2013;color:#79ff9d}
-    .playground{margin:26px 0;padding:18px;border:1px solid #26743b;border-radius:10px;background:linear-gradient(145deg,#09140c,#060b07);box-shadow:0 0 24px #39ff780a}
+    .chapter{overflow-wrap:anywhere}.chapter h2,.chapter h3{margin-top:1.8em;line-height:1.35;color:#00ff41;border-bottom:1px solid rgba(0,255,65,.25);padding-bottom:7px}
+    .chapter h2:before{content:"// ";color:#00c832}.chapter h3{color:#00ff41;border-bottom:0}.chapter a{color:#00ff41;text-decoration-color:#00c832}
+    .chapter p,.chapter li,.chapter td{color:#00e83b}.chapter strong{color:#00ff41}
+    .chapter pre{overflow:auto;background:rgba(0,0,0,.55);border:1px solid var(--line);border-radius:8px;padding:14px;box-shadow:none}
+    .chapter code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:#00ff41}.chapter :not(pre)>code{background:rgba(0,0,0,.48);border:1px solid rgba(0,255,65,.22);padding:2px 5px;border-radius:4px}
+    .chapter table{border-collapse:collapse;display:block;overflow-x:auto;width:100%}.chapter th,.chapter td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}.chapter th{background:rgba(0,0,0,.65);color:#00ff41}
+    .playground{margin:26px 0;padding:18px;border:1px solid #26743b;border-radius:10px;background:rgba(0,0,0,.58);backdrop-filter:blur(8px);box-shadow:none}
     .playground h2{margin:0 0 4px;color:var(--green)}.muted{color:var(--muted)}.editor-toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:14px 0 8px}
-    .buttons{display:flex;gap:8px;flex-wrap:wrap}button{font:inherit;font-weight:600;border:1px solid #276c3a;border-radius:6px;padding:9px 13px;color:#d9ffe3;background:#0c2112;cursor:pointer}
-    button.primary{background:#123d20;border-color:#39ff78;color:#aaffbd}button:disabled{opacity:.55;cursor:wait}button:hover:not(:disabled){filter:brightness(1.18);box-shadow:0 0 12px #39ff7820}
+    .buttons{display:flex;gap:8px;flex-wrap:wrap}button{font:inherit;font-weight:600;border:1px solid #276c3a;border-radius:6px;padding:9px 13px;color:#00ff41;background:rgba(0,0,0,.55);cursor:pointer}
+    button.primary{background:rgba(0,40,10,.72);border-color:#00ff41;color:#00ff41}button:disabled{opacity:.55;cursor:wait}button:hover:not(:disabled){filter:brightness(1.12);box-shadow:none}
     .CodeMirror{height:300px;border:1px solid #245b32;border-radius:7px;font:14px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}
-    .CodeMirror,.CodeMirror-gutters{background:#030805!important}.CodeMirror-gutters{border-right:1px solid #153d22!important}.CodeMirror-linenumber{color:#477d54!important}.CodeMirror-cursor{border-left:2px solid #39ff78!important}
-    .cm-s-material-darker .cm-keyword{color:#68ff91!important}.cm-s-material-darker .cm-string{color:#d0ff88!important}.cm-s-material-darker .cm-number{color:#b2ffc5!important}
+    .CodeMirror,.CodeMirror-gutters{background:rgba(0,0,0,.72)!important}.CodeMirror-gutters{border-right:1px solid #153d22!important}.CodeMirror-linenumber{color:#008f26!important}.CodeMirror-cursor{border-left:2px solid #00ff41!important}
+    .cm-s-material-darker .cm-keyword{color:#00ff41!important}.cm-s-material-darker .cm-string{color:#00ff41!important}.cm-s-material-darker .cm-number{color:#00ff41!important}
     .output{min-height:92px;max-height:280px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#020503;border:1px solid #245b32;border-radius:7px;padding:12px;color:#9affb2;font:13px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}
-    .status{font-size:.9rem;color:var(--muted);margin:8px 0}.status.error{color:#ffaaa8}.status.ok{color:#7dff9b}
+    .status{font-size:.9rem;color:var(--muted);margin:8px 0}.status.error{color:#ffaaa8}.status.ok{color:#00ff41}
     .note{font-size:.88rem;color:var(--muted);margin-top:12px}.tag{display:inline-block;border-radius:4px;background:#0d2614;color:#7dff9b;border:1px solid #1d542d;padding:3px 9px;font-size:.8rem}
-    footer{text-align:center;border-top:1px solid var(--line);padding:20px;color:var(--muted);font-size:.9rem}
+    footer{text-align:center;border-top:1px solid var(--line);padding:20px;color:var(--muted);font-size:.9rem;background:rgba(0,0,0,.65)}
+    .compiler-options{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.compiler-options label{color:#00ff41}.compiler-options select{font:inherit;color:#00ff41;background:rgba(0,0,0,.8);border:1px solid rgba(0,255,65,.45);border-radius:6px;padding:8px;max-width:100%}
+    .chapter h1,.chapter h2,.chapter h3,.chapter h4,.chapter h5,.chapter h6,.chapter p,.chapter li,.chapter blockquote,.chapter th,.chapter td,.chapter strong,.chapter em{color:#00ff41}.chapter blockquote{border-left:2px solid rgba(0,255,65,.45);padding-left:12px}.chapter hr{border:0;border-top:1px solid rgba(0,255,65,.3)}
     @media(max-width:600px){.playground{padding:12px}.CodeMirror{height:260px}}
   </style>
 </head>
@@ -47,7 +49,7 @@
     <h2>Java Playground</h2>
     <p class="muted">Edit the example and run it. Compilation and execution are handled by the Judge0 Java service.</p>
     <div class="editor-toolbar">
-      <span class="muted">Java · OpenJDK · standard input supported</span>
+      <div class="compiler-options"><label for="language">Compiler:</label><select id="language" aria-label="Choose programming language"><option value="62">Java</option><option value="71">Python 3</option><option value="54">C++</option><option value="50">C</option><option value="63">JavaScript (Node.js)</option><option value="51">C#</option></select><span class="muted">Multiple languages · standard input supported</span></div>
       <div class="buttons">
         <button id="reset">Reset code</button>
         <button id="run" class="primary">▶ Run Java</button>
@@ -76,6 +78,16 @@
   const chapter = document.getElementById('chapter');
   const playground = document.getElementById('playground');
   const defaultCode = document.getElementById('source').value;
+  const languageSelect = document.getElementById('language');
+  const templates = {
+    '62':'public class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello, Java!");\n    }\n}',
+    '71':'print("Hello, Python!")',
+    '54':'#include <iostream>\nusing namespace std;\nint main() {\n    cout << "Hello, C++!" << endl;\n    return 0;\n}',
+    '50':'#include <stdio.h>\nint main(void) {\n    printf("Hello, C!\\n");\n    return 0;\n}',
+    '63':'console.log("Hello, JavaScript!");',
+    '51':'using System;\nclass Program {\n    static void Main() {\n        Console.WriteLine("Hello, C#!");\n    }\n}'
+  };
+  const initialTemplate = templates['62'];
   const output = document.getElementById('output');
   const status = document.getElementById('status');
   const runButton = document.getElementById('run');
@@ -113,6 +125,13 @@
     status.className = 'status' + (kind ? ' ' + kind : '');
   }
   function getCode(){ return editor ? editor.getValue() : document.getElementById('source').value; }
+  languageSelect.addEventListener('change',function(){
+    const template = templates[languageSelect.value] || initialTemplate;
+    if(editor){ editor.setOption('mode', languageSelect.value === '71' ? 'python' : (languageSelect.value === '63' ? 'javascript' : (languageSelect.value === '50' || languageSelect.value === '54' || languageSelect.value === '51' ? 'text/x-c++src' : 'text/x-java'))); editor.setValue(template); }
+    else document.getElementById('source').value = template;
+    output.textContent = 'Your program\'s output will appear here.';
+    setStatus('Compiler changed to ' + languageSelect.options[languageSelect.selectedIndex].text + '.','');
+  });
   document.getElementById('reset').addEventListener('click',function(){
     if(editor) editor.setValue(defaultCode); else document.getElementById('source').value = defaultCode;
     output.textContent = 'Your program\'s output will appear here.';
@@ -128,7 +147,7 @@
       const response = await fetch('https://ce.judge0.com/submissions?base64_encoded=false&wait=false',{
         method:'POST',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({source_code:source,language_id:62,stdin:'',cpu_time_limit:3,wall_time_limit:5})
+        body:JSON.stringify({source_code:source,language_id:Number(languageSelect.value),stdin:'',cpu_time_limit:3,wall_time_limit:5})
       });
       if(!response.ok) throw new Error('Execution service returned HTTP ' + response.status + '.');
       const submission = await response.json();
