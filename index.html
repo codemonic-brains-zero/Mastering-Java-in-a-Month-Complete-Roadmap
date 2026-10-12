@@ -87,7 +87,12 @@ main{display:block!important;width:calc(100% - clamp(160px, 30vw, 560px))!import
 .compiler-modal-heading h3{margin:8px 0!important;color:#eafff3!important;font-size:clamp(20px,4vw,27px)!important}
 .compiler-modal-heading p,.compiler-modal-footnote{color:#8eafa0!important;font-size:13px!important;margin:0!important}
 .modal-close{font-size:25px!important;line-height:1!important;padding:5px 11px!important;background:#0a1719!important}
-.compiler-choice-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+.compiler-search-label{display:block!important;color:#45ffad!important;font:600 10px ui-monospace,monospace!important;letter-spacing:.12em!important;margin-bottom:8px!important}
+.compiler-search{width:100%!important;box-sizing:border-box!important;padding:12px 14px!important;margin-bottom:12px!important;background:#050d10!important;border:1px solid #29463b!important;border-radius:8px!important;color:#eafff3!important;font:13px ui-monospace,monospace!important}
+.compiler-search:focus{outline:1px solid #45ffad!important;border-color:#45ffad!important}
+.compiler-list-status{color:#8eafa0!important;font:11px ui-monospace,monospace!important;margin:8px 0!important}
+.compiler-choice-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;max-height:min(42vh,420px)!important;overflow:auto!important;padding:2px!important}
+
 .compiler-choice{display:flex!important;align-items:center!important;text-align:left!important;gap:12px!important;min-width:0!important;padding:14px!important;background:#091518!important;border:1px solid #29463b!important;border-radius:10px!important}
 .compiler-choice.active{border-color:#45ffad!important;background:#10291f!important;box-shadow:inset 0 0 0 1px #45ffad22!important}
 .choice-icon{display:grid!important;place-items:center!important;flex:0 0 38px!important;height:38px!important;border-radius:9px!important;background:#10271e!important;color:#45ffad!important;font:700 15px ui-monospace,monospace!important}
@@ -258,15 +263,11 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
       <div class="compiler-modal-backdrop" data-close-compiler-picker></div>
       <div class="compiler-modal-card">
         <div class="compiler-modal-heading"><div><span class="modal-kicker">ENVIRONMENT SELECTOR</span><h3 id="compilerPickerTitle">Choose your compiler</h3><p>Select a language to load it into the same editor.</p></div><button type="button" id="closeCompilerPicker" class="modal-close" aria-label="Close compiler options">×</button></div>
-        <div class="compiler-choice-grid">
-          <button type="button" class="compiler-choice active" data-language="62"><span class="choice-icon">☕</span><span><strong>Java</strong><small>JVM · Main class</small></span><span class="choice-arrow">↗</span></button>
-          <button type="button" class="compiler-choice" data-language="71"><span class="choice-icon">🐍</span><span><strong>Python 3</strong><small>Python interpreter</small></span><span class="choice-arrow">↗</span></button>
-          <button type="button" class="compiler-choice" data-language="54"><span class="choice-icon">⚙</span><span><strong>C++</strong><small>GNU C++ compiler</small></span><span class="choice-arrow">↗</span></button>
-          <button type="button" class="compiler-choice" data-language="50"><span class="choice-icon">⌘</span><span><strong>C</strong><small>GNU C compiler</small></span><span class="choice-arrow">↗</span></button>
-          <button type="button" class="compiler-choice" data-language="63"><span class="choice-icon">JS</span><span><strong>JavaScript</strong><small>Node.js runtime</small></span><span class="choice-arrow">↗</span></button>
-          <button type="button" class="compiler-choice" data-language="51"><span class="choice-icon">#</span><span><strong>C#</strong><small>.NET environment</small></span><span class="choice-arrow">↗</span></button>
-        </div>
-        <p class="compiler-modal-footnote">Changing language loads its starter code in the editor above.</p>
+        <label class="compiler-search-label" for="compilerSearch">SEARCH ALL AVAILABLE LANGUAGES</label>
+        <input id="compilerSearch" class="compiler-search" type="search" placeholder="Search Java, Rust, Kotlin, COBOL…" autocomplete="off">
+        <p id="compilerListStatus" class="compiler-list-status" role="status">Loading all available languages…</p>
+        <div id="compilerChoiceGrid" class="compiler-choice-grid" aria-live="polite"></div>
+        <p class="compiler-modal-footnote">Languages are loaded from the active Judge0 runtimes. Choosing one updates the same editor.</p>
       </div>
     </div>
   </section>
@@ -339,63 +340,144 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
   const pickerButton = document.getElementById('compilerPickerButton');
   const picker = document.getElementById('compilerPicker');
   const selectedCompilerName = document.getElementById('selectedCompilerName');
-  const languageNames = {'62':'Java','71':'Python 3','54':'C++','50':'C','63':'JavaScript','51':'C#'};
+  const compilerChoiceGrid = document.getElementById('compilerChoiceGrid');
+  const compilerSearch = document.getElementById('compilerSearch');
+  const compilerListStatus = document.getElementById('compilerListStatus');
+  const languageNames = {'62':'Java (OpenJDK 13.0.1)','71':'Python (3.8.1)','54':'C++ (GCC 9.2.0)','50':'C (GCC 9.2.0)','63':'JavaScript (Node.js 12.14.0)','51':'C# (Mono 6.6.0.161)'};
+  const languageBaseNames = {'62':'Java','71':'Python','54':'C++','50':'C','63':'JavaScript','51':'C#'};
+  let activeLanguages = [
+    {id:62,name:languageNames['62']},{id:71,name:languageNames['71']},
+    {id:54,name:languageNames['54']},{id:50,name:languageNames['50']},
+    {id:63,name:languageNames['63']},{id:51,name:languageNames['51']}
+  ];
+  function baseLanguageName(name){
+    return String(name || 'Code').replace(/\s*\([^)]*\)\s*$/,'').trim() || 'Code';
+  }
   function editorMode(languageId){
-    return {'62':'text/x-java','71':'python','54':'text/x-c++src','50':'text/x-csrc','63':'javascript','51':'text/x-csharp'}[languageId] || 'text/x-java';
+    const name = baseLanguageName(languageNames[String(languageId)] || '');
+    const modes = {'Java':'text/x-java','Python':'python','C++':'text/x-c++src','C':'text/x-csrc','JavaScript':'javascript','C#':'text/x-csharp'};
+    return modes[name] || 'text/plain';
   }
   function updateLanguageLabels(){
-    const name = languageNames[languageSelect.value] || 'Code';
-    selectedCompilerName.textContent = name;
-    runButton.textContent = '▶ Run ' + (name === 'Python 3' ? 'Python' : name);
-    playgroundTitle.textContent = name + ' Playground';
-    playground.setAttribute('aria-label',name + ' code editor');
-    document.getElementById('source').setAttribute('aria-label',name + ' source code');
-    picker.querySelectorAll('[data-language]').forEach(function(option){
-      const active = option.dataset.language === languageSelect.value;
+    const id = String(languageSelect.value);
+    const fullName = languageNames[id] || 'Code';
+    const baseName = languageBaseNames[id] || baseLanguageName(fullName);
+    selectedCompilerName.textContent = fullName;
+    runButton.textContent = '▶ Run ' + baseName;
+    playgroundTitle.textContent = baseName + ' Playground';
+    playground.setAttribute('aria-label',baseName + ' code editor');
+    document.getElementById('source').setAttribute('aria-label',baseName + ' source code');
+    compilerChoiceGrid.querySelectorAll('[data-language]').forEach(function(option){
+      const active = option.dataset.language === id;
       option.classList.toggle('active',active);
       option.setAttribute('aria-pressed',String(active));
     });
   }
+  function renderLanguageChoices(){
+    const query = compilerSearch.value.trim().toLowerCase();
+    const filtered = activeLanguages.filter(function(language){
+      return language.name.toLowerCase().includes(query) || String(language.id).includes(query);
+    });
+    compilerChoiceGrid.replaceChildren();
+    filtered.forEach(function(language){
+      const id = String(language.id);
+      const base = baseLanguageName(language.name);
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'compiler-choice' + (id === String(languageSelect.value) ? ' active' : '');
+      button.dataset.language = id;
+      button.setAttribute('aria-pressed',String(id === String(languageSelect.value)));
+      const icon = document.createElement('span');
+      icon.className = 'choice-icon';
+      icon.textContent = base.slice(0,3).toUpperCase();
+      const label = document.createElement('span');
+      const strong = document.createElement('strong');
+      strong.textContent = language.name;
+      const small = document.createElement('small');
+      small.textContent = 'Language ID ' + id;
+      label.append(strong,small);
+      const arrow = document.createElement('span');
+      arrow.className = 'choice-arrow';
+      arrow.textContent = '↗';
+      button.append(icon,label,arrow);
+      button.addEventListener('click',function(){selectLanguage(id);});
+      compilerChoiceGrid.appendChild(button);
+    });
+    compilerListStatus.textContent = filtered.length + ' language runtime' + (filtered.length === 1 ? '' : 's') + (query ? ' found' : ' available');
+  }
   function openCompilerPicker(){
     picker.hidden = false;
     document.body.style.overflow = 'hidden';
-    const active = picker.querySelector('[data-language="' + languageSelect.value + '"]');
-    if(active) active.focus();
+    compilerSearch.value = '';
+    renderLanguageChoices();
+    compilerSearch.focus();
   }
   function closeCompilerPicker(){
     picker.hidden = true;
     document.body.style.overflow = '';
     pickerButton.focus();
   }
+  function selectLanguage(selectedLanguage){
+    const changed = String(selectedLanguage) !== String(languageSelect.value);
+    languageSelect.value = String(selectedLanguage);
+    if(changed){
+      const template = templates[String(selectedLanguage)];
+      if(editor){
+        editor.setOption('mode',editorMode(selectedLanguage));
+        editor.setValue(typeof template === 'string' ? template : '');
+        editor.refresh();
+      } else {
+        document.getElementById('source').value = typeof template === 'string' ? template : '';
+      }
+      output.textContent = 'Your program\'s output will appear here.';
+      const name = baseLanguageName(languageNames[String(selectedLanguage)] || 'code');
+      setStatus(typeof template === 'string' ? 'Ready to run ' + name + '.' : 'Selected ' + name + '. Write your code in the editor, then run it.','');
+    }
+    updateLanguageLabels();
+    renderLanguageChoices();
+    closeCompilerPicker();
+    if(editor) editor.focus();
+  }
   pickerButton.addEventListener('click',openCompilerPicker);
   document.getElementById('closeCompilerPicker').addEventListener('click',closeCompilerPicker);
   picker.querySelectorAll('[data-close-compiler-picker]').forEach(function(el){el.addEventListener('click',closeCompilerPicker);});
+  compilerSearch.addEventListener('input',renderLanguageChoices);
   document.addEventListener('keydown',function(event){
     if(event.key === 'Escape' && !picker.hidden) closeCompilerPicker();
   });
-  picker.querySelectorAll('[data-language]').forEach(function(option){
-    option.addEventListener('click',function(){
-      const selectedLanguage = option.dataset.language;
-      const changed = selectedLanguage !== languageSelect.value;
-      languageSelect.value = selectedLanguage;
-      if(changed){
-        const template = templates[selectedLanguage] || initialTemplate;
-        if(editor){
-          editor.setOption('mode',editorMode(selectedLanguage));
-          editor.setValue(template);
-          editor.refresh();
-        } else {
-          document.getElementById('source').value = template;
-        }
-        output.textContent = 'Your program\'s output will appear here.';
-        setStatus('Ready to run ' + (languageNames[selectedLanguage] || 'code') + '.','');
-      }
-      updateLanguageLabels();
-      closeCompilerPicker();
-      if(editor) editor.focus();
-    });
-  });
+  languageSelect.addEventListener('change',function(){selectLanguage(languageSelect.value);});
+  function loadAvailableLanguages(){
+    fetch('https://ce.judge0.com/languages')
+      .then(function(response){if(!response.ok) throw new Error('Language service returned HTTP ' + response.status);return response.json();})
+      .then(function(languages){
+        if(!Array.isArray(languages) || !languages.length) throw new Error('No active languages returned');
+        activeLanguages = languages.filter(function(language){return language && Number.isFinite(Number(language.id)) && language.name;})
+          .map(function(language){return {id:Number(language.id),name:String(language.name)};})
+          .sort(function(a,b){return a.name.localeCompare(b.name);});
+        activeLanguages.forEach(function(language){
+          languageNames[String(language.id)] = language.name;
+          if(!languageBaseNames[String(language.id)]) languageBaseNames[String(language.id)] = baseLanguageName(language.name);
+        });
+        const selectedExists = activeLanguages.some(function(language){return String(language.id) === String(languageSelect.value);});
+        if(!selectedExists) languageSelect.value = String(activeLanguages[0].id);
+        languageSelect.replaceChildren();
+        activeLanguages.forEach(function(language){
+          const option = document.createElement('option');
+          option.value = String(language.id);
+          option.textContent = language.name;
+          languageSelect.appendChild(option);
+        });
+        updateLanguageLabels();
+        renderLanguageChoices();
+      })
+      .catch(function(){
+        compilerListStatus.textContent = 'Could not load the full list. Showing the six built-in options.';
+        renderLanguageChoices();
+      });
+  }
   updateLanguageLabels();
+  renderLanguageChoices();
+  loadAvailableLanguages();
     document.getElementById('reset').addEventListener('click',function(){
     if(editor) editor.setValue(templates[languageSelect.value] || defaultCode); else document.getElementById('source').value = templates[languageSelect.value] || defaultCode;
     output.textContent = 'Your program\'s output will appear here.';
