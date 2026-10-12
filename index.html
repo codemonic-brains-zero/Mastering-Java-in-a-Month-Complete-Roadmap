@@ -3,74 +3,163 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Java Playground | Mastering Java</title>
-  <meta name="description" content="An interactive Java playground for the Mastering Java learning roadmap. Write, run, and debug beginner Java examples.">
+  <meta name="description" content="Learn Java with Chapter 1 notes and an inline Java compiler playground.">
+  <title>Chapter 1: Introduction to Java | Mastering Java</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css">
   <style>
-    :root { color-scheme: dark; --bg:#0b1120; --panel:#111b2e; --line:#263650; --text:#edf3ff; --muted:#aab8cf; --accent:#68a5ff; }
-    * { box-sizing:border-box; }
-    body { margin:0; background:var(--bg); color:var(--text); font:16px/1.55 system-ui,-apple-system,Segoe UI,sans-serif; }
-    header { padding:32px clamp(18px,5vw,64px) 24px; background:linear-gradient(135deg,#132747,#101827); border-bottom:1px solid var(--line); }
-    .tag { display:inline-block; color:#cfe2ff; background:#20385d; padding:4px 10px; border-radius:999px; font-size:.82rem; }
-    h1 { margin:12px 0 8px; font-size:clamp(1.8rem,4vw,2.8rem); line-height:1.15; }
-    p { margin:8px 0; }
-    .muted { color:var(--muted); }
-    main { max-width:1250px; margin:auto; padding:24px clamp(14px,3vw,32px) 44px; }
-    .toolbar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between; margin-bottom:14px; }
-    .buttons { display:flex; flex-wrap:wrap; gap:8px; }
-    button, .linkbtn { border:1px solid #3a5275; border-radius:9px; padding:10px 14px; color:var(--text); background:#182842; cursor:pointer; text-decoration:none; font:inherit; }
-    button.primary { background:#2463bb; border-color:#4387e7; }
-    button:hover,.linkbtn:hover { filter:brightness(1.15); }
-    .frame-wrap { overflow:hidden; border:1px solid var(--line); border-radius:14px; background:#fff; }
-    iframe { display:block; width:100%; height:720px; border:0; background:white; }
-    .note { margin-top:16px; padding:14px 16px; border:1px solid var(--line); border-radius:12px; background:var(--panel); }
-    code { color:#d4e5ff; background:#1c2a40; padding:2px 5px; border-radius:5px; }
-    footer { padding:18px; text-align:center; color:var(--muted); border-top:1px solid var(--line); font-size:.9rem; }
-    @media(max-width:600px) { iframe { height:650px; } header { padding-top:24px; } }
+    :root{color-scheme:dark;--bg:#0b1120;--panel:#111b2e;--line:#263650;--text:#edf3ff;--muted:#aab8cf;--accent:#68a5ff}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,Segoe UI,sans-serif}
+    header{padding:30px clamp(16px,5vw,64px);background:linear-gradient(135deg,#132747,#101827);border-bottom:1px solid var(--line)}
+    header p{color:var(--muted);margin:6px 0}h1{font-size:clamp(1.8rem,4vw,2.5rem);line-height:1.2;margin:8px 0}
+    main{max-width:1050px;margin:auto;padding:24px clamp(14px,3vw,30px) 48px}
+    .chapter{overflow-wrap:anywhere}.chapter h2,.chapter h3{margin-top:1.8em;line-height:1.3}.chapter a{color:#8bbaff}
+    .chapter pre{overflow:auto;background:#101827;border:1px solid var(--line);border-radius:10px;padding:14px}
+    .chapter code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}.chapter :not(pre)>code{background:#1c2a40;padding:2px 5px;border-radius:5px}
+    .chapter table{border-collapse:collapse;display:block;overflow-x:auto;width:100%}.chapter th,.chapter td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}.chapter th{background:#16243a}
+    .playground{margin:26px 0;padding:18px;border:1px solid #38527a;border-radius:14px;background:var(--panel);box-shadow:0 10px 28px #0002}
+    .playground h2{margin:0 0 4px}.muted{color:var(--muted)}.editor-toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:14px 0 8px}
+    .buttons{display:flex;gap:8px;flex-wrap:wrap}button{font:inherit;font-weight:600;border:1px solid #3a5275;border-radius:8px;padding:9px 13px;color:var(--text);background:#182842;cursor:pointer}
+    button.primary{background:#2463bb;border-color:#4387e7}button:disabled{opacity:.55;cursor:wait}button:hover:not(:disabled){filter:brightness(1.12)}
+    .CodeMirror{height:300px;border:1px solid #33435e;border-radius:8px;font:14px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}
+    .output{min-height:92px;max-height:280px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#070d17;border:1px solid var(--line);border-radius:8px;padding:12px;font:13px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}
+    .status{font-size:.9rem;color:var(--muted);margin:8px 0}.status.error{color:#ffaaa8}.status.ok{color:#a7f3c0}
+    .note{font-size:.88rem;color:var(--muted);margin-top:12px}.tag{display:inline-block;border-radius:999px;background:#20385d;color:#cfe2ff;padding:3px 9px;font-size:.8rem}
+    footer{text-align:center;border-top:1px solid var(--line);padding:20px;color:var(--muted);font-size:.9rem}
+    @media(max-width:600px){.playground{padding:12px}.CodeMirror{height:260px}}
   </style>
 </head>
 <body>
-  <header>
-    <span class="tag">Mastering Java · Chapter 1</span>
-    <h1>Java Playground</h1>
-    <p>Write Java code, run it, inspect output, and experiment with errors—all in one place.</p>
-    <p class="muted">A beginner-friendly practice area. Your Chapter 1 notes remain in the Markdown file.</p>
-  </header>
-  <main>
-    <div class="toolbar">
-      <div>
-        <strong>Interactive Java editor</strong>
-        <div class="muted">Try changing the text inside <code>System.out.println(...)</code>, then run the program.</div>
-      </div>
+<header>
+  <span class="tag">Mastering Java · Chapter 1</span>
+  <h1>Introduction to Java</h1>
+  <p>Read the chapter and practise Java in the same page.</p>
+  <p>The editor is built into this learning page; GitHub's own Markdown preview cannot run interactive editors.</p>
+</header>
+<main>
+  <article id="chapter" class="chapter"><p class="muted">Loading chapter notes…</p></article>
+  <section class="playground" id="playground" aria-label="Java code editor">
+    <h2>Java Playground</h2>
+    <p class="muted">Edit the example and run it. Compilation and execution are handled by the Judge0 Java service.</p>
+    <div class="editor-toolbar">
+      <span class="muted">Java · OpenJDK · standard input supported</span>
       <div class="buttons">
-        <button class="primary" id="reload">Reload editor</button>
-        <a class="linkbtn" href="https://onecompiler.com/java" target="_blank" rel="noopener noreferrer">Open editor in a new tab ↗</a>
+        <button id="reset">Reset code</button>
+        <button id="run" class="primary">▶ Run Java</button>
       </div>
     </div>
-    <div class="frame-wrap">
-      <iframe id="java-editor" title="Embedded Java editor with run and output support"
-        src="https://onecompiler.com/embed/java"
-        loading="eager"
-        allow="clipboard-read; clipboard-write"
-        referrerpolicy="strict-origin-when-cross-origin"></iframe>
-    </div>
-    <section class="note">
-      <strong>Quick experiment</strong>
-      <ol>
-        <li>In the editor, write <code>System.out.println("Hello, Java!");</code> inside the <code>main</code> method.</li>
-        <li>Press the editor's <strong>Run</strong> button and look for <code>Hello, Java!</code> in its output panel.</li>
-        <li>Change the message to <code>Namaste!</code> and run again.</li>
-        <li>Remove a semicolon or misspell a keyword to see a compiler error; then fix the code and run again.</li>
-      </ol>
-      <p class="muted">The embedded editor is a third-party online service. If it does not load in the embedded panel, use “Open editor in a new tab.” Avoid entering passwords, API keys, or private code.</p>
-    </section>
-    <p style="margin-top:20px"><a class="linkbtn" href="./Chapter-01-Introduction-to-Java/Chapter-01-Introduction-to-Java.md">← Back to Chapter 1 notes</a></p>
-  </main>
-  <footer>Java Playground · Learning resource for the Mastering Java roadmap</footer>
-  <script>
-    document.getElementById('reload').addEventListener('click', function () {
-      const frame = document.getElementById('java-editor');
-      frame.src = 'https://onecompiler.com/embed/java';
+    <textarea id="source" aria-label="Java source code">public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, Java!");
+    }
+}</textarea>
+    <div class="editor-toolbar"><strong>Output</strong><span id="status" class="status" role="status">Ready when you are.</span></div>
+    <pre id="output" class="output">Your program's output will appear here.</pre>
+    <p class="note">Execution uses a public third-party service and may be rate-limited or temporarily unavailable. Do not submit passwords, API keys, personal information, or sensitive code. Programs run in a sandbox with service-defined limits.</p>
+  </section>
+  <p><a href="https://github.com/codemonic-brains-zero/Mastering-Java-in-a-Month-Complete-Roadmap/blob/main/Chapter-01-Introduction-to-Java/Chapter-01-Introduction-to-Java.md">View the original Markdown file on GitHub ↗</a></p>
+</main>
+<footer>Mastering Java in a Month · Chapter 1</footer>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.6/purify.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/clike/clike.min.js"></script>
+<script>
+(function(){
+  const rawMarkdownUrl = 'https://raw.githubusercontent.com/codemonic-brains-zero/Mastering-Java-in-a-Month-Complete-Roadmap/main/Chapter-01-Introduction-to-Java/Chapter-01-Introduction-to-Java.md';
+  const marker = '<!-- INLINE_JAVA_EDITOR -->';
+  const chapter = document.getElementById('chapter');
+  const playground = document.getElementById('playground');
+  const defaultCode = document.getElementById('source').value;
+  const output = document.getElementById('output');
+  const status = document.getElementById('status');
+  const runButton = document.getElementById('run');
+  let editor;
+  function renderPart(text){
+    const rendered = marked.parse(text);
+    return DOMPurify.sanitize(rendered);
+  }
+  fetch(rawMarkdownUrl).then(function(response){
+    if(!response.ok) throw new Error('Could not load the chapter Markdown (' + response.status + ').');
+    return response.text();
+  }).then(function(md){
+    const parts = md.split(marker);
+    if(parts.length > 1){
+      chapter.innerHTML = renderPart(parts[0]);
+      chapter.appendChild(playground);
+      const after = document.createElement('div');
+      after.innerHTML = renderPart(parts.slice(1).join(marker));
+      while(after.firstChild) chapter.appendChild(after.firstChild);
+    } else {
+      chapter.innerHTML = renderPart(md);
+      chapter.appendChild(playground);
+    }
+  }).catch(function(error){
+    chapter.innerHTML = '<p class="status error">Chapter notes could not be loaded. You can still use the editor below. Open the <a href="https://github.com/codemonic-brains-zero/Mastering-Java-in-a-Month-Complete-Roadmap/blob/main/Chapter-01-Introduction-to-Java/Chapter-01-Introduction-to-Java.md">Markdown chapter on GitHub</a> instead.</p>';
+    chapter.appendChild(playground);
+  });
+  if(window.CodeMirror){
+    editor = CodeMirror.fromTextArea(document.getElementById('source'),{
+      mode:'text/x-java',theme:'material-darker',lineNumbers:true,indentUnit:4,tabSize:4,matchBrackets:true,viewportMargin:20
     });
-  </script>
+  }
+  function setStatus(message,kind){
+    status.textContent = message;
+    status.className = 'status' + (kind ? ' ' + kind : '');
+  }
+  function getCode(){ return editor ? editor.getValue() : document.getElementById('source').value; }
+  document.getElementById('reset').addEventListener('click',function(){
+    if(editor) editor.setValue(defaultCode); else document.getElementById('source').value = defaultCode;
+    output.textContent = 'Your program\'s output will appear here.';
+    setStatus('Code reset.','');
+  });
+  runButton.addEventListener('click',async function(){
+    const source = getCode().trim();
+    if(!source){setStatus('Write some Java code first.','error');return;}
+    runButton.disabled = true;
+    output.textContent = '';
+    setStatus('Submitting code…','');
+    try{
+      const response = await fetch('https://ce.judge0.com/submissions?base64_encoded=false&wait=false',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({source_code:source,language_id:62,stdin:'',cpu_time_limit:3,wall_time_limit:5})
+      });
+      if(!response.ok) throw new Error('Execution service returned HTTP ' + response.status + '.');
+      const submission = await response.json();
+      if(!submission.token) throw new Error(submission.error || 'The execution service did not return a submission token.');
+      setStatus('Java is compiling/running…','');
+      let result = null;
+      for(let attempt=0;attempt<30;attempt++){
+        await new Promise(resolve=>setTimeout(resolve,1000));
+        const check = await fetch('https://ce.judge0.com/submissions/' + encodeURIComponent(submission.token) + '?base64_encoded=false&fields=stdout,stderr,compile_output,message,status');
+        if(!check.ok) throw new Error('Could not retrieve execution result (HTTP ' + check.status + ').');
+        result = await check.json();
+        const state = result.status && result.status.id;
+        if(state !== 1 && state !== 2) break;
+        setStatus('Queued or running… (' + (attempt+1) + 's)','');
+      }
+      if(!result || !result.status || result.status.id === 1 || result.status.id === 2){
+        setStatus('Still processing. Please try again in a moment.','error');
+        output.textContent = 'The execution service has not finished within 30 seconds.';
+      } else {
+        const pieces = [];
+        if(result.stdout) pieces.push(result.stdout);
+        if(result.compile_output) pieces.push('Compiler output:\n' + result.compile_output);
+        if(result.stderr) pieces.push('Error output:\n' + result.stderr);
+        if(result.message) pieces.push('Message:\n' + result.message);
+        output.textContent = pieces.join('\n') || '(Program finished with no output.)';
+        const successful = result.status.id === 3;
+        setStatus(result.status.description + (result.time ? ' · ' + result.time + 's' : ''),successful?'ok':'error');
+      }
+    }catch(error){
+      setStatus('Could not run code.','error');
+      output.textContent = String(error.message || error) + '\n\nCheck your internet connection, or the public execution service may be busy or unavailable.';
+    }finally{
+      runButton.disabled = false;
+    }
+  });
+})();
+</script>
 </body>
 </html>
