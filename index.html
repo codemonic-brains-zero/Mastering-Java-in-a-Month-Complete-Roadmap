@@ -284,6 +284,54 @@ button:active,.button:active,.compiler-choice:active,.compiler-picker:active{
   .chapter,.playground,button,.button,.compiler-choice,.compiler-picker{transition:none!important}
 }
 
+
+/* BLUEPRINT MODE — technical drawing board with dimensional layers */
+:root{--bp-ink:#d8f6ff;--bp-cyan:#70eaff;--bp-line:rgba(112,234,255,.48);--bp-muted:#91bdce;--bp-deep:#061727}
+html{background-color:#041321!important;background-image:linear-gradient(rgba(96,205,255,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(96,205,255,.09) 1px,transparent 1px),linear-gradient(rgba(96,205,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(96,205,255,.035) 1px,transparent 1px),radial-gradient(ellipse at 48% -12%,rgba(18,122,177,.32),transparent 54%),linear-gradient(135deg,#041321,#061b2b 52%,#081626)!important;background-size:40px 40px,40px 40px,8px 8px,8px 8px,auto,auto!important;background-attachment:fixed!important}
+header{background:linear-gradient(135deg,rgba(4,25,42,.98),rgba(5,39,61,.96) 52%,rgba(8,25,47,.98))!important;border-bottom:1px solid rgba(112,234,255,.5)!important;box-shadow:0 1px 0 rgba(112,234,255,.2),0 8px 0 rgba(5,26,43,.85),0 24px 65px #0008,inset 0 1px rgba(255,255,255,.06)!important}
+header:before{color:#8beaff!important;text-shadow:0 0 15px #4ccfff55!important}
+header h1{color:#f0fbff!important;text-shadow:0 2px 0 #12425b,0 5px 0 #08283c,0 12px 28px #0009,0 0 28px #4ccfff2e!important}
+header .tag{color:#9beeff!important;border-color:#70eaff66!important;background:#70eaff0b!important;box-shadow:inset 0 1px #ffffff0b,0 3px 0 #08253a!important}
+header p{color:#b3d6e5!important}header p:nth-of-type(2){color:#8beaff!important}
+.chapter,.playground{background:linear-gradient(145deg,rgba(7,30,47,.97),rgba(4,20,34,.98))!important;border:1px solid rgba(112,234,255,.34)!important;box-shadow:0 1px 0 rgba(180,246,255,.18),0 5px 0 #08283c,0 8px 0 #041725,0 26px 60px #0007,inset 0 1px rgba(255,255,255,.035)!important}
+.chapter:before{color:#8beaff!important;border-bottom-color:#70eaff3a!important}
+.chapter h1,.chapter h2,.chapter h3,.chapter h4{color:#e6f9ff!important;text-shadow:0 0 15px #70eaff12!important}
+.chapter h2{border-bottom-color:#70eaff42!important}.chapter h2:before{color:#70eaff!important}
+.chapter p,.chapter li,.chapter blockquote{color:#b9d5e3!important}.chapter strong{color:#ffe6a6!important}
+.chapter code{background:#092b40!important;border-color:#226080!important;color:#a6f0ff!important}
+.chapter pre{background:#031522!important;border-color:#2b6985!important;border-left-color:#70eaff!important;color:#d7f6ff!important}
+.chapter a{color:#85edff!important}
+.playground:before,.playground h2,.editor-toolbar strong,.compiler-label{color:#8beaff!important}
+.playground{background:linear-gradient(150deg,rgba(7,34,50,.99),rgba(3,17,30,.99))!important}
+.editor-toolbar{background:#082237!important;border-color:#28566c!important}
+#sourceEditor{border-color:#36758f!important;box-shadow:inset 0 3px 18px #0009,0 4px 0 #092c42,0 9px 20px #0006!important}
+#output{background:#031522!important;color:#9ff1ff!important;border-color:#36758f!important;box-shadow:inset 0 3px 14px #0009,0 4px 0 #092b3e,0 9px 18px #0005!important}
+button,.button{background:linear-gradient(135deg,#10405a,#09273d)!important;border-color:#4da7c7!important;color:#dff8ff!important;box-shadow:0 3px 0 #031827,0 6px 14px #0004,inset 0 1px #ffffff12!important}
+button.primary,#run{background:linear-gradient(135deg,#9beeff,#4abbdc)!important;color:#031725!important;border-color:#9beeff!important;box-shadow:0 3px 0 #14516a,0 8px 18px #0005,inset 0 1px #ffffff80!important}
+button:hover,.button:hover{border-color:#a1f1ff!important;box-shadow:0 5px 0 #031827,0 10px 20px #0005,0 0 20px #70eaff24!important}
+.compiler-picker{background:#062136!important;border-color:#70eaff75!important;color:#e8faff!important}.compiler-picker span:last-child{color:#8beaff!important}
+.compiler-modal-card{background:linear-gradient(145deg,#0b2c42,#041827)!important;border-color:#70eaff75!important;box-shadow:0 2px #70eaff26,0 8px 0 #041725,0 35px 100px #000d!important}
+.compiler-choice{background:#062136!important;border-color:#27566d!important}.compiler-choice.active{background:#0b354c!important;border-color:#8beaff!important}
+.choice-icon{background:#0c354b!important;color:#8beaff!important}.compiler-choice strong,.compiler-modal-heading h3{color:#e7f9ff!important}
+.compiler-choice small,.compiler-modal-heading p,.compiler-modal-footnote,.compiler-list-status{color:#9bbdce!important}
+.compiler-search{background:#041827!important;border-color:#2b5c73!important;color:#e7f9ff!important}
+.status{color:#9bbdce!important}.status.ok{color:#8dffd2!important}.status.error{color:#ff9daf!important}
+.blueprint-figure{position:relative;isolation:isolate;overflow:hidden;margin:1.3rem 0 1.8rem!important;padding:1rem clamp(.65rem,2vw,1.35rem)!important;border:1px solid rgba(112,234,255,.38)!important;border-radius:8px!important;background:linear-gradient(rgba(112,234,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(112,234,255,.055) 1px,transparent 1px),linear-gradient(145deg,rgba(6,39,60,.98),rgba(3,21,36,.98))!important;background-size:18px 18px,18px 18px,auto!important;box-shadow:0 1px 0 #9ceeff25,0 4px 0 #08283b,0 7px 0 #041725,0 18px 30px #0004,inset 0 1px #ffffff08!important}
+.blueprint-figure:before{content:"TECHNICAL PLATE  /  CONCEPT MAP";display:block;margin-bottom:.65rem;color:#8beaff;font:600 9px/1.5 ui-monospace,monospace;letter-spacing:.16em}
+.blueprint-figure:after{content:"";position:absolute;inset:5px;z-index:-1;pointer-events:none;border:1px solid rgba(112,234,255,.10)}
+.blueprint-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:.25rem;color:#dff8ff;font:600 11px/1.5 ui-monospace,monospace;letter-spacing:.04em}
+.blueprint-heading span:last-child{color:#7daec2;font-size:9px;white-space:nowrap}
+.blueprint-svg{display:block;width:100%;height:auto;overflow:visible}
+.blueprint-svg .bp-node{fill:rgba(8,47,70,.85);stroke:#65d9f7;stroke-width:1.25}
+.blueprint-svg .bp-top{stroke:#65d9f7;stroke-width:1;opacity:.65}
+.blueprint-svg .bp-label{fill:#e2f9ff;font:600 16px ui-monospace,monospace;text-anchor:middle}
+.blueprint-svg .bp-small{fill:#94c9dd;font:11px ui-monospace,monospace;text-anchor:middle}
+.blueprint-svg .bp-arrow{stroke:#7fe8ff;stroke-width:1.5;fill:none;opacity:.95}
+.blueprint-svg .bp-dim{stroke:#4b99b8;stroke-width:1;fill:none;stroke-dasharray:3 4;opacity:.65}
+.blueprint-svg .bp-dot{fill:#9df1ff}
+.blueprint-caption{margin:.3rem 0 0!important;color:#9dc8d8!important;font-size:11px!important;line-height:1.65!important}
+@media(max-width:600px){.blueprint-figure{padding:.75rem .5rem!important}.blueprint-heading{font-size:10px}.blueprint-heading span:last-child{font-size:8px}}
+
 </style>
 </head>
 <body>
@@ -379,6 +427,46 @@ button:active,.button:active,.compiler-choice:active,.compiler-picker:active{
     const rendered = marked.parse(text);
     return DOMPurify.sanitize(rendered);
   }
+  // Topic-specific SVG blueprint plates: crisp, responsive, and labelled.
+  const blueprintSpecs = [
+    {match:/^1\\.\\s*What is Java\\?/i,title:'Source → bytecode → runtime',caption:'Java separates the code you write from the instructions the JVM executes.',nodes:[['SOURCE','Main.java','Readable Java code'],['COMPILER','javac','Checks + translates'],['BYTECODE','Main.class','Portable instructions'],['JVM','Run program','Executes bytecode']]},
+    {match:/^2\\.\\s*History of Java/i,title:'Java origin timeline',caption:'A simplified timeline of the best-established milestones in Java’s early history.',nodes:[['1991','Green Project','Consumer devices'],['EARLY NAME','Oak','Early language name'],['1995','Java announced','Public introduction'],['1996','Java 1.0','First production release']]},
+    {match:/^3\\.\\s*Why Java was created/i,title:'Design goals',caption:'Java made a different trade-off from C and C++ rather than replacing them.',nodes:[['PORTABILITY','Bytecode + JVM','Across compatible systems'],['SAFETY','Types + checks','Catch many errors'],['MEMORY','Garbage collection','Managed object memory'],['LIBRARIES','Standard APIs','Reusable building blocks']]},
+    {match:/^4\\.\\s*Features/i,title:'Feature system map',caption:'These language and runtime features work together; none guarantees bug-free code.',nodes:[['OOP','Classes + objects','Structure and reuse'],['TYPE SYSTEM','Compile checks','Catch many mistakes'],['RUNTIME','JVM + JIT','Load and optimize'],['LIBRARIES','Threads + network','Built-in APIs']]},
+    {match:/^5\\.\\s*Applications/i,title:'Where Java is used',caption:'Java is a programming platform used to build these kinds of systems.',nodes:[['SERVERS','Backend + APIs','Business logic'],['MOBILE','Android codebases','App components'],['DATA','Processing + cloud','Jobs and services'],['TOOLS','Desktop + dev tools','Developer workflows']]},
+    {match:/^6\\.\\s*Java editions/i,title:'Choose the right Java edition',caption:'These editions target different environments and are not interchangeable labels.',nodes:[['JAVA SE','Core platform','General-purpose Java'],['JAKARTA EE','Enterprise APIs','Server-side applications'],['JAVA ME','Constrained devices','Selected embedded use']]},
+    {match:/^7\\.\\s*Java versions/i,title:'Release and support map',caption:'LTS is a support policy category; vendor dates and terms can differ.',nodes:[['JAVA 8','2014 · LTS','Lambdas + streams'],['JAVA 11','2018 · LTS','HTTP Client API'],['JAVA 17','2021 · LTS','Sealed classes'],['JAVA 21','2023 · LTS','Virtual threads'],['JAVA 25','2025 · LTS','Modern language updates']]},
+    {match:/^8\\.\\s*Install and verify/i,title:'JDK installation check',caption:'Install a JDK, then confirm the command line can find both the runtime and compiler.',nodes:[['INSTALL','JDK distribution','Temurin / Oracle / etc.'],['PATH','Find bin tools','Open a new terminal'],['CHECK','java -version','Runtime launcher'],['CHECK','javac -version','Compiler tool']]},
+    {match:/^9\\.\\s*IDE and command line/i,title:'IDE and command-line workflow',caption:'An IDE brings common development tools together; the underlying steps remain the same.',nodes:[['EDIT','Eclipse editor','Write source'],['BUILD','Compiler / builder','Create class files'],['RUN','Launcher + JVM','Execute the class'],['INSPECT','Console + debugger','Read results']]},
+    {match:/^10\\.\\s*Structure of a Java program/i,title:'Anatomy of Main.java',caption:'The class name, entry-point method, statement, and braces each have a role.',nodes:[['CLASS','public class Main','Class declaration'],['ENTRY','main(String[] args)','Application entry point'],['STATEMENT','println(...)','Prints a line'],['FILE','Main.java','Matches public class']]},
+    {match:/^11\\.\\s*First program/i,title:'The complete run pipeline',caption:'Save and compile the source before launching the generated class file.',nodes:[['01 · EDIT','Main.java','Write and save'],['02 · BUILD','javac Main.java','Compile source'],['03 · OUTPUT','Main.class','Bytecode file'],['04 · RUN','java Main','Console result']]},
+    {match:/^12\\.\\s*Compilation and execution/i,title:'Two distinct operations',caption:'Compilation creates bytecode; execution launches the compiled class.',nodes:[['SOURCE','Main.java','Input to compiler'],['COMPILE','javac Main.java','Errors or .class'],['CLASS','Main.class','Compiled bytecode'],['EXECUTE','java Main','Start application']]},
+    {match:/^13\\.\\s*Bytecode/i,title:'Inside the JVM',caption:'The JVM verifies and runs bytecode; hot code may be JIT-compiled to native instructions.',nodes:[['LOAD','Class loader','Finds classes'],['VERIFY','Bytecode checks','Checks class structure'],['EXECUTE','Interpreter','Runs instructions'],['OPTIMIZE','JIT compiler','Native machine code']]},
+    {match:/^14\\.\\s*JDK, JRE, JVM/i,title:'JDK, JRE and JVM relationship',caption:'The JDK is the developer toolkit; the JRE is a runtime concept; the JVM executes bytecode.',nodes:[['JDK','Development kit','javac + runtime'],['RUNTIME','Libraries + JVM','Runtime environment idea'],['JVM','Execution engine','Loads + runs bytecode']]},
+    {match:/^15\\.\\s*\\.java and \\.class files/i,title:'Two file types',caption:'Edit the source file; regenerate the class file by compiling it.',nodes:[['EDIT','Main.java','Human-readable source'],['COMPILE','javac Main.java','Translation step'],['GENERATE','Main.class','Bytecode; don’t edit']]},
+    {match:/^16\\.\\s*Compiler and launcher/i,title:'Tool responsibility',caption:'The compiler takes a source filename; the launcher takes the class name without .class.',nodes:[['javac','Main.java','Compiler input'],['OUTPUT','Main.class','Generated bytecode'],['java','Main','Class name to launch']]},
+    {match:/^17\\.\\s*Write Once, Run Anywhere/i,title:'WORA portability model',caption:'Portability depends on a compatible JVM, required libraries, and avoiding OS-specific assumptions.',nodes:[['ONE SOURCE','Main.java','Compile once'],['BYTECODE','Main.class','Portable format'],['JVM A','Windows / Linux','Compatible runtime'],['JVM B','macOS / server','Compatible runtime']]},
+    {match:/^18\\.\\s*Workflow/i,title:'Repeatable developer loop',caption:'Errors and test results feed back into the next edit; the workflow is iterative.',nodes:[['PLAN','Define expected result','Clarify task'],['EDIT','Write + save','Implement'],['BUILD','Compile + fix','Resolve errors'],['RUN + TEST','Check output','Improve and repeat']]},
+    {match:/^19\\.\\s*Common errors/i,title:'Debugging decision map',caption:'Start with the exact error, then check the matching layer before changing code randomly.',nodes:[['COMMAND FAILS','PATH / JDK','Check installation'],['BUILD FAILS','Syntax / filename','Read compiler line'],['CLASS NOT FOUND','Folder / classpath','Check build output'],['OLD OUTPUT','Stale build','Save + rebuild']]},
+    {match:/^20\\.\\s*Quick revision/i,title:'Chapter essentials',caption:'Keep these core relationships in mind as you move into writing Java programs.',nodes:[['WRITE','.java','Source code'],['COMPILE','javac','Source → bytecode'],['RUN','java + JVM','Execute bytecode'],['RESULT','Console','Inspect output']]},
+    {match:/^21\\.\\s*Practice questions/i,title:'Practice like an engineer',caption:'Use the chapter concepts in a loop: explain, draw, code, run, observe, and correct.',nodes:[['EXPLAIN','Concepts','History + features'],['DRAW','Relationships','JDK / JRE / JVM'],['CODE','Small program','Print your name'],['TEST','Break + fix','Observe diagnostics']]}
+  ];
+  function createBlueprint(spec,index){
+    const fig=document.createElement('figure');fig.className='blueprint-figure';fig.setAttribute('aria-label','Blueprint diagram: '+spec.title);
+    const head=document.createElement('div');head.className='blueprint-heading';const title=document.createElement('span');title.textContent=spec.title;const num=document.createElement('span');num.textContent='PLATE '+String(index+1).padStart(2,'0');head.append(title,num);fig.appendChild(head);
+    const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');svg.setAttribute('class','blueprint-svg');svg.setAttribute('viewBox','0 0 900 156');svg.setAttribute('role','img');svg.setAttribute('aria-label',spec.nodes.map(n=>n[0]+': '+n[1]+' — '+n[2]).join('; '));
+    const defs=document.createElementNS(ns,'defs'),marker=document.createElementNS(ns,'marker');marker.setAttribute('id','bp-arrow-'+index);marker.setAttribute('markerWidth','8');marker.setAttribute('markerHeight','8');marker.setAttribute('refX','6');marker.setAttribute('refY','3');marker.setAttribute('orient','auto');const tip=document.createElementNS(ns,'path');tip.setAttribute('d','M0,0 L6,3 L0,6 Z');tip.setAttribute('fill','#7fe8ff');marker.appendChild(tip);defs.appendChild(marker);svg.appendChild(defs);
+    const count=spec.nodes.length,gap=count===5?18:(count===4?28:(count===3?48:36)),nodeW=(840-gap*(count-1))/count,startX=30,y=38,h=78;
+    spec.nodes.forEach(function(n,i){const x=startX+i*(nodeW+gap);if(i<count-1){const line=document.createElementNS(ns,'path');line.setAttribute('class','bp-arrow');line.setAttribute('d','M '+(x+nodeW+3)+' '+(y+h/2)+' H '+(x+nodeW+gap-6));line.setAttribute('marker-end','url(#bp-arrow-'+index+')');svg.appendChild(line);}
+      const dim=document.createElementNS(ns,'path');dim.setAttribute('class','bp-dim');dim.setAttribute('d','M '+x+' '+(y-8)+' v -7 h '+nodeW+' v 7');svg.appendChild(dim);
+      const rect=document.createElementNS(ns,'rect');rect.setAttribute('class','bp-node');rect.setAttribute('x',x);rect.setAttribute('y',y);rect.setAttribute('width',nodeW);rect.setAttribute('height',h);rect.setAttribute('rx','3');svg.appendChild(rect);
+      const top=document.createElementNS(ns,'line');top.setAttribute('class','bp-top');top.setAttribute('x1',x+8);top.setAttribute('x2',x+nodeW-8);top.setAttribute('y1',y+8);top.setAttribute('y2',y+8);svg.appendChild(top);
+      const label=document.createElementNS(ns,'text');label.setAttribute('class','bp-small');label.setAttribute('x',x+nodeW/2);label.setAttribute('y',y+24);label.textContent=n[0];svg.appendChild(label);
+      const main=document.createElementNS(ns,'text');main.setAttribute('class','bp-label');main.setAttribute('x',x+nodeW/2);main.setAttribute('y',y+45);const words=String(n[1]).split(' '),lines=[''],maxChars=Math.max(8,Math.floor(nodeW/11));words.forEach(function(word){const last=lines.length-1;if((lines[last]+' '+word).trim().length>maxChars&&lines[last])lines.push(word);else lines[last]=(lines[last]+' '+word).trim();});lines.slice(0,2).forEach(function(txt,j){const span=document.createElementNS(ns,'tspan');span.setAttribute('x',x+nodeW/2);span.setAttribute('dy',j===0?'0':'16');span.textContent=txt;main.appendChild(span);});svg.appendChild(main);
+      const small=document.createElementNS(ns,'text');small.setAttribute('class','bp-small');small.setAttribute('x',x+nodeW/2);small.setAttribute('y',y+h-9);small.textContent=n[2];svg.appendChild(small);const dot=document.createElementNS(ns,'circle');dot.setAttribute('class','bp-dot');dot.setAttribute('cx',x+5);dot.setAttribute('cy',y+h-5);dot.setAttribute('r','1.8');svg.appendChild(dot);});
+    fig.appendChild(svg);const cap=document.createElement('figcaption');cap.className='blueprint-caption';cap.textContent=spec.caption;fig.appendChild(cap);return fig;
+  }
+  function addChapterBlueprints(){Array.from(chapter.querySelectorAll('h2')).forEach(function(h){if(h.dataset.blueprintAdded)return;const txt=h.textContent.trim(),spec=blueprintSpecs.find(function(s){return s.match.test(txt);});if(!spec)return;h.dataset.blueprintAdded='true';h.insertAdjacentElement('afterend',createBlueprint(spec,blueprintSpecs.indexOf(spec)));});}
   fetch(rawMarkdownUrl).then(function(response){
     if(!response.ok) throw new Error('Could not load the chapter Markdown (' + response.status + ').');
     return response.text();
@@ -386,12 +474,14 @@ button:active,.button:active,.compiler-choice:active,.compiler-picker:active{
     const parts = md.split(marker);
     if(parts.length > 1){
       chapter.innerHTML = renderPart(parts[0]);
+      addChapterBlueprints();
       chapter.appendChild(playground);
       const after = document.createElement('div');
       after.innerHTML = renderPart(parts.slice(1).join(marker));
       while(after.firstChild) chapter.appendChild(after.firstChild);
     } else {
       chapter.innerHTML = renderPart(md);
+      addChapterBlueprints();
       chapter.appendChild(playground);
     }
     chapter.appendChild(sourceLink);
