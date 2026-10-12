@@ -123,30 +123,70 @@ public class Main {
 - Java is case-sensitive, braces delimit blocks, and statements commonly end with semicolons.
 - // starts a single-line comment; /* ... */ is a block comment.
 
-## 11. First program: editor to output
-Step 1: Write the Main.java code shown above in Eclipse or a text editor and save it.
+## 11. First program: editor → compiler → output
 
-Step 2: In a terminal opened in the folder containing Main.java, compile:
+This section deliberately shows the complete path from the editor where you type code, to the compiler that translates it, to the console where you see the result. The code block below represents what you type in Eclipse's Java editor; the command and console blocks show the build and output.
+
+### A. Editor: write and save `Main.java`
+
+In Eclipse, open your Java project, create a class named `Main` in the source folder, and type this code into the editor:
+
+~~~java
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, Java!");
+    }
+}
+~~~
+
+Save the file. The filename must be `Main.java` because the public class is named `Main`.
+
+### B. Compiler: translate the source code
+
+**Command-line compiler:** open a terminal in the folder containing `Main.java` and run:
 
 ~~~bash
 javac Main.java
 ~~~
 
-Successful compilation normally produces no message and creates Main.class in the output folder.
+If compilation succeeds, `javac` normally prints no success message. It creates `Main.class`, containing bytecode. If there is a syntax error, the compiler prints a diagnostic and you must fix the source before running it.
 
-Step 3: Run the class:
+**In Eclipse:** save the file. Eclipse usually compiles automatically when *Project > Build Automatically* is enabled. Click **Run As > Java Application** to run the class; you generally do not need to type `javac` manually inside Eclipse.
+
+### C. Output: run the compiled class
+
+From the same terminal, run:
 
 ~~~bash
 java Main
 ~~~
 
-Expected output:
+The console should show:
 
 ~~~text
 Hello, Java!
 ~~~
 
-Step 4: Change the editor code to:
+The flow is:
+
+~~~text
+Eclipse editor: Main.java
+        |
+        | save / compile
+        v
+Compiler: javac Main.java
+        |
+        v
+Compiled bytecode: Main.class
+        |
+        | run with java Main
+        v
+Console output: Hello, Java!
+~~~
+
+### D. Change the code and compare the output
+
+Return to the editor and change only the text inside `println`:
 
 ~~~java
 public class Main {
@@ -156,14 +196,31 @@ public class Main {
 }
 ~~~
 
-Save, compile again using javac Main.java, and run again using java Main. New output:
+Save the changed source file. In a terminal, compile and run again:
+
+~~~bash
+javac Main.java
+java Main
+~~~
+
+**New console output:**
 
 ~~~text
 I am learning Java!
 ~~~
 
-If you change the source but do not rebuild, the class file may still contain the previous compiled version.
+**Before:** `Hello, Java!`  
+**After:** `I am learning Java!`
 
+The output changes because the source code changed and the updated source was compiled and executed. If you change `Main.java` but run without rebuilding, the `.class` file can still contain the previous compiled program.
+
+### E. What each part does
+
+- **Editor (Eclipse):** where you write and edit `Main.java`; syntax highlighting and error markers help you spot mistakes.
+- **Compiler (`javac`):** checks source code and translates valid code into bytecode in `.class` files.
+- **Launcher (`java`):** starts the Java Virtual Machine to execute the class.
+- **Console / output panel:** displays text printed by your program and any runtime messages.
+- **Eclipse Console:** shows the program output after you use **Run As > Java Application**. The exact panels and menu wording may vary slightly by Eclipse version.
 ## 12. Compilation and execution
 Compilation and execution are separate steps. javac Main.java compiles source code. java Main launches the compiled class; omit the .class extension. An IDE can automate these steps, but understanding them helps you diagnose problems.
 
