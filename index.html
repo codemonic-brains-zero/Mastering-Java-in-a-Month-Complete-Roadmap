@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Learn Java with Chapter 1 notes and an inline Java compiler playground.">
   <title>Chapter 1: Introduction to Java | Mastering Java</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css">
   <style>
 :root{color-scheme:dark;--bg:#070b10;--panel:rgba(10,17,24,.82);--line:rgba(66,255,173,.25);--text:#e1f5ed;--muted:#8aa79c;--green:#42ffad;--pink:#ff4fd8;--cyan:#52f7ff;--purple:#a98bff;--yellow:#f7ef78}
 *{box-sizing:border-box}
@@ -32,13 +30,7 @@ hr{border:0;border-top:1px solid #263b32}
 .chapter p,.chapter li,.chapter blockquote{color:#c2d8ce;text-shadow:none}
 .chapter strong{color:var(--yellow);text-shadow:none}
 .chapter a{color:var(--cyan)}
-#editor,.CodeMirror,.cm-editor,.CodeMirror-scroll{background:#080d13!important;color:#d9f7e9!important}
-.CodeMirror{border:1px solid #315342;border-radius:12px;font-family:"JetBrains Mono",Consolas,monospace;line-height:1.6}
-.CodeMirror-gutters{background:#0b1318!important;border-right:1px solid #263d32!important}
-.CodeMirror-linenumber{color:#587466!important}
-.CodeMirror-cursor{border-left:2px solid var(--green)!important}
-.CodeMirror-selected{background:#245540!important}
-.CodeMirror .cm-keyword{color:#ff79c6!important}.CodeMirror .cm-string{color:#f7ef78!important}.CodeMirror .cm-number{color:#bd9cff!important}.CodeMirror .cm-comment{color:#718b7f!important}.CodeMirror .cm-def{color:#52f7ff!important}
+#sourceEditor{width:100%;height:360px;min-height:260px;border:1px solid #315342;border-radius:10px;overflow:hidden;font-family:"JetBrains Mono",Consolas,monospace;font-size:14px;line-height:1.6;background:#080d13!important;box-shadow:inset 0 0 22px rgba(69,255,173,.035),0 0 20px rgba(69,255,173,.045)!important}#source{display:none!important}
 #output,.output,.output-panel{background:#07121a!important;color:#8ffff0!important;border:1px solid #52f7ff50!important;border-radius:12px}
 footer{color:var(--muted)}
 @media(max-width:700px){body{font-size:15px}h1{font-size:clamp(2rem,10vw,3.4rem)}.chapter,.panel,.card{border-radius:10px}}
@@ -190,9 +182,7 @@ main{
  padding:clamp(1.25rem,2vw,1.75rem)!important;
 }
 .playground h2,.playground h3{color:#eafff5!important;text-shadow:0 0 14px rgba(102,255,181,.24)!important}
-#source,.CodeMirror,.cm-editor{
- box-shadow:inset 0 0 22px rgba(69,255,173,.035),0 0 20px rgba(69,255,173,.045)!important;
-}
+#sourceEditor{box-shadow:inset 0 0 22px rgba(69,255,173,.035),0 0 20px rgba(69,255,173,.045)!important}
 #output,.output,.output-panel{
  box-shadow:inset 0 0 18px rgba(76,233,255,.055),0 0 18px rgba(76,233,255,.075)!important;
 }
@@ -220,15 +210,11 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
 #chapter p,#chapter li,#chapter blockquote{overflow-wrap:anywhere}
 #playground,.playground{position:static!important;top:auto!important;float:none!important;clear:both!important;display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important;grid-column:auto!important;align-self:stretch!important;margin:2.5rem 0!important;overflow:visible!important}
 #playground *,.playground *{box-sizing:border-box}
-.CodeMirror{width:100%!important;max-width:100%!important;height:auto!important;min-height:320px!important;overflow:hidden!important;border-radius:8px!important}
-.CodeMirror-scroll{min-height:320px!important;max-height:70vh!important;overflow:auto!important}
-.CodeMirror-sizer{min-width:0!important}
-.CodeMirror-lines{padding:8px 0!important}
-#source{width:100%!important;max-width:100%!important;min-height:340px!important;white-space:pre!important;overflow:auto!important;box-sizing:border-box!important}
+#sourceEditor{width:100%!important;max-width:100%!important;height:360px!important;min-height:320px!important;border-radius:8px!important}#source{display:none!important}
 #output{width:100%!important;max-width:100%!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important;overflow-x:auto!important}
 #chapter .markdown-source-link{display:block!important;margin:2.5rem 0 0!important;padding:1rem 0 0!important;border-top:1px solid rgba(102,255,181,.22)!important;overflow-wrap:anywhere!important}
 #chapter .markdown-source-link a{display:inline-block!important;max-width:100%!important;line-height:1.7!important}
-@media(max-width:900px){main{width:calc(100% - 48px)!important;margin-top:1rem!important}.chapter{padding:1rem!important;border-radius:8px!important}#playground,.playground{padding:1rem!important;margin:1.5rem 0!important}.CodeMirror{min-height:260px!important}.CodeMirror-scroll{min-height:260px!important}}
+@media(max-width:900px){main{width:calc(100% - 48px)!important;margin-top:1rem!important}.chapter{padding:1rem!important;border-radius:8px!important}#playground,.playground{padding:1rem!important;margin:1.5rem 0!important}#sourceEditor{min-height:260px!important;height:300px!important}}
 
 </style>
 </head>
@@ -251,7 +237,7 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
         <button id="run" class="primary">▶ Run Java</button>
       </div>
     </div>
-    <textarea id="source" aria-label="Java source code">public class Main {
+    <div id="sourceEditor" aria-label="Java source code"></div><textarea id="source" aria-label="Java source code">public class Main {
     public static void main(String[] args) {
         System.out.println("Hello, Java!");
     }
@@ -275,8 +261,7 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
 <footer>Mastering Java in a Month · Chapter 1</footer>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.6/purify.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/clike/clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ace.js"></script>
 <script>
 (function(){
   const rawMarkdownUrl = 'https://raw.githubusercontent.com/codemonic-brains-zero/Mastering-Java-in-a-Month-Complete-Roadmap/main/Chapter-01-Introduction-to-Java/Chapter-01-Introduction-to-Java.md';
@@ -326,10 +311,12 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
     chapter.appendChild(playground);
     chapter.appendChild(sourceLink);
   });
-  if(window.CodeMirror){
-    editor = CodeMirror.fromTextArea(document.getElementById('source'),{
-      mode:'text/x-java',theme:'material-darker',lineNumbers:true,indentUnit:4,tabSize:4,matchBrackets:true,viewportMargin:20
-    });
+  if(window.ace){
+    editor = ace.edit('sourceEditor');
+    editor.setTheme('ace/theme/tomorrow_night');
+    editor.session.setMode('ace/mode/java');
+    editor.setOptions({fontSize:'14px',showPrintMargin:false,showGutter:true,highlightActiveLine:true,highlightSelectedWord:true,tabSize:4,useSoftTabs:true,wrap:false,scrollPastEnd:0});
+    editor.session.setValue(document.getElementById('source').value);
   }
   function setStatus(message,kind){
     status.textContent = message;
@@ -354,9 +341,9 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
     return String(name || 'Code').replace(/\s*\([^)]*\)\s*$/,'').trim() || 'Code';
   }
   function editorMode(languageId){
-    const name = baseLanguageName(languageNames[String(languageId)] || '');
-    const modes = {'Java':'text/x-java','Python':'python','C++':'text/x-c++src','C':'text/x-csrc','JavaScript':'javascript','C#':'text/x-csharp'};
-    return modes[name] || 'text/plain';
+    const name = baseLanguageName(languageNames[String(languageId)] || '').toLowerCase();
+    const modes = {'java':'java','python':'python','python 3':'python','c++':'c_cpp','c':'c_cpp','javascript':'javascript','typescript':'typescript','c#':'csharp','ruby':'ruby','go':'golang','rust':'rust','php':'php','swift':'swift','kotlin':'kotlin','sql':'sql','html':'html','css':'css','json':'json','bash':'sh','shell':'sh','r':'r','perl':'perl','scala':'scala','dart':'dart','lua':'lua','haskell':'haskell','objective-c':'objectivec','fortran':'fortran','assembly':'assembly_x86'};
+    return 'ace/mode/' + (modes[name] || 'text');
   }
   function updateLanguageLabels(){
     const id = String(languageSelect.value);
@@ -422,12 +409,12 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
     languageSelect.value = String(selectedLanguage);
     if(changed){
       const template = templates[String(selectedLanguage)];
+      const nextCode = typeof template === 'string' ? template : '';
       if(editor){
-        editor.setOption('mode',editorMode(selectedLanguage));
-        editor.setValue(typeof template === 'string' ? template : '');
-        editor.refresh();
+        editor.session.setMode(editorMode(selectedLanguage));
+        editor.setValue(nextCode,-1);
       } else {
-        document.getElementById('source').value = typeof template === 'string' ? template : '';
+        document.getElementById('source').value = nextCode;
       }
       output.textContent = 'Your program\'s output will appear here.';
       const name = baseLanguageName(languageNames[String(selectedLanguage)] || 'code');
@@ -479,7 +466,7 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
   renderLanguageChoices();
   loadAvailableLanguages();
     document.getElementById('reset').addEventListener('click',function(){
-    if(editor) editor.setValue(templates[languageSelect.value] || defaultCode); else document.getElementById('source').value = templates[languageSelect.value] || defaultCode;
+    if(editor) editor.setValue(templates[languageSelect.value] || defaultCode,-1); else document.getElementById('source').value = templates[languageSelect.value] || defaultCode;
     output.textContent = 'Your program\'s output will appear here.';
     setStatus('Code reset.','');
   });
