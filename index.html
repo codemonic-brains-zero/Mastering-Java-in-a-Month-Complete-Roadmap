@@ -386,9 +386,45 @@ button.primary:hover:after,#run:hover:after{left:140%}
 .motion-item.motion-visible{opacity:1;transform:translateY(0)}
 @media(prefers-reduced-motion:reduce){.motion-item,.motion-item.motion-visible{opacity:1!important;transform:none!important;transition:none!important}}
 
+
+/* FLOATING BACKGROUND BLUEPRINTS — ambient animated engineering schematics */
+#blueprint-atmosphere{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;contain:strict;opacity:.7}
+#blueprint-atmosphere .ambient-plate{position:absolute;width:clamp(190px,24vw,390px);height:auto;overflow:visible;color:#71dfff;opacity:0;filter:drop-shadow(0 0 9px #3bc9ff18);animation:ambient-blueprint-drift var(--duration,32s) var(--delay,0s) ease-in-out infinite}
+#blueprint-atmosphere .ambient-plate svg{display:block;width:100%;height:auto;overflow:visible}
+#blueprint-atmosphere .ambient-plate .wire{fill:none;stroke:currentColor;stroke-width:1.1;vector-effect:non-scaling-stroke;stroke-dasharray:5 7;animation:ambient-wire-flow 12s linear infinite}
+#blueprint-atmosphere .ambient-plate .solid{fill:#0a3150;fill-opacity:.16;stroke:currentColor;stroke-width:1.1;vector-effect:non-scaling-stroke}
+#blueprint-atmosphere .ambient-plate .fine{fill:none;stroke:currentColor;stroke-opacity:.65;stroke-width:.7;vector-effect:non-scaling-stroke}
+#blueprint-atmosphere .ambient-plate .label{fill:currentColor;font:8px ui-monospace,monospace;letter-spacing:1px;opacity:.88}
+#blueprint-atmosphere .ambient-plate .glint{fill:none;stroke:#c0f5ff;stroke-width:1.5;stroke-dasharray:18 160;animation:ambient-glint 7s linear infinite}
+@keyframes ambient-blueprint-drift{
+  0%{opacity:0;transform:translate3d(0,22px,0) rotate(var(--tilt,-7deg)) scale(.94)}
+  12%,78%{opacity:var(--plate-opacity,.25)}
+  100%{opacity:0;transform:translate3d(var(--drift,35px),-34px,0) rotate(calc(var(--tilt,-7deg) + 5deg)) scale(1.04)}
+}
+@keyframes ambient-wire-flow{to{stroke-dashoffset:-96}}
+@keyframes ambient-glint{from{stroke-dashoffset:180}to{stroke-dashoffset:-180}}
+/* Keep real content above the atmospheric drawings */
+header,main,footer{position:relative;z-index:1}
+@media(max-width:700px){#blueprint-atmosphere{opacity:.42}#blueprint-atmosphere .ambient-plate{width:clamp(150px,38vw,230px)}}
+@media(prefers-reduced-motion:reduce){#blueprint-atmosphere .ambient-plate,#blueprint-atmosphere .ambient-plate *{animation:none!important}#blueprint-atmosphere .ambient-plate{opacity:.08;transform:none}}
+
 </style>
 </head>
 <body>
+<div id="blueprint-atmosphere" aria-hidden="true">
+  <div class="ambient-plate" style="left:-4%;top:14%;--delay:-17s;--duration:38s;--tilt:-9deg;--drift:44px;--plate-opacity:.22">
+    <svg viewBox="0 0 320 220"><path class="wire" d="M16 18H304V202H16Z M26 30H294V190H26Z"/><path class="solid" d="M62 76L160 40L258 76L160 112Z M62 76V144L160 184V112 M258 76V144L160 184"/><path class="fine" d="M62 76L160 112L258 76 M160 40V112 M110 58L208 94 M110 94L208 58 M80 146L80 168 M92 151L92 173 M104 156L104 178 M220 151L220 173 M232 146L232 168"/><path class="glint" d="M62 76L160 40L258 76L160 112Z"/><text class="label" x="18" y="12">AXONOMETRIC / 01</text><text class="label" x="186" y="214">FIG. 01 · MODULE</text></svg>
+  </div>
+  <div class="ambient-plate" style="right:-7%;top:32%;--delay:-8s;--duration:43s;--tilt:8deg;--drift:-38px;--plate-opacity:.19">
+    <svg viewBox="0 0 320 220"><path class="wire" d="M12 20H308V200H12Z M22 30H298V190H22Z"/><rect class="solid" x="45" y="60" width="230" height="112"/><rect class="fine" x="57" y="72" width="206" height="88"/><path class="fine" d="M57 91H263 M57 110H263 M57 129H263 M88 72V160 M119 72V160 M150 72V160 M181 72V160 M212 72V160 M243 72V160"/><path class="solid" d="M94 86L126 116L94 146 M143 146H205"/><path class="glint" d="M45 60H275V172H45Z"/><text class="label" x="18" y="12">CIRCUIT / TRACE MAP</text><text class="label" x="190" y="214">REV 02.6</text></svg>
+  </div>
+  <div class="ambient-plate" style="left:17%;bottom:-7%;--delay:-25s;--duration:46s;--tilt:5deg;--drift:-26px;--plate-opacity:.17">
+    <svg viewBox="0 0 320 220"><path class="wire" d="M16 18H304V202H16Z M26 30H294V190H26Z"/><path class="solid" d="M68 62H252V156H68Z"/><path class="fine" d="M80 75H240V143H80Z M68 91H252 M68 109H252 M68 127H252 M110 62V156 M150 62V156 M190 62V156 M230 62V156"/><circle class="solid" cx="112" cy="94" r="12"/><circle class="fine" cx="112" cy="94" r="5"/><circle class="solid" cx="160" cy="118" r="12"/><circle class="fine" cx="160" cy="118" r="5"/><circle class="solid" cx="208" cy="94" r="12"/><circle class="fine" cx="208" cy="94" r="5"/><path class="fine" d="M112 106V138H160 M160 130V138H208V106"/><path class="glint" d="M68 62H252V156H68Z"/><text class="label" x="18" y="12">NETWORK / NODE PLAN</text><text class="label" x="202" y="214">SYSTEM 03</text></svg>
+  </div>
+  <div class="ambient-plate" style="right:19%;top:2%;--delay:-31s;--duration:41s;--tilt:-4deg;--drift:22px;--plate-opacity:.14">
+    <svg viewBox="0 0 320 220"><path class="wire" d="M16 18H304V202H16Z M26 30H294V190H26Z"/><path class="solid" d="M55 65H265V155H55Z"/><path class="fine" d="M55 84H265 M55 104H265 M55 124H265 M85 65V155 M115 65V155 M145 65V155 M175 65V155 M205 65V155 M235 65V155"/><path class="solid" d="M82 85L120 85L140 110L120 135H82Z M156 85H222V135H156Z"/><path class="fine" d="M140 110H156 M189 85V70H240V85 M189 135V150H240V135"/><path class="glint" d="M55 65H265V155H55Z"/><text class="label" x="18" y="12">FLOW / SYSTEM ARCHITECTURE</text><text class="label" x="200" y="214">FLOW PLATE 04</text></svg>
+  </div>
+</div>
 <header>
   <span class="tag">Mastering Java · Chapter 1</span>
   <h1>Introduction to Java</h1>
