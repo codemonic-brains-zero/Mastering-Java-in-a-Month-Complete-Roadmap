@@ -25,7 +25,7 @@
     .buttons{display:flex;gap:8px;flex-wrap:wrap}button{font:inherit;font-weight:600;border:1px solid #276c3a;border-radius:6px;padding:9px 13px;color:#00ff41;background:rgba(0,0,0,.55);cursor:pointer}
     button.primary{background:rgba(0,40,10,.72);border-color:#00ff41;color:#00ff41}button:disabled{opacity:.55;cursor:wait}button:hover:not(:disabled){filter:brightness(1.12);box-shadow:none}
     .CodeMirror{height:300px;border:1px solid #245b32;border-radius:7px;font:14px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}
-    .CodeMirror,.CodeMirror-gutters{background:rgba(0,0,0,.72)!important}.CodeMirror-gutters{border-right:1px solid #153d22!important}.CodeMirror-linenumber{color:#008f26!important}.CodeMirror-cursor{border-left:2px solid #00ff41!important}
+    .CodeMirror,.CodeMirror-gutters{background:rgba(0,0,0,.72)!important}.CodeMirror span{color:#00ff41!important}.CodeMirror-gutters{border-right:1px solid #153d22!important}.CodeMirror-linenumber{color:#008f26!important}.CodeMirror-cursor{border-left:2px solid #00ff41!important}
     .cm-s-material-darker .cm-keyword{color:#00ff41!important}.cm-s-material-darker .cm-string{color:#00ff41!important}.cm-s-material-darker .cm-number{color:#00ff41!important}
     .output{min-height:92px;max-height:280px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#020503;border:1px solid #245b32;border-radius:7px;padding:12px;color:#9affb2;font:13px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}
     .status{font-size:.9rem;color:var(--muted);margin:8px 0}.status.error{color:#ffaaa8}.status.ok{color:#00ff41}
@@ -133,7 +133,7 @@
     setStatus('Compiler changed to ' + languageSelect.options[languageSelect.selectedIndex].text + '.','');
   });
   document.getElementById('reset').addEventListener('click',function(){
-    if(editor) editor.setValue(defaultCode); else document.getElementById('source').value = defaultCode;
+    if(editor) editor.setValue(templates[languageSelect.value] || defaultCode); else document.getElementById('source').value = templates[languageSelect.value] || defaultCode;
     output.textContent = 'Your program\'s output will appear here.';
     setStatus('Code reset.','');
   });
