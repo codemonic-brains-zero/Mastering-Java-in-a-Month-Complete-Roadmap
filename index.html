@@ -447,6 +447,17 @@ header.hero-header{padding:clamp(1.5rem,3.5vw,3rem) max(4vw,calc((100vw - 1440px
 main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!important;margin:clamp(1.5rem,3vw,3rem) auto 5rem!important;padding:0!important}
 @media(max-width:900px){header.hero-header{padding:2rem 4vw!important}.hero-layout{grid-template-columns:minmax(0,1fr)!important;gap:1.25rem!important}.hero-copy h1{font-size:clamp(2.5rem,8vw,4.5rem)!important}.hero-header .playground{max-width:none!important}.hero-header #sourceEditor{height:180px!important}.hero-header .playground{grid-column:1!important;grid-row:auto!important}main{width:min(760px,92vw)!important}}
 @media(max-width:600px){header.hero-header{padding:1.5rem 4vw!important}.hero-layout{gap:1rem!important}.hero-copy p:nth-of-type(2){display:none!important}.hero-header .playground{padding:.7rem!important}.hero-header #sourceEditor{height:155px!important}.hero-header .editor-toolbar{align-items:center!important}}
+
+
+/* MOVE ONLY THE CODE EDITOR: keep compiler controls/output at chapter marker */
+.hero-layout{grid-template-columns:minmax(0,1fr) minmax(340px,.85fr)!important;align-items:center!important}
+.hero-editor-dock{position:relative;z-index:2;min-width:0;width:100%;max-width:620px;margin:0 auto;padding:clamp(.65rem,1.3vw,1rem);background:linear-gradient(160deg,rgba(12,25,27,.98),rgba(7,12,18,.98));border:1px solid #34745a;border-radius:12px;box-shadow:0 18px 55px #0008,0 0 28px #45ffad10}
+.hero-editor-label{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:.55rem;color:#45ffad;font:600 9px ui-monospace,monospace;letter-spacing:.12em}
+.hero-editor-placeholder{height:190px;display:grid;place-items:center;color:#8eafa0;font:12px ui-monospace,monospace}
+.hero-editor-dock #sourceEditor{height:190px!important;min-height:140px!important;width:100%!important;font-size:12px!important}
+#playground #sourceEditor{height:360px;min-height:260px}
+@media(max-width:900px){.hero-layout{grid-template-columns:minmax(0,1fr)!important}.hero-editor-dock{max-width:none}.hero-editor-dock #sourceEditor{height:180px!important}}
+@media(max-width:600px){.hero-editor-dock #sourceEditor{height:155px!important}}
 </style>
 </head>
 <body>
@@ -496,40 +507,44 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
       <p>Read the chapter and practise Java in the same page.</p>
       <p>The editor is built into this learning page; GitHub's own Markdown preview cannot run interactive editors.</p>
     </div>
-    <section class="playground" id="playground" aria-label="Java code editor">
-    <h2>Java Playground</h2>
-    <p class="muted">Edit the example and run it. Compilation and execution are handled by the Judge0 Java service.</p>
-    <div class="editor-toolbar">
-      <div class="compiler-options"><span class="compiler-label">Compiler</span><button type="button" id="compilerPickerButton" class="compiler-picker" aria-haspopup="dialog" aria-controls="compilerPicker"><span id="selectedCompilerName">Java</span><span aria-hidden="true">⌄</span></button><select id="language" aria-label="Choose programming language" tabindex="-1" aria-hidden="true"><option value="62">Java</option><option value="71">Python 3</option><option value="54">C++</option><option value="50">C</option><option value="63">JavaScript (Node.js)</option><option value="51">C#</option></select><span class="muted">Choose a language for this editor</span></div>
-      <div class="buttons">
-        <button id="reset">Reset code</button>
-        <button id="run" class="primary">▶ Run Java</button>
-      </div>
+    <div class="hero-editor-dock" id="heroEditorDock" aria-label="Java code editor">
+      <div class="hero-editor-label"><span>LIVE CODE EDITOR</span><span>JAVA · MAIN.JAVA</span></div>
+      <div class="hero-editor-placeholder">Initialising editor…</div>
     </div>
-    <div id="sourceEditor" aria-label="Java source code"></div><textarea id="source" aria-label="Java source code">public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello, Java!");
-    }
-}</textarea>
-    <div class="editor-toolbar"><strong>Output</strong><span id="status" class="status" role="status">Ready when you are.</span></div>
-    <pre id="output" class="output">Your program's output will appear here.</pre>
-    <p class="note">Execution uses a public third-party service and may be rate-limited or temporarily unavailable. Do not submit passwords, API keys, personal information, or sensitive code. Programs run in a sandbox with service-defined limits.</p>
-    <div id="compilerPicker" class="compiler-modal" hidden role="dialog" aria-modal="true" aria-labelledby="compilerPickerTitle">
-      <div class="compiler-modal-backdrop" data-close-compiler-picker></div>
-      <div class="compiler-modal-card">
-        <div class="compiler-modal-heading"><div><span class="modal-kicker">ENVIRONMENT SELECTOR</span><h3 id="compilerPickerTitle">Choose your compiler</h3><p>Select a language to load it into the same editor.</p></div><button type="button" id="closeCompilerPicker" class="modal-close" aria-label="Close compiler options">×</button></div>
-        <label class="compiler-search-label" for="compilerSearch">SEARCH ALL AVAILABLE LANGUAGES</label>
-        <input id="compilerSearch" class="compiler-search" type="search" placeholder="Search Java, Rust, Kotlin, COBOL…" autocomplete="off">
-        <p id="compilerListStatus" class="compiler-list-status" role="status">Loading all available languages…</p>
-        <div id="compilerChoiceGrid" class="compiler-choice-grid" aria-live="polite"></div>
-        <p class="compiler-modal-footnote">Languages are loaded from the active Judge0 runtimes. Choosing one updates the same editor.</p>
-      </div>
-    </div>
-    </section>
   </div>
 </header>
 <main>
   <article id="chapter" class="chapter"><p class="muted">Loading chapter notes…</p></article>
+    <section class="playground" id="playground" aria-label="Java code editor">
+  <h2>Java Playground</h2>
+  <p class="muted">Edit the example and run it. Compilation and execution are handled by the Judge0 Java service.</p>
+  <div class="editor-toolbar">
+    <div class="compiler-options"><span class="compiler-label">Compiler</span><button type="button" id="compilerPickerButton" class="compiler-picker" aria-haspopup="dialog" aria-controls="compilerPicker"><span id="selectedCompilerName">Java</span><span aria-hidden="true">⌄</span></button><select id="language" aria-label="Choose programming language" tabindex="-1" aria-hidden="true"><option value="62">Java</option><option value="71">Python 3</option><option value="54">C++</option><option value="50">C</option><option value="63">JavaScript (Node.js)</option><option value="51">C#</option></select><span class="muted">Choose a language for this editor</span></div>
+    <div class="buttons">
+      <button id="reset">Reset code</button>
+      <button id="run" class="primary">▶ Run Java</button>
+    </div>
+  </div>
+  <div id="sourceEditor" aria-label="Java source code"></div><textarea id="source" aria-label="Java source code">public class Main {
+  public static void main(String[] args) {
+      System.out.println("Hello, Java!");
+  }
+}</textarea>
+  <div class="editor-toolbar"><strong>Output</strong><span id="status" class="status" role="status">Ready when you are.</span></div>
+  <pre id="output" class="output">Your program's output will appear here.</pre>
+  <p class="note">Execution uses a public third-party service and may be rate-limited or temporarily unavailable. Do not submit passwords, API keys, personal information, or sensitive code. Programs run in a sandbox with service-defined limits.</p>
+  <div id="compilerPicker" class="compiler-modal" hidden role="dialog" aria-modal="true" aria-labelledby="compilerPickerTitle">
+    <div class="compiler-modal-backdrop" data-close-compiler-picker></div>
+    <div class="compiler-modal-card">
+      <div class="compiler-modal-heading"><div><span class="modal-kicker">ENVIRONMENT SELECTOR</span><h3 id="compilerPickerTitle">Choose your compiler</h3><p>Select a language to load it into the same editor.</p></div><button type="button" id="closeCompilerPicker" class="modal-close" aria-label="Close compiler options">×</button></div>
+      <label class="compiler-search-label" for="compilerSearch">SEARCH ALL AVAILABLE LANGUAGES</label>
+      <input id="compilerSearch" class="compiler-search" type="search" placeholder="Search Java, Rust, Kotlin, COBOL…" autocomplete="off">
+      <p id="compilerListStatus" class="compiler-list-status" role="status">Loading all available languages…</p>
+      <div id="compilerChoiceGrid" class="compiler-choice-grid" aria-live="polite"></div>
+      <p class="compiler-modal-footnote">Languages are loaded from the active Judge0 runtimes. Choosing one updates the same editor.</p>
+    </div>
+  </div>
+  </section>
 </main>
 <footer>Mastering Java in a Month · Chapter 1</footer>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -656,8 +671,15 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
     chapter.appendChild(playground);
     chapter.appendChild(sourceLink);
   });
+  const heroEditorDock = document.getElementById('heroEditorDock');
+  const sourceEditorElement = document.getElementById('sourceEditor');
+  if(heroEditorDock && sourceEditorElement){
+    const placeholder = heroEditorDock.querySelector('.hero-editor-placeholder');
+    if(placeholder) placeholder.replaceWith(sourceEditorElement);
+  }
   if(window.ace){
     editor = ace.edit('sourceEditor');
+    requestAnimationFrame(function(){ if(editor) editor.resize(); });
     editor.setTheme('ace/theme/tomorrow_night');
     editor.session.setMode('ace/mode/java');
     editor.setOptions({fontSize:'14px',showPrintMargin:false,showGutter:true,highlightActiveLine:true,highlightSelectedWord:true,tabSize:4,useSoftTabs:true,wrap:false,scrollPastEnd:0});
