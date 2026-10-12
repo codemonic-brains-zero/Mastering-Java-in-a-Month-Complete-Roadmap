@@ -353,7 +353,7 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
   const compilerListStatus = document.getElementById('compilerListStatus');
   const languageNames = {'62':'Java','71':'Python','54':'C++','50':'C','63':'JavaScript','51':'C#','68':'PHP','60':'Go','73':'Rust','72':'Ruby','78':'Kotlin','83':'Swift','82':'SQL'};
   const languageBaseNames = {'62':'Java','71':'Python','54':'C++','50':'C','63':'JavaScript','51':'C#','68':'PHP','60':'Go','73':'Rust','72':'Ruby','78':'Kotlin','83':'Swift','82':'SQL'};
-  let activeLanguages = popularLanguageOrder.map(function(name){return {id:preferredLanguageIds[name],name:name};});
+  let activeLanguages = [{id:62,name:'Java'},{id:71,name:'Python'},{id:63,name:'JavaScript'},{id:50,name:'C'},{id:54,name:'C++'},{id:51,name:'C#'}];
   function baseLanguageName(name){
     return String(name || 'Code').replace(/\s*\([^)]*\)\s*$/,'').trim() || 'Code';
   }
