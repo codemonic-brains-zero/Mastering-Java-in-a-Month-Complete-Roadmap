@@ -247,6 +247,67 @@ Bytecode is the intermediate instruction format normally stored in .class files.
 - JDK: development kit containing tools such as javac plus runtime components.
 Memory aid: JDK for development, JRE as the runtime concept, JVM for executing bytecode.
 
+### Blueprint: How JDK, JRE, and JVM fit together
+
+Think of the three as related parts, not three competing tools:
+- **JDK (Java Development Kit):** the developer's toolbox. It includes tools such as `javac` and the runtime components needed to run Java programs.
+- **JRE (Java Runtime Environment):** the runtime concept: the JVM plus standard libraries and supporting files needed to run an application. A separate JRE installer is not provided by every modern Java distribution.
+- **JVM (Java Virtual Machine):** the engine that loads and executes Java bytecode.
+
+#### Drawing 1 — Relationship overview
+
+```mermaid
+flowchart TB
+    DEV["Developer writes Main.java"]
+    JDK["JDK — development toolbox"]
+    JAVAC["javac — Java compiler"]
+    BYTE["Main.class — bytecode"]
+    JRE["JRE concept — runtime libraries + JVM"]
+    JVM["JVM — executes bytecode"]
+    OUT["Running Java application / output"]
+
+    DEV --> JAVAC
+    JDK -. "provides" .-> JAVAC
+    JAVAC --> BYTE
+    BYTE --> JVM
+    JRE -. "contains / supplies runtime" .-> JVM
+    JVM --> OUT
+```
+
+**Read the drawing like a pipeline:** write source code → use the JDK's compiler to create bytecode → run that bytecode on a JVM with the required runtime libraries → see the application's result.
+
+#### Drawing 2 — Simple nested view
+
+```text
+JDK (tools for developers)
+├── javac compiler
+├── other development tools
+└── runtime components
+    └── JVM + standard runtime libraries
+        (the JRE idea: what a program needs to run)
+```
+
+This is a **conceptual** picture, not a promise that every vendor packages folders exactly this way. In current Java distributions, the JDK normally includes a runtime image; a separate JRE download may not be available.
+
+#### One-line memory trick
+
+- **JDK = Develop** (compile and build Java programs)
+- **JRE = Run environment** (runtime libraries and JVM concept)
+- **JVM = Execute** (runs Java bytecode)
+
+#### Example workflow
+
+```bash
+javac Main.java
+java Main
+```
+
+1. `javac Main.java` uses the compiler supplied by the JDK and creates `Main.class` if compilation succeeds.
+2. `java Main` starts the Java launcher, which loads the class and uses a JVM to execute its bytecode.
+3. The program's printed text appears in the console.
+
+**Important:** the JVM does not normally compile your `.java` source file directly in this beginner workflow. The `javac` compiler converts source code to bytecode first.
+
 ## 15. .java and .class files
 - Main.java contains human-readable source code.
 - Main.class contains compiled bytecode.
