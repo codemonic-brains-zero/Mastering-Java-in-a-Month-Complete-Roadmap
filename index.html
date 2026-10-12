@@ -421,6 +421,32 @@ header,main,footer{position:relative;z-index:1}
 @media(max-width:560px){#blueprint-atmosphere .ambient-plate{width:105px;opacity:.16}#blueprint-atmosphere .ambient-plate .label{display:none}}
 @media(prefers-reduced-motion:reduce){#blueprint-atmosphere .ambient-plate,#blueprint-atmosphere .ambient-plate *{animation:none!important}#blueprint-atmosphere .ambient-plate{opacity:.3;transform:none}}
 
+
+
+/* COMPACT HERO WORKSTATION: keep the editor beside the chapter title */
+header.hero-header{padding:clamp(1.5rem,3.5vw,3rem) max(4vw,calc((100vw - 1440px)/2))!important;overflow:visible!important}
+.hero-layout{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(360px,.92fr)!important;align-items:center!important;gap:clamp(1.25rem,3vw,3rem)!important;width:100%!important;max-width:1440px!important;margin:0 auto!important}
+.hero-copy{min-width:0!important;position:relative!important;z-index:1!important}
+.hero-copy .tag{margin-bottom:.6rem!important}
+.hero-copy h1{font-size:clamp(2.3rem,5.3vw,5rem)!important;line-height:1.02!important;margin:.65rem 0 1rem!important;max-width:720px!important}
+.hero-copy p{font-size:clamp(.9rem,1.2vw,1.05rem)!important;margin:.55rem 0!important;max-width:560px!important}
+.hero-copy p:nth-of-type(2){font-size:10px!important;opacity:.75!important}
+.hero-header .playground{grid-column:auto!important;position:relative!important;top:auto!important;z-index:2!important;min-width:0!important;width:100%!important;max-width:650px!important;margin:0!important;padding:clamp(.8rem,1.4vw,1.15rem)!important;align-self:center!important}
+.hero-header .playground:before{margin-bottom:.45rem!important;font-size:9px!important}
+.hero-header .playground h2{font-size:1.15rem!important;margin:.2rem 0 .3rem!important}
+.hero-header .playground>p{font-size:.78rem!important;line-height:1.45!important;margin:0 0 .6rem!important}
+.hero-header .editor-toolbar{margin:.45rem 0!important;padding:.45rem!important;gap:.45rem!important}
+.hero-header .compiler-picker{min-width:110px!important;gap:.5rem!important;padding:.4rem .55rem!important;font-size:11px!important}
+.hero-header .compiler-label,.hero-header .editor-toolbar strong{font-size:9px!important}
+.hero-header .buttons{display:flex!important;gap:.35rem!important;flex-wrap:wrap!important}
+.hero-header .buttons button{font-size:11px!important;padding:.42rem .55rem!important;margin:0!important}
+.hero-header #sourceEditor{height:170px!important;min-height:130px!important;font-size:12px!important;line-height:1.45!important}
+.hero-header #source{display:none!important}
+.hero-header #output{min-height:42px!important;max-height:70px!important;overflow:auto!important;padding:.5rem .65rem!important;margin:.35rem 0 0!important;font-size:10px!important;line-height:1.45!important}
+.hero-header .note{font-size:9px!important;line-height:1.35!important;margin:.4rem 0 0!important;opacity:.65!important}
+main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!important;margin:clamp(1.5rem,3vw,3rem) auto 5rem!important;padding:0!important}
+@media(max-width:900px){header.hero-header{padding:2rem 4vw!important}.hero-layout{grid-template-columns:minmax(0,1fr)!important;gap:1.25rem!important}.hero-copy h1{font-size:clamp(2.5rem,8vw,4.5rem)!important}.hero-header .playground{max-width:none!important}.hero-header #sourceEditor{height:180px!important}.hero-header .playground{grid-column:1!important;grid-row:auto!important}main{width:min(760px,92vw)!important}}
+@media(max-width:600px){header.hero-header{padding:1.5rem 4vw!important}.hero-layout{gap:1rem!important}.hero-copy p:nth-of-type(2){display:none!important}.hero-header .playground{padding:.7rem!important}.hero-header #sourceEditor{height:155px!important}.hero-header .editor-toolbar{align-items:center!important}}
 </style>
 </head>
 <body>
@@ -462,15 +488,15 @@ header,main,footer{position:relative;z-index:1}
     <svg viewBox="0 0 320 220"><path class="wire" d="M16 18H304V202H16Z M28 30H292V190H28Z"/><path class="solid" d="M64 70H256V150H64Z"/><path class="fine" d="M64 94H256 M64 118H256 M104 70V150 M144 70V150 M184 70V150 M224 70V150"/><path class="solid" d="M84 82L110 110L84 138 M132 138H168V82H196L216 110L196 138H168"/><path class="glint" d="M64 70H256V150H64Z"/><text class="label" x="18" y="12">CONTROL / FLOW PATH</text><text class="label" x="204" y="214">PLATE 12</text></svg>
   </div>
 </div>
-<header>
-  <span class="tag">Mastering Java · Chapter 1</span>
-  <h1>Introduction to Java</h1>
-  <p>Read the chapter and practise Java in the same page.</p>
-  <p>The editor is built into this learning page; GitHub's own Markdown preview cannot run interactive editors.</p>
-</header>
-<main>
-  <article id="chapter" class="chapter"><p class="muted">Loading chapter notes…</p></article>
-  <section class="playground" id="playground" aria-label="Java code editor">
+<header class="hero-header">
+  <div class="hero-layout">
+    <div class="hero-copy">
+      <span class="tag">Mastering Java · Chapter 1</span>
+      <h1>Introduction to Java</h1>
+      <p>Read the chapter and practise Java in the same page.</p>
+      <p>The editor is built into this learning page; GitHub's own Markdown preview cannot run interactive editors.</p>
+    </div>
+    <section class="playground" id="playground" aria-label="Java code editor">
     <h2>Java Playground</h2>
     <p class="muted">Edit the example and run it. Compilation and execution are handled by the Judge0 Java service.</p>
     <div class="editor-toolbar">
@@ -499,7 +525,11 @@ header,main,footer{position:relative;z-index:1}
         <p class="compiler-modal-footnote">Languages are loaded from the active Judge0 runtimes. Choosing one updates the same editor.</p>
       </div>
     </div>
-  </section>
+    </section>
+  </div>
+</header>
+<main>
+  <article id="chapter" class="chapter"><p class="muted">Loading chapter notes…</p></article>
 </main>
 <footer>Mastering Java in a Month · Chapter 1</footer>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
