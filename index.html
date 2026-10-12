@@ -387,26 +387,31 @@ button.primary:hover:after,#run:hover:after{left:140%}
 @media(prefers-reduced-motion:reduce){.motion-item,.motion-item.motion-visible{opacity:1!important;transform:none!important;transition:none!important}}
 
 
-/* FLOATING BACKGROUND BLUEPRINTS — ambient animated engineering schematics */
-#blueprint-atmosphere{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;contain:strict;opacity:.7}
-#blueprint-atmosphere .ambient-plate{position:absolute;width:clamp(190px,24vw,390px);height:auto;overflow:visible;color:#71dfff;opacity:0;filter:drop-shadow(0 0 9px #3bc9ff18);animation:ambient-blueprint-drift var(--duration,32s) var(--delay,0s) ease-in-out infinite}
+/* VISIBLE SIDE BLUEPRINTS — fixed to the clear left/right gutters */
+#blueprint-atmosphere{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;contain:strict;opacity:1}
+#blueprint-atmosphere .ambient-plate{position:absolute;width:clamp(155px,17vw,270px);height:auto;overflow:visible;color:#71dfff;opacity:var(--plate-opacity,.38);filter:drop-shadow(0 0 10px #3bc9ff30);animation:ambient-blueprint-drift var(--duration,32s) var(--delay,0s) ease-in-out infinite}
+#blueprint-atmosphere .ambient-plate:nth-child(1){left:0!important;top:13%!important;right:auto!important}
+#blueprint-atmosphere .ambient-plate:nth-child(2){right:0!important;top:35%!important;left:auto!important}
+#blueprint-atmosphere .ambient-plate:nth-child(3){left:0!important;top:auto!important;bottom:7%!important;right:auto!important}
+#blueprint-atmosphere .ambient-plate:nth-child(4){right:0!important;top:3%!important;left:auto!important}
 #blueprint-atmosphere .ambient-plate svg{display:block;width:100%;height:auto;overflow:visible}
 #blueprint-atmosphere .ambient-plate .wire{fill:none;stroke:currentColor;stroke-width:1.1;vector-effect:non-scaling-stroke;stroke-dasharray:5 7;animation:ambient-wire-flow 12s linear infinite}
 #blueprint-atmosphere .ambient-plate .solid{fill:#0a3150;fill-opacity:.16;stroke:currentColor;stroke-width:1.1;vector-effect:non-scaling-stroke}
-#blueprint-atmosphere .ambient-plate .fine{fill:none;stroke:currentColor;stroke-opacity:.65;stroke-width:.7;vector-effect:non-scaling-stroke}
-#blueprint-atmosphere .ambient-plate .label{fill:currentColor;font:8px ui-monospace,monospace;letter-spacing:1px;opacity:.88}
+#blueprint-atmosphere .ambient-plate .fine{fill:none;stroke:currentColor;stroke-opacity:.8;stroke-width:.7;vector-effect:non-scaling-stroke}
+#blueprint-atmosphere .ambient-plate .label{fill:currentColor;font:8px ui-monospace,monospace;letter-spacing:1px;opacity:.95}
 #blueprint-atmosphere .ambient-plate .glint{fill:none;stroke:#c0f5ff;stroke-width:1.5;stroke-dasharray:18 160;animation:ambient-glint 7s linear infinite}
 @keyframes ambient-blueprint-drift{
-  0%{opacity:0;transform:translate3d(0,22px,0) rotate(var(--tilt,-7deg)) scale(.94)}
-  12%,78%{opacity:var(--plate-opacity,.25)}
-  100%{opacity:0;transform:translate3d(var(--drift,35px),-34px,0) rotate(calc(var(--tilt,-7deg) + 5deg)) scale(1.04)}
+  0%{transform:translate3d(0,12px,0) rotate(var(--tilt,-7deg)) scale(.97)}
+  50%{transform:translate3d(var(--drift,20px),-10px,0) rotate(calc(var(--tilt,-7deg) + 3deg)) scale(1.02)}
+  100%{transform:translate3d(0,-22px,0) rotate(calc(var(--tilt,-7deg) + 5deg)) scale(.99)}
 }
 @keyframes ambient-wire-flow{to{stroke-dashoffset:-96}}
 @keyframes ambient-glint{from{stroke-dashoffset:180}to{stroke-dashoffset:-180}}
-/* Keep real content above the atmospheric drawings */
+/* Keep real content above the atmosphere while leaving side gutters visible */
 header,main,footer{position:relative;z-index:1}
-@media(max-width:700px){#blueprint-atmosphere{opacity:.42}#blueprint-atmosphere .ambient-plate{width:clamp(150px,38vw,230px)}}
-@media(prefers-reduced-motion:reduce){#blueprint-atmosphere .ambient-plate,#blueprint-atmosphere .ambient-plate *{animation:none!important}#blueprint-atmosphere .ambient-plate{opacity:.08;transform:none}}
+@media(max-width:900px){#blueprint-atmosphere .ambient-plate{width:clamp(105px,15vw,155px);opacity:.25}}
+@media(max-width:560px){#blueprint-atmosphere .ambient-plate{width:105px;opacity:.16}#blueprint-atmosphere .ambient-plate .label{display:none}}
+@media(prefers-reduced-motion:reduce){#blueprint-atmosphere .ambient-plate,#blueprint-atmosphere .ambient-plate *{animation:none!important}#blueprint-atmosphere .ambient-plate{opacity:.3;transform:none}}
 
 </style>
 </head>
