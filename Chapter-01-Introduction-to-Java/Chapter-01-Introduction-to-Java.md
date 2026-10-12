@@ -125,6 +125,8 @@ public class Main {
 
 ## 11. First program: editor → compiler → output
 
+<!-- INLINE_JAVA_EDITOR -->
+
 This section deliberately shows the complete path from the editor where you type code, to the compiler that translates it, to the console where you see the result. The code block below represents what you type in Eclipse's Java editor; the command and console blocks show the build and output.
 
 ### A. Editor: write and save `Main.java`
