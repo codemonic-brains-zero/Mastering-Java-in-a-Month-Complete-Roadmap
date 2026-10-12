@@ -74,7 +74,30 @@ main{display:block!important;width:calc(100% - clamp(160px, 30vw, 560px))!import
 .compiler-options{display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:.5rem!important}
 .compiler-options label,.editor-toolbar strong{color:#45ffad!important;font:600 11px ui-monospace,monospace!important;text-transform:uppercase!important;letter-spacing:.08em}
 .compiler-options .muted{display:none!important}
-#language{max-width:100%!important;padding:.45rem .6rem!important;background:#07100f!important;border:1px solid #34745a!important;color:#d9f7e9!important}
+.compiler-label{color:#45ffad!important;font:600 11px ui-monospace,monospace!important;text-transform:uppercase!important;letter-spacing:.08em}
+#language{position:absolute!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important;overflow:hidden!important}
+.compiler-picker{display:inline-flex!important;align-items:center!important;justify-content:space-between!important;gap:1.5rem!important;min-width:150px!important;background:#07100f!important;border:1px solid #45ffad66!important;color:#eafff3!important;font:600 13px ui-monospace,monospace!important}
+.compiler-picker span:last-child{color:#45ffad!important;font-size:18px!important}
+.compiler-modal[hidden]{display:none!important}
+.compiler-modal{position:fixed!important;inset:0!important;z-index:99999!important;display:grid!important;place-items:center!important;padding:20px!important}
+.compiler-modal-backdrop{position:absolute!important;inset:0!important;background:rgba(1,7,10,.82)!important;backdrop-filter:blur(8px)!important}
+.compiler-modal-card{position:relative!important;width:min(600px,100%)!important;padding:clamp(18px,4vw,30px)!important;background:linear-gradient(145deg,#101f22,#071014)!important;border:1px solid #45ffad65!important;border-radius:16px!important;box-shadow:0 25px 100px #000c,0 0 50px #45ffad10!important}
+.compiler-modal-heading{display:flex!important;justify-content:space-between!important;align-items:flex-start!important;gap:15px!important;margin-bottom:22px!important}
+.modal-kicker{color:#45ffad!important;font:600 10px ui-monospace,monospace!important;letter-spacing:.15em!important}
+.compiler-modal-heading h3{margin:8px 0!important;color:#eafff3!important;font-size:clamp(20px,4vw,27px)!important}
+.compiler-modal-heading p,.compiler-modal-footnote{color:#8eafa0!important;font-size:13px!important;margin:0!important}
+.modal-close{font-size:25px!important;line-height:1!important;padding:5px 11px!important;background:#0a1719!important}
+.compiler-choice-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+.compiler-choice{display:flex!important;align-items:center!important;text-align:left!important;gap:12px!important;min-width:0!important;padding:14px!important;background:#091518!important;border:1px solid #29463b!important;border-radius:10px!important}
+.compiler-choice.active{border-color:#45ffad!important;background:#10291f!important;box-shadow:inset 0 0 0 1px #45ffad22!important}
+.choice-icon{display:grid!important;place-items:center!important;flex:0 0 38px!important;height:38px!important;border-radius:9px!important;background:#10271e!important;color:#45ffad!important;font:700 15px ui-monospace,monospace!important}
+.compiler-choice strong,.compiler-choice small{display:block!important}
+.compiler-choice strong{color:#eafff3!important;font-size:13px!important}
+.compiler-choice small{margin-top:4px!important;color:#8eafa0!important;font-size:10px!important;font-weight:400!important}
+.choice-arrow{margin-left:auto!important;color:#45ffad!important;opacity:.6!important}
+.compiler-modal-footnote{margin-top:18px!important;font:11px ui-monospace,monospace!important}
+@media(max-width:480px){.compiler-choice-grid{grid-template-columns:1fr!important}.compiler-modal{padding:12px!important}.compiler-choice{padding:11px!important}}
+
 #source{width:100%!important;min-height:300px!important;padding:1rem!important;background:#050a0e!important;color:#bfffe0!important;border:1px solid #294638!important;border-radius:8px!important;font:13px/1.7 ui-monospace,"Cascadia Code",Consolas,monospace!important;tab-size:4!important}
 button,.button{padding:.65rem .9rem!important;background:#10271e!important;border:1px solid #34745a!important;border-radius:6px!important;color:#d9ffeb!important;font-weight:650!important}
 button.primary,#run{background:#45ffad!important;color:#04110b!important;border-color:#45ffad!important;box-shadow:0 0 22px #45ffad25!important}
@@ -217,7 +240,7 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
     <h2>Java Playground</h2>
     <p class="muted">Edit the example and run it. Compilation and execution are handled by the Judge0 Java service.</p>
     <div class="editor-toolbar">
-      <div class="compiler-options"><label for="language">Compiler:</label><select id="language" aria-label="Choose programming language"><option value="62">Java</option><option value="71">Python 3</option><option value="54">C++</option><option value="50">C</option><option value="63">JavaScript (Node.js)</option><option value="51">C#</option></select><span class="muted">Multiple languages · standard input supported</span></div>
+      <div class="compiler-options"><span class="compiler-label">Compiler</span><button type="button" id="compilerPickerButton" class="compiler-picker" aria-haspopup="dialog" aria-controls="compilerPicker"><span id="selectedCompilerName">Java</span><span aria-hidden="true">⌄</span></button><select id="language" aria-label="Choose programming language" tabindex="-1" aria-hidden="true"><option value="62">Java</option><option value="71">Python 3</option><option value="54">C++</option><option value="50">C</option><option value="63">JavaScript (Node.js)</option><option value="51">C#</option></select><span class="muted">Choose a language for this editor</span></div>
       <div class="buttons">
         <button id="reset">Reset code</button>
         <button id="run" class="primary">▶ Run Java</button>
@@ -231,6 +254,21 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
     <div class="editor-toolbar"><strong>Output</strong><span id="status" class="status" role="status">Ready when you are.</span></div>
     <pre id="output" class="output">Your program's output will appear here.</pre>
     <p class="note">Execution uses a public third-party service and may be rate-limited or temporarily unavailable. Do not submit passwords, API keys, personal information, or sensitive code. Programs run in a sandbox with service-defined limits.</p>
+    <div id="compilerPicker" class="compiler-modal" hidden role="dialog" aria-modal="true" aria-labelledby="compilerPickerTitle">
+      <div class="compiler-modal-backdrop" data-close-compiler-picker></div>
+      <div class="compiler-modal-card">
+        <div class="compiler-modal-heading"><div><span class="modal-kicker">ENVIRONMENT SELECTOR</span><h3 id="compilerPickerTitle">Choose your compiler</h3><p>Select a language to load it into the same editor.</p></div><button type="button" id="closeCompilerPicker" class="modal-close" aria-label="Close compiler options">×</button></div>
+        <div class="compiler-choice-grid">
+          <button type="button" class="compiler-choice active" data-language="62"><span class="choice-icon">☕</span><span><strong>Java</strong><small>JVM · Main class</small></span><span class="choice-arrow">↗</span></button>
+          <button type="button" class="compiler-choice" data-language="71"><span class="choice-icon">🐍</span><span><strong>Python 3</strong><small>Python interpreter</small></span><span class="choice-arrow">↗</span></button>
+          <button type="button" class="compiler-choice" data-language="54"><span class="choice-icon">⚙</span><span><strong>C++</strong><small>GNU C++ compiler</small></span><span class="choice-arrow">↗</span></button>
+          <button type="button" class="compiler-choice" data-language="50"><span class="choice-icon">⌘</span><span><strong>C</strong><small>GNU C compiler</small></span><span class="choice-arrow">↗</span></button>
+          <button type="button" class="compiler-choice" data-language="63"><span class="choice-icon">JS</span><span><strong>JavaScript</strong><small>Node.js runtime</small></span><span class="choice-arrow">↗</span></button>
+          <button type="button" class="compiler-choice" data-language="51"><span class="choice-icon">#</span><span><strong>C#</strong><small>.NET environment</small></span><span class="choice-arrow">↗</span></button>
+        </div>
+        <p class="compiler-modal-footnote">Changing language loads its starter code in the editor above.</p>
+      </div>
+    </div>
   </section>
 </main>
 <footer>Mastering Java in a Month · Chapter 1</footer>
@@ -298,40 +336,66 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
   }
   function getCode(){ return editor ? editor.getValue() : document.getElementById('source').value; }
   const playgroundTitle = playground.querySelector('h2');
+  const pickerButton = document.getElementById('compilerPickerButton');
+  const picker = document.getElementById('compilerPicker');
+  const selectedCompilerName = document.getElementById('selectedCompilerName');
   const languageNames = {'62':'Java','71':'Python 3','54':'C++','50':'C','63':'JavaScript','51':'C#'};
   function editorMode(languageId){
     return {'62':'text/x-java','71':'python','54':'text/x-c++src','50':'text/x-csrc','63':'javascript','51':'text/x-csharp'}[languageId] || 'text/x-java';
   }
   function updateLanguageLabels(){
     const name = languageNames[languageSelect.value] || 'Code';
+    selectedCompilerName.textContent = name;
     runButton.textContent = '▶ Run ' + (name === 'Python 3' ? 'Python' : name);
     playgroundTitle.textContent = name + ' Playground';
     playground.setAttribute('aria-label',name + ' code editor');
     document.getElementById('source').setAttribute('aria-label',name + ' source code');
+    picker.querySelectorAll('[data-language]').forEach(function(option){
+      const active = option.dataset.language === languageSelect.value;
+      option.classList.toggle('active',active);
+      option.setAttribute('aria-pressed',String(active));
+    });
   }
-  let previousLanguage = languageSelect.value;
-  updateLanguageLabels();
-  languageSelect.addEventListener('change',function(){
-    const selectedLanguage = languageSelect.value;
-    const name = languageNames[selectedLanguage] || 'this language';
-    const accepted = window.confirm('Switch the editor to ' + name + '?\n\nThe current code will be replaced with a ' + name + ' example. Copy your code first if you want to keep it.');
-    if(!accepted){
-      languageSelect.value = previousLanguage;
-      return;
-    }
-    const template = templates[selectedLanguage] || initialTemplate;
-    if(editor){
-      editor.setOption('mode',editorMode(selectedLanguage));
-      editor.setValue(template);
-      editor.refresh();
-    } else {
-      document.getElementById('source').value = template;
-    }
-    previousLanguage = selectedLanguage;
-    updateLanguageLabels();
-    output.textContent = 'Your program\'s output will appear here.';
-    setStatus('Editor switched to ' + name + '.','');
+  function openCompilerPicker(){
+    picker.hidden = false;
+    document.body.style.overflow = 'hidden';
+    const active = picker.querySelector('[data-language="' + languageSelect.value + '"]');
+    if(active) active.focus();
+  }
+  function closeCompilerPicker(){
+    picker.hidden = true;
+    document.body.style.overflow = '';
+    pickerButton.focus();
+  }
+  pickerButton.addEventListener('click',openCompilerPicker);
+  document.getElementById('closeCompilerPicker').addEventListener('click',closeCompilerPicker);
+  picker.querySelectorAll('[data-close-compiler-picker]').forEach(function(el){el.addEventListener('click',closeCompilerPicker);});
+  document.addEventListener('keydown',function(event){
+    if(event.key === 'Escape' && !picker.hidden) closeCompilerPicker();
   });
+  picker.querySelectorAll('[data-language]').forEach(function(option){
+    option.addEventListener('click',function(){
+      const selectedLanguage = option.dataset.language;
+      const changed = selectedLanguage !== languageSelect.value;
+      languageSelect.value = selectedLanguage;
+      if(changed){
+        const template = templates[selectedLanguage] || initialTemplate;
+        if(editor){
+          editor.setOption('mode',editorMode(selectedLanguage));
+          editor.setValue(template);
+          editor.refresh();
+        } else {
+          document.getElementById('source').value = template;
+        }
+        output.textContent = 'Your program\'s output will appear here.';
+        setStatus('Ready to run ' + (languageNames[selectedLanguage] || 'code') + '.','');
+      }
+      updateLanguageLabels();
+      closeCompilerPicker();
+      if(editor) editor.focus();
+    });
+  });
+  updateLanguageLabels();
     document.getElementById('reset').addEventListener('click',function(){
     if(editor) editor.setValue(templates[languageSelect.value] || defaultCode); else document.getElementById('source').value = templates[languageSelect.value] || defaultCode;
     output.textContent = 'Your program\'s output will appear here.';
