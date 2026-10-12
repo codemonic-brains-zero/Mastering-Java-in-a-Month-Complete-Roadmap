@@ -196,7 +196,7 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
 .CodeMirror-scroll{min-height:320px!important;max-height:70vh!important;overflow:auto!important}
 .CodeMirror-sizer{min-width:0!important}
 .CodeMirror-lines{padding:8px 0!important}
-#source{display:block;width:100%!important;max-width:100%!important;min-height:340px!important;white-space:pre!important;overflow:auto!important;box-sizing:border-box!important}
+#source{width:100%!important;max-width:100%!important;min-height:340px!important;white-space:pre!important;overflow:auto!important;box-sizing:border-box!important}
 #output{width:100%!important;max-width:100%!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important;overflow-x:auto!important}
 #chapter .markdown-source-link{display:block!important;margin:2.5rem 0 0!important;padding:1rem 0 0!important;border-top:1px solid rgba(102,255,181,.22)!important;overflow-wrap:anywhere!important}
 #chapter .markdown-source-link a{display:inline-block!important;max-width:100%!important;line-height:1.7!important}
@@ -297,14 +297,42 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
     status.className = 'status' + (kind ? ' ' + kind : '');
   }
   function getCode(){ return editor ? editor.getValue() : document.getElementById('source').value; }
+  const playgroundTitle = playground.querySelector('h2');
+  const languageNames = {'62':'Java','71':'Python 3','54':'C++','50':'C','63':'JavaScript','51':'C#'};
+  function editorMode(languageId){
+    return {'62':'text/x-java','71':'python','54':'text/x-c++src','50':'text/x-csrc','63':'javascript','51':'text/x-csharp'}[languageId] || 'text/x-java';
+  }
+  function updateLanguageLabels(){
+    const name = languageNames[languageSelect.value] || 'Code';
+    runButton.textContent = '▶ Run ' + (name === 'Python 3' ? 'Python' : name);
+    playgroundTitle.textContent = name + ' Playground';
+    playground.setAttribute('aria-label',name + ' code editor');
+    document.getElementById('source').setAttribute('aria-label',name + ' source code');
+  }
+  let previousLanguage = languageSelect.value;
+  updateLanguageLabels();
   languageSelect.addEventListener('change',function(){
-    const template = templates[languageSelect.value] || initialTemplate;
-    if(editor){ editor.setOption('mode', languageSelect.value === '71' ? 'python' : (languageSelect.value === '63' ? 'javascript' : (languageSelect.value === '50' || languageSelect.value === '54' || languageSelect.value === '51' ? 'text/x-c++src' : 'text/x-java'))); editor.setValue(template); }
-    else document.getElementById('source').value = template;
+    const selectedLanguage = languageSelect.value;
+    const name = languageNames[selectedLanguage] || 'this language';
+    const accepted = window.confirm('Switch the editor to ' + name + '?\n\nThe current code will be replaced with a ' + name + ' example. Copy your code first if you want to keep it.');
+    if(!accepted){
+      languageSelect.value = previousLanguage;
+      return;
+    }
+    const template = templates[selectedLanguage] || initialTemplate;
+    if(editor){
+      editor.setOption('mode',editorMode(selectedLanguage));
+      editor.setValue(template);
+      editor.refresh();
+    } else {
+      document.getElementById('source').value = template;
+    }
+    previousLanguage = selectedLanguage;
+    updateLanguageLabels();
     output.textContent = 'Your program\'s output will appear here.';
-    setStatus('Compiler changed to ' + languageSelect.options[languageSelect.selectedIndex].text + '.','');
+    setStatus('Editor switched to ' + name + '.','');
   });
-  document.getElementById('reset').addEventListener('click',function(){
+    document.getElementById('reset').addEventListener('click',function(){
     if(editor) editor.setValue(templates[languageSelect.value] || defaultCode); else document.getElementById('source').value = templates[languageSelect.value] || defaultCode;
     output.textContent = 'Your program\'s output will appear here.';
     setStatus('Code reset.','');
