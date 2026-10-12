@@ -32,13 +32,59 @@ Java is used for backend services, enterprise systems, APIs, Android codebases, 
 - Java ME: technologies for certain constrained or embedded devices.
 They serve different needs and are not interchangeable labels.
 
-## 7. Java versions and LTS
-Modern Java follows a six-month feature-release cadence. Vendors designate some releases as Long-Term Support (LTS); commonly used examples include Java 8, 11, 17, 21, and 25. Support dates vary by vendor. Check your installed versions with:
+## 7. Java versions, release history, and what changed
+
+Java version numbers tell you which language, library, JVM, and tooling features became available. Java 8, 11, 17, 21, and 25 are widely used LTS releases; LTS means a vendor offers a longer support window, not that every vendor has identical dates or terms. Since Java 9, feature releases have generally arrived every six months. A newer Java can run older bytecode in many cases, but compatibility is not automatic in every situation: removed APIs, changed defaults, dependencies, and build settings can matter.
+
+### Major milestones
+
+| Release | Date | Important additions or changes (highlights, not every change) |
+|---|---|---|
+| Java 1.0 | Jan 1996 | First public production release; core language/runtime and standard APIs. |
+| Java 1.1 | Feb 1997 | Inner classes, JavaBeans-related support, JDBC and RMI APIs. |
+| Java 2 / Java 1.2 | Dec 1998 | Collections framework, Swing, major standard-library and JVM improvements. |
+| Java 5 (1.5) | Sep 2004 | Generics, annotations, enums, enhanced for-loop, autoboxing/unboxing, varargs, concurrency utilities. |
+| Java 6 | Dec 2006 | Library/tooling improvements, scripting support, compiler APIs; no major new syntax headline. |
+| Java 7 | Jul 2011 | try-with-resources, diamond operator `<>`, multi-catch, strings in `switch`, binary literals and numeric underscores, NIO.2. |
+| Java 8 (LTS for many vendors) | Mar 2014 | Lambda expressions, method references, streams, functional interfaces, default methods, and the `java.time` date/time API. |
+| Java 9 | Sep 2017 | Java Platform Module System (JPMS), JShell, collection factory methods, and improved process/API support. |
+| Java 10 | Mar 2018 | Local-variable type inference with `var` (for eligible local variables; not a dynamic type). |
+| Java 11 (LTS for many vendors) | Sep 2018 | Standardized HTTP Client API, single-file source launch, new String/file methods, and removal of some older Java EE/CORBA modules from the JDK. |
+| Java 12–13 | 2019 | Switch expressions and text blocks appeared as preview features; previews were not yet final features. |
+| Java 14 | Mar 2020 | Switch expressions became final; helpful NullPointerException messages; records appeared as preview. |
+| Java 15 | Sep 2020 | Text blocks became final; sealed classes and records continued through preview stages. |
+| Java 16 | Mar 2021 | Records became final; pattern matching for `instanceof` became final; `jpackage` became a standard tool. |
+| Java 17 (LTS) | Sep 2021 | Sealed classes became final; strong encapsulation of JDK internals; pattern matching for switch remained preview. |
+| Java 18 | Mar 2022 | UTF-8 became the default charset; simple web server tool; `@snippet` support for documentation. |
+| Java 19–20 | 2022–2023 | Virtual threads, structured concurrency, and some pattern-matching work were preview/incubator features—not all final yet. |
+| Java 21 (LTS) | Sep 2023 | Virtual threads, record patterns, pattern matching for switch, and sequenced collections became final; string templates were preview at this release. |
+| Java 22–24 | 2024–2025 | Foreign Function & Memory API became final in Java 22; continued work on language previews, performance, garbage collection, and developer tools. Check each JEP/release notes for the exact status of a feature in a specific release. |
+| Java 25 (LTS) | Sep 2025 | Current LTS generation as of this note; includes compact source files and instance main methods as final features, plus other language, library, runtime, and performance changes. Exact support periods depend on the vendor. |
+
+**Important:** this is a learning timeline of selected headline changes, not a complete list of every API or bug fix. A feature marked *preview* or *incubator* was experimental and could require special flags; it should not be treated as a normal finalized language feature for that release.
+
+### LTS versus non-LTS
+
+- **LTS:** a vendor-supported long-term baseline that organizations often choose for production, such as Java 8, 11, 17, 21, or 25.
+- **Non-LTS / interim feature release:** delivers newer features sooner, but typically has a shorter support window.
+- Oracle's support policy and the policies of OpenJDK distributors such as Eclipse Temurin can differ. Always check the exact vendor, build, and support policy rather than assuming a universal end-of-support date.
+- For a new learning project, use a currently supported JDK such as 25 LTS if your IDE and course setup support it. If a course or project specifically targets Java 17 or 21, use that version for consistency.
+
+### Check the Java version installed on your computer
 
 ~~~bash
 java -version
 javac -version
 ~~~
+
+- `java -version` reports the runtime/launcher version selected by your PATH.
+- `javac -version` reports the compiler version selected by your PATH.
+- They should normally come from the JDK you intend to use. On Windows, `where java` and `where javac` help identify which executable is being used.
+- In Eclipse, also check **Window > Preferences > Java > Installed JREs** (the exact menu can vary by version) and the project's **Java Compiler** settings. The command-line JDK and Eclipse project compliance level can differ.
+
+### Why version matters in practice
+
+For example, records became a final feature in Java 16, and virtual threads became final in Java 21. Code using either feature will not compile on older language levels that do not support it. In Eclipse, a project set to Java 17 can reject newer syntax even if a newer JDK is installed. Set the project's JRE/JDK and compiler compliance level intentionally, and check library/deployment compatibility before upgrading.
 
 ## 8. Install and verify the JDK
 For development, install a JDK, which includes the compiler and runtime components. Common distributions include Eclipse Temurin, Oracle JDK, and Amazon Corretto. On Windows, if a command is not found, locate the actual JDK installation and check whether its bin directory is on PATH, then open a new terminal. You have already installed Eclipse Temurin and verified both commands, so you can continue to the examples.
