@@ -504,7 +504,7 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
   });
   runButton.addEventListener('click',async function(){
     const source = getCode().trim();
-    if(!source){setStatus('Write some Java code first.','error');return;}
+    if(!source){const selectedName = languageBaseNames[String(languageSelect.value)] || languageNames[String(languageSelect.value)] || 'program';setStatus('Write some ' + selectedName + ' code first.','error');return;}
     runButton.disabled = true;
     output.textContent = '';
     setStatus('Submitting code…','');
@@ -517,7 +517,8 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
       if(!response.ok) throw new Error('Execution service returned HTTP ' + response.status + '.');
       const submission = await response.json();
       if(!submission.token) throw new Error(submission.error || 'The execution service did not return a submission token.');
-      setStatus('Java is compiling/running…','');
+      const runningLanguage = languageBaseNames[String(languageSelect.value)] || languageNames[String(languageSelect.value)] || 'Code';
+      setStatus(runningLanguage + ' is compiling/running…','');
       let result = null;
       for(let attempt=0;attempt<30;attempt++){
         await new Promise(resolve=>setTimeout(resolve,1000));
