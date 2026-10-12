@@ -43,6 +43,49 @@ hr{border:0;border-top:1px solid #263b32}
 footer{color:var(--muted)}
 @media(max-width:700px){body{font-size:15px}h1{font-size:clamp(2rem,10vw,3.4rem)}.chapter,.panel,.card{border-radius:10px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* HARD VISUAL REDESIGN — hacker workstation */
+:root{--bg:#05090d;--panel:#0a1118;--line:#244a3a;--text:#e5fff2;--muted:#87a99a;--green:#45ffad;--cyan:#4ce9ff;--pink:#ff57d5;--purple:#a58bff;--yellow:#f4f58a}
+html{background-color:#05090d!important;background-image:linear-gradient(rgba(69,255,173,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(69,255,173,.055) 1px,transparent 1px),radial-gradient(ellipse at 15% 0%,#0d4934 0,transparent 34%),radial-gradient(ellipse at 95% 12%,#201746 0,transparent 30%)!important;background-size:28px 28px,28px 28px,auto,auto!important;background-attachment:fixed!important}
+body{max-width:none!important;margin:0!important;color:#d9f7e9!important;background:transparent!important;font-family:Inter,"Segoe UI",system-ui,sans-serif!important}
+header{position:relative!important;overflow:hidden!important;padding:clamp(2.5rem,7vw,6.5rem) max(6vw,calc((100vw - 1180px)/2)) 3.5rem!important;background:linear-gradient(115deg,rgba(4,12,13,.98),rgba(7,20,22,.96) 58%,rgba(22,10,31,.95))!important;border:0!important;border-bottom:1px solid #45ffad55!important;box-shadow:0 18px 70px #0009!important}
+header:before{content:"SYSTEM ONLINE  //  JAVA LEARNING ENVIRONMENT";display:block;color:#45ffad;font:600 11px/1.5 ui-monospace,monospace;letter-spacing:.18em;margin-bottom:1.6rem}
+header:after{content:"01";position:absolute;right:8%;bottom:-.35em;font:900 clamp(12rem,30vw,25rem)/1 ui-monospace,monospace;color:#45ffad08;pointer-events:none}
+header .tag{display:inline-flex!important;align-items:center;gap:.55rem;padding:.45rem .75rem!important;border:1px solid #45ffad55!important;border-radius:4px!important;background:#45ffad0d!important;color:#45ffad!important;font:600 11px ui-monospace,monospace!important;letter-spacing:.12em;text-transform:uppercase}
+header h1{max-width:900px!important;margin:.85rem 0 1rem!important;font-size:clamp(2.8rem,7.5vw,6.5rem)!important;font-weight:850!important;letter-spacing:-.075em!important;line-height:.98!important;color:#f0fff7!important;text-shadow:0 0 36px #45ffad1f!important}
+header h1:after{content:"_"!important;color:#45ffad!important}
+header p{max-width:650px!important;margin:.7rem 0!important;color:#a8c7b9!important;font-size:clamp(1rem,1.6vw,1.2rem)!important}
+header p:nth-of-type(2){font:12px/1.8 ui-monospace,monospace!important;color:#45ffad!important}
+main{display:grid!important;grid-template-columns:minmax(0,1.45fr) minmax(320px,.8fr)!important;align-items:start!important;gap:1.5rem!important;width:min(1240px,92vw)!important;margin:2rem auto 5rem!important;padding:0!important}
+.chapter{grid-column:1!important;min-width:0!important;padding:clamp(1.25rem,3vw,2.5rem)!important;background:rgba(8,15,20,.92)!important;border:1px solid #294638!important;border-radius:12px!important;box-shadow:0 20px 65px #0005!important}
+.chapter:before{content:"// FIELD NOTES";display:block;padding-bottom:1rem;margin-bottom:1.5rem;border-bottom:1px solid #294638;color:#45ffad;font:600 11px ui-monospace,monospace;letter-spacing:.18em}
+.chapter h1,.chapter h2,.chapter h3,.chapter h4{letter-spacing:-.035em!important;color:#e8fff4!important;text-shadow:none!important}
+.chapter h2{margin-top:2.4rem!important;padding-bottom:.7rem!important;border-bottom:1px solid #2d5945!important;font-size:clamp(1.35rem,2.5vw,1.8rem)!important}
+.chapter h2:before{content:"[+] "!important;color:#45ffad!important}
+.chapter p,.chapter li,.chapter blockquote{color:#b8d2c6!important;line-height:1.85!important}
+.chapter strong{color:#f4f58a!important}
+.chapter code{padding:.15em .35em!important;background:#14251e!important;border:1px solid #294638!important;border-radius:4px!important;color:#69ffd0!important}
+.chapter pre{background:#050a0e!important;border:1px solid #294638!important;border-left:3px solid #45ffad!important;border-radius:8px!important;color:#d7ffeb!important}
+.playground{grid-column:2!important;position:sticky!important;top:1rem!important;min-width:0!important;padding:1.25rem!important;background:linear-gradient(160deg,rgba(12,25,27,.98),rgba(7,12,18,.98))!important;border:1px solid #34745a!important;border-radius:12px!important;box-shadow:0 18px 55px #0008,0 0 0 1px #45ffad0a!important}
+.playground:before{content:"LIVE TERMINAL  ● CONNECTED";display:block;color:#45ffad;font:600 10px ui-monospace,monospace;letter-spacing:.14em;margin-bottom:1rem}
+.playground h2{margin:.2rem 0 .5rem!important;font-size:1.45rem!important;color:#f0fff7!important}
+.playground>p{color:#8eafa0!important;font-size:.9rem!important}
+.editor-toolbar{display:flex!important;flex-wrap:wrap!important;align-items:center!important;justify-content:space-between!important;gap:.75rem!important;padding:.8rem!important;margin:.8rem 0!important;background:#0c171b!important;border:1px solid #263f35!important;border-radius:8px!important}
+.compiler-options{display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:.5rem!important}
+.compiler-options label,.editor-toolbar strong{color:#45ffad!important;font:600 11px ui-monospace,monospace!important;text-transform:uppercase!important;letter-spacing:.08em}
+.compiler-options .muted{display:none!important}
+#language{max-width:100%!important;padding:.45rem .6rem!important;background:#07100f!important;border:1px solid #34745a!important;color:#d9f7e9!important}
+#source{width:100%!important;min-height:300px!important;padding:1rem!important;background:#050a0e!important;color:#bfffe0!important;border:1px solid #294638!important;border-radius:8px!important;font:13px/1.7 ui-monospace,"Cascadia Code",Consolas,monospace!important;tab-size:4!important}
+button,.button{padding:.65rem .9rem!important;background:#10271e!important;border:1px solid #34745a!important;border-radius:6px!important;color:#d9ffeb!important;font-weight:650!important}
+button.primary,#run{background:#45ffad!important;color:#04110b!important;border-color:#45ffad!important;box-shadow:0 0 22px #45ffad25!important}
+button:hover,.button:hover{transform:translateY(-1px)!important;border-color:#45ffad!important;box-shadow:0 0 20px #45ffad25!important}
+#output{min-height:95px!important;white-space:pre-wrap!important;background:#03090d!important;color:#70f8ff!important;border:1px solid #2d7a80!important;border-radius:8px!important;font:12px/1.7 ui-monospace,monospace!important}
+.status{font:11px ui-monospace,monospace!important;color:#8ca99b!important}
+.status.ok{color:#45ffad!important}.status.error{color:#ff6d92!important}
+footer{color:#769587!important}
+@media(max-width:900px){main{grid-template-columns:minmax(0,1fr)!important;width:min(760px,92vw)!important} .chapter,.playground{grid-column:1!important}.playground{position:relative!important;top:auto!important;grid-row:1!important}}
+@media(max-width:600px){header{padding:3rem 5vw 2.5rem!important}main{width:92vw!important;margin:1rem auto 3rem!important;gap:1rem!important}.playground{padding:.85rem!important}.editor-toolbar{align-items:flex-start!important}}
+
 </style>
 </head>
 <body>
