@@ -282,6 +282,27 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
     '51':'using System;\nclass Program {\n    static void Main() {\n        Console.WriteLine("Hello, C#!");\n    }\n}'
   };
   const initialTemplate = templates['62'];
+  const preferredLanguageIds = {'Java':62,'Python':71,'C++':54,'C':50,'JavaScript':63,'C#':51,'PHP':68,'Go':60,'Rust':73,'Ruby':72,'Kotlin':78,'Swift':83,'SQL':82};
+  const popularLanguageOrder = ['Java','Python','JavaScript','C','C++','C#','PHP','SQL','Go','Rust','Kotlin','Ruby','Swift'];
+  function templateForLanguage(name){
+    const key = baseLanguageName(name).toLowerCase();
+    const examples = {
+      'java':templates['62'],
+      'python':'print("Hello, Python!")',
+      'javascript':'console.log("Hello, JavaScript!");',
+      'c':templates['50'],
+      'c++':templates['54'],
+      'c#':templates['51'],
+      'php':'<?php\necho "Hello, PHP!";\n?>',
+      'go':'package main\n\nimport "fmt"\n\nfunc main() {\n    fmt.Println("Hello, Go!")\n}',
+      'rust':'fn main() {\n    println!("Hello, Rust!");\n}',
+      'ruby':'puts "Hello, Ruby!"',
+      'kotlin':'fun main() {\n    println("Hello, Kotlin!")\n}',
+      'swift':'print("Hello, Swift!")',
+      'sql':'SELECT \'Hello, SQL!\' AS message;'
+    };
+    return examples[key] || '';
+  }
   const output = document.getElementById('output');
   const status = document.getElementById('status');
   const runButton = document.getElementById('run');
@@ -330,19 +351,20 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
   const compilerChoiceGrid = document.getElementById('compilerChoiceGrid');
   const compilerSearch = document.getElementById('compilerSearch');
   const compilerListStatus = document.getElementById('compilerListStatus');
-  const languageNames = {'62':'Java (OpenJDK 13.0.1)','71':'Python (3.8.1)','54':'C++ (GCC 9.2.0)','50':'C (GCC 9.2.0)','63':'JavaScript (Node.js 12.14.0)','51':'C# (Mono 6.6.0.161)'};
-  const languageBaseNames = {'62':'Java','71':'Python','54':'C++','50':'C','63':'JavaScript','51':'C#'};
-  let activeLanguages = [
-    {id:62,name:languageNames['62']},{id:71,name:languageNames['71']},
-    {id:54,name:languageNames['54']},{id:50,name:languageNames['50']},
-    {id:63,name:languageNames['63']},{id:51,name:languageNames['51']}
-  ];
+  const languageNames = {'62':'Java','71':'Python','54':'C++','50':'C','63':'JavaScript','51':'C#','68':'PHP','60':'Go','73':'Rust','72':'Ruby','78':'Kotlin','83':'Swift','82':'SQL'};
+  const languageBaseNames = {'62':'Java','71':'Python','54':'C++','50':'C','63':'JavaScript','51':'C#','68':'PHP','60':'Go','73':'Rust','72':'Ruby','78':'Kotlin','83':'Swift','82':'SQL'};
+  let activeLanguages = popularLanguageOrder.map(function(name){return {id:preferredLanguageIds[name],name:name};});
   function baseLanguageName(name){
     return String(name || 'Code').replace(/\s*\([^)]*\)\s*$/,'').trim() || 'Code';
   }
+  function canonicalLanguage(name){
+    const n = baseLanguageName(name).toLowerCase();
+    const aliases = {'c++':'C++','cpp':'C++','c':'C','java':'Java','python':'Python','python 3':'Python','javascript':'JavaScript','node.js':'JavaScript','c#':'C#','csharp':'C#','php':'PHP','go':'Go','golang':'Go','rust':'Rust','ruby':'Ruby','kotlin':'Kotlin','swift':'Swift','sql':'SQL'};
+    return aliases[n] || '';
+  }
   function editorMode(languageId){
-    const name = baseLanguageName(languageNames[String(languageId)] || '').toLowerCase();
-    const modes = {'java':'java','python':'python','python 3':'python','c++':'c_cpp','c':'c_cpp','javascript':'javascript','typescript':'typescript','c#':'csharp','ruby':'ruby','go':'golang','rust':'rust','php':'php','swift':'swift','kotlin':'kotlin','sql':'sql','html':'html','css':'css','json':'json','bash':'sh','shell':'sh','r':'r','perl':'perl','scala':'scala','dart':'dart','lua':'lua','haskell':'haskell','objective-c':'objectivec','fortran':'fortran','assembly':'assembly_x86'};
+    const name = canonicalLanguage(languageNames[String(languageId)] || '');
+    const modes = {'Java':'java','Python':'python','C++':'c_cpp','C':'c_cpp','JavaScript':'javascript','C#':'csharp','Ruby':'ruby','Go':'golang','Rust':'rust','PHP':'php','Swift':'swift','Kotlin':'kotlin','SQL':'sql'};
     return 'ace/mode/' + (modes[name] || 'text');
   }
   function updateLanguageLabels(){
@@ -408,8 +430,8 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
     const changed = String(selectedLanguage) !== String(languageSelect.value);
     languageSelect.value = String(selectedLanguage);
     if(changed){
-      const template = templates[String(selectedLanguage)];
-      const nextCode = typeof template === 'string' ? template : '';
+      const nameForTemplate = languageBaseNames[String(selectedLanguage)] || languageNames[String(selectedLanguage)] || '';
+      const nextCode = templateForLanguage(nameForTemplate);
       if(editor){
         editor.session.setMode(editorMode(selectedLanguage));
         editor.setValue(nextCode,-1);
@@ -418,7 +440,7 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
       }
       output.textContent = 'Your program\'s output will appear here.';
       const name = baseLanguageName(languageNames[String(selectedLanguage)] || 'code');
-      setStatus(typeof template === 'string' ? 'Ready to run ' + name + '.' : 'Selected ' + name + '. Write your code in the editor, then run it.','');
+      setStatus(nextCode ? 'Ready to run ' + name + '.' : 'Selected ' + name + '. Write your code in the editor, then run it.','');
     }
     updateLanguageLabels();
     renderLanguageChoices();
@@ -438,15 +460,24 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
       .then(function(response){if(!response.ok) throw new Error('Language service returned HTTP ' + response.status);return response.json();})
       .then(function(languages){
         if(!Array.isArray(languages) || !languages.length) throw new Error('No active languages returned');
-        activeLanguages = languages.filter(function(language){return language && Number.isFinite(Number(language.id)) && language.name;})
-          .map(function(language){return {id:Number(language.id),name:String(language.name)};})
-          .sort(function(a,b){return a.name.localeCompare(b.name);});
+        const byFamily = new Map();
+        languages.filter(function(language){return language && Number.isFinite(Number(language.id)) && language.name;}).forEach(function(runtime){
+          const family = canonicalLanguage(runtime.name);
+          if(!family) return;
+          const candidate = {id:Number(runtime.id),name:family,runtimeName:String(runtime.name)};
+          const current = byFamily.get(family);
+          if(!current || candidate.id === preferredLanguageIds[family]) byFamily.set(family,candidate);
+        });
+        const curated = popularLanguageOrder.map(function(name){return byFamily.get(name);}).filter(Boolean);
+        if(!curated.some(function(language){return language.name === 'Java';})){
+          curated.unshift({id:62,name:'Java',runtimeName:'Java (OpenJDK)'});
+        }
+        activeLanguages = curated;
         activeLanguages.forEach(function(language){
           languageNames[String(language.id)] = language.name;
-          if(!languageBaseNames[String(language.id)]) languageBaseNames[String(language.id)] = baseLanguageName(language.name);
+          languageBaseNames[String(language.id)] = language.name;
         });
-        const selectedExists = activeLanguages.some(function(language){return String(language.id) === String(languageSelect.value);});
-        if(!selectedExists) languageSelect.value = String(activeLanguages[0].id);
+        if(!activeLanguages.some(function(language){return String(language.id) === String(languageSelect.value);})) languageSelect.value = String(activeLanguages[0].id);
         languageSelect.replaceChildren();
         activeLanguages.forEach(function(language){
           const option = document.createElement('option');
@@ -458,7 +489,7 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
         renderLanguageChoices();
       })
       .catch(function(){
-        compilerListStatus.textContent = 'Could not load the full list. Showing the six built-in options.';
+        compilerListStatus.textContent = 'Showing popular languages; the runtime list could not be refreshed.';
         renderLanguageChoices();
       });
   }
@@ -466,7 +497,8 @@ main{width:calc(100% - clamp(160px, 30vw, 560px))!important;max-width:1120px!imp
   renderLanguageChoices();
   loadAvailableLanguages();
     document.getElementById('reset').addEventListener('click',function(){
-    if(editor) editor.setValue(templates[languageSelect.value] || defaultCode,-1); else document.getElementById('source').value = templates[languageSelect.value] || defaultCode;
+    const resetCode = templateForLanguage(languageBaseNames[languageSelect.value] || languageNames[languageSelect.value] || 'Java') || defaultCode;
+    if(editor) editor.setValue(resetCode,-1); else document.getElementById('source').value = resetCode;
     output.textContent = 'Your program\'s output will appear here.';
     setStatus('Code reset.','');
   });
