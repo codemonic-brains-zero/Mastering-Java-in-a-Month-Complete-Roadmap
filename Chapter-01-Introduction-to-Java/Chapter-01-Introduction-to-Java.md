@@ -8,7 +8,7 @@ Main.java --javac--> Main.class (bytecode) --JVM--> program runs
 ~~~
 
 ## 2. History of Java
-Java began at Sun Microsystems in the early 1990s as part of the Green Project, which explored software for consumer electronic devices. James Gosling was a key designer. Oak is the best-documented early name; the name was later changed to Java. Sun announced Java publicly in 1995, and Java 1.0 was released on 23 January 1996. Java did not invent the World Wide Web; web software became an important use for Java as the Web grew. Some secondary sources mention GreenTalk and .gt in early naming accounts, but accounts of that stage are not consistent.
+Java began at Sun Microsystems in the early 1990s as part of the Green Project, which explored software for consumer electronic devices. James Gosling was a key designer. Oak is the best-documented early name; the name was later changed to Java. Sun announced Java publicly in 1995, and Java 1.0 was released on 23 January 1996. Some secondary sources mention GreenTalk and .gt in early naming accounts, but accounts of that stage are not consistent.
 
 ## 3. Why Java was created
 The project sought portability across different devices, reliability, security, and a productive programming environment. C and C++ already existed and remain useful; Java offered a different balance with bytecode, a managed runtime, garbage collection, and a broad standard library.
