@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 390" role="img" aria-labelledby="title desc">
+  <title id="title">Java build and release pipeline</title>
+  <desc id="desc">Source and build configuration flow through dependency resolution, compilation, automated tests, packaging, and artifact publication. Environment configuration is supplied at deployment and secrets remain outside the build artifact.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+    <marker id="purpleArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#a58bff"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="388" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">JAVA BUILD / REPEATABLE SOURCE-TO-ARTIFACT FLOW</text>
+  <g font-family="system-ui, sans-serif">
+    <rect x="48" y="126" width="146" height="74" rx="11" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="90" y="158" fill="#4ce9ff" font-size="15" font-weight="700">Source</text>
+    <text x="68" y="183" fill="#b7cfc4" font-family="monospace" font-size="12">code + POM / Gradle</text>
+    <path d="M194 163h28" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="230" y="126" width="148" height="74" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="259" y="158" fill="#a8fff0" font-family="monospace" font-size="13">resolve deps</text>
+    <text x="254" y="183" fill="#87a99a" font-size="12">pinned versions</text>
+    <path d="M378 163h28" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="414" y="126" width="132" height="74" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="450" y="158" fill="#a8fff0" font-family="monospace" font-size="13">compile</text>
+    <text x="439" y="183" fill="#87a99a" font-size="12">static checks</text>
+    <path d="M546 163h28" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="582" y="126" width="132" height="74" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="622" y="158" fill="#a8fff0" font-family="monospace" font-size="13">test</text>
+    <text x="605" y="183" fill="#87a99a" font-size="12">unit + integration</text>
+    <path d="M714 163h28" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="750" y="126" width="162" height="74" rx="11" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="791" y="158" fill="#d0c8ff" font-family="monospace" font-size="13">package</text>
+    <text x="782" y="183" fill="#b7a8ff" font-size="12">JAR / WAR artifact</text>
+    <path d="M831 204v59H513v-59" fill="none" stroke="#4ce9ff" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+    <text x="618" y="252" fill="#bdefff" font-size="12">publish immutable artifact</text>
+    <rect x="48" y="287" width="344" height="62" rx="11" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="80" y="315" fill="#bdefff" font-size="14" font-weight="700">Environment configuration</text>
+    <text x="80" y="337" fill="#87a99a" font-size="12">injected when the artifact is deployed</text>
+    <path d="M392 318h56" stroke="#4ce9ff" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="456" y="287" width="456" height="62" rx="11" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="494" y="315" fill="#d0c8ff" font-size="14" font-weight="700">Secrets stay outside source and artifacts</text>
+    <text x="494" y="337" fill="#b7a8ff" font-size="12">supply through a protected runtime secret store</text>
+    <text x="48" y="373" fill="#87a99a" font-family="monospace" font-size="12">Build with the committed wrapper so local and CI tooling versions agree.</text>
+  </g>
+</svg>
