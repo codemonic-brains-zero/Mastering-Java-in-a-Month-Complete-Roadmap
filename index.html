@@ -546,6 +546,7 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.6/purify.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ace.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
 <script>
 (function(){
   const rawMarkdownUrl = 'https://raw.githubusercontent.com/codemonic-brains-zero/Mastering-Java-in-a-Month-Complete-Roadmap/main/Chapter-01-Introduction-to-Java/Chapter-01-Introduction-to-Java.md';
@@ -594,6 +595,25 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
   function renderPart(text){
     const rendered = marked.parse(text);
     return DOMPurify.sanitize(rendered);
+  }
+  function renderMermaidDiagrams(){
+    if(!window.mermaid || chapter.dataset.mermaidRendered === 'pending') return;
+    const blocks = chapter.querySelectorAll('pre > code.language-mermaid');
+    if(!blocks.length) return;
+    chapter.dataset.mermaidRendered = 'pending';
+    window.mermaid.initialize({startOnLoad:false,securityLevel:'strict',theme:'default'});
+    blocks.forEach(function(code){
+      const diagram = document.createElement('div');
+      diagram.className = 'mermaid';
+      diagram.textContent = code.textContent;
+      code.parentElement.replaceWith(diagram);
+    });
+    window.mermaid.run({nodes: chapter.querySelectorAll('.mermaid')}).then(function(){
+      chapter.dataset.mermaidRendered = 'done';
+    }).catch(function(error){
+      chapter.dataset.mermaidRendered = 'error';
+      console.error('Could not render Mermaid diagrams:', error);
+    });
   }
   // Topic-specific SVG blueprint plates: crisp, responsive, and labelled.
   const blueprintSpecs = [
@@ -662,6 +682,7 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
       heroEditorDock.appendChild(playground);
     }
     chapter.appendChild(sourceLink);
+    renderMermaidDiagrams();
   }).catch(function(error){
     chapter.innerHTML = '<p class="status error">Chapter notes could not be loaded. You can still use the editor below. Open the <a href="https://github.com/codemonic-brains-zero/Mastering-Java-in-a-Month-Complete-Roadmap/blob/main/Chapter-01-Introduction-to-Java/Chapter-01-Introduction-to-Java.md">Markdown chapter on GitHub</a> instead.</p>';
     heroEditorDock.appendChild(playground);
