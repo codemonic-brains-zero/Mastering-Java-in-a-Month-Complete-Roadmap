@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" role="img" aria-labelledby="title desc">
+  <title id="title">Java stream pipeline</title>
+  <desc id="desc">A source of values flows through lazy filter, map, and sorted intermediate operations. A terminal collect operation triggers traversal and produces a result.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="358" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">STREAMS / LAZY TRANSFORMATIONS TO TERMINAL RESULT</text>
+  <g font-family="system-ui, sans-serif">
+    <rect x="48" y="135" width="160" height="70" rx="12" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="82" y="165" fill="#4ce9ff" font-size="16" font-weight="700">Source</text>
+    <text x="68" y="190" fill="#b7cfc4" font-family="monospace" font-size="13">List&lt;String&gt;</text>
+    <path d="M208 170h42" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <rect x="260" y="135" width="135" height="70" rx="12" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="295" y="166" fill="#a8fff0" font-family="monospace" font-size="16">filter()</text>
+    <text x="281" y="189" fill="#87a99a" font-size="12">intermediate</text>
+    <path d="M395 170h38" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <rect x="443" y="135" width="135" height="70" rx="12" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="479" y="166" fill="#a8fff0" font-family="monospace" font-size="16">map()</text>
+    <text x="464" y="189" fill="#87a99a" font-size="12">intermediate</text>
+    <path d="M578 170h38" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <rect x="626" y="135" width="135" height="70" rx="12" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="655" y="166" fill="#a8fff0" font-family="monospace" font-size="16">sorted()</text>
+    <text x="647" y="189" fill="#87a99a" font-size="12">intermediate</text>
+    <path d="M761 170h38" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <rect x="809" y="135" width="112" height="70" rx="12" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="830" y="166" fill="#d0c8ff" font-family="monospace" font-size="15">collect()</text>
+    <text x="834" y="189" fill="#b7a8ff" font-size="12">terminal</text>
+
+    <path d="M867 215v42H121v-42" fill="none" stroke="#a58bff" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+    <text x="340" y="281" fill="#b7a8ff" font-size="14">Terminal operation triggers traversal through the lazy stages</text>
+    <text x="48" y="326" fill="#87a99a" font-family="monospace" font-size="12">INTERMEDIATE OPERATIONS BUILD A PIPELINE; THEY DO NOT CONSUME THE SOURCE BY THEMSELVES.</text>
+  </g>
+</svg>

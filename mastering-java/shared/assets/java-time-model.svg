@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" role="img" aria-labelledby="title desc">
+  <title id="title">Java local date-time, time zone, and instant model</title>
+  <desc id="desc">A LocalDateTime is a wall-clock value without a time zone. A ZoneId maps it to a ZonedDateTime and an Instant on the global timeline. Duration measures elapsed time between instants.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="358" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">JAVA.TIME / WALL CLOCK VS GLOBAL TIMELINE</text>
+  <g font-family="system-ui, sans-serif">
+    <rect x="52" y="126" width="222" height="82" rx="12" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="82" y="159" fill="#4ce9ff" font-family="monospace" font-size="17">LocalDateTime</text>
+    <text x="86" y="186" fill="#b7cfc4" font-size="13">calendar + clock, no zone</text>
+
+    <rect x="369" y="72" width="214" height="66" rx="12" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="412" y="101" fill="#d0c8ff" font-family="monospace" font-size="16">ZoneId</text>
+    <text x="394" y="123" fill="#b7a8ff" font-size="12">region rules / DST</text>
+
+    <rect x="369" y="207" width="214" height="66" rx="12" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="393" y="236" fill="#a8fff0" font-family="monospace" font-size="16">ZonedDateTime</text>
+    <text x="401" y="258" fill="#b7cfc4" font-size="12">local value + zone</text>
+
+    <path d="M274 157h67v79h16" fill="none" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path d="M476 138v53" stroke="#a58bff" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="284" y="146" fill="#87a99a" font-size="12">atZone()</text>
+
+    <path d="M583 240h73" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="672" y="207" width="226" height="66" rx="12" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="730" y="236" fill="#a8fff0" font-family="monospace" font-size="17">Instant</text>
+    <text x="719" y="258" fill="#b7cfc4" font-size="12">point on UTC timeline</text>
+    <text x="600" y="224" fill="#87a99a" font-size="12">toInstant()</text>
+
+    <path d="M785 207v-64" stroke="#4ce9ff" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="672" y="72" width="226" height="62" rx="12" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="742" y="100" fill="#bdefff" font-family="monospace" font-size="17">Duration</text>
+    <text x="707" y="122" fill="#b7cfc4" font-size="12">elapsed time between instants</text>
+    <text x="799" y="173" fill="#87a99a" font-size="12">between</text>
+  </g>
+  <text x="52" y="321" fill="#87a99a" font-family="monospace" font-size="12">USE LocalDate / LocalTime FOR ZONE-FREE CALENDAR VALUES; USE Instant FOR GLOBAL EVENT TIME.</text>
+</svg>

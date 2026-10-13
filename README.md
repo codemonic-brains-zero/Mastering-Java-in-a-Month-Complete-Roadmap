@@ -35,6 +35,18 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
     +-- chapter-07-exception-handling/
     |   +-- chapter-07-exception-handling.html
     |   +-- chapter-07-exception-handling.md
+    +-- chapter-08-wrapper-classes-and-core-apis/
+    |   +-- chapter-08-wrapper-classes-and-core-apis.html
+    |   +-- chapter-08-wrapper-classes-and-core-apis.md
+    +-- chapter-09-collections-framework/
+    |   +-- chapter-09-collections-framework.html
+    |   +-- chapter-09-collections-framework.md
+    +-- chapter-10-functional-java-and-streams/
+    |   +-- chapter-10-functional-java-and-streams.html
+    |   +-- chapter-10-functional-java-and-streams.md
+    +-- chapter-11-java-io-files-and-serialization/
+    |   +-- chapter-11-java-io-files-and-serialization.html
+    |   +-- chapter-11-java-io-files-and-serialization.md
     +-- shared/
         +-- index.html
         +-- assets/
@@ -51,6 +63,10 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
             +-- exception-resource-flow.svg
             +-- java-inheritance-and-interfaces.svg
             +-- java-exception-hierarchy.svg
+            +-- collections-framework-hierarchy.svg
+            +-- java-stream-pipeline.svg
+            +-- java-io-stream-types.svg
+            +-- java-time-model.svg
 ```
 
 - [`roadmap/java-learning-roadmap.md`](roadmap/java-learning-roadmap.md) contains the complete Java syllabus.
@@ -58,7 +74,8 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
 - [`mastering-java/chapter-02-variables-data-types-and-operators/chapter-02-variables-data-types-and-operators.md`](mastering-java/chapter-02-variables-data-types-and-operators/chapter-02-variables-data-types-and-operators.md) contains Chapter 2 lesson explanations, Java examples, takeaways, and its coverage check against the master roadmap.
 - [`mastering-java/chapter-03-control-flow-and-arrays/chapter-03-control-flow-and-arrays.md`](mastering-java/chapter-03-control-flow-and-arrays/chapter-03-control-flow-and-arrays.md) contains Chapter 3 lesson explanations and Java examples.
 - Chapters 4–7 contain detailed lessons for Strings and Text Processing, Methods and Object-Oriented Programming, Packages and Java Language Features, and Exception Handling.
+- Chapters 8–11 contain detailed lessons for Core APIs, Collections, Functional Java and Streams, and Java I/O, Files, and Serialization.
 - Each named chapter HTML page opens the shared UI in [`mastering-java/shared/index.html`](mastering-java/shared/index.html); lesson content stays in Markdown.
-- Chapter 2–7 visual diagrams are SVG files in `mastering-java/shared/assets/`.
+- Chapter 2–11 visual diagrams are SVG files in `mastering-java/shared/assets/`.
 
-The root page redirects directly to Chapter 1's named HTML page. Chapters 1–7 have Previous/Next navigation.
+The root page redirects directly to Chapter 1's named HTML page. Chapters 1–11 have Previous/Next navigation.

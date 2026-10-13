@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 370" role="img" aria-labelledby="title desc">
+  <title id="title">Java byte streams and character streams</title>
+  <desc id="desc">Binary data uses InputStream and OutputStream. Text uses Reader and Writer, with a charset encoder or decoder converting between characters and bytes at file boundaries.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+    <marker id="cyanArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#4ce9ff"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="368" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">JAVA I/O / BINARY BYTES VS ENCODED TEXT</text>
+  <g font-family="system-ui, sans-serif">
+    <text x="62" y="100" fill="#4ce9ff" font-size="17" font-weight="700">Binary data</text>
+    <rect x="62" y="122" width="190" height="62" rx="10" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="87" y="159" fill="#bdefff" font-family="monospace" font-size="16">InputStream</text>
+    <path d="M252 153h105" stroke="#4ce9ff" stroke-width="2.5" marker-end="url(#cyanArrow)"/>
+    <rect x="369" y="122" width="196" height="62" rx="10" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="394" y="159" fill="#bdefff" font-family="monospace" font-size="16">raw bytes</text>
+    <path d="M565 153h105" stroke="#4ce9ff" stroke-width="2.5" marker-end="url(#cyanArrow)"/>
+    <rect x="682" y="122" width="212" height="62" rx="10" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="710" y="159" fill="#bdefff" font-family="monospace" font-size="16">OutputStream</text>
+
+    <path d="M38 207h884" stroke="#294638" stroke-width="2"/>
+    <text x="62" y="245" fill="#45ffad" font-size="17" font-weight="700">Text data</text>
+    <rect x="62" y="267" width="190" height="62" rx="10" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="95" y="304" fill="#a8fff0" font-family="monospace" font-size="16">Reader</text>
+    <path d="M252 298h76" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="340" y="260" width="230" height="76" rx="10" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="369" y="290" fill="#d0c8ff" font-family="monospace" font-size="15">charset decoder</text>
+    <text x="381" y="316" fill="#b7a8ff" font-size="12">bytes → characters</text>
+    <path d="M570 298h76" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="658" y="267" width="236" height="62" rx="10" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="684" y="304" fill="#a8fff0" font-family="monospace" font-size="16">characters / Writer</text>
+  </g>
+  <text x="62" y="353" fill="#87a99a" font-family="monospace" font-size="12">SPECIFY A CHARSET SUCH AS UTF-8 WHEN CONVERTING TEXT AND BYTES.</text>
+</svg>
