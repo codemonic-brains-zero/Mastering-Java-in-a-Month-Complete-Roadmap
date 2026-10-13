@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 390" role="img" aria-labelledby="title desc">
+  <title id="title">Java class inheritance and interface relationships</title>
+  <desc id="desc">Java classes have one direct superclass but may implement multiple interfaces. The example shows Shape extended by Circle and Rectangle, both implementing Measurable.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="inheritanceArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+    <marker id="interfaceArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#a58bff"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="388" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">JAVA TYPES / EXTENDS VS IMPLEMENTS</text>
+  <g font-family="system-ui, sans-serif">
+    <rect x="365" y="78" width="230" height="66" rx="12" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="402" y="108" fill="#4ce9ff" font-size="18" font-weight="700">abstract class Shape</text>
+    <text x="405" y="130" fill="#b7cfc4" font-family="monospace" font-size="13">area()</text>
+
+    <rect x="90" y="234" width="230" height="72" rx="12" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="145" y="266" fill="#a8fff0" font-family="monospace" font-size="17">class Circle</text>
+    <text x="134" y="289" fill="#b7cfc4" font-size="13">extends Shape</text>
+
+    <rect x="365" y="234" width="230" height="72" rx="12" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="414" y="266" fill="#a8fff0" font-family="monospace" font-size="17">class Rectangle</text>
+    <text x="420" y="289" fill="#b7cfc4" font-size="13">extends Shape</text>
+
+    <rect x="682" y="234" width="230" height="72" rx="12" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="715" y="266" fill="#d0c8ff" font-family="monospace" font-size="17">interface Measurable</text>
+    <text x="742" y="289" fill="#b7a8ff" font-size="13">measure()</text>
+
+    <path d="M420 144L236 223" fill="none" stroke="#45ffad" stroke-width="2.5" marker-end="url(#inheritanceArrow)"/>
+    <path d="M480 144v78" fill="none" stroke="#45ffad" stroke-width="2.5" marker-end="url(#inheritanceArrow)"/>
+    <text x="299" y="181" fill="#87a99a" font-size="12">extends</text>
+    <text x="488" y="188" fill="#87a99a" font-size="12">extends</text>
+
+    <path d="M320 270h330v-28" fill="none" stroke="#a58bff" stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#interfaceArrow)"/>
+    <path d="M595 270h56" fill="none" stroke="#a58bff" stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#interfaceArrow)"/>
+    <text x="498" y="336" fill="#b7a8ff" font-size="13">implements — classes can implement multiple interfaces</text>
+  </g>
+  <text x="38" y="368" fill="#87a99a" font-family="monospace" font-size="12">A CLASS EXTENDS ONE CLASS; INTERFACES ADD COMPOSABLE TYPE CONTRACTS.</text>
+</svg>

@@ -49,6 +49,8 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
             +-- runtime-method-dispatch.svg
             +-- java-module-boundaries.svg
             +-- exception-resource-flow.svg
+            +-- java-inheritance-and-interfaces.svg
+            +-- java-exception-hierarchy.svg
 ```
 
 - [`roadmap/java-learning-roadmap.md`](roadmap/java-learning-roadmap.md) contains the complete Java syllabus.
