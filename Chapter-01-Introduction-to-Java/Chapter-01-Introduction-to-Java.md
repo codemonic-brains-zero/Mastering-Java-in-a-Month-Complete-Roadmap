@@ -251,66 +251,107 @@ Bytecode is the intermediate instruction format normally stored in .class files.
 - JDK: development kit containing tools such as javac plus runtime components.
 Memory aid: JDK for development, JRE as the runtime concept, JVM for executing bytecode.
 
-### Blueprint: How JDK, JRE, and JVM fit together
+### Blueprint 1 — JDK (Java Development Kit)
 
-Think of the three as related parts, not three competing tools:
-- **JDK (Java Development Kit):** the developer's toolbox. It includes tools such as `javac` and the runtime components needed to run Java programs.
-- **JRE (Java Runtime Environment):** the runtime concept: the JVM plus standard libraries and supporting files needed to run an application. A separate JRE installer is not provided by every modern Java distribution.
-- **JVM (Java Virtual Machine):** the engine that loads and executes Java bytecode.
-
-#### Drawing 1 — Relationship overview
+The JDK is the **complete toolkit used to develop Java applications**. It includes the compiler and other development tools, plus runtime components.
 
 ```mermaid
 flowchart TB
-    DEV["Developer writes Main.java"]
-    JDK["JDK — development toolbox"]
-    JAVAC["javac — Java compiler"]
-    BYTE["Main.class — bytecode"]
-    JRE["JRE concept — runtime libraries + JVM"]
-    JVM["JVM — executes bytecode"]
-    OUT["Running Java application / output"]
-
-    DEV --> JAVAC
-    JDK -. "provides" .-> JAVAC
-    JAVAC --> BYTE
-    BYTE --> JVM
-    JRE -. "contains / supplies runtime" .-> JVM
-    JVM --> OUT
+    JDK["JDK — Java Development Kit"]
+    subgraph TOOLS["Development tools"]
+        JAVAC["javac — compiler"]
+        JAVA["java — application launcher"]
+        JDB["jdb — debugger"]
+        JAVADOC["javadoc — documentation tool"]
+        JAR["jar — archive tool"]
+    end
+    subgraph RUNTIME["Runtime components"]
+        JVM["JVM"]
+        LIBS["Java standard libraries"]
+    end
+    JDK --> TOOLS
+    JDK --> RUNTIME
+    JAVAC --> BYTE[".class bytecode"]
+    BYTE --> JAVA
+    JAVA --> JVM
+    JVM --> LIBS
 ```
 
-**Read the drawing like a pipeline:** write source code → use the JDK's compiler to create bytecode → run that bytecode on a JVM with the required runtime libraries → see the application's result.
+**Remember:** You install/use a JDK when you want to write, compile, debug, and run Java programs. The exact tools included can vary by JDK version and distribution.
 
-#### Drawing 2 — Simple nested view
+### Blueprint 2 — JRE (Java Runtime Environment)
+
+The JRE describes the **environment required to run a Java application**. Conceptually, it includes a JVM and the standard libraries and supporting files that the application needs.
+
+```mermaid
+flowchart TB
+    JRE["JRE — Java Runtime Environment"]
+    JVM["JVM — executes bytecode"]
+    LIBS["Java standard libraries"]
+    SUPPORT["Supporting runtime files"]
+    APP["Java application"]
+    BYTE["Compiled .class bytecode"]
+    JRE --> JVM
+    JRE --> LIBS
+    JRE --> SUPPORT
+    BYTE --> JVM
+    JVM --> APP
+    APP --> LIBS
+```
+
+**Remember:** The JRE is the runtime environment, not the compiler. Modern Java distributions often provide a JDK with runtime components rather than a separate JRE download, so treat this as a conceptual blueprint.
+
+### Blueprint 3 — JVM (Java Virtual Machine)
+
+The JVM is the **engine that loads and executes Java bytecode**. This simplified blueprint shows its major responsibilities.
+
+```mermaid
+flowchart TB
+    BYTE[".class bytecode"]
+    subgraph JVM["JVM — Java Virtual Machine"]
+        CL["Class loader"]
+        VERIFY["Bytecode verifier"]
+        MEMORY["Runtime memory areas"]
+        ENGINE["Execution engine"]
+        GC["Garbage collector"]
+        JNI["Native interface (JNI)"]
+    end
+    NATIVE["Platform-specific native code / libraries"]
+    RESULT["Program runs"]
+    BYTE --> CL --> VERIFY --> MEMORY --> ENGINE
+    ENGINE --> RESULT
+    ENGINE <--> GC
+    ENGINE <--> JNI
+    JNI <--> NATIVE
+```
+
+- **Class loader:** loads class definitions.
+- **Bytecode verifier:** checks bytecode for structural and safety rules.
+- **Runtime memory areas:** hold data needed while the program runs, including objects and method information.
+- **Execution engine:** interprets bytecode and may use JIT compilation to turn frequently executed code into native machine code.
+- **Garbage collector:** reclaims memory occupied by objects that are no longer reachable.
+- **JNI:** lets Java code interact with native code when needed.
+
+### How the three relate
 
 ```text
-JDK (tools for developers)
-├── javac compiler
-├── other development tools
-└── runtime components
-    └── JVM + standard runtime libraries
-        (the JRE idea: what a program needs to run)
+JDK = development tools + runtime components
+JRE = runtime environment concept (libraries + JVM + supporting files)
+JVM = loads and executes bytecode
 ```
 
-This is a **conceptual** picture, not a promise that every vendor packages folders exactly this way. In current Java distributions, the JDK normally includes a runtime image; a separate JRE download may not be available.
-
-#### One-line memory trick
-
-- **JDK = Develop** (compile and build Java programs)
-- **JRE = Run environment** (runtime libraries and JVM concept)
-- **JVM = Execute** (runs Java bytecode)
-
-#### Example workflow
+### Example workflow
 
 ```bash
 javac Main.java
 java Main
 ```
 
-1. `javac Main.java` uses the compiler supplied by the JDK and creates `Main.class` if compilation succeeds.
-2. `java Main` starts the Java launcher, which loads the class and uses a JVM to execute its bytecode.
+1. `javac Main.java` uses the JDK compiler to create `Main.class` if compilation succeeds.
+2. `java Main` launches the application using the JVM and required runtime libraries.
 3. The program's printed text appears in the console.
 
-**Important:** the JVM does not normally compile your `.java` source file directly in this beginner workflow. The `javac` compiler converts source code to bytecode first.
+**Important:** In this beginner workflow, the JVM does not normally compile your `.java` source file directly. The `javac` compiler converts source code into bytecode first.
 
 ## 15. .java and .class files
 - Main.java contains human-readable source code.
