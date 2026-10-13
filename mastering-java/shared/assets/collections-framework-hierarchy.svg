@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 390" role="img" aria-labelledby="title desc">
+  <title id="title">Java Collections Framework interface hierarchy</title>
+  <desc id="desc">Iterable is the parent of Collection, which branches into List, Set, and Queue. Deque extends Queue. Map is a separate key-value interface, not a Collection.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="388" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">COLLECTIONS / INTERFACES AND SEMANTICS</text>
+  <g font-family="system-ui, sans-serif">
+    <rect x="324" y="70" width="230" height="54" rx="10" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="393" y="104" fill="#4ce9ff" font-family="monospace" font-size="18">Iterable&lt;E&gt;</text>
+    <rect x="324" y="159" width="230" height="54" rx="10" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="398" y="193" fill="#a8fff0" font-family="monospace" font-size="18">Collection&lt;E&gt;</text>
+    <path d="M439 124v25" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <rect x="72" y="267" width="190" height="64" rx="10" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="126" y="294" fill="#a8fff0" font-family="monospace" font-size="17">List&lt;E&gt;</text>
+    <text x="105" y="317" fill="#b7cfc4" font-size="12">ordered, duplicates</text>
+    <rect x="292" y="267" width="190" height="64" rx="10" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="353" y="294" fill="#a8fff0" font-family="monospace" font-size="17">Set&lt;E&gt;</text>
+    <text x="330" y="317" fill="#b7cfc4" font-size="12">unique elements</text>
+    <rect x="512" y="267" width="190" height="64" rx="10" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="560" y="294" fill="#a8fff0" font-family="monospace" font-size="17">Queue&lt;E&gt;</text>
+    <text x="555" y="317" fill="#b7cfc4" font-size="12">processing order</text>
+    <rect x="732" y="267" width="170" height="64" rx="10" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="773" y="294" fill="#bdefff" font-family="monospace" font-size="17">Map&lt;K,V&gt;</text>
+    <text x="764" y="317" fill="#b7cfc4" font-size="12">key-value lookup</text>
+
+    <path d="M380 213L167 252" fill="none" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path d="M439 213v39" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path d="M498 213L607 252" fill="none" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path d="M702 284h30" stroke="#4ce9ff" stroke-width="2" stroke-dasharray="5 5"/>
+    <text x="704" y="252" fill="#b7cfc4" font-size="12">separate interface</text>
+    <rect x="526" y="342" width="162" height="34" rx="8" fill="#19152a" stroke="#a58bff"/>
+    <text x="567" y="364" fill="#d0c8ff" font-family="monospace" font-size="14">Deque&lt;E&gt;</text>
+    <path d="M607 331v10" stroke="#a58bff" stroke-width="2" marker-end="url(#arrow)"/>
+  </g>
+</svg>
