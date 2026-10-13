@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
+  <title id="title">Secure Java application trust boundaries</title>
+  <desc id="desc">Untrusted client input is validated and authorized before reaching application logic. Protected secrets and least-privilege identities support trusted service operations; output is context-encoded and security events are logged with sensitive values redacted.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+    <marker id="purpleArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#a58bff"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="418" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">SECURE JAVA / TRUST BOUNDARIES + LEAST PRIVILEGE</text>
+  <g font-family="system-ui, sans-serif">
+    <rect x="48" y="119" width="146" height="76" rx="11" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="89" y="151" fill="#d0c8ff" font-size="14" font-weight="700">Untrusted</text>
+    <text x="77" y="177" fill="#b7a8ff" font-size="12">client input</text>
+    <path d="M194 157h34" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="238" y="119" width="176" height="76" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="271" y="151" fill="#a8fff0" font-family="monospace" font-size="13">validate + encode</text>
+    <text x="280" y="177" fill="#87a99a" font-size="12">contextual boundary</text>
+    <path d="M414 157h34" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="458" y="119" width="176" height="76" rx="11" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="491" y="151" fill="#bdefff" font-family="monospace" font-size="13">authenticate</text>
+    <text x="493" y="177" fill="#87a99a" font-size="12">identity + session</text>
+    <path d="M634 157h34" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="678" y="119" width="196" height="76" rx="11" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="711" y="151" fill="#bdefff" font-family="monospace" font-size="13">authorize</text>
+    <text x="703" y="177" fill="#87a99a" font-size="12">resource + action check</text>
+    <path d="M776 197v49H354v-48" fill="none" stroke="#4ce9ff" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+    <text x="504" y="239" fill="#bdefff" font-size="12">least-privilege service identity</text>
+
+    <path d="M38 269h884" stroke="#294638" stroke-width="2"/>
+    <rect x="48" y="296" width="248" height="66" rx="10" fill="#0a151b" stroke="#a58bff"/>
+    <text x="86" y="326" fill="#d0c8ff" font-family="monospace" font-size="13">secret store</text>
+    <text x="81" y="349" fill="#b7a8ff" font-size="11">keys • rotation • access</text>
+    <rect x="356" y="296" width="248" height="66" rx="10" fill="#0a151b" stroke="#4ce9ff"/>
+    <text x="398" y="326" fill="#bdefff" font-family="monospace" font-size="13">TLS + data store</text>
+    <text x="394" y="349" fill="#87a99a" font-size="11">verified transport + bound SQL</text>
+    <rect x="664" y="296" width="248" height="66" rx="10" fill="#0a151b" stroke="#45ffad"/>
+    <text x="706" y="326" fill="#a8fff0" font-family="monospace" font-size="13">safe security logs</text>
+    <text x="699" y="349" fill="#87a99a" font-size="11">correlation; redact sensitive data</text>
+    <text x="48" y="392" fill="#87a99a" font-family="monospace" font-size="12">Do not trust network location; enforce authorization at each server-side object boundary.</text>
+  </g>
+</svg>
