@@ -325,42 +325,28 @@ flowchart TB
     CLASS["Class files (.class bytecode)"]
     subgraph JVM["JVM — Java Virtual Machine"]
       direction TB
-      subgraph LOADING["Class loader subsystem"]
-        LOAD["Load class"]
-        LINK["Link: verify, prepare, resolve"]
-        INIT["Initialize class"]
-      end
-      subgraph MEMORY["Runtime data areas"]
-        direction LR
-        METHOD["Method area\nClass metadata / runtime constant pool"]
-        STACK["Java stack\nFrames / local variables"]
-        HEAP["Heap\nObjects / arrays"]
-        PC["PC register\nCurrent instruction per thread"]
-        NATIVE_STACK["Native method stack"]
-      end
-      subgraph ENGINE["Execution engine"]
-        direction LR
-        INTERP["Interpreter"]
-        JIT["JIT compiler\nHot code → native code"]
-        GC["Garbage collector"]
-      end
-      JNI["JNI — Java Native Interface"]
+      LOAD["CLASS LOADER<br/>Load class"]
+      LINK["VERIFICATION + LINKING<br/>Check and prepare bytecode"]
+      INIT["CLASS INITIALIZATION<br/>Run static initialization"]
+      METHOD["METHOD AREA<br/>Class metadata and constant pool"]
+      HEAP["HEAP<br/>Objects and arrays"]
+      STACK["JAVA STACK<br/>Call frames and local variables"]
+      PC["PC REGISTER<br/>Current instruction per thread"]
+      NATIVE_STACK["NATIVE METHOD STACK<br/>Native call state"]
+      INTERP["INTERPRETER<br/>Run bytecode"]
+      JIT["JIT COMPILER<br/>Optimize frequently used code"]
+      GC["GARBAGE COLLECTOR<br/>Reclaim unreachable heap objects"]
+      JNI["JNI<br/>Java Native Interface"]
     end
     NATIVELIB["Native libraries / OS"]
     RESULT["Program execution"]
     CLASS --> LOAD --> LINK --> INIT
-    INIT --> METHOD
-    INIT --> ENGINE
-    ENGINE <--> STACK
-    ENGINE <--> HEAP
-    ENGINE <--> PC
-    ENGINE <--> NATIVE_STACK
-    HEAP <--> GC
-    ENGINE --> INTERP
-    ENGINE --> JIT
+    INIT --> METHOD & HEAP & STACK & PC & NATIVE_STACK
+    METHOD & HEAP & STACK & PC & NATIVE_STACK --> INTERP
     INTERP --> RESULT
-    JIT --> RESULT
-    ENGINE <--> JNI
+    INTERP -. hot code .-> JIT --> RESULT
+    HEAP --> GC
+    INTERP <--> JNI
     JNI <--> NATIVELIB
 ```
 
