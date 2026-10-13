@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 410" role="img" aria-labelledby="title desc">
+  <title id="title">Java project portfolio progression</title>
+  <desc id="desc">Projects progress from focused console and object-oriented programs through files, testing, databases, web APIs, authentication, event-driven systems, containers, cloud deployment, and a documented tested capstone.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+    <marker id="purpleArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#a58bff"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="408" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">PORTFOLIO / INCREASING SYSTEM SCOPE + EVIDENCE</text>
+  <g font-family="system-ui, sans-serif">
+    <rect x="48" y="104" width="260" height="76" rx="11" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="80" y="136" fill="#4ce9ff" font-size="14" font-weight="700">Core projects</text>
+    <text x="78" y="162" fill="#b7cfc4" font-size="12">console • OOP • collections • files</text>
+    <path d="M308 142h44" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="360" y="104" width="250" height="76" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="391" y="136" fill="#a8fff0" font-size="14" font-weight="700">Persistence + tests</text>
+    <text x="390" y="162" fill="#87a99a" font-size="12">threads • JDBC • JUnit</text>
+    <path d="M610 142h44" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="662" y="104" width="250" height="76" rx="11" fill="#0a151b" stroke="#a58bff" stroke-width="2"/>
+    <text x="697" y="136" fill="#d0c8ff" font-size="14" font-weight="700">Web applications</text>
+    <text x="690" y="162" fill="#b7a8ff" font-size="12">Servlet/JSP • Spring • auth</text>
+
+    <path d="M786 182v63H484v-63" fill="none" stroke="#a58bff" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#purpleArrow)"/>
+    <rect x="224" y="263" width="512" height="66" rx="11" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="334" y="292" fill="#d0c8ff" font-size="14" font-weight="700">Production-style capstone</text>
+    <text x="278" y="315" fill="#b7a8ff" font-size="12">events • container • cloud • monitoring • recovery</text>
+    <path d="M480 329v30" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="48" y="384" fill="#87a99a" font-family="monospace" font-size="12">Every project: clear README + tests + design decisions + reproducible run/deploy instructions.</text>
+  </g>
+</svg>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 410" role="img" aria-labelledby="title desc">
+  <title id="title">Java cloud deployment flow</title>
+  <desc id="desc">Reviewed source passes through continuous integration to an immutable container image. A deployment platform supplies configuration and secrets, checks readiness, routes traffic, and monitors logs, metrics, and traces.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+    <marker id="purpleArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#a58bff"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="408" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">JAVA CLOUD / BUILD ONCE, DEPLOY WITH CONTROL</text>
+  <g font-family="system-ui, sans-serif">
+    <rect x="48" y="114" width="142" height="72" rx="11" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="87" y="146" fill="#4ce9ff" font-size="14" font-weight="700">Git source</text>
+    <text x="71" y="170" fill="#b7cfc4" font-size="12">reviewed change</text>
+    <path d="M190 150h28" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="224" y="114" width="142" height="72" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="260" y="146" fill="#a8fff0" font-family="monospace" font-size="13">CI build</text>
+    <text x="247" y="170" fill="#87a99a" font-size="12">test + scan</text>
+    <path d="M366 150h28" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="400" y="114" width="166" height="72" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="431" y="146" fill="#a8fff0" font-family="monospace" font-size="13">image registry</text>
+    <text x="430" y="170" fill="#87a99a" font-size="12">immutable artifact</text>
+    <path d="M566 150h28" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="600" y="114" width="152" height="72" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="634" y="146" fill="#a8fff0" font-family="monospace" font-size="13">orchestrator</text>
+    <text x="638" y="170" fill="#87a99a" font-size="12">rollout + probes</text>
+    <path d="M752 150h28" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="786" y="114" width="126" height="72" rx="11" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="818" y="146" fill="#d0c8ff" font-family="monospace" font-size="13">service</text>
+    <text x="809" y="170" fill="#b7a8ff" font-size="12">traffic routed</text>
+
+    <path d="M676 188v61H290v-60" fill="none" stroke="#a58bff" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#purpleArrow)"/>
+    <text x="400" y="243" fill="#b7a8ff" font-size="12">configuration and protected secrets injected at runtime</text>
+    <path d="M850 188v79H708v-79" fill="none" stroke="#4ce9ff" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+    <text x="749" y="262" fill="#bdefff" font-size="12">readiness gates traffic</text>
+
+    <path d="M38 286h884" stroke="#294638" stroke-width="2"/>
+    <text x="48" y="322" fill="#45ffad" font-size="15" font-weight="700">Operate and recover</text>
+    <rect x="48" y="342" width="244" height="44" rx="9" fill="#0a151b" stroke="#4ce9ff"/>
+    <text x="95" y="370" fill="#bdefff" font-family="monospace" font-size="12">logs + metrics + traces</text>
+    <rect x="358" y="342" width="244" height="44" rx="9" fill="#0a151b" stroke="#4ce9ff"/>
+    <text x="414" y="370" fill="#bdefff" font-family="monospace" font-size="12">health + alerting</text>
+    <rect x="668" y="342" width="244" height="44" rx="9" fill="#19152a" stroke="#a58bff"/>
+    <text x="721" y="370" fill="#d0c8ff" font-family="monospace" font-size="12">rollback + restore plan</text>
+  </g>
+</svg>

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" role="img" aria-labelledby="title desc">
+  <title id="title">Java release and feature adoption path</title>
+  <desc id="desc">A Java feature moves from proposal and preview or incubator stages to finalization across releases. Adoption checks JDK vendor support, source and runtime compatibility, tests, dependencies, and a staged upgrade plan.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+    <marker id="purpleArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#a58bff"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="398" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">JAVA RELEASES / CHECK STATUS BEFORE ADOPTION</text>
+  <g font-family="system-ui, sans-serif">
+    <text x="48" y="94" fill="#4ce9ff" font-size="15" font-weight="700">Feature lifecycle (not every feature follows every stage)</text>
+    <rect x="48" y="116" width="170" height="66" rx="11" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="86" y="146" fill="#bdefff" font-family="monospace" font-size="13">proposal</text>
+    <text x="76" y="168" fill="#87a99a" font-size="12">design + review</text>
+    <path d="M218 149h34" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="258" y="116" width="182" height="66" rx="11" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="290" y="146" fill="#d0c8ff" font-family="monospace" font-size="13">preview / incubate</text>
+    <text x="302" y="168" fill="#b7a8ff" font-size="12">may change; opt in</text>
+    <path d="M440 149h34" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="480" y="116" width="170" height="66" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="519" y="146" fill="#a8fff0" font-family="monospace" font-size="13">finalized</text>
+    <text x="504" y="168" fill="#87a99a" font-size="12">stable spec / API</text>
+    <path d="M650 149h34" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="690" y="116" width="222" height="66" rx="11" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="735" y="146" fill="#bdefff" font-family="monospace" font-size="13">deprecated / removed</text>
+    <text x="748" y="168" fill="#87a99a" font-size="12">migration required</text>
+
+    <path d="M38 210h884" stroke="#294638" stroke-width="2"/>
+    <text x="48" y="247" fill="#45ffad" font-size="15" font-weight="700">Safe adoption / upgrade checks</text>
+    <rect x="48" y="270" width="190" height="70" rx="10" fill="#0a151b" stroke="#4ce9ff"/>
+    <text x="78" y="299" fill="#bdefff" font-family="monospace" font-size="12">JDK + vendor</text>
+    <text x="82" y="323" fill="#87a99a" font-size="11">support window</text>
+    <rect x="258" y="270" width="190" height="70" rx="10" fill="#0a151b" stroke="#4ce9ff"/>
+    <text x="290" y="299" fill="#bdefff" font-family="monospace" font-size="12">source + runtime</text>
+    <text x="299" y="323" fill="#87a99a" font-size="11">compatibility</text>
+    <rect x="468" y="270" width="190" height="70" rx="10" fill="#0a151b" stroke="#45ffad"/>
+    <text x="526" y="299" fill="#a8fff0" font-family="monospace" font-size="12">tests + deps</text>
+    <text x="511" y="323" fill="#87a99a" font-size="11">validate behavior</text>
+    <rect x="678" y="270" width="234" height="70" rx="10" fill="#19152a" stroke="#a58bff"/>
+    <text x="723" y="299" fill="#d0c8ff" font-family="monospace" font-size="12">staged rollout</text>
+    <text x="721" y="323" fill="#b7a8ff" font-size="11">telemetry + rollback</text>
+    <path d="M871 184v71H143v-71" fill="none" stroke="#a58bff" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#purpleArrow)"/>
+  </g>
+</svg>
