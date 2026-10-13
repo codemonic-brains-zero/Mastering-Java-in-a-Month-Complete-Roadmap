@@ -22,11 +22,17 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
     |   +-- chapter-02-variables-data-types-and-operators.md
     +-- shared/
         +-- index.html
+        +-- assets/
+            +-- java-primitive-types.svg
+            +-- operator-evaluation.svg
+            +-- primitive-conversion.svg
+            +-- variable-ownership.svg
 ```
 
 - [`roadmap/java-learning-roadmap.md`](roadmap/java-learning-roadmap.md) contains the complete Java syllabus.
 - [`mastering-java/chapter-01-introduction-to-java/chapter-01-introduction-to-java.md`](mastering-java/chapter-01-introduction-to-java/chapter-01-introduction-to-java.md) contains the Chapter 1 lesson notes.
-- [`mastering-java/chapter-02-variables-data-types-and-operators/chapter-02-variables-data-types-and-operators.md`](mastering-java/chapter-02-variables-data-types-and-operators/chapter-02-variables-data-types-and-operators.md) contains Chapter 2's current roadmap topics.
+- [`mastering-java/chapter-02-variables-data-types-and-operators/chapter-02-variables-data-types-and-operators.md`](mastering-java/chapter-02-variables-data-types-and-operators/chapter-02-variables-data-types-and-operators.md) contains Chapter 2 lesson explanations, Java examples, takeaways, and its coverage check against the master roadmap.
 - Each chapter's `index.html` opens the shared UI in [`mastering-java/shared/index.html`](mastering-java/shared/index.html); lesson content stays in Markdown.
+- Chapter 2's visual diagrams are SVG files in `mastering-java/shared/assets/`.
 
 The root page redirects to Chapter 1. The prototype includes Chapter 1 and Chapter 2 pages with Previous/Next navigation; later chapter pages will be added in subsequent steps.
