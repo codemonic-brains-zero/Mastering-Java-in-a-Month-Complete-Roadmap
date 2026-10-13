@@ -589,9 +589,13 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
 .chapter .mermaid .marker{fill:#70eaff!important;stroke:#70eaff!important;filter:drop-shadow(0 0 3px rgba(72,219,255,.65))}
 .chapter .mermaid .edgeLabel rect,
 .chapter .mermaid .labelBkg{fill:#061522!important;background-color:#061522!important}
-.chapter .mermaid .edgeLabel span{color:#9bbdce!important}
-.chapter .mermaid #MEMORY_TOP rect,
-.chapter .mermaid #MEMORY_BOTTOM rect{fill:transparent!important;stroke:transparent!important;filter:none!important}
+.chapter .mermaid .edgeLabel span{
+  color:#9bbdce!important;
+  background:#061522!important;
+  padding:2px 6px!important;
+  border:1px solid rgba(112,234,255,.28);
+  border-radius:4px;
+}
 @keyframes diagram-node-arrive{from{opacity:0;filter:drop-shadow(0 0 0 transparent)}to{opacity:1}}
 @keyframes diagram-node-glow{from{filter:drop-shadow(0 0 3px rgba(72,219,255,.2)) drop-shadow(0 4px 6px rgba(0,0,0,.25))}to{filter:drop-shadow(0 0 9px rgba(72,219,255,.52)) drop-shadow(0 5px 8px rgba(0,0,0,.3))}}
 @keyframes diagram-flow{to{stroke-dashoffset:-24}}

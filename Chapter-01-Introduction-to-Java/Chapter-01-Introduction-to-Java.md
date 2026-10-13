@@ -318,36 +318,41 @@ The JRE does **not** include the Java source compiler `javac` as part of its run
 
 ### Blueprint 3 — JVM (Java Virtual Machine): internal architecture
 
-This follows the detailed structure in your notebook: class file → class loading and verification → runtime memory areas → execution engine. Native libraries interact through JNI.
+The JVM work is shown in two focused diagrams so every block remains readable: first the class-file execution path, then the separate runtime memory areas. Native code connects through JNI.
 
 ```mermaid
 flowchart TB
-    CLASS["Class files (.class bytecode)"]
-    subgraph JVM["JVM — Java Virtual Machine"]
-      direction TB
-      LOAD["CLASS LOADER<br/>Load class"]
-      LINK["VERIFICATION + LINKING<br/>Check and prepare bytecode"]
-      INIT["CLASS INITIALIZATION<br/>Run static initialization"]
-      METHOD["METHOD AREA<br/>Class metadata and constant pool"]
-      HEAP["HEAP<br/>Objects and arrays"]
-      STACK["JAVA STACK<br/>Call frames and local variables"]
-      PC["PC REGISTER<br/>Current instruction per thread"]
-      NATIVE_STACK["NATIVE METHOD STACK<br/>Native call state"]
-      INTERP["INTERPRETER<br/>Run bytecode"]
-      JIT["JIT COMPILER<br/>Optimize frequently used code"]
-      GC["GARBAGE COLLECTOR<br/>Reclaim unreachable heap objects"]
-      JNI["JNI<br/>Java Native Interface"]
-    end
-    NATIVELIB["Native libraries / OS"]
-    RESULT["Program execution"]
-    CLASS --> LOAD --> LINK --> INIT
-    INIT --> METHOD & HEAP & STACK & PC & NATIVE_STACK
-    METHOD & HEAP & STACK & PC & NATIVE_STACK --> INTERP
-    INTERP --> RESULT
+    CLASS["CLASS FILE<br/>.class bytecode"]
+    LOAD["CLASS LOADER<br/>Loads class definitions"]
+    VERIFY["VERIFICATION + LINKING<br/>Checks and prepares bytecode"]
+    INIT["CLASS INITIALIZATION<br/>Runs static initialization"]
+    MEMORY["RUNTIME DATA AREAS<br/>Store class, object, and thread state"]
+    INTERP["INTERPRETER<br/>Executes bytecode"]
+    JIT["JIT COMPILER<br/>Optimizes frequently used code"]
+    RESULT["RUNNING PROGRAM"]
+    JNI["JNI<br/>Java Native Interface"]
+    NATIVELIB["NATIVE LIBRARIES / OS"]
+    CLASS --> LOAD --> VERIFY --> INIT --> MEMORY --> INTERP --> RESULT
     INTERP -. hot code .-> JIT --> RESULT
-    HEAP --> GC
-    INTERP <--> JNI
-    JNI <--> NATIVELIB
+    INTERP <--> JNI <--> NATIVELIB
+```
+
+#### JVM runtime memory areas
+
+These are distinct areas used by the JVM, not sequential steps in the execution flow.
+
+```mermaid
+flowchart TB
+    subgraph MEMORY["JVM RUNTIME DATA AREAS"]
+      direction TB
+      METHOD["METHOD AREA<br/>Class metadata and runtime constant pool"]
+      HEAP["HEAP<br/>Objects and arrays"]
+      STACK["JAVA STACK<br/>Frames and local variables · one per thread"]
+      PC["PC REGISTER<br/>Current instruction · one per thread"]
+      NATIVE_STACK["NATIVE METHOD STACK<br/>Native-call state"]
+      METHOD ~~~ HEAP ~~~ STACK ~~~ PC ~~~ NATIVE_STACK
+    end
+    HEAP --> GC["GARBAGE COLLECTOR<br/>Reclaims unreachable heap objects"]
 ```
 
 #### What the JVM does
