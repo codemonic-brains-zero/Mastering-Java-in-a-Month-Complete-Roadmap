@@ -95,6 +95,27 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
     +-- chapter-27-performance-scalability-and-observability/
     |   +-- chapter-27-performance-scalability-and-observability.html
     |   +-- chapter-27-performance-scalability-and-observability.md
+    +-- chapter-28-devops-deployment-and-cloud-native-java/
+    |   +-- chapter-28-devops-deployment-and-cloud-native-java.html
+    |   +-- chapter-28-devops-deployment-and-cloud-native-java.md
+    +-- chapter-29-modern-java-and-the-latest-language-features/
+    |   +-- chapter-29-modern-java-and-the-latest-language-features.html
+    |   +-- chapter-29-modern-java-and-the-latest-language-features.md
+    +-- chapter-30-reactive-and-asynchronous-java/
+    |   +-- chapter-30-reactive-and-asynchronous-java.html
+    |   +-- chapter-30-reactive-and-asynchronous-java.md
+    +-- chapter-31-graalvm-and-modern-runtime-technologies/
+    |   +-- chapter-31-graalvm-and-modern-runtime-technologies.html
+    |   +-- chapter-31-graalvm-and-modern-runtime-technologies.md
+    +-- chapter-32-advanced-testing-and-quality-engineering/
+    |   +-- chapter-32-advanced-testing-and-quality-engineering.html
+    |   +-- chapter-32-advanced-testing-and-quality-engineering.md
+    +-- chapter-33-data-structures-algorithms-and-problem-solving/
+    |   +-- chapter-33-data-structures-algorithms-and-problem-solving.html
+    |   +-- chapter-33-data-structures-algorithms-and-problem-solving.md
+    +-- chapter-34-projects-and-portfolio/
+    |   +-- chapter-34-projects-and-portfolio.html
+    |   +-- chapter-34-projects-and-portfolio.md
     +-- shared/
         +-- index.html
         +-- assets/
@@ -131,6 +152,13 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
             +-- java-architecture-patterns.svg
             +-- java-secure-boundaries.svg
             +-- java-performance-observability-loop.svg
+            +-- java-cloud-deployment-flow.svg
+            +-- java-release-and-feature-status.svg
+            +-- java-reactive-backpressure.svg
+            +-- java-graalvm-runtime-options.svg
+            +-- java-testing-quality-pyramid.svg
+            +-- java-algorithm-toolkit.svg
+            +-- java-project-portfolio-path.svg
 ```
 
 - [`roadmap/java-learning-roadmap.md`](roadmap/java-learning-roadmap.md) contains the complete Java syllabus.
@@ -143,7 +171,8 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
 - Chapters 16–19 contain detailed lessons for JDBC, Unit Testing with JUnit, Build Tools and Professional Java Development, and Servlets and JSP.
 - Chapters 20–23 contain detailed lessons for Jakarta EE, Spring and Spring Boot, Hibernate and ORM, and REST APIs and Backend Architecture.
 - Chapters 24–27 contain detailed lessons for Microservices and Distributed Systems, Advanced Design and Architecture, Secure Java Development, and Performance, Scalability, and Observability.
+- Chapters 28–34 complete the roadmap with Cloud-Native Java, modern Java features, reactive programming, GraalVM, advanced quality engineering, algorithms, and portfolio projects.
 - Each named chapter HTML page opens the shared UI in [`mastering-java/shared/index.html`](mastering-java/shared/index.html); lesson content stays in Markdown.
-- Chapter 2–27 visual diagrams are SVG files in `mastering-java/shared/assets/`.
+- Chapter 2–34 visual diagrams are SVG files in `mastering-java/shared/assets/`.
 
-The root page redirects directly to Chapter 1's named HTML page. Chapters 1–27 have Previous/Next navigation.
+The root page redirects directly to Chapter 1's named HTML page. Chapters 1–34 have Previous/Next navigation.

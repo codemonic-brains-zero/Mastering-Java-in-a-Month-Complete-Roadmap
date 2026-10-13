@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 410" role="img" aria-labelledby="title desc">
+  <title id="title">JVM and native executable runtime options</title>
+  <desc id="desc">The JVM loads bytecode and uses runtime profiling and JIT compilation, offering dynamic behavior and mature diagnostics. Native Image analyzes reachable code ahead of time and produces a platform executable, requiring metadata for some dynamic features; both paths need workload-based comparison.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="410" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">JAVA RUNTIMES / JIT VS AHEAD-OF-TIME</text>
+  <g font-family="system-ui, sans-serif">
+    <rect x="48" y="103" width="126" height="60" rx="10" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="77" y="139" fill="#bdefff" font-family="monospace" font-size="13">bytecode</text>
+    <path d="M174 133h32" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="212" y="103" width="272" height="60" rx="10" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="277" y="139" fill="#a8fff0" font-size="15" font-weight="700">Managed JVM</text>
+    <path d="M348 163v42" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="212" y="213" width="272" height="86" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="251" y="246" fill="#a8fff0" font-family="monospace" font-size="13">profile + JIT compile</text>
+    <text x="255" y="274" fill="#87a99a" font-size="12">dynamic loading • diagnostics</text>
+
+    <rect x="570" y="103" width="126" height="60" rx="10" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="598" y="139" fill="#bdefff" font-family="monospace" font-size="13">bytecode</text>
+    <path d="M696 133h32" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="734" y="103" width="178" height="60" rx="10" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="760" y="139" fill="#d0c8ff" font-family="monospace" font-size="12">Native Image build</text>
+    <path d="M823 163v42" stroke="#a58bff" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="570" y="213" width="342" height="86" rx="11" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="629" y="246" fill="#d0c8ff" font-family="monospace" font-size="13">reachability analysis</text>
+    <text x="610" y="274" fill="#b7a8ff" font-size="12">metadata for reflection / resources</text>
+
+    <path d="M38 324h884" stroke="#294638" stroke-width="2"/>
+    <rect x="48" y="345" width="396" height="42" rx="9" fill="#0a151b" stroke="#4ce9ff"/>
+    <text x="83" y="371" fill="#bdefff" font-family="monospace" font-size="12">Compare startup • throughput • memory</text>
+    <rect x="516" y="345" width="396" height="42" rx="9" fill="#0a151b" stroke="#45ffad"/>
+    <text x="556" y="371" fill="#a8fff0" font-family="monospace" font-size="12">Build cost • compatibility • diagnostics</text>
+  </g>
+</svg>
