@@ -596,24 +596,34 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
     const rendered = marked.parse(text);
     return DOMPurify.sanitize(rendered);
   }
-  function renderMermaidDiagrams(){
-    if(!window.mermaid || chapter.dataset.mermaidRendered === 'pending') return;
-    const blocks = chapter.querySelectorAll('pre > code.language-mermaid');
+  async function renderMermaidDiagrams(){
+    const blocks = Array.from(chapter.querySelectorAll('pre > code.language-mermaid, pre > code[class*="mermaid"]'));
     if(!blocks.length) return;
-    chapter.dataset.mermaidRendered = 'pending';
+    if(!window.mermaid){
+      console.error('Mermaid library did not load; diagram blocks remain as source.');
+      return;
+    }
     window.mermaid.initialize({startOnLoad:false,securityLevel:'strict',theme:'default'});
-    blocks.forEach(function(code){
+    const nodes = [];
+    blocks.forEach(function(code,index){
       const diagram = document.createElement('div');
       diagram.className = 'mermaid';
-      diagram.textContent = code.textContent;
+      diagram.setAttribute('data-diagram-index',String(index));
+      diagram.textContent = code.textContent.trim();
       code.parentElement.replaceWith(diagram);
+      nodes.push(diagram);
     });
-    window.mermaid.run({nodes: chapter.querySelectorAll('.mermaid')}).then(function(){
-      chapter.dataset.mermaidRendered = 'done';
-    }).catch(function(error){
-      chapter.dataset.mermaidRendered = 'error';
-      console.error('Could not render Mermaid diagrams:', error);
-    });
+    for(const node of nodes){
+      try{
+        await window.mermaid.run({nodes:[node]});
+      }catch(error){
+        console.error('Mermaid diagram failed to render:',error);
+        const fallback=document.createElement('pre');
+        fallback.className='mermaid-error';
+        fallback.textContent='Diagram could not be rendered. Check the diagram syntax.\n\n'+node.textContent;
+        node.replaceWith(fallback);
+      }
+    }
   }
   // Topic-specific SVG blueprint plates: crisp, responsive, and labelled.
   const blueprintSpecs = [
