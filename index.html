@@ -754,18 +754,14 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
     return DOMPurify.sanitize(rendered);
   }
   async function renderMermaidDiagrams(){
-    const items = Array.from(chapter.querySelectorAll('h2, h3, pre > code.language-mermaid, pre > code[class*="mermaid"]'));
+    const items = Array.from(chapter.querySelectorAll('h2, pre > code.language-mermaid, pre > code[class*="mermaid"]'));
     const blocks = [];
     let inJvmSection = false;
-    let inJvmArchitecture = false;
     items.forEach(function(item){
       if(item.tagName === 'H2'){
         inJvmSection = /^14\.\s*JDK, JRE, JVM/i.test(item.textContent.trim());
-        inJvmArchitecture = false;
-      }else if(item.tagName === 'H3'){
-        inJvmArchitecture = inJvmSection && /^Blueprint 3\s*[—-]\s*JVM/i.test(item.textContent.trim());
       }else{
-        blocks.push({code:item,isJvmDiagram:inJvmArchitecture});
+        blocks.push({code:item,isJvmDiagram:inJvmSection});
       }
     });
     if(!blocks.length) return;
