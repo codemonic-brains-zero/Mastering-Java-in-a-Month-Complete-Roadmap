@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 380" role="img" aria-labelledby="title desc">
+  <title id="title">JUnit test execution lifecycle</title>
+  <desc id="desc">JUnit discovers a test, creates its fixture, runs setup and the test action, evaluates assertions, performs cleanup, and reports a result. Unit tests isolate logic; integration tests exercise real system boundaries.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="378" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">JUNIT / TEST LIFECYCLE AND TEST SCOPE</text>
+  <g font-family="system-ui, sans-serif">
+    <rect x="48" y="126" width="132" height="70" rx="11" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="79" y="157" fill="#4ce9ff" font-family="monospace" font-size="14">discover</text>
+    <text x="75" y="180" fill="#87a99a" font-size="12">JUnit Platform</text>
+    <path d="M180 161h26" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="214" y="126" width="132" height="70" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="244" y="157" fill="#a8fff0" font-family="monospace" font-size="14">@BeforeEach</text>
+    <text x="254" y="180" fill="#87a99a" font-size="12">fixture setup</text>
+    <path d="M346 161h26" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="380" y="126" width="132" height="70" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="409" y="157" fill="#a8fff0" font-family="monospace" font-size="14">@Test</text>
+    <text x="405" y="180" fill="#87a99a" font-size="12">exercise behavior</text>
+    <path d="M512 161h26" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="546" y="126" width="132" height="70" rx="11" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="572" y="157" fill="#d0c8ff" font-family="monospace" font-size="14">assert</text>
+    <text x="571" y="180" fill="#b7a8ff" font-size="12">verify outcome</text>
+    <path d="M678 161h26" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="712" y="126" width="132" height="70" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="741" y="157" fill="#a8fff0" font-family="monospace" font-size="14">@AfterEach</text>
+    <text x="741" y="180" fill="#87a99a" font-size="12">cleanup</text>
+    <path d="M844 161h26" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="878" y="126" width="54" height="70" rx="10" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="884" y="157" fill="#bdefff" font-size="12">report</text>
+    <text x="884" y="180" fill="#87a99a" font-size="11">CI</text>
+    <path d="M38 232h884" stroke="#294638" stroke-width="2"/>
+    <rect x="48" y="257" width="390" height="72" rx="11" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="76" y="287" fill="#4ce9ff" font-size="15" font-weight="700">Unit test</text>
+    <text x="76" y="311" fill="#b7cfc4" font-size="13">isolated logic; fast deterministic feedback</text>
+    <rect x="466" y="257" width="446" height="72" rx="11" fill="#0a151b" stroke="#a58bff" stroke-width="2"/>
+    <text x="494" y="287" fill="#d0c8ff" font-size="15" font-weight="700">Integration test</text>
+    <text x="494" y="311" fill="#b7a8ff" font-size="13">real boundaries; verify component interaction</text>
+    <text x="48" y="356" fill="#87a99a" font-family="monospace" font-size="12">Assertions verify behavior; coverage alone does not measure test quality.</text>
+  </g>
+</svg>

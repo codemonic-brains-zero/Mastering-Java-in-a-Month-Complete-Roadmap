@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" role="img" aria-labelledby="title desc">
+  <title id="title">JDBC connection and transaction flow</title>
+  <desc id="desc">A service borrows a connection from a DataSource pool, executes parameterized SQL through prepared statements, maps result rows in a repository, then commits successful work or rolls it back on failure before returning the connection.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+    <marker id="purpleArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#a58bff"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="398" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">JDBC / POOLED CONNECTION AND TRANSACTION</text>
+  <g font-family="system-ui, sans-serif">
+    <rect x="48" y="115" width="166" height="78" rx="11" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="97" y="148" fill="#4ce9ff" font-size="15" font-weight="700">Service</text>
+    <text x="74" y="174" fill="#b7cfc4" font-size="12">transaction boundary</text>
+    <path d="M214 154h36" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="258" y="115" width="166" height="78" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="291" y="148" fill="#a8fff0" font-family="monospace" font-size="14">DataSource</text>
+    <text x="286" y="174" fill="#87a99a" font-size="12">pool / connection</text>
+    <path d="M424 154h36" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="468" y="115" width="186" height="78" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="492" y="148" fill="#a8fff0" font-family="monospace" font-size="14">PreparedStatement</text>
+    <text x="507" y="174" fill="#87a99a" font-size="12">bind values safely</text>
+    <path d="M654 154h36" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="698" y="115" width="214" height="78" rx="11" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="760" y="148" fill="#bdefff" font-family="monospace" font-size="14">Database</text>
+    <text x="729" y="174" fill="#87a99a" font-size="12">constraints + isolation</text>
+    <path d="M804 196v52H552v-52" fill="none" stroke="#4ce9ff" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+    <text x="641" y="239" fill="#bdefff" font-size="12">ResultSet rows</text>
+
+    <rect x="48" y="278" width="270" height="66" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="88" y="307" fill="#a8fff0" font-family="monospace" font-size="14">Repository / DAO</text>
+    <text x="87" y="329" fill="#87a99a" font-size="12">maps rows to domain data</text>
+    <path d="M318 311h110" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="436" y="278" width="202" height="66" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="493" y="307" fill="#a8fff0" font-family="monospace" font-size="14">success</text>
+    <text x="483" y="329" fill="#87a99a" font-size="12">commit transaction</text>
+    <path d="M638 311h48" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="694" y="278" width="218" height="66" rx="11" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="755" y="307" fill="#d0c8ff" font-family="monospace" font-size="14">failure</text>
+    <text x="738" y="329" fill="#b7a8ff" font-size="12">rollback; release safely</text>
+    <path d="M804 278v-31H176v-52" fill="none" stroke="#a58bff" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#purpleArrow)"/>
+    <text x="340" y="269" fill="#b7a8ff" font-size="12">close resources and return connection to pool on either path</text>
+  </g>
+</svg>

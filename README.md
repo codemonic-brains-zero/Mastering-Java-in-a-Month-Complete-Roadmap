@@ -59,6 +59,18 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
     +-- chapter-15-java-networking/
     |   +-- chapter-15-java-networking.html
     |   +-- chapter-15-java-networking.md
+    +-- chapter-16-jdbc-java-database-connectivity/
+    |   +-- chapter-16-jdbc-java-database-connectivity.html
+    |   +-- chapter-16-jdbc-java-database-connectivity.md
+    +-- chapter-17-unit-testing-with-junit/
+    |   +-- chapter-17-unit-testing-with-junit.html
+    |   +-- chapter-17-unit-testing-with-junit.md
+    +-- chapter-18-build-tools-and-professional-java-development/
+    |   +-- chapter-18-build-tools-and-professional-java-development.html
+    |   +-- chapter-18-build-tools-and-professional-java-development.md
+    +-- chapter-19-servlets-and-jsp/
+    |   +-- chapter-19-servlets-and-jsp.html
+    |   +-- chapter-19-servlets-and-jsp.md
     +-- shared/
         +-- index.html
         +-- assets/
@@ -83,6 +95,10 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
             +-- java-jvm-lifecycle-and-memory.svg
             +-- java-applets-and-awt-overview.svg
             +-- java-network-request-flow.svg
+            +-- java-jdbc-transaction-flow.svg
+            +-- java-junit-test-lifecycle.svg
+            +-- java-build-release-pipeline.svg
+            +-- java-servlet-mvc-flow.svg
 ```
 
 - [`roadmap/java-learning-roadmap.md`](roadmap/java-learning-roadmap.md) contains the complete Java syllabus.
@@ -92,7 +108,8 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
 - Chapters 4–7 contain detailed lessons for Strings and Text Processing, Methods and Object-Oriented Programming, Packages and Java Language Features, and Exception Handling.
 - Chapters 8–11 contain detailed lessons for Core APIs, Collections, Functional Java and Streams, and Java I/O, Files, and Serialization.
 - Chapters 12–15 contain detailed lessons for Multithreading and Concurrency, JVM Internals and Performance, Applets and AWT essentials, and Java Networking.
+- Chapters 16–19 contain detailed lessons for JDBC, Unit Testing with JUnit, Build Tools and Professional Java Development, and Servlets and JSP.
 - Each named chapter HTML page opens the shared UI in [`mastering-java/shared/index.html`](mastering-java/shared/index.html); lesson content stays in Markdown.
-- Chapter 2–15 visual diagrams are SVG files in `mastering-java/shared/assets/`.
+- Chapter 2–19 visual diagrams are SVG files in `mastering-java/shared/assets/`.
 
-The root page redirects directly to Chapter 1's named HTML page. Chapters 1–15 have Previous/Next navigation.
+The root page redirects directly to Chapter 1's named HTML page. Chapters 1–19 have Previous/Next navigation.

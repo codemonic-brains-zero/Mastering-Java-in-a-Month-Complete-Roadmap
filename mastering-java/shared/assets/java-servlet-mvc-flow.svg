@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 410" role="img" aria-labelledby="title desc">
+  <title id="title">Servlet and JSP MVC request flow</title>
+  <desc id="desc">A browser sends an HTTP request through a filter to a servlet controller. The controller calls a service and repository, then forwards a model to a JSP view or redirects the client. A response returns to the browser.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+    <marker id="cyanArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#4ce9ff"/>
+    </marker>
+    <marker id="purpleArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#a58bff"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="408" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">SERVLETS + JSP / MODEL-VIEW-CONTROLLER</text>
+  <g font-family="system-ui, sans-serif">
+    <rect x="48" y="124" width="144" height="72" rx="11" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="91" y="156" fill="#4ce9ff" font-size="15" font-weight="700">Browser</text>
+    <text x="78" y="180" fill="#b7cfc4" font-size="12">HTTP client</text>
+    <path d="M192 160h36" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="236" y="124" width="132" height="72" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="279" y="156" fill="#a8fff0" font-family="monospace" font-size="14">Filter</text>
+    <text x="258" y="180" fill="#87a99a" font-size="12">cross-cutting</text>
+    <path d="M368 160h36" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="412" y="124" width="164" height="72" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="445" y="156" fill="#a8fff0" font-family="monospace" font-size="14">Servlet</text>
+    <text x="442" y="180" fill="#87a99a" font-size="12">controller</text>
+    <path d="M576 160h36" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="620" y="124" width="142" height="72" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="660" y="156" fill="#a8fff0" font-family="monospace" font-size="14">Service</text>
+    <text x="650" y="180" fill="#87a99a" font-size="12">business rules</text>
+    <path d="M762 160h36" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="806" y="124" width="106" height="72" rx="11" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="818" y="156" fill="#bdefff" font-family="monospace" font-size="13">Repository</text>
+    <text x="832" y="180" fill="#87a99a" font-size="12">data access</text>
+    <path d="M860 198v47H690v-47" fill="none" stroke="#4ce9ff" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#cyanArrow)"/>
+    <text x="742" y="239" fill="#bdefff" font-size="12">domain data</text>
+
+    <path d="M494 198v74" stroke="#a58bff" stroke-width="2.5" marker-end="url(#purpleArrow)"/>
+    <rect x="394" y="280" width="200" height="68" rx="11" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="450" y="310" fill="#d0c8ff" font-family="monospace" font-size="14">JSP view</text>
+    <text x="423" y="333" fill="#b7a8ff" font-size="12">EL + JSTL render model</text>
+    <path d="M394 314H166v-111" fill="none" stroke="#4ce9ff" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#cyanArrow)"/>
+    <text x="214" y="301" fill="#bdefff" font-size="12">response</text>
+    <text x="48" y="373" fill="#87a99a" font-family="monospace" font-size="12">Forward renders server-side; redirect asks the browser to make a new request.</text>
+  </g>
+</svg>
