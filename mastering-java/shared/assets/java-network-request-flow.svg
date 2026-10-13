@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 390" role="img" aria-labelledby="title desc">
+  <title id="title">Java network and HTTP request flow</title>
+  <desc id="desc">An application creates a request for an endpoint. Name resolution and TCP connection establishment occur before optional TLS, then HTTP request and response exchange happens with the server. Timeouts, status validation, and body parsing follow.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+    <marker id="cyanArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#4ce9ff"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="388" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">JAVA NETWORKING / HTTP REQUEST LIFECYCLE</text>
+  <g font-family="system-ui, sans-serif">
+    <rect x="48" y="118" width="174" height="86" rx="12" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="94" y="154" fill="#4ce9ff" font-size="16" font-weight="700">Application</text>
+    <text x="76" y="180" fill="#b7cfc4" font-family="monospace" font-size="13">HttpRequest</text>
+    <path d="M222 161h46" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="276" y="118" width="172" height="86" rx="12" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="326" y="154" fill="#a8fff0" font-size="16" font-weight="700">HttpClient</text>
+    <text x="307" y="180" fill="#87a99a" font-size="12">timeout + policy</text>
+    <path d="M448 161h46" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="502" y="118" width="170" height="86" rx="12" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="547" y="154" fill="#a8fff0" font-family="monospace" font-size="14">DNS + TCP</text>
+    <text x="531" y="180" fill="#87a99a" font-size="12">resolve + connect</text>
+    <path d="M672 161h46" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="726" y="118" width="184" height="86" rx="12" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="773" y="154" fill="#d0c8ff" font-family="monospace" font-size="14">TLS + server</text>
+    <text x="754" y="180" fill="#b7a8ff" font-size="12">HTTPS / HTTP exchange</text>
+
+    <path d="M816 210v67H354v-65" fill="none" stroke="#4ce9ff" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#cyanArrow)"/>
+    <text x="493" y="268" fill="#bdefff" font-size="13">HTTP response</text>
+    <path d="M304 210v112h-88" fill="none" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="48" y="296" width="166" height="58" rx="10" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="67" y="321" fill="#bdefff" font-family="monospace" font-size="12">check status</text>
+    <text x="66" y="340" fill="#87a99a" font-size="11">validate and parse body</text>
+    <text x="257" y="339" fill="#87a99a" font-family="monospace" font-size="12">Bound waits; handle failure; never disable certificate validation.</text>
+  </g>
+</svg>

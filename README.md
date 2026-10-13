@@ -47,6 +47,18 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
     +-- chapter-11-java-io-files-and-serialization/
     |   +-- chapter-11-java-io-files-and-serialization.html
     |   +-- chapter-11-java-io-files-and-serialization.md
+    +-- chapter-12-multithreading-and-concurrency/
+    |   +-- chapter-12-multithreading-and-concurrency.html
+    |   +-- chapter-12-multithreading-and-concurrency.md
+    +-- chapter-13-jvm-internals-and-performance/
+    |   +-- chapter-13-jvm-internals-and-performance.html
+    |   +-- chapter-13-jvm-internals-and-performance.md
+    +-- chapter-14-applets-and-awt-essentials-only/
+    |   +-- chapter-14-applets-and-awt-essentials-only.html
+    |   +-- chapter-14-applets-and-awt-essentials-only.md
+    +-- chapter-15-java-networking/
+    |   +-- chapter-15-java-networking.html
+    |   +-- chapter-15-java-networking.md
     +-- shared/
         +-- index.html
         +-- assets/
@@ -67,6 +79,10 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
             +-- java-stream-pipeline.svg
             +-- java-io-stream-types.svg
             +-- java-time-model.svg
+            +-- java-concurrency-coordination.svg
+            +-- java-jvm-lifecycle-and-memory.svg
+            +-- java-applets-and-awt-overview.svg
+            +-- java-network-request-flow.svg
 ```
 
 - [`roadmap/java-learning-roadmap.md`](roadmap/java-learning-roadmap.md) contains the complete Java syllabus.
@@ -75,7 +91,8 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
 - [`mastering-java/chapter-03-control-flow-and-arrays/chapter-03-control-flow-and-arrays.md`](mastering-java/chapter-03-control-flow-and-arrays/chapter-03-control-flow-and-arrays.md) contains Chapter 3 lesson explanations and Java examples.
 - Chapters 4–7 contain detailed lessons for Strings and Text Processing, Methods and Object-Oriented Programming, Packages and Java Language Features, and Exception Handling.
 - Chapters 8–11 contain detailed lessons for Core APIs, Collections, Functional Java and Streams, and Java I/O, Files, and Serialization.
+- Chapters 12–15 contain detailed lessons for Multithreading and Concurrency, JVM Internals and Performance, Applets and AWT essentials, and Java Networking.
 - Each named chapter HTML page opens the shared UI in [`mastering-java/shared/index.html`](mastering-java/shared/index.html); lesson content stays in Markdown.
-- Chapter 2–11 visual diagrams are SVG files in `mastering-java/shared/assets/`.
+- Chapter 2–15 visual diagrams are SVG files in `mastering-java/shared/assets/`.
 
-The root page redirects directly to Chapter 1's named HTML page. Chapters 1–11 have Previous/Next navigation.
+The root page redirects directly to Chapter 1's named HTML page. Chapters 1–15 have Previous/Next navigation.
