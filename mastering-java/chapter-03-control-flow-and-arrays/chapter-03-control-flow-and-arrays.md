@@ -216,7 +216,7 @@ Use these statements to express a clear exit or skip condition. Too many jumps c
 Labels identify an enclosing loop. A labeled `break` exits that labeled loop, and a labeled `continue` starts its next iteration. These are useful when a nested search must stop or continue at the outer-loop level; they should be used sparingly because they can make control flow harder to trace.
 
 ```java
-int[][] values = {{2, 4}, {6, 8}};
+int[][] values = new int[][] { {2, 4}, {6, 8} };
 int target = 6;
 
 search:
