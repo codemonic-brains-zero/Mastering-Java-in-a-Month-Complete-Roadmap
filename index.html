@@ -706,13 +706,13 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.3/dist/mermaid.min.js"></script>
 <script>
 (function(){
-  const rawMarkdownUrl = 'Chapter-01-Introduction-to-Java/Chapter-01-Introduction-to-Java.md';
+  const rawMarkdownUrl = 'mastering-java/chapter-01-introduction-to-java/chapter-01-introduction-to-java.md';
   const marker = '<!-- INLINE_JAVA_EDITOR -->';
   const chapter = document.getElementById('chapter');
   const playground = document.getElementById('playground');
   const sourceLink = document.createElement('p');
   sourceLink.className = 'markdown-source-link';
-  sourceLink.innerHTML = '<a href="https://github.com/codemonic-brains-zero/Mastering-Java-in-a-Month-Complete-Roadmap/blob/main/Chapter-01-Introduction-to-Java/Chapter-01-Introduction-to-Java.md">View the original Markdown file on GitHub ↗</a>';
+  sourceLink.innerHTML = '<a href="https://github.com/codemonic-brains-zero/Mastering-Java-in-a-Month-Complete-Roadmap/blob/main/mastering-java/chapter-01-introduction-to-java/chapter-01-introduction-to-java.md">View the original Markdown file on GitHub ↗</a>';
   const defaultCode = document.getElementById('source').value;
   const languageSelect = document.getElementById('language');
   const templates = {
@@ -876,7 +876,7 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
     chapter.appendChild(sourceLink);
     renderMermaidDiagrams();
   }).catch(function(error){
-    chapter.innerHTML = '<p class="status error">Chapter notes could not be loaded. You can still use the editor below. Open the <a href="https://github.com/codemonic-brains-zero/Mastering-Java-in-a-Month-Complete-Roadmap/blob/main/Chapter-01-Introduction-to-Java/Chapter-01-Introduction-to-Java.md">Markdown chapter on GitHub</a> instead.</p>';
+    chapter.innerHTML = '<p class="status error">Chapter notes could not be loaded. You can still use the editor below. Open the <a href="https://github.com/codemonic-brains-zero/Mastering-Java-in-a-Month-Complete-Roadmap/blob/main/mastering-java/chapter-01-introduction-to-java/chapter-01-introduction-to-java.md">Markdown chapter on GitHub</a> instead.</p>';
     heroEditorDock.appendChild(playground);
     chapter.appendChild(sourceLink);
   });
