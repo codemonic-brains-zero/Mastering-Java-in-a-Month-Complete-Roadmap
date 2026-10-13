@@ -345,6 +345,8 @@ Interfaces provide multiple type contracts without multiple class inheritance.
 
 **Key takeaway:** Use interfaces for multiple capabilities and a single superclass for the class hierarchy.
 
+![Java classes extend one superclass but can implement multiple interfaces, combining inheritance with additional type contracts.](../shared/assets/java-inheritance-and-interfaces.svg)
+
 ## 100. Method overriding
 
 Overriding provides a subclass implementation of an inherited instance method with a compatible signature and return type. `@Override` asks the compiler to verify that the method actually overrides a parent method.

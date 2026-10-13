@@ -47,6 +47,8 @@ Catch at a level that can handle the condition or add meaningful context.
 
 **Key takeaway:** Understand the hierarchy to choose precise catch and throws declarations.
 
+![Throwable divides into Error and Exception; RuntimeException is the unchecked branch, while other Exception types are checked.](../shared/assets/java-exception-hierarchy.svg)
+
 ## 153. Checked exceptions
 
 Checked exceptions must be caught or declared in a method's `throws` clause. They make certain failure paths visible to callers at compile time.
