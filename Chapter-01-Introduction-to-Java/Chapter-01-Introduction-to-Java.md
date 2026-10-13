@@ -318,50 +318,41 @@ The JRE does **not** include the Java source compiler `javac` as part of its run
 
 ### Blueprint 3 — JVM (Java Virtual Machine): internal architecture
 
-This follows the detailed structure in your notebook: class file → class loading and verification → runtime memory areas → execution engine. Native libraries interact through JNI.
+The JVM work is shown in two focused diagrams so every block remains readable: first the class-file execution path, then the separate runtime memory areas. Native code connects through JNI.
 
 ```mermaid
 flowchart TB
-    CLASS["Class files (.class bytecode)"]
-    subgraph JVM["JVM — Java Virtual Machine"]
+    CLASS["CLASS FILE<br/>.class bytecode"]
+    LOAD["CLASS LOADER<br/>Loads class definitions"]
+    VERIFY["VERIFICATION + LINKING<br/>Checks and prepares bytecode"]
+    INIT["CLASS INITIALIZATION<br/>Runs static initialization"]
+    MEMORY["RUNTIME DATA AREAS<br/>Store class, object, and thread state"]
+    INTERP["INTERPRETER<br/>Executes bytecode"]
+    JIT["JIT COMPILER<br/>Optimizes frequently used code"]
+    RESULT["RUNNING PROGRAM"]
+    JNI["JNI<br/>Java Native Interface"]
+    NATIVELIB["NATIVE LIBRARIES / OS"]
+    CLASS --> LOAD --> VERIFY --> INIT --> MEMORY --> INTERP --> RESULT
+    INTERP -. hot code .-> JIT --> RESULT
+    INTERP <--> JNI <--> NATIVELIB
+```
+
+#### JVM runtime memory areas
+
+These are distinct areas used by the JVM, not sequential steps in the execution flow.
+
+```mermaid
+flowchart TB
+    subgraph MEMORY["JVM RUNTIME DATA AREAS"]
       direction TB
-      subgraph LOADING["Class loader subsystem"]
-        LOAD["Load class"]
-        LINK["Link: verify, prepare, resolve"]
-        INIT["Initialize class"]
-      end
-      subgraph MEMORY["Runtime data areas"]
-        direction LR
-        METHOD["Method area\nClass metadata / runtime constant pool"]
-        STACK["Java stack\nFrames / local variables"]
-        HEAP["Heap\nObjects / arrays"]
-        PC["PC register\nCurrent instruction per thread"]
-        NATIVE_STACK["Native method stack"]
-      end
-      subgraph ENGINE["Execution engine"]
-        direction LR
-        INTERP["Interpreter"]
-        JIT["JIT compiler\nHot code → native code"]
-        GC["Garbage collector"]
-      end
-      JNI["JNI — Java Native Interface"]
+      METHOD["METHOD AREA<br/>Class metadata and runtime constant pool"]
+      HEAP["HEAP<br/>Objects and arrays"]
+      STACK["JAVA STACK<br/>Frames and local variables · one per thread"]
+      PC["PC REGISTER<br/>Current instruction · one per thread"]
+      NATIVE_STACK["NATIVE METHOD STACK<br/>Native-call state"]
+      METHOD ~~~ HEAP ~~~ STACK ~~~ PC ~~~ NATIVE_STACK
     end
-    NATIVELIB["Native libraries / OS"]
-    RESULT["Program execution"]
-    CLASS --> LOAD --> LINK --> INIT
-    INIT --> METHOD
-    INIT --> ENGINE
-    ENGINE <--> STACK
-    ENGINE <--> HEAP
-    ENGINE <--> PC
-    ENGINE <--> NATIVE_STACK
-    HEAP <--> GC
-    ENGINE --> INTERP
-    ENGINE --> JIT
-    INTERP --> RESULT
-    JIT --> RESULT
-    ENGINE <--> JNI
-    JNI <--> NATIVELIB
+    HEAP --> GC["GARBAGE COLLECTOR<br/>Reclaims unreachable heap objects"]
 ```
 
 #### What the JVM does
