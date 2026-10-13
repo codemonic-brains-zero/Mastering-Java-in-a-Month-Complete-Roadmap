@@ -303,34 +303,71 @@ flowchart TB
 
 ### Blueprint 3 — JVM (Java Virtual Machine)
 
-The JVM is the **engine that loads and executes Java bytecode**. This simplified blueprint shows its major responsibilities.
+The JVM is the **abstract machine that loads, verifies, and executes Java bytecode**. A real JVM implementation is platform-specific, which is why the same bytecode can run on different systems that have compatible JVMs.
 
 ```mermaid
 flowchart TB
-    BYTE[".class bytecode"]
-    subgraph JVM["JVM — Java Virtual Machine"]
-        CL["Class loader"]
-        VERIFY["Bytecode verifier"]
-        MEMORY["Runtime memory areas"]
-        ENGINE["Execution engine"]
+    BYTE[".class file — bytecode"]
+    subgraph JVM["JVM"]
+        CL["Class loader subsystem"]
+        VERIFY["Bytecode verification"]
+        subgraph DATA["Runtime data areas"]
+            METHOD["Method area — class metadata, runtime constant pool"]
+            HEAP["Heap — objects and arrays"]
+            STACK["Java stacks — frames, local variables, operand stacks"]
+            PC["PC registers — current instruction per thread"]
+            NMS["Native method stacks — native calls"]
+        end
+        subgraph ENGINE["Execution engine"]
+            INTERP["Interpreter"]
+            JIT["JIT compiler — compiles hot code"]
+        end
         GC["Garbage collector"]
-        JNI["Native interface (JNI)"]
+        JNI["JNI — Java Native Interface"]
     end
-    NATIVE["Platform-specific native code / libraries"]
-    RESULT["Program runs"]
-    BYTE --> CL --> VERIFY --> MEMORY --> ENGINE
-    ENGINE --> RESULT
-    ENGINE <--> GC
-    ENGINE <--> JNI
+    NATIVE["Native libraries / operating-system code"]
+    OUTPUT["Application executes"]
+    BYTE --> CL --> VERIFY
+    VERIFY --> METHOD
+    VERIFY --> ENGINE
+    ENGINE <--> DATA
+    HEAP <--> GC
+    ENGINE --> OUTPUT
     JNI <--> NATIVE
+    ENGINE <--> JNI
 ```
 
-- **Class loader:** loads class definitions.
-- **Bytecode verifier:** checks bytecode for structural and safety rules.
-- **Runtime memory areas:** hold data needed while the program runs, including objects and method information.
-- **Execution engine:** interprets bytecode and may use JIT compilation to turn frequently executed code into native machine code.
-- **Garbage collector:** reclaims memory occupied by objects that are no longer reachable.
-- **JNI:** lets Java code interact with native code when needed.
+#### Main tasks and parts of the JVM
+
+1. **Load classes:** the class loader subsystem finds and loads class definitions when needed.
+2. **Verify bytecode:** the verifier checks bytecode structure and type-safety rules before execution.
+3. **Manage runtime memory:** the JVM creates and manages runtime data areas for class information, objects, method calls, and thread execution.
+4. **Execute bytecode:** the execution engine interprets bytecode and may use a **Just-In-Time (JIT) compiler** to compile frequently executed (“hot”) code into native machine code for better performance.
+5. **Manage memory:** garbage collection can reclaim heap space used by objects that are no longer reachable. Not every runtime memory area is garbage-collected in the same way.
+6. **Support native interaction:** the Java Native Interface (JNI) allows Java code to call native code and native libraries when required.
+
+#### JVM runtime data areas
+
+The JVM specification defines several runtime data areas. The key distinction is that some are shared by threads and others are created for each thread.
+
+| Runtime area | What it stores |
+|---|---|
+| **Heap** (shared) | Objects and arrays; garbage collection primarily manages this area. |
+| **Method area** (shared, conceptual specification area) | Per-class structures such as class metadata, method information, and the runtime constant pool. Implementations may organize it differently. |
+| **Java virtual machine stack** (per thread) | Frames for method calls, including local variables, intermediate calculations, and method results. |
+| **PC register** (per thread) | The address or position of the current JVM instruction for the thread; its value is undefined while executing a native method. |
+| **Native method stack** (per thread, implementation-dependent) | Supports execution of native methods. |
+
+A method call generally creates a **stack frame** on that thread's Java stack. Objects created with `new` are typically allocated on the heap, though JVM optimizations can sometimes avoid a physical heap allocation.
+
+#### Execution engine: interpreter vs JIT
+
+- **Interpreter:** executes bytecode instruction by instruction; useful for starting execution quickly.
+- **JIT compiler:** compiles frequently executed code into native machine code so it can run faster.
+- **Garbage collector (GC):** reclaims heap memory from objects that are no longer reachable.
+- **Native libraries and JNI:** enable integration with platform-specific code; using native code can reduce portability.
+
+The exact strategy and internal layout vary by JVM implementation. The diagram is a learning model, not a literal memory map for every JVM.
 
 ### How the three relate
 
