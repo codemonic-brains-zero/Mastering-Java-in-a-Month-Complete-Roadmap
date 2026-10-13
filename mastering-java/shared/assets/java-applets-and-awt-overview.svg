@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 390" role="img" aria-labelledby="title desc">
+  <title id="title">Historical applets and AWT event flow</title>
+  <desc id="desc">A historical browser plugin hosted an applet and its lifecycle. In AWT, components live in containers, user input becomes events handled on the event-dispatch thread, and repaint renders updated state.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+    <marker id="purpleArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#a58bff"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="388" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">AWT / HISTORICAL HOSTING AND EVENT-DRIVEN UI</text>
+  <g font-family="system-ui, sans-serif">
+    <text x="48" y="88" fill="#a58bff" font-size="15" font-weight="700">Historical applet host - obsolete</text>
+    <rect x="48" y="105" width="170" height="62" rx="10" fill="#0a151b" stroke="#a58bff" stroke-width="2"/>
+    <text x="88" y="143" fill="#d0c8ff" font-family="monospace" font-size="14">browser page</text>
+    <path d="M218 136h44" stroke="#a58bff" stroke-width="2.5" marker-end="url(#purpleArrow)"/>
+    <rect x="270" y="105" width="170" height="62" rx="10" fill="#0a151b" stroke="#a58bff" stroke-width="2"/>
+    <text x="302" y="143" fill="#d0c8ff" font-family="monospace" font-size="14">plugin / host</text>
+    <path d="M440 136h44" stroke="#a58bff" stroke-width="2.5" marker-end="url(#purpleArrow)"/>
+    <rect x="492" y="105" width="190" height="62" rx="10" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="528" y="143" fill="#d0c8ff" font-family="monospace" font-size="14">applet lifecycle</text>
+    <text x="710" y="130" fill="#b7a8ff" font-size="13">No modern browser</text>
+    <text x="710" y="151" fill="#b7a8ff" font-size="13">supports this plugin.</text>
+
+    <path d="M38 193h884" stroke="#294638" stroke-width="2"/>
+    <text x="48" y="228" fill="#45ffad" font-size="15" font-weight="700">AWT desktop UI - component tree and event thread</text>
+    <rect x="48" y="250" width="170" height="70" rx="10" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="80" y="280" fill="#bdefff" font-family="monospace" font-size="14">Frame / Panel</text>
+    <text x="80" y="302" fill="#87a99a" font-size="12">container + layout</text>
+    <path d="M218 285h42" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="268" y="250" width="170" height="70" rx="10" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="303" y="280" fill="#bdefff" font-family="monospace" font-size="14">Button / Label</text>
+    <text x="302" y="302" fill="#87a99a" font-size="12">components</text>
+    <path d="M438 285h42" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="488" y="250" width="182" height="70" rx="10" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="514" y="280" fill="#a8fff0" font-family="monospace" font-size="14">event-dispatch</text>
+    <text x="541" y="302" fill="#87a99a" font-size="12">listener callback</text>
+    <path d="M670 285h42" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="720" y="250" width="192" height="70" rx="10" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="760" y="280" fill="#d0c8ff" font-family="monospace" font-size="14">update + repaint</text>
+    <text x="754" y="302" fill="#b7a8ff" font-size="12">render current state</text>
+    <path d="M816 320v33H578v-30" fill="none" stroke="#a58bff" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#purpleArrow)"/>
+    <text x="617" y="375" fill="#87a99a" font-family="monospace" font-size="12">Keep callbacks brief; do not block the UI event-dispatch thread.</text>
+  </g>
+</svg>

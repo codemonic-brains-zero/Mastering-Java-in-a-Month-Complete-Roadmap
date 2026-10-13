@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 430" role="img" aria-labelledby="title desc">
+  <title id="title">JVM class lifecycle and runtime memory</title>
+  <desc id="desc">Class files pass through loading, linking, and initialization before execution. The runtime uses per-thread stacks and a shared heap; garbage collection reclaims unreachable heap objects.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="428" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">JVM / CLASS LIFECYCLE AND RUNTIME MEMORY</text>
+  <g font-family="system-ui, sans-serif">
+    <text x="48" y="91" fill="#4ce9ff" font-size="16" font-weight="700">Class lifecycle</text>
+    <rect x="48" y="108" width="142" height="58" rx="10" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="83" y="143" fill="#bdefff" font-family="monospace" font-size="14">.class file</text>
+    <path d="M190 137h32" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="230" y="108" width="142" height="58" rx="10" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="270" y="143" fill="#a8fff0" font-family="monospace" font-size="14">load</text>
+    <path d="M372 137h32" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="412" y="108" width="154" height="58" rx="10" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="448" y="143" fill="#a8fff0" font-family="monospace" font-size="14">link</text>
+    <path d="M566 137h32" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="606" y="108" width="154" height="58" rx="10" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="630" y="143" fill="#a8fff0" font-family="monospace" font-size="14">initialize</text>
+    <path d="M760 137h32" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="800" y="108" width="112" height="58" rx="10" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="821" y="143" fill="#d0c8ff" font-family="monospace" font-size="14">execute</text>
+
+    <path d="M38 193h884" stroke="#294638" stroke-width="2"/>
+    <text x="48" y="227" fill="#45ffad" font-size="16" font-weight="700">Runtime data areas</text>
+    <rect x="48" y="246" width="254" height="126" rx="12" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="75" y="279" fill="#4ce9ff" font-size="15" font-weight="700">Per-thread state</text>
+    <text x="76" y="310" fill="#bdefff" font-family="monospace" font-size="13">JVM stack / frames</text>
+    <text x="76" y="339" fill="#bdefff" font-family="monospace" font-size="13">program counter</text>
+    <rect x="326" y="246" width="326" height="126" rx="12" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="354" y="279" fill="#a8fff0" font-size="15" font-weight="700">Shared heap</text>
+    <text x="354" y="310" fill="#b7cfc4" font-family="monospace" font-size="13">objects and arrays</text>
+    <text x="354" y="339" fill="#87a99a" font-size="12">unreachable objects eligible for collection</text>
+    <rect x="676" y="246" width="236" height="126" rx="12" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="704" y="279" fill="#d0c8ff" font-size="15" font-weight="700">Class metadata</text>
+    <text x="704" y="310" fill="#d0c8ff" font-family="monospace" font-size="13">method area</text>
+    <text x="704" y="339" fill="#b7a8ff" font-size="12">HotSpot: Metaspace</text>
+    <path d="M490 372v27" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="514" y="402" fill="#87a99a" font-family="monospace" font-size="12">GC reclaims unreachable heap objects; native memory also contributes to process usage.</text>
+  </g>
+</svg>
