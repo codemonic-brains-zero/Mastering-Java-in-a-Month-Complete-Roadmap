@@ -490,6 +490,48 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
  .blueprint-svg .bp-description{font-size:10px}
 }
 @media(prefers-reduced-motion:reduce){.blueprint-figure,.blueprint-svg *{animation:none!important;transition:none!important}}
+
+/* Integrated concept maps: match the site's terminal panels, typography and restrained accent system. */
+.blueprint-figure{
+  position:relative!important;isolation:isolate;overflow:hidden!important;
+  margin:1.35rem 0 1.8rem!important;padding:clamp(1rem,2.4vw,1.55rem)!important;
+  background:linear-gradient(145deg,rgba(10,22,25,.98),rgba(7,14,20,.98))!important;
+  border:1px solid #294638!important;border-radius:12px!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.035),0 14px 35px #0003!important;
+  transform:none!important;animation:none!important;
+}
+.blueprint-figure:before{content:none!important}
+.blueprint-figure:after{inset:0!important;border:0!important;background:linear-gradient(90deg,transparent,#45ffad08,transparent);z-index:-1!important;animation:none!important}
+.bp-meta{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.55rem}
+.bp-kicker{color:#45ffad;font:600 10px/1.4 ui-monospace,Consolas,monospace;letter-spacing:.15em}
+.bp-index{color:#6f8f83;font:500 10px/1.4 ui-monospace,Consolas,monospace}
+.blueprint-heading{display:block;margin:0 0 1.1rem!important;color:#e8fff4!important;font:650 clamp(1rem,1.7vw,1.2rem)/1.35 Inter,"Segoe UI",system-ui,sans-serif!important;letter-spacing:-.025em!important}
+.blueprint-heading span:last-child{display:none!important}
+.bp-flow{display:grid;grid-template-columns:repeat(var(--bp-count),minmax(0,1fr));gap:12px;align-items:stretch}
+.bp-step{position:relative;min-width:0;padding:14px 13px 15px;background:linear-gradient(155deg,#101f20,#0a1418 80%);border:1px solid #29463b;border-radius:9px;box-shadow:inset 0 1px rgba(255,255,255,.025);transition:border-color .18s,background .18s,transform .18s}
+.bp-step:not(:last-child):after{content:"";position:absolute;z-index:2;top:28px;right:-13px;width:12px;height:1px;background:#45ffad70}
+.bp-step:not(:last-child):before{content:"";position:absolute;z-index:3;top:24px;right:-13px;width:7px;height:7px;border-top:1px solid #45ffad;background:transparent;transform:translateX(-1px) rotate(45deg)}
+.bp-step:hover{border-color:#45ffad80;background:linear-gradient(155deg,#132823,#0a1718);transform:translateY(-2px)}
+.bp-step-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:1rem}
+.bp-step-number{color:#6b8a7c;font:600 10px ui-monospace,Consolas,monospace}
+.blueprint-svg{display:none!important}
+.blueprint-figure .bp-small{min-width:0;color:#45ffad;font:600 9px/1.4 ui-monospace,Consolas,monospace;letter-spacing:.08em;text-align:right;overflow-wrap:anywhere}
+.blueprint-figure .bp-label{margin:0 0 .45rem;color:#e5fff2;font:650 clamp(.88rem,1.2vw,1rem)/1.35 Inter,"Segoe UI",system-ui,sans-serif;letter-spacing:-.02em;overflow-wrap:anywhere}
+.blueprint-figure .bp-description{color:#91aa9f;font:400 11px/1.55 Inter,"Segoe UI",system-ui,sans-serif;overflow-wrap:anywhere}
+.blueprint-caption{margin:1rem 0 0!important;padding:0!important;border:0!important;color:#8ba79a!important;font:400 12px/1.7 Inter,"Segoe UI",system-ui,sans-serif!important}
+@media(max-width:820px){
+ .bp-flow{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .bp-step:not(:last-child):after,.bp-step:not(:last-child):before{display:none}
+}
+@media(max-width:480px){
+ .blueprint-figure{padding:1rem!important}
+ .bp-flow{grid-template-columns:minmax(0,1fr);gap:8px}
+ .bp-step{padding:12px 13px}
+ .bp-step-top{margin-bottom:.55rem}
+ .blueprint-heading{margin-bottom:.85rem!important}
+}
+@media(prefers-reduced-motion:reduce){.bp-step{transition:none!important}.bp-step:hover{transform:none!important}}
+
 </style>
 </head>
 <body>
@@ -688,52 +730,25 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
     const fig=document.createElement('figure');
     fig.className='blueprint-figure';
     fig.setAttribute('aria-label','Diagram: '+spec.title);
-    const head=document.createElement('div');
-    head.className='blueprint-heading';
-    const title=document.createElement('span');title.textContent=spec.title;
-    const num=document.createElement('span');num.textContent='SYSTEM MAP / '+String(index+1).padStart(2,'0');
-    head.append(title,num);fig.appendChild(head);
-    const ns='http://www.w3.org/2000/svg';
-    const svg=document.createElementNS(ns,'svg');
-    svg.setAttribute('class','blueprint-svg');
-    svg.setAttribute('viewBox','0 0 900 188');
-    svg.setAttribute('role','img');
-    svg.setAttribute('aria-label',spec.nodes.map(n=>n[0]+': '+n[1]+' — '+n[2]).join('; '));
-    svg.setAttribute('preserveAspectRatio','xMidYMid meet');
-    const defs=document.createElementNS(ns,'defs');
-    const marker=document.createElementNS(ns,'marker');
-    marker.setAttribute('id','bp-arrow-'+index);marker.setAttribute('markerWidth','8');marker.setAttribute('markerHeight','8');
-    marker.setAttribute('refX','6');marker.setAttribute('refY','3');marker.setAttribute('orient','auto');
-    const tip=document.createElementNS(ns,'path');tip.setAttribute('d','M0,0 L6,3 L0,6 Z');tip.setAttribute('fill','#70eaff');
-    marker.appendChild(tip);defs.appendChild(marker);svg.appendChild(defs);
-    const count=spec.nodes.length,outer=24,gap=count===5?15:(count===4?25:38);
-    const nodeW=(900-outer*2-gap*(count-1))/count,y=30,h=112;
-    function addText(parent,cls,x,y,text){
-      const el=document.createElementNS(ns,'text');el.setAttribute('class',cls);el.setAttribute('x',x);el.setAttribute('y',y);el.textContent=text;parent.appendChild(el);return el;
-    }
+    const meta=document.createElement('div');meta.className='bp-meta';
+    const kicker=document.createElement('span');kicker.className='bp-kicker';kicker.textContent='CONCEPT MAP';
+    const number=document.createElement('span');number.className='bp-index';number.textContent='FIG. '+String(index+1).padStart(2,'0');
+    meta.append(kicker,number);fig.appendChild(meta);
+    const head=document.createElement('div');head.className='blueprint-heading';
+    const title=document.createElement('span');title.textContent=spec.title;head.appendChild(title);fig.appendChild(head);
+    const flow=document.createElement('div');flow.className='bp-flow';flow.setAttribute('role','list');
+    flow.style.setProperty('--bp-count',String(spec.nodes.length));
     spec.nodes.forEach(function(n,i){
-      const x=outer+i*(nodeW+gap),cx=x+nodeW/2;
-      if(i<count-1){
-        const line=document.createElementNS(ns,'path');line.setAttribute('class','bp-arrow');
-        line.setAttribute('d','M '+(x+nodeW+5)+' '+(y+h/2)+' H '+(x+nodeW+gap-7));
-        line.setAttribute('marker-end','url(#bp-arrow-'+index+')');svg.appendChild(line);
-      }
-      const rect=document.createElementNS(ns,'rect');rect.setAttribute('class','bp-node');
-      rect.setAttribute('x',x);rect.setAttribute('y',y);rect.setAttribute('width',nodeW);rect.setAttribute('height',h);rect.setAttribute('rx','8');svg.appendChild(rect);
-      const accent=document.createElementNS(ns,'path');accent.setAttribute('class','bp-accent');
-      accent.setAttribute('d','M '+(x+10)+' '+(y+1)+' H '+(x+nodeW-10));svg.appendChild(accent);
-      addText(svg,'bp-small',cx,y+25,String(n[0]).toUpperCase());
-      const main=document.createElementNS(ns,'text');main.setAttribute('class','bp-label');main.setAttribute('x',cx);main.setAttribute('y',y+51);
-      const words=String(n[1]).split(/\\s+/),lines=[''],maxChars=Math.max(9,Math.floor(nodeW/10));
-      words.forEach(function(word){const last=lines.length-1;if((lines[last]+' '+word).trim().length>maxChars&&lines[last])lines.push(word);else lines[last]=(lines[last]+' '+word).trim();});
-      lines.slice(0,2).forEach(function(txt,j){const span=document.createElementNS(ns,'tspan');span.setAttribute('x',cx);span.setAttribute('dy',j===0?'0':'18');span.textContent=txt;main.appendChild(span);});svg.appendChild(main);
-      const desc=String(n[2]),descWords=desc.split(/\\s+/),descLines=[''],descMax=Math.max(12,Math.floor(nodeW/7.5));
-      descWords.forEach(function(word){const last=descLines.length-1;if((descLines[last]+' '+word).trim().length>descMax&&descLines[last])descLines.push(word);else descLines[last]=(descLines[last]+' '+word).trim();});
-      const small=document.createElementNS(ns,'text');small.setAttribute('class','bp-description');small.setAttribute('x',cx);small.setAttribute('y',y+87);
-      descLines.slice(0,2).forEach(function(txt,j){const span=document.createElementNS(ns,'tspan');span.setAttribute('x',cx);span.setAttribute('dy',j===0?'0':'13');span.textContent=txt;small.appendChild(span);});svg.appendChild(small);
-      const dot=document.createElementNS(ns,'circle');dot.setAttribute('class','bp-dot');dot.setAttribute('cx',x+nodeW-10);dot.setAttribute('cy',y+13);dot.setAttribute('r','2.5');svg.appendChild(dot);
+      const card=document.createElement('div');card.className='bp-step';card.setAttribute('role','listitem');
+      const top=document.createElement('div');top.className='bp-step-top';
+      const num=document.createElement('span');num.className='bp-step-number';num.textContent=String(i+1).padStart(2,'0');
+      const tag=document.createElement('span');tag.className='bp-small';tag.textContent=String(n[0]).toUpperCase();
+      top.append(num,tag);
+      const label=document.createElement('div');label.className='bp-label';label.textContent=n[1];
+      const desc=document.createElement('div');desc.className='bp-description';desc.textContent=n[2];
+      card.append(top,label,desc);flow.appendChild(card);
     });
-    fig.appendChild(svg);
+    fig.appendChild(flow);
     const cap=document.createElement('figcaption');cap.className='blueprint-caption';cap.textContent=spec.caption;fig.appendChild(cap);
     return fig;
   }
