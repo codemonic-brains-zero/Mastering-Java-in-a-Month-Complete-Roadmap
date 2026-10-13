@@ -15,10 +15,18 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
 |   +-- java-learning-roadmap.md
 +-- mastering-java/
     +-- chapter-01-introduction-to-java/
-        +-- chapter-01-introduction-to-java.md
+    |   +-- index.html
+    |   +-- chapter-01-introduction-to-java.md
+    +-- chapter-02-variables-data-types-and-operators/
+    |   +-- index.html
+    |   +-- chapter-02-variables-data-types-and-operators.md
+    +-- shared/
+        +-- index.html
 ```
 
 - [`roadmap/java-learning-roadmap.md`](roadmap/java-learning-roadmap.md) contains the complete Java syllabus.
 - [`mastering-java/chapter-01-introduction-to-java/chapter-01-introduction-to-java.md`](mastering-java/chapter-01-introduction-to-java/chapter-01-introduction-to-java.md) contains the Chapter 1 lesson notes.
+- [`mastering-java/chapter-02-variables-data-types-and-operators/chapter-02-variables-data-types-and-operators.md`](mastering-java/chapter-02-variables-data-types-and-operators/chapter-02-variables-data-types-and-operators.md) contains Chapter 2's current roadmap topics.
+- Each chapter's `index.html` opens the shared UI in [`mastering-java/shared/index.html`](mastering-java/shared/index.html); lesson content stays in Markdown.
 
-The interactive site loads the Chapter 1 notes alongside a code editor and Java playground. Add detailed notes for future chapters to their matching folders under `mastering-java/`; keep the full syllabus in the master roadmap.
+The root page redirects to Chapter 1. The prototype includes Chapter 1 and Chapter 2 pages with Previous/Next navigation; later chapter pages will be added in subsequent steps.
