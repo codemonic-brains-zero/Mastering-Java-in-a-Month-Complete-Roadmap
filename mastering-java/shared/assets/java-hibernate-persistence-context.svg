@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" role="img" aria-labelledby="title desc">
+  <title id="title">Hibernate persistence context and database flow</title>
+  <desc id="desc">A transaction uses an entity manager and persistence context to track managed entities. Hibernate translates entity queries and changes into SQL through JDBC; the database returns rows and persists updates at flush or commit.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+    <marker id="purpleArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#a58bff"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="400" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">HIBERNATE / PERSISTENCE CONTEXT AND SQL</text>
+  <g font-family="system-ui, sans-serif">
+    <rect x="48" y="116" width="156" height="80" rx="11" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="91" y="149" fill="#4ce9ff" font-size="15" font-weight="700">Service</text>
+    <text x="80" y="176" fill="#b7cfc4" font-size="12">transaction scope</text>
+    <path d="M204 156h34" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="246" y="116" width="190" height="80" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="273" y="149" fill="#a8fff0" font-family="monospace" font-size="13">EntityManager</text>
+    <text x="279" y="176" fill="#87a99a" font-size="12">persistence context</text>
+    <path d="M436 156h34" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="478" y="116" width="170" height="80" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="523" y="149" fill="#a8fff0" font-size="15" font-weight="700">Hibernate</text>
+    <text x="503" y="176" fill="#87a99a" font-size="12">ORM provider + SQL</text>
+    <path d="M648 156h34" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="690" y="116" width="124" height="80" rx="11" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="727" y="149" fill="#bdefff" font-family="monospace" font-size="13">JDBC</text>
+    <text x="711" y="176" fill="#87a99a" font-size="12">driver</text>
+    <path d="M814 156h34" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="856" y="116" width="60" height="80" rx="10" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="861" y="149" fill="#d0c8ff" font-size="12">DB</text>
+    <text x="858" y="174" fill="#b7a8ff" font-size="11">SQL</text>
+
+    <path d="M880 204v58H566v-62" fill="none" stroke="#4ce9ff" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+    <text x="660" y="253" fill="#bdefff" font-size="12">rows / update count</text>
+    <path d="M340 205v76H110v-82" fill="none" stroke="#a58bff" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#purpleArrow)"/>
+    <text x="151" y="274" fill="#b7a8ff" font-size="12">flush / commit sends tracked changes</text>
+
+    <rect x="246" y="310" width="402" height="54" rx="10" fill="#0a151b" stroke="#45ffad"/>
+    <text x="284" y="343" fill="#a8fff0" font-family="monospace" font-size="13">managed objects + identity map + dirty tracking</text>
+    <text x="676" y="337" fill="#87a99a" font-family="monospace" font-size="12">Fetching and transaction boundaries control query behavior.</text>
+  </g>
+</svg>

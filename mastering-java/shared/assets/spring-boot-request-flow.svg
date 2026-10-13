@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 410" role="img" aria-labelledby="title desc">
+  <title id="title">Spring Boot REST request and response flow</title>
+  <desc id="desc">An HTTP request passes through Spring Security and Spring MVC to a controller, is validated and delegated to a service and repository, then returns a DTO or structured error through the response pipeline.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+    <marker id="cyanArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#4ce9ff"/>
+    </marker>
+    <marker id="purpleArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#a58bff"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="410" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">SPRING BOOT / VALIDATED REST REQUEST</text>
+  <g font-family="system-ui, sans-serif">
+    <rect x="48" y="117" width="136" height="72" rx="11" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="89" y="149" fill="#4ce9ff" font-size="15" font-weight="700">Client</text>
+    <text x="69" y="174" fill="#b7cfc4" font-size="12">HTTP + DTO</text>
+    <path d="M184 153h26" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="218" y="117" width="142" height="72" rx="11" fill="#0a151b" stroke="#a58bff" stroke-width="2"/>
+    <text x="248" y="149" fill="#d0c8ff" font-family="monospace" font-size="13">Security</text>
+    <text x="247" y="174" fill="#b7a8ff" font-size="12">authenticate</text>
+    <path d="M360 153h26" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="394" y="117" width="142" height="72" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="429" y="149" fill="#a8fff0" font-family="monospace" font-size="13">Controller</text>
+    <text x="420" y="174" fill="#87a99a" font-size="12">bind + validate</text>
+    <path d="M536 153h26" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="570" y="117" width="132" height="72" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="610" y="149" fill="#a8fff0" font-family="monospace" font-size="13">Service</text>
+    <text x="596" y="174" fill="#87a99a" font-size="12">business rules</text>
+    <path d="M702 153h26" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="736" y="117" width="176" height="72" rx="11" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="780" y="149" fill="#bdefff" font-family="monospace" font-size="13">Repository</text>
+    <text x="773" y="174" fill="#87a99a" font-size="12">transactional data</text>
+    <path d="M824 190v56H636v-54" fill="none" stroke="#4ce9ff" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#cyanArrow)"/>
+    <text x="694" y="239" fill="#bdefff" font-size="12">domain result</text>
+
+    <rect x="48" y="278" width="380" height="68" rx="11" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="77" y="307" fill="#bdefff" font-size="14" font-weight="700">Success response</text>
+    <text x="77" y="330" fill="#87a99a" font-size="12">status + response DTO + documented schema</text>
+    <rect x="476" y="278" width="436" height="68" rx="11" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="507" y="307" fill="#d0c8ff" font-size="14" font-weight="700">Error response</text>
+    <text x="507" y="330" fill="#b7a8ff" font-size="12">exception advice maps failures to safe contract</text>
+    <path d="M467 189v79" stroke="#a58bff" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#purpleArrow)"/>
+    <text x="48" y="378" fill="#87a99a" font-family="monospace" font-size="12">Monitor health and metrics; restrict actuator and security-sensitive endpoints.</text>
+  </g>
+</svg>
