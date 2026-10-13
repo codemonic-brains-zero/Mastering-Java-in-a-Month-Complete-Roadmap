@@ -45,6 +45,10 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
             +-- loop-control-flow.svg
             +-- array-indexing.svg
             +-- array-reference-structure.svg
+            +-- string-building-flow.svg
+            +-- runtime-method-dispatch.svg
+            +-- java-module-boundaries.svg
+            +-- exception-resource-flow.svg
 ```
 
 - [`roadmap/java-learning-roadmap.md`](roadmap/java-learning-roadmap.md) contains the complete Java syllabus.
@@ -53,6 +57,6 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
 - [`mastering-java/chapter-03-control-flow-and-arrays/chapter-03-control-flow-and-arrays.md`](mastering-java/chapter-03-control-flow-and-arrays/chapter-03-control-flow-and-arrays.md) contains Chapter 3 lesson explanations and Java examples.
 - Chapters 4–7 contain detailed lessons for Strings and Text Processing, Methods and Object-Oriented Programming, Packages and Java Language Features, and Exception Handling.
 - Each named chapter HTML page opens the shared UI in [`mastering-java/shared/index.html`](mastering-java/shared/index.html); lesson content stays in Markdown.
-- Chapter 2 and Chapter 3 visual diagrams are SVG files in `mastering-java/shared/assets/`.
+- Chapter 2–7 visual diagrams are SVG files in `mastering-java/shared/assets/`.
 
 The root page redirects directly to Chapter 1's named HTML page. Chapters 1–7 have Previous/Next navigation.

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" role="img" aria-labelledby="title desc">
+  <title id="title">Java exception propagation and try-with-resources</title>
+  <desc id="desc">When a failure occurs in a try-with-resources body, resources close before a catch handler runs. A close failure is suppressed behind the original exception, which can then be caught or propagated.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+    <marker id="purpleArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#a58bff"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="358" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">FAILURE / RESOURCE CLOSE / HANDLING</text>
+  <g font-family="system-ui, sans-serif">
+    <rect x="42" y="112" width="195" height="86" rx="12" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="61" y="145" fill="#4ce9ff" font-size="16" font-weight="700">try body fails</text>
+    <text x="61" y="173" fill="#b7cfc4" font-family="monospace" font-size="13">IOException: read</text>
+    <path d="M237 155h69" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="245" y="137" fill="#87a99a" font-size="12">unwind</text>
+
+    <rect x="319" y="112" width="217" height="86" rx="12" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="338" y="145" fill="#a8fff0" font-size="16" font-weight="700">resource closes</text>
+    <text x="338" y="173" fill="#b7cfc4" font-family="monospace" font-size="13">close() also fails</text>
+    <path d="M536 155h68" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <rect x="618" y="96" width="286" height="124" rx="12" fill="#0a151b" stroke="#a58bff" stroke-width="2"/>
+    <text x="638" y="129" fill="#b7a8ff" font-size="16" font-weight="700">Primary exception</text>
+    <text x="638" y="155" fill="#d0c8ff" font-family="monospace" font-size="13">IOException: read</text>
+    <rect x="638" y="169" width="244" height="34" rx="7" fill="#19152a" stroke="#a58bff" stroke-opacity=".65"/>
+    <text x="651" y="192" fill="#d0c8ff" font-family="monospace" font-size="12">suppressed: IOException: close</text>
+
+    <path d="M761 220v50h-114" fill="none" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="400" y="255" width="241" height="62" rx="10" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="421" y="282" fill="#4ce9ff" font-size="15" font-weight="700">matching catch handles it</text>
+    <text x="421" y="303" fill="#b7cfc4" font-size="12">or exception propagates to caller</text>
+  </g>
+</svg>

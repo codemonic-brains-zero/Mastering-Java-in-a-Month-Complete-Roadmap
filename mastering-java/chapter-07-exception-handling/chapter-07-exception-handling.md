@@ -289,6 +289,8 @@ Inspect suppressed exceptions when diagnosing cleanup failures.
 
 **Key takeaway:** Automatic resource management preserves both the primary failure and close failures.
 
+![Try-with-resources closes resources before catch handling and records a close failure as suppressed when a primary exception is already active.](../shared/assets/exception-resource-flow.svg)
+
 ## 168. Best practices for exception handling
 
 Catch specific types, keep handlers close to the layer that can recover, preserve causes when translating exceptions, and avoid empty catch blocks. Do not use exceptions for ordinary branching or log the same failure at every layer.

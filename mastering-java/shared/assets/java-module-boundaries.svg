@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" role="img" aria-labelledby="title desc">
+  <title id="title">Java module dependencies and exported packages</title>
+  <desc id="desc">A consumer module requires an application module, which requires a data module. Only exported packages are available across module boundaries; internal packages remain encapsulated.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="358" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">JPMS / DEPENDENCIES AND ENCAPSULATION</text>
+  <g font-family="system-ui, sans-serif">
+    <rect x="54" y="108" width="230" height="162" rx="14" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="76" y="140" fill="#4ce9ff" font-size="18" font-weight="700">com.example.ui</text>
+    <text x="76" y="174" fill="#b7cfc4" font-family="monospace" font-size="14">requires app</text>
+    <rect x="76" y="192" width="184" height="48" rx="8" fill="#0d2025" stroke="#4ce9ff" stroke-opacity=".6"/>
+    <text x="91" y="222" fill="#a8fff0" font-family="monospace" font-size="13">uses public API</text>
+
+    <path d="M284 188h66" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="294" y="169" fill="#87a99a" font-size="12">requires</text>
+
+    <rect x="365" y="90" width="258" height="198" rx="14" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="387" y="122" fill="#45ffad" font-size="18" font-weight="700">com.example.app</text>
+    <rect x="387" y="145" width="214" height="54" rx="8" fill="#0d2025" stroke="#45ffad"/>
+    <text x="404" y="168" fill="#a8fff0" font-family="monospace" font-size="13">exports app.api</text>
+    <text x="404" y="188" fill="#87a99a" font-size="12">visible to dependents</text>
+    <rect x="387" y="212" width="214" height="52" rx="8" fill="#19152a" stroke="#a58bff"/>
+    <text x="404" y="235" fill="#d0c8ff" font-family="monospace" font-size="13">app.internal</text>
+    <text x="404" y="254" fill="#b7a8ff" font-size="12">not exported</text>
+
+    <path d="M623 188h68" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="632" y="169" fill="#87a99a" font-size="12">requires</text>
+
+    <rect x="706" y="108" width="204" height="162" rx="14" fill="#0a151b" stroke="#a58bff" stroke-width="2"/>
+    <text x="728" y="140" fill="#b7a8ff" font-size="17" font-weight="700">com.example.data</text>
+    <text x="728" y="178" fill="#d0c8ff" font-family="monospace" font-size="13">exports data.api</text>
+    <text x="728" y="210" fill="#b7cfc4" font-size="13">explicit dependency</text>
+    <text x="728" y="232" fill="#b7cfc4" font-size="13">and public surface</text>
+  </g>
+</svg>

@@ -172,6 +172,8 @@ Modules are useful for large applications and platform composition, but small pr
 
 **Key takeaway:** A module describes dependencies and the packages it makes accessible.
 
+![JPMS modules declare requires dependencies and export selected packages while keeping internal packages encapsulated.](../shared/assets/java-module-boundaries.svg)
+
 ## 141. Creating modules using `module-info.java`
 
 A module descriptor named `module-info.java` declares a module's name, dependencies, and exports. The descriptor is compiled with the module's source code.

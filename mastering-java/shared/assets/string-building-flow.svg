@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" role="img" aria-labelledby="title desc">
+  <title id="title">Java String immutability and StringBuilder workflow</title>
+  <desc id="desc">String transformations create new String values, while StringBuilder accumulates mutable text and produces a String with toString.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="358" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">TEXT / IMMUTABLE VALUE VS MUTABLE BUILDER</text>
+  <g font-family="system-ui, sans-serif">
+    <text x="54" y="98" fill="#4ce9ff" font-size="18" font-weight="700">String transformation</text>
+    <rect x="54" y="125" width="205" height="72" rx="12" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="76" y="155" fill="#a8fff0" font-family="monospace" font-size="16">original</text>
+    <text x="76" y="180" fill="#b7cfc4" font-family="monospace" font-size="14">"hello"</text>
+    <path d="M260 161h80" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="270" y="145" fill="#87a99a" font-size="12">concat</text>
+    <rect x="356" y="125" width="205" height="72" rx="12" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="378" y="155" fill="#a8fff0" font-family="monospace" font-size="16">updated</text>
+    <text x="378" y="180" fill="#b7cfc4" font-family="monospace" font-size="14">"hello Java"</text>
+    <text x="54" y="229" fill="#b7cfc4" font-size="14">The original is unchanged; the operation returns a new value.</text>
+
+    <path d="M600 86v214" stroke="#294638" stroke-width="2"/>
+    <text x="638" y="98" fill="#b7a8ff" font-size="18" font-weight="700">Repeated construction</text>
+    <rect x="638" y="124" width="166" height="58" rx="10" fill="#0a151b" stroke="#a58bff" stroke-width="2"/>
+    <text x="661" y="160" fill="#d0c8ff" font-family="monospace" font-size="15">StringBuilder</text>
+    <path d="M804 153h70" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="806" y="137" fill="#87a99a" font-size="12">append</text>
+    <rect x="638" y="207" width="166" height="58" rx="10" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="663" y="243" fill="#a8fff0" font-family="monospace" font-size="15">toString()</text>
+    <path d="M721 182v18" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="822" y="238" fill="#b7cfc4" font-size="13">finished</text>
+    <text x="822" y="258" fill="#b7cfc4" font-size="13">String value</text>
+  </g>
+</svg>
