@@ -23,6 +23,18 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
     +-- chapter-03-control-flow-and-arrays/
     |   +-- chapter-03-control-flow-and-arrays.html
     |   +-- chapter-03-control-flow-and-arrays.md
+    +-- chapter-04-strings-and-text-processing/
+    |   +-- chapter-04-strings-and-text-processing.html
+    |   +-- chapter-04-strings-and-text-processing.md
+    +-- chapter-05-methods-and-object-oriented-programming/
+    |   +-- chapter-05-methods-and-object-oriented-programming.html
+    |   +-- chapter-05-methods-and-object-oriented-programming.md
+    +-- chapter-06-packages-imports-and-java-language-features/
+    |   +-- chapter-06-packages-imports-and-java-language-features.html
+    |   +-- chapter-06-packages-imports-and-java-language-features.md
+    +-- chapter-07-exception-handling/
+    |   +-- chapter-07-exception-handling.html
+    |   +-- chapter-07-exception-handling.md
     +-- shared/
         +-- index.html
         +-- assets/
@@ -39,7 +51,8 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
 - [`mastering-java/chapter-01-introduction-to-java/chapter-01-introduction-to-java.md`](mastering-java/chapter-01-introduction-to-java/chapter-01-introduction-to-java.md) contains the Chapter 1 lesson notes.
 - [`mastering-java/chapter-02-variables-data-types-and-operators/chapter-02-variables-data-types-and-operators.md`](mastering-java/chapter-02-variables-data-types-and-operators/chapter-02-variables-data-types-and-operators.md) contains Chapter 2 lesson explanations, Java examples, takeaways, and its coverage check against the master roadmap.
 - [`mastering-java/chapter-03-control-flow-and-arrays/chapter-03-control-flow-and-arrays.md`](mastering-java/chapter-03-control-flow-and-arrays/chapter-03-control-flow-and-arrays.md) contains Chapter 3 lesson explanations and Java examples.
+- Chapters 4–7 contain detailed lessons for Strings and Text Processing, Methods and Object-Oriented Programming, Packages and Java Language Features, and Exception Handling.
 - Each named chapter HTML page opens the shared UI in [`mastering-java/shared/index.html`](mastering-java/shared/index.html); lesson content stays in Markdown.
 - Chapter 2 and Chapter 3 visual diagrams are SVG files in `mastering-java/shared/assets/`.
 
-The root page redirects directly to Chapter 1's named HTML page. Chapter 1, Chapter 2, and Chapter 3 have Previous/Next navigation; later chapter pages will be added in subsequent steps.
+The root page redirects directly to Chapter 1's named HTML page. Chapters 1–7 have Previous/Next navigation.
