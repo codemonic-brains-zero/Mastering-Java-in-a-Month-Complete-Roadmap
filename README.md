@@ -71,6 +71,18 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
     +-- chapter-19-servlets-and-jsp/
     |   +-- chapter-19-servlets-and-jsp.html
     |   +-- chapter-19-servlets-and-jsp.md
+    +-- chapter-20-jakarta-ee-and-enterprise-java/
+    |   +-- chapter-20-jakarta-ee-and-enterprise-java.html
+    |   +-- chapter-20-jakarta-ee-and-enterprise-java.md
+    +-- chapter-21-spring-framework-and-spring-boot/
+    |   +-- chapter-21-spring-framework-and-spring-boot.html
+    |   +-- chapter-21-spring-framework-and-spring-boot.md
+    +-- chapter-22-hibernate-and-orm/
+    |   +-- chapter-22-hibernate-and-orm.html
+    |   +-- chapter-22-hibernate-and-orm.md
+    +-- chapter-23-rest-apis-and-backend-architecture/
+    |   +-- chapter-23-rest-apis-and-backend-architecture.html
+    |   +-- chapter-23-rest-apis-and-backend-architecture.md
     +-- shared/
         +-- index.html
         +-- assets/
@@ -99,6 +111,10 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
             +-- java-junit-test-lifecycle.svg
             +-- java-build-release-pipeline.svg
             +-- java-servlet-mvc-flow.svg
+            +-- jakarta-ee-application-flow.svg
+            +-- spring-boot-request-flow.svg
+            +-- java-hibernate-persistence-context.svg
+            +-- java-rest-api-boundary.svg
 ```
 
 - [`roadmap/java-learning-roadmap.md`](roadmap/java-learning-roadmap.md) contains the complete Java syllabus.
@@ -109,7 +125,8 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
 - Chapters 8–11 contain detailed lessons for Core APIs, Collections, Functional Java and Streams, and Java I/O, Files, and Serialization.
 - Chapters 12–15 contain detailed lessons for Multithreading and Concurrency, JVM Internals and Performance, Applets and AWT essentials, and Java Networking.
 - Chapters 16–19 contain detailed lessons for JDBC, Unit Testing with JUnit, Build Tools and Professional Java Development, and Servlets and JSP.
+- Chapters 20–23 contain detailed lessons for Jakarta EE, Spring and Spring Boot, Hibernate and ORM, and REST APIs and Backend Architecture.
 - Each named chapter HTML page opens the shared UI in [`mastering-java/shared/index.html`](mastering-java/shared/index.html); lesson content stays in Markdown.
-- Chapter 2–19 visual diagrams are SVG files in `mastering-java/shared/assets/`.
+- Chapter 2–23 visual diagrams are SVG files in `mastering-java/shared/assets/`.
 
-The root page redirects directly to Chapter 1's named HTML page. Chapters 1–19 have Previous/Next navigation.
+The root page redirects directly to Chapter 1's named HTML page. Chapters 1–23 have Previous/Next navigation.

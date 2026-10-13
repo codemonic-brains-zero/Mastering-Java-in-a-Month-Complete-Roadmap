@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 410" role="img" aria-labelledby="title desc">
+  <title id="title">REST API request boundary and response contract</title>
+  <desc id="desc">An API request passes through authentication and authorization, rate limits, validation, and a resource handler to application services. The response is a versioned DTO or a consistent safe error; OpenAPI documents the contract.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+    <marker id="cyanArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#4ce9ff"/>
+    </marker>
+    <marker id="purpleArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#a58bff"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="410" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">REST API / CONTRACT AND TRUST BOUNDARY</text>
+  <g font-family="system-ui, sans-serif">
+    <rect x="48" y="118" width="128" height="74" rx="11" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="87" y="150" fill="#4ce9ff" font-size="15" font-weight="700">Client</text>
+    <text x="71" y="175" fill="#b7cfc4" font-family="monospace" font-size="12">HTTP + JSON</text>
+    <path d="M176 155h28" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="212" y="118" width="168" height="74" rx="11" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="243" y="150" fill="#d0c8ff" font-family="monospace" font-size="13">auth + limits</text>
+    <text x="239" y="175" fill="#b7a8ff" font-size="12">identify + authorize</text>
+    <path d="M380 155h28" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="416" y="118" width="152" height="74" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="452" y="150" fill="#a8fff0" font-family="monospace" font-size="13">validate</text>
+    <text x="443" y="175" fill="#87a99a" font-size="12">shape + domain input</text>
+    <path d="M568 155h28" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="604" y="118" width="138" height="74" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="638" y="150" fill="#a8fff0" font-family="monospace" font-size="13">resource</text>
+    <text x="625" y="175" fill="#87a99a" font-size="12">HTTP contract</text>
+    <path d="M742 155h28" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="778" y="118" width="134" height="74" rx="11" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="809" y="150" fill="#bdefff" font-family="monospace" font-size="13">service</text>
+    <text x="800" y="175" fill="#87a99a" font-size="12">business work</text>
+
+    <path d="M846 197v53H682v-54" fill="none" stroke="#4ce9ff" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#cyanArrow)"/>
+    <text x="719" y="241" fill="#bdefff" font-size="12">result</text>
+    <path d="M672 194v79H110v-78" fill="none" stroke="#45ffad" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+    <rect x="48" y="286" width="406" height="60" rx="10" fill="#0a151b" stroke="#4ce9ff"/>
+    <text x="79" y="313" fill="#bdefff" font-size="14" font-weight="700">Success: status + versioned DTO</text>
+    <text x="79" y="335" fill="#87a99a" font-size="12">stable fields and documented semantics</text>
+    <rect x="492" y="286" width="420" height="60" rx="10" fill="#19152a" stroke="#a58bff"/>
+    <text x="523" y="313" fill="#d0c8ff" font-size="14" font-weight="700">Failure: safe, consistent error</text>
+    <text x="523" y="335" fill="#b7a8ff" font-size="12">status + actionable detail without internals</text>
+    <path d="M628 193v82" stroke="#a58bff" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#purpleArrow)"/>
+    <text x="48" y="379" fill="#87a99a" font-family="monospace" font-size="12">OpenAPI documents the contract; CORS does not replace authentication or authorization.</text>
+  </g>
+</svg>

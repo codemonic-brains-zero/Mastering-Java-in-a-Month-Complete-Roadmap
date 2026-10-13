@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" role="img" aria-labelledby="title desc">
+  <title id="title">Jakarta EE enterprise application flow</title>
+  <desc id="desc">A request enters a Jakarta REST resource, which uses an injected application service and persistence context to access data. Validation, transactions, security, and messaging support the application flow.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+    <marker id="purpleArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#a58bff"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="398" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">JAKARTA EE / SPECIFICATION-DRIVEN ENTERPRISE APP</text>
+  <g font-family="system-ui, sans-serif">
+    <rect x="48" y="117" width="150" height="74" rx="11" fill="#0a151b" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="93" y="150" fill="#4ce9ff" font-size="15" font-weight="700">Client</text>
+    <text x="75" y="175" fill="#b7cfc4" font-size="12">HTTP / REST</text>
+    <path d="M198 154h34" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="240" y="117" width="166" height="74" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="271" y="150" fill="#a8fff0" font-family="monospace" font-size="14">REST resource</text>
+    <text x="272" y="175" fill="#87a99a" font-size="12">Jakarta REST</text>
+    <path d="M406 154h34" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="448" y="117" width="164" height="74" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="481" y="150" fill="#a8fff0" font-family="monospace" font-size="14">Service</text>
+    <text x="474" y="175" fill="#87a99a" font-size="12">CDI-injected logic</text>
+    <path d="M612 154h34" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="654" y="117" width="166" height="74" rx="11" fill="#0a151b" stroke="#45ffad" stroke-width="2"/>
+    <text x="684" y="150" fill="#a8fff0" font-family="monospace" font-size="14">Persistence</text>
+    <text x="680" y="175" fill="#87a99a" font-size="12">JPA / EntityManager</text>
+    <path d="M820 154h30" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="858" y="117" width="58" height="74" rx="10" fill="#19152a" stroke="#a58bff" stroke-width="2"/>
+    <text x="863" y="150" fill="#d0c8ff" font-size="12">DB</text>
+    <text x="861" y="174" fill="#b7a8ff" font-size="11">data</text>
+
+    <path d="M38 224h884" stroke="#294638" stroke-width="2"/>
+    <text x="48" y="260" fill="#45ffad" font-size="15" font-weight="700">Container-managed cross-cutting services</text>
+    <rect x="48" y="281" width="188" height="60" rx="10" fill="#0a151b" stroke="#4ce9ff"/>
+    <text x="98" y="317" fill="#bdefff" font-family="monospace" font-size="13">validation</text>
+    <rect x="258" y="281" width="188" height="60" rx="10" fill="#0a151b" stroke="#4ce9ff"/>
+    <text x="312" y="317" fill="#bdefff" font-family="monospace" font-size="13">transactions</text>
+    <rect x="468" y="281" width="188" height="60" rx="10" fill="#0a151b" stroke="#a58bff"/>
+    <text x="529" y="317" fill="#d0c8ff" font-family="monospace" font-size="13">security</text>
+    <rect x="678" y="281" width="234" height="60" rx="10" fill="#0a151b" stroke="#a58bff"/>
+    <text x="737" y="317" fill="#d0c8ff" font-family="monospace" font-size="13">messaging / mail</text>
+    <path d="M342 281v-48H323v-40" fill="none" stroke="#a58bff" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#purpleArrow)"/>
+    <text x="48" y="372" fill="#87a99a" font-family="monospace" font-size="12">Specifications define contracts; the target runtime supplies compatible implementations.</text>
+  </g>
+</svg>
