@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 380" role="img" aria-labelledby="title desc">
+  <title id="title">Loop control flow</title>
+  <desc id="desc">A loop tests a condition, runs its body when true, updates progress, then tests again; when false it exits.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="378" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">LOOP / CONDITION AND PROGRESS</text>
+  <g font-family="system-ui, sans-serif" text-anchor="middle">
+    <rect x="365" y="76" width="230" height="58" rx="12" fill="#10231e" stroke="#45ffad" stroke-width="2"/>
+    <text x="480" y="112" fill="#e5fff2" font-size="19" font-weight="700">Initialize</text>
+    <path d="M480 135v28" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path d="M480 170l120 52-120 52-120-52z" fill="#11192a" stroke="#a58bff" stroke-width="2"/>
+    <text x="480" y="218" fill="#e5fff2" font-size="17" font-weight="700">Condition</text>
+    <text x="480" y="240" fill="#b7a8ff" font-size="14">true?</text>
+    <path d="M360 222H230v50" fill="none" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="292" y="210" fill="#45ffad" font-size="14">yes</text>
+    <rect x="125" y="280" width="210" height="58" rx="12" fill="#0d2025" stroke="#4ce9ff" stroke-width="2"/>
+    <text x="230" y="316" fill="#d8fbff" font-size="17" font-weight="700">Run body</text>
+    <path d="M335 309h74" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="415" y="280" width="190" height="58" rx="12" fill="#10231e" stroke="#45ffad" stroke-width="2"/>
+    <text x="510" y="316" fill="#e5fff2" font-size="17" font-weight="700">Update</text>
+    <path d="M605 309h83V222h-73" fill="none" stroke="#45ffad" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="724" y="210" fill="#45ffad" font-size="14">repeat</text>
+    <path d="M600 222h166v58" fill="none" stroke="#ff87df" stroke-width="2.5"/>
+    <text x="674" y="210" fill="#ff87df" font-size="14">no</text>
+    <rect x="690" y="280" width="160" height="58" rx="12" fill="#271321" stroke="#ff57d5" stroke-width="2"/>
+    <text x="770" y="316" fill="#ffc6f0" font-size="17" font-weight="700">Exit loop</text>
+  </g>
+  <text x="38" y="363" fill="#87a99a" font-family="monospace" font-size="13">while / for TEST BEFORE BODY · do-while TEST AFTER BODY</text>
+</svg>

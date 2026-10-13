@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" role="img" aria-labelledby="title desc">
+  <title id="title">Zero-based array indexing</title>
+  <desc id="desc">An array of length four has valid indexes zero through three. Index four is outside the array.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+  </defs>
+  <rect x="1" y="1" width="958" height="298" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">ARRAY / ZERO-BASED INDEXING</text>
+  <g font-family="system-ui, sans-serif" text-anchor="middle">
+    <g fill="#a8fff0" font-family="monospace" font-size="19">
+      <rect x="70" y="105" width="150" height="76" rx="10" fill="#0d2025" stroke="#45ffad"/><text x="145" y="151">scores[0]</text>
+      <rect x="225" y="105" width="150" height="76" rx="10" fill="#0d2025" stroke="#45ffad"/><text x="300" y="151">scores[1]</text>
+      <rect x="380" y="105" width="150" height="76" rx="10" fill="#0d2025" stroke="#45ffad"/><text x="455" y="151">scores[2]</text>
+      <rect x="535" y="105" width="150" height="76" rx="10" fill="#0d2025" stroke="#45ffad"/><text x="610" y="151">scores[3]</text>
+      <rect x="710" y="105" width="180" height="76" rx="10" fill="#271321" stroke="#ff57d5"/><text x="800" y="151" fill="#ffc6f0">scores[4]</text>
+    </g>
+    <g fill="#87a99a" font-family="monospace" font-size="15">
+      <text x="145" y="207">index 0</text>
+      <text x="300" y="207">index 1</text>
+      <text x="455" y="207">index 2</text>
+      <text x="610" y="207">index 3</text>
+      <text x="800" y="207" fill="#ff87df">OUT OF BOUNDS</text>
+    </g>
+  </g>
+  <path d="M70 229v13h615v-13" fill="none" stroke="#45ffad" stroke-width="2"/>
+  <text x="375" y="270" fill="#a8fff0" font-family="monospace" font-size="16" text-anchor="middle">length = 4  →  valid indexes: 0 through length - 1</text>
+</svg>
