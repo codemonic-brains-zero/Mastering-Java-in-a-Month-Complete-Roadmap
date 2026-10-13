@@ -723,6 +723,13 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
       title: 'Variables, Data Types, and Operators',
       markdown: 'mastering-java/chapter-02-variables-data-types-and-operators/chapter-02-variables-data-types-and-operators.md',
       previous: { label: 'Chapter 1: Introduction to Java', href: '../chapter-01-introduction-to-java/chapter-01-introduction-to-java.html' },
+      next: { label: 'Chapter 3: Control Flow and Arrays', href: '../chapter-03-control-flow-and-arrays/chapter-03-control-flow-and-arrays.html' }
+    },
+    '03': {
+      label: 'Chapter 3',
+      title: 'Control Flow and Arrays',
+      markdown: 'mastering-java/chapter-03-control-flow-and-arrays/chapter-03-control-flow-and-arrays.md',
+      previous: { label: 'Chapter 2: Variables, Data Types, and Operators', href: '../chapter-02-variables-data-types-and-operators/chapter-02-variables-data-types-and-operators.html' },
       next: null
     }
   };
@@ -934,7 +941,7 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
       navigation.appendChild(next);
     } else {
       const upcoming = document.createElement('span');
-      upcoming.textContent = 'Chapter 3 will be added next';
+      upcoming.textContent = 'More chapters coming soon';
       upcoming.setAttribute('aria-disabled', 'true');
       navigation.appendChild(upcoming);
     }
