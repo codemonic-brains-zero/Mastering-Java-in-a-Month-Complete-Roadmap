@@ -584,6 +584,9 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
 .chapter .mermaid.jvm-diagram .label text,
 .chapter .mermaid.jvm-diagram .cluster-label,
 .chapter .mermaid.jvm-diagram .cluster-label span{color:#e8faff!important;fill:#e8faff!important}
+.chapter .mermaid.jvm-diagram .nodeLabel,
+.chapter .mermaid.jvm-diagram .cluster-label,
+.chapter .mermaid.jvm-diagram .edgeLabel span{font-size:16px!important}
 .chapter .mermaid.jvm-diagram .edgePath .path,
 .chapter .mermaid.jvm-diagram .flowchart-link{stroke:#70eaff!important;stroke-width:1.8px!important;filter:drop-shadow(0 0 3px rgba(72,219,255,.52));stroke-dasharray:7 5;animation:diagram-flow 1.8s linear infinite}
 .chapter .mermaid.jvm-diagram .marker{fill:#70eaff!important;stroke:#70eaff!important;filter:drop-shadow(0 0 3px rgba(72,219,255,.65))}
@@ -751,14 +754,18 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
     return DOMPurify.sanitize(rendered);
   }
   async function renderMermaidDiagrams(){
-    const items = Array.from(chapter.querySelectorAll('h2, pre > code.language-mermaid, pre > code[class*="mermaid"]'));
+    const items = Array.from(chapter.querySelectorAll('h2, h3, pre > code.language-mermaid, pre > code[class*="mermaid"]'));
     const blocks = [];
     let inJvmSection = false;
+    let inJvmArchitecture = false;
     items.forEach(function(item){
       if(item.tagName === 'H2'){
         inJvmSection = /^14\.\s*JDK, JRE, JVM/i.test(item.textContent.trim());
+        inJvmArchitecture = false;
+      }else if(item.tagName === 'H3'){
+        inJvmArchitecture = inJvmSection && /^Blueprint 3\s*[—-]\s*JVM/i.test(item.textContent.trim());
       }else{
-        blocks.push({code:item,isJvmDiagram:inJvmSection});
+        blocks.push({code:item,isJvmDiagram:inJvmArchitecture});
       }
     });
     if(!blocks.length) return;

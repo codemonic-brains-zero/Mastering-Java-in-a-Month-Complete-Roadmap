@@ -318,41 +318,22 @@ The JRE does **not** include the Java source compiler `javac` as part of its run
 
 ### Blueprint 3 — JVM (Java Virtual Machine): internal architecture
 
-The JVM work is shown in two focused diagrams so every block remains readable: first the class-file execution path, then the separate runtime memory areas. Native code connects through JNI.
+This single JVM flowchart shows the class-file path, runtime data areas, and execution engine together. Runtime data areas support execution; they are not compile-time stages.
 
 ```mermaid
 flowchart TB
     CLASS["CLASS FILE<br/>.class bytecode"]
-    LOAD["CLASS LOADER<br/>Loads class definitions"]
-    VERIFY["VERIFICATION + LINKING<br/>Checks and prepares bytecode"]
-    INIT["CLASS INITIALIZATION<br/>Runs static initialization"]
-    MEMORY["RUNTIME DATA AREAS<br/>Store class, object, and thread state"]
-    INTERP["INTERPRETER<br/>Executes bytecode"]
-    JIT["JIT COMPILER<br/>Optimizes frequently used code"]
-    RESULT["RUNNING PROGRAM"]
-    JNI["JNI<br/>Java Native Interface"]
-    NATIVELIB["NATIVE LIBRARIES / OS"]
-    CLASS --> LOAD --> VERIFY --> INIT --> MEMORY --> INTERP --> RESULT
-    INTERP -. hot code .-> JIT --> RESULT
-    INTERP <--> JNI <--> NATIVELIB
-```
-
-#### JVM runtime memory areas
-
-These are distinct areas used by the JVM, not sequential steps in the execution flow.
-
-```mermaid
-flowchart TB
-    subgraph MEMORY["JVM RUNTIME DATA AREAS"]
+    APP["RUNNING JAVA APPLICATION"]
+    subgraph JVM["JAVA VIRTUAL MACHINE (JVM)"]
       direction TB
-      METHOD["METHOD AREA<br/>Class metadata and runtime constant pool"]
-      HEAP["HEAP<br/>Objects and arrays"]
-      STACK["JAVA STACK<br/>Frames and local variables · one per thread"]
-      PC["PC REGISTER<br/>Current instruction · one per thread"]
-      NATIVE_STACK["NATIVE METHOD STACK<br/>Native-call state"]
-      METHOD ~~~ HEAP ~~~ STACK ~~~ PC ~~~ NATIVE_STACK
+      LOAD["CLASS LOADER<br/>Loads class definitions"]
+      VERIFY["VERIFICATION + LINKING<br/>Checks and prepares bytecode"]
+      INIT["CLASS INITIALIZATION<br/>Runs static initialization"]
+      AREAS["RUNTIME DATA AREAS<br/>METHOD AREA — class metadata + constant pool · shared<br/>HEAP — objects + arrays · shared<br/>JAVA STACK — frames + local variables · per thread<br/>PC REGISTER — current instruction · per thread<br/>NATIVE METHOD STACK — native-call state · per thread<br/>GARBAGE COLLECTOR reclaims unreachable heap objects"]
+      ENGINE["EXECUTION ENGINE<br/>Interpreter executes bytecode<br/>JIT may compile frequently used code to native machine code<br/>JNI connects Java to native libraries and the operating system"]
     end
-    HEAP --> GC["GARBAGE COLLECTOR<br/>Reclaims unreachable heap objects"]
+    CLASS --> LOAD --> VERIFY --> INIT --> ENGINE --> APP
+    AREAS -. supports execution .-> ENGINE
 ```
 
 #### What the JVM does
@@ -365,7 +346,7 @@ flowchart TB
 6. **Collect unreachable objects:** the garbage collector can reclaim heap memory used by objects that are no longer reachable.
 7. **Call native code when needed:** JNI connects Java code with native libraries.
 
-#### Runtime memory areas — what each box means
+#### Runtime memory areas — what each area means
 
 | Area | Purpose | Sharing |
 |---|---|---|
@@ -384,7 +365,7 @@ flowchart TB
 - **Garbage collector:** reclaims heap memory from unreachable objects; it does not simply clear every memory area.
 - **JNI and native libraries:** provide access to platform-specific code, which can affect portability.
 
-The precise implementation varies across JVMs. The blueprint explains the main concepts rather than promising an identical internal layout in every Java implementation.
+The precise implementation varies across JVMs. The flowchart explains the main concepts rather than promising an identical internal layout in every Java implementation.
 
 ### How the three relate
 
