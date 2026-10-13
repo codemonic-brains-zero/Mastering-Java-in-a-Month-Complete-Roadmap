@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 280" role="img" aria-labelledby="title desc">
+  <title id="title">Operator precedence and grouping</title>
+  <desc id="desc">Multiplication groups before addition in 2 plus 3 times 4, producing 14. Parentheses around 2 plus 3 change the result to 20.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+  </defs>
+  <rect x="1" y="1" width="958" height="278" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="47" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">EXPRESSION / GROUPING MAP</text>
+  <g font-family="system-ui, sans-serif">
+    <text x="54" y="91" fill="#4ce9ff" font-size="18" font-weight="700">Without parentheses</text>
+    <text x="54" y="133" fill="#e5fff2" font-family="monospace" font-size="28">2 + 3 * 4 = 14</text>
+    <path d="M120 147v20h134v-20" fill="none" stroke="#a58bff" stroke-width="2"/>
+    <text x="121" y="192" fill="#c5b9ff" font-size="14">3 * 4 first</text>
+    <text x="306" y="177" fill="#87a99a" font-size="16">Multiplication has higher precedence.</text>
+
+    <text x="54" y="230" fill="#45ffad" font-size="18" font-weight="700">With parentheses</text>
+    <text x="306" y="230" fill="#e5fff2" font-family="monospace" font-size="25">(2 + 3) * 4 = 20</text>
+    <path d="M386 236v21h66v-21" fill="none" stroke="#45ffad" stroke-width="2"/>
+  </g>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" role="img" aria-labelledby="title desc">
+  <title id="title">Primitive numeric conversions</title>
+  <desc id="desc">Widening conversions are usually implicit. Narrowing conversions require a cast and may lose the fractional part, range, or precision.</desc>
+  <defs>
+    <linearGradient id="panel" x2="0" y2="1">
+      <stop stop-color="#0d1b22"/>
+      <stop offset="1" stop-color="#081116"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#45ffad"/>
+    </marker>
+    <marker id="warnArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#ff87df"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="298" rx="20" fill="url(#panel)" stroke="#45ffad" stroke-opacity=".45"/>
+  <text x="38" y="48" fill="#45ffad" font-family="monospace" font-size="15" letter-spacing="3">NUMERIC CONVERSION / INFORMATION FLOW</text>
+  <g font-family="system-ui, sans-serif">
+    <text x="50" y="93" fill="#4ce9ff" font-size="18" font-weight="700">WIDENING · usually implicit</text>
+    <g fill="#a8fff0" font-family="monospace" font-size="18">
+      <rect x="50" y="118" width="105" height="48" rx="9" fill="#0d2025" stroke="#45ffad" stroke-opacity=".55"/><text x="78" y="149">int</text>
+      <rect x="220" y="118" width="105" height="48" rx="9" fill="#0d2025" stroke="#45ffad" stroke-opacity=".55"/><text x="247" y="149">long</text>
+      <rect x="390" y="118" width="115" height="48" rx="9" fill="#0d2025" stroke="#45ffad" stroke-opacity=".55"/><text x="412" y="149">float</text>
+      <rect x="570" y="118" width="125" height="48" rx="9" fill="#19152a" stroke="#a58bff" stroke-opacity=".65"/><text x="590" y="149">double</text>
+    </g>
+    <path d="M160 142h48m120 0h87m130 0h57" stroke="#45ffad" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="714" y="148" fill="#b7cfc4" font-size="14">No cast for these</text>
+
+    <text x="50" y="212" fill="#ff87df" font-size="18" font-weight="700">NARROWING · explicit cast</text>
+    <rect x="55" y="231" width="150" height="48" rx="9" fill="#19152a" stroke="#a58bff" stroke-opacity=".65"/>
+    <text x="78" y="261" fill="#d0c8ff" font-family="monospace" font-size="18">double 7.9</text>
+    <path d="M217 255h120" stroke="#ff87df" stroke-width="3" marker-end="url(#warnArrow)"/>
+    <rect x="350" y="231" width="120" height="48" rx="9" fill="#271321" stroke="#ff57d5" stroke-opacity=".75"/>
+    <text x="382" y="261" fill="#ffc6f0" font-family="monospace" font-size="18">(int) 7</text>
+    <text x="505" y="250" fill="#ffc6f0" font-size="15">Fraction discarded; a cast does not round.</text>
+    <text x="505" y="273" fill="#b7cfc4" font-size="14">Check ranges before converting variable input.</text>
+  </g>
+</svg>
