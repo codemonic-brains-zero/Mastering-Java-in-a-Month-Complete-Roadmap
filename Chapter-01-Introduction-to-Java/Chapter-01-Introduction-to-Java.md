@@ -251,130 +251,156 @@ Bytecode is the intermediate instruction format normally stored in .class files.
 - JDK: development kit containing tools such as javac plus runtime components.
 Memory aid: JDK for development, JRE as the runtime concept, JVM for executing bytecode.
 
-### Blueprint 1 — JDK (Java Development Kit)
+### Blueprint 1 — JDK (Java Development Kit): overall structure
 
-The JDK is the **complete toolkit used to develop Java applications**. It includes the compiler and other development tools, plus runtime components.
+This is the outer-container view from your notebook: the JDK provides development tools as well as the runtime components needed to run Java programs.
 
 ```mermaid
 flowchart TB
-    JDK["JDK — Java Development Kit"]
-    subgraph TOOLS["Development tools"]
-        JAVAC["javac — compiler"]
-        JAVA["java — application launcher"]
-        JDB["jdb — debugger"]
-        JAVADOC["javadoc — documentation tool"]
-        JAR["jar — archive tool"]
+    subgraph JDK["JDK — Java Development Kit"]
+      direction TB
+      subgraph JRE["JRE concept — runtime environment"]
+        direction TB
+        subgraph RUNTIME["Runtime components"]
+          direction LR
+          JVM["JVM"]
+          LIBS["Java standard libraries"]
+          OTHER["Other runtime files / libraries"]
+        end
+      end
+      subgraph TOOLS["JDK development tools"]
+        direction LR
+        JAVAC["javac"]
+        JAVA["java"]
+        JAVADOC["javadoc"]
+        JDB["jdb"]
+        JAR["jar"]
+      end
     end
-    subgraph RUNTIME["Runtime components"]
-        JVM["JVM"]
-        LIBS["Java standard libraries"]
-    end
-    JDK --> TOOLS
-    JDK --> RUNTIME
-    JAVAC --> BYTE[".class bytecode"]
+    SOURCE["Main.java"] --> JAVAC
+    JAVAC --> BYTE["Main.class — bytecode"]
     BYTE --> JAVA
     JAVA --> JVM
-    JVM --> LIBS
+    JVM --> APP["Running Java application"]
 ```
 
-**Remember:** You install/use a JDK when you want to write, compile, debug, and run Java programs. The exact tools included can vary by JDK version and distribution.
+- **JDK:** the complete development kit, including tools and runtime components.
+- **JRE concept:** the runtime environment needed by a Java application.
+- **Important modern note:** this nested drawing is conceptual. Current JDK distributions usually include a runtime image; they do not necessarily contain a separately installable JRE folder or every tool shown in the diagram.
 
-### Blueprint 2 — JRE (Java Runtime Environment)
+### Blueprint 2 — JRE (Java Runtime Environment): runtime structure
 
-The JRE describes the **environment required to run a Java application**. Conceptually, it includes a JVM and the standard libraries and supporting files that the application needs.
+This is the separate runtime-only view. It focuses on the components used when running an already-compiled Java application.
 
 ```mermaid
 flowchart TB
-    JRE["JRE — Java Runtime Environment"]
-    JVM["JVM — executes bytecode"]
-    LIBS["Java standard libraries"]
-    SUPPORT["Supporting runtime files"]
-    APP["Java application"]
-    BYTE["Compiled .class bytecode"]
-    JRE --> JVM
-    JRE --> LIBS
-    JRE --> SUPPORT
-    BYTE --> JVM
-    JVM --> APP
-    APP --> LIBS
-```
-
-**Remember:** The JRE is the runtime environment, not the compiler. Modern Java distributions often provide a JDK with runtime components rather than a separate JRE download, so treat this as a conceptual blueprint.
-
-### Blueprint 3 — JVM (Java Virtual Machine)
-
-The JVM is the **abstract machine that loads, verifies, and executes Java bytecode**. A real JVM implementation is platform-specific, which is why the same bytecode can run on different systems that have compatible JVMs.
-
-```mermaid
-flowchart TB
-    BYTE[".class file — bytecode"]
-    subgraph JVM["JVM"]
-        CL["Class loader subsystem"]
-        VERIFY["Bytecode verification"]
-        subgraph DATA["Runtime data areas"]
-            METHOD["Method area — class metadata, runtime constant pool"]
-            HEAP["Heap — objects and arrays"]
-            STACK["Java stacks — frames, local variables, operand stacks"]
-            PC["PC registers — current instruction per thread"]
-            NMS["Native method stacks — native calls"]
-        end
-        subgraph ENGINE["Execution engine"]
-            INTERP["Interpreter"]
-            JIT["JIT compiler — compiles hot code"]
-        end
-        GC["Garbage collector"]
-        JNI["JNI — Java Native Interface"]
+    APP["Java application (.class files)"]
+    subgraph JRE["JRE — Java Runtime Environment (concept)"]
+      direction TB
+      subgraph LIBRARIES["Runtime libraries and supporting files"]
+        STDLIB["Java standard libraries"]
+        OTHERLIB["Other required runtime libraries / resources"]
+      end
+      subgraph VM["Java Virtual Machine"]
+        LOADER["Class loading"]
+        EXEC["Bytecode execution"]
+        MEMORY["Runtime memory management"]
+      end
     end
-    NATIVE["Native libraries / operating-system code"]
-    OUTPUT["Application executes"]
-    BYTE --> CL --> VERIFY
-    VERIFY --> METHOD
-    VERIFY --> ENGINE
-    ENGINE <--> DATA
-    HEAP <--> GC
-    ENGINE --> OUTPUT
-    JNI <--> NATIVE
-    ENGINE <--> JNI
+    APP --> LOADER
+    LOADER --> EXEC
+    EXEC <--> MEMORY
+    EXEC <--> STDLIB
+    EXEC <--> OTHERLIB
 ```
 
-#### Main tasks and parts of the JVM
+The JRE does **not** include the Java source compiler `javac` as part of its runtime role. It provides what an application needs to run. A separate JRE download is not offered by every modern Java distribution, so this is a conceptual blueprint.
 
-1. **Load classes:** the class loader subsystem finds and loads class definitions when needed.
-2. **Verify bytecode:** the verifier checks bytecode structure and type-safety rules before execution.
-3. **Manage runtime memory:** the JVM creates and manages runtime data areas for class information, objects, method calls, and thread execution.
-4. **Execute bytecode:** the execution engine interprets bytecode and may use a **Just-In-Time (JIT) compiler** to compile frequently executed (“hot”) code into native machine code for better performance.
-5. **Manage memory:** garbage collection can reclaim heap space used by objects that are no longer reachable. Not every runtime memory area is garbage-collected in the same way.
-6. **Support native interaction:** the Java Native Interface (JNI) allows Java code to call native code and native libraries when required.
+### Blueprint 3 — JVM (Java Virtual Machine): internal architecture
 
-#### JVM runtime data areas
+This follows the detailed structure in your notebook: class file → class loading and verification → runtime memory areas → execution engine. Native libraries interact through JNI.
 
-The JVM specification defines several runtime data areas. The key distinction is that some are shared by threads and others are created for each thread.
+```mermaid
+flowchart TB
+    CLASS["Class files (.class bytecode)"]
+    subgraph JVM["JVM — Java Virtual Machine"]
+      direction TB
+      subgraph LOADING["Class loader subsystem"]
+        LOAD["Load class"]
+        LINK["Link: verify, prepare, resolve"]
+        INIT["Initialize class"]
+      end
+      subgraph MEMORY["Runtime data areas"]
+        direction LR
+        METHOD["Method area\nClass metadata / runtime constant pool"]
+        STACK["Java stack\nFrames / local variables"]
+        HEAP["Heap\nObjects / arrays"]
+        PC["PC register\nCurrent instruction per thread"]
+        NATIVE_STACK["Native method stack"]
+      end
+      subgraph ENGINE["Execution engine"]
+        direction LR
+        INTERP["Interpreter"]
+        JIT["JIT compiler\nHot code → native code"]
+        GC["Garbage collector"]
+      end
+      JNI["JNI — Java Native Interface"]
+    end
+    NATIVELIB["Native libraries / OS"]
+    RESULT["Program execution"]
+    CLASS --> LOAD --> LINK --> INIT
+    INIT --> METHOD
+    INIT --> ENGINE
+    ENGINE <--> STACK
+    ENGINE <--> HEAP
+    ENGINE <--> PC
+    ENGINE <--> NATIVE_STACK
+    HEAP <--> GC
+    ENGINE --> INTERP
+    ENGINE --> JIT
+    INTERP --> RESULT
+    JIT --> RESULT
+    ENGINE <--> JNI
+    JNI <--> NATIVELIB
+```
 
-| Runtime area | What it stores |
-|---|---|
-| **Heap** (shared) | Objects and arrays; garbage collection primarily manages this area. |
-| **Method area** (shared, conceptual specification area) | Per-class structures such as class metadata, method information, and the runtime constant pool. Implementations may organize it differently. |
-| **Java virtual machine stack** (per thread) | Frames for method calls, including local variables, intermediate calculations, and method results. |
-| **PC register** (per thread) | The address or position of the current JVM instruction for the thread; its value is undefined while executing a native method. |
-| **Native method stack** (per thread, implementation-dependent) | Supports execution of native methods. |
+#### What the JVM does
 
-A method call generally creates a **stack frame** on that thread's Java stack. Objects created with `new` are typically allocated on the heap, though JVM optimizations can sometimes avoid a physical heap allocation.
+1. **Load class files:** the class loader loads class definitions when needed.
+2. **Verify and link:** bytecode verification checks structural and type-safety rules; linking also includes preparation and resolution.
+3. **Initialize classes:** static initialization runs when required.
+4. **Allocate and manage runtime memory:** the JVM uses runtime data areas for class information, objects, method calls, and thread state.
+5. **Execute bytecode:** the interpreter executes bytecode; a **Just-In-Time (JIT) compiler** may compile frequently executed (“hot”) code into native machine code.
+6. **Collect unreachable objects:** the garbage collector can reclaim heap memory used by objects that are no longer reachable.
+7. **Call native code when needed:** JNI connects Java code with native libraries.
 
-#### Execution engine: interpreter vs JIT
+#### Runtime memory areas — what each box means
 
-- **Interpreter:** executes bytecode instruction by instruction; useful for starting execution quickly.
-- **JIT compiler:** compiles frequently executed code into native machine code so it can run faster.
-- **Garbage collector (GC):** reclaims heap memory from objects that are no longer reachable.
-- **Native libraries and JNI:** enable integration with platform-specific code; using native code can reduce portability.
+| Area | Purpose | Sharing |
+|---|---|---|
+| **Method area** | Class-level structures, method metadata, and runtime constant pool. It is a specification concept; implementations can organize it differently. | Shared |
+| **Heap** | Stores objects and arrays; this is the main area managed by garbage collection. | Shared |
+| **Java stack** | Holds stack frames for method calls, including local variables and intermediate computations. | One per thread |
+| **PC register** | Tracks the current JVM instruction for a thread; its value is undefined while that thread executes a native method. | One per thread |
+| **Native method stack** | Supports native-method execution; details depend on the JVM implementation. | Typically per thread / implementation-dependent |
 
-The exact strategy and internal layout vary by JVM implementation. The diagram is a learning model, not a literal memory map for every JVM.
+**Memory allocation correction:** primitive local variables and references may be stored in a stack frame, while objects and arrays are typically allocated on the heap. This is a useful learning model; JVM optimizations can change physical allocation details.
+
+#### Execution engine
+
+- **Interpreter:** starts executing bytecode without first compiling all of it to native code.
+- **JIT compiler:** compiles frequently executed code to native machine code for better performance.
+- **Garbage collector:** reclaims heap memory from unreachable objects; it does not simply clear every memory area.
+- **JNI and native libraries:** provide access to platform-specific code, which can affect portability.
+
+The precise implementation varies across JVMs. The blueprint explains the main concepts rather than promising an identical internal layout in every Java implementation.
 
 ### How the three relate
 
 ```text
 JDK = development tools + runtime components
-JRE = runtime environment concept (libraries + JVM + supporting files)
-JVM = loads and executes bytecode
+JRE = runtime libraries + JVM + supporting files (conceptual)
+JVM = loads, verifies, and executes bytecode
 ```
 
 ### Example workflow
@@ -384,11 +410,11 @@ javac Main.java
 java Main
 ```
 
-1. `javac Main.java` uses the JDK compiler to create `Main.class` if compilation succeeds.
-2. `java Main` launches the application using the JVM and required runtime libraries.
-3. The program's printed text appears in the console.
+1. `javac Main.java` uses the JDK compiler to produce `Main.class` if compilation succeeds.
+2. `java Main` launches the program using a JVM and the required runtime libraries.
+3. The program's output appears in the console.
 
-**Important:** In this beginner workflow, the JVM does not normally compile your `.java` source file directly. The `javac` compiler converts source code into bytecode first.
+The JVM does not normally compile `.java` source directly in this workflow; `javac` compiles source code into bytecode first.
 
 ## 15. .java and .class files
 - Main.java contains human-readable source code.
