@@ -381,6 +381,8 @@ Fields and static methods do not use dynamic overriding dispatch.
 
 **Key takeaway:** The compiler selects overloads; the runtime selects overridden instance implementations.
 
+![A Circle reference can point to a UnitCircle object; runtime dispatch invokes the object's area override.](../shared/assets/runtime-method-dispatch.svg)
+
 ## 102. Dynamic method dispatch
 
 When an overridable instance method is called through a superclass or interface reference, Java chooses the implementation belonging to the actual object at runtime.

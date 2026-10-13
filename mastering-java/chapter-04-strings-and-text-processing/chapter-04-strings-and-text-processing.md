@@ -31,6 +31,8 @@ Prefer literals for ordinary text; constructors such as `new String("hello")` us
 
 **Key takeaway:** Store the returned string when applying a transformation.
 
+![String operations return new immutable values, while StringBuilder accumulates mutable text before producing a finished String.](../shared/assets/string-building-flow.svg)
+
 ## 67. String pool and interning
 
 The JVM can reuse string literals from a pool. Equal literals commonly refer to the same pooled object, while `new String(...)` explicitly creates a distinct object. `intern()` returns the canonical pooled representation, but application code rarely needs to call it.
