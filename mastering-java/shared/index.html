@@ -700,7 +700,7 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
     <input id="lesson-search-input" class="lesson-search-input" type="search" placeholder="Search every chapter by keyword…" autocomplete="off">
     <button id="lesson-search-clear" class="lesson-search-clear" type="button">Clear</button>
   </form>
-  <p id="lesson-search-status" class="lesson-search-status" role="status" aria-live="polite">Loading searchable lesson content…</p>
+  <p id="lesson-search-status" class="lesson-search-status" role="status" aria-live="polite">Search every chapter by keyword; lesson content loads when you start searching.</p>
   <div id="lesson-search-results" class="lesson-search-results"></div>
 </section>
 <main>
@@ -709,7 +709,6 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
 <footer id="chapterFooter">Mastering Java in a Month</footer>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.6/purify.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.3/dist/mermaid.min.js"></script>
 <script>
 (function(){
   const chapters = {
@@ -966,6 +965,7 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
   let lessonSearchMatches = [];
   let lessonSearchVisible = 0;
   let lessonSearchReady = false;
+  let lessonSearchIndexPromise = null;
   let failedLessonSearchChapters = 0;
   let lessonSearchTimer;
   const heroTag = document.querySelector('.hero-copy .tag');
@@ -1089,13 +1089,43 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
     lessonSearchStatus.textContent=failedLessonSearchChapters?'Some lesson content could not be loaded. Search results may be incomplete.':'Search for a keyword to find complete matching topics across every chapter.';
     if(lessonSearchInput.value.trim()) renderLessonSearch(false);
   }
-  lessonSearchForm.addEventListener('submit',function(event){event.preventDefault();renderLessonSearch(false);});
-  lessonSearchInput.addEventListener('input',function(){clearTimeout(lessonSearchTimer);lessonSearchTimer=setTimeout(function(){renderLessonSearch(false);},120);});
+  function ensureLessonSearchIndex(){
+    if(lessonSearchReady) return Promise.resolve();
+    if(!lessonSearchIndexPromise){
+      lessonSearchStatus.textContent='Loading lessons for your search…';
+      lessonSearchIndexPromise=loadLessonSearchIndex().catch(function(error){
+        lessonSearchIndexPromise=null;
+        console.error('The lesson search index could not be loaded:',error);
+        lessonSearchStatus.textContent='Search content could not be loaded. Try again or refresh the page.';
+      });
+    }
+    return lessonSearchIndexPromise;
+  }
+  function searchLessonContent(){
+    if(!lessonSearchInput.value.trim()){
+      renderLessonSearch(false);
+      return;
+    }
+    ensureLessonSearchIndex();
+    if(lessonSearchReady) renderLessonSearch(false);
+  }
+  lessonSearchForm.addEventListener('submit',function(event){event.preventDefault();searchLessonContent();});
+  lessonSearchInput.addEventListener('input',function(){clearTimeout(lessonSearchTimer);lessonSearchTimer=setTimeout(searchLessonContent,120);});
   lessonSearchClear.addEventListener('click',function(){lessonSearchInput.value='';renderLessonSearch(false);lessonSearchInput.focus();});
-  loadLessonSearchIndex().catch(function(error){
-    console.error('The lesson search index could not be loaded:',error);
-    lessonSearchStatus.textContent='Search content could not be loaded. Refresh the page to try again.';
-  });
+  let mermaidLoadPromise = null;
+  function loadMermaid(){
+    if(window.mermaid) return Promise.resolve();
+    if(!mermaidLoadPromise){
+      mermaidLoadPromise=new Promise(function(resolve,reject){
+        const script=document.createElement('script');
+        script.src='https://cdn.jsdelivr.net/npm/mermaid@10.9.3/dist/mermaid.min.js';
+        script.onload=resolve;
+        script.onerror=function(){mermaidLoadPromise=null;reject(new Error('Could not load Mermaid from the CDN.'));};
+        document.head.appendChild(script);
+      });
+    }
+    return mermaidLoadPromise;
+  }
   async function renderMermaidDiagrams(){
     const items = Array.from(chapter.querySelectorAll('h2, pre > code.language-mermaid, pre > code[class*="mermaid"]'));
     const blocks = [];
@@ -1108,8 +1138,10 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
       }
     });
     if(!blocks.length) return;
-    if(!window.mermaid){
-      console.error('Mermaid library did not load; diagram blocks remain as source.');
+    try{
+      await loadMermaid();
+    }catch(error){
+      console.error('Mermaid diagrams could not be rendered:',error);
       return;
     }
     window.mermaid.initialize({
