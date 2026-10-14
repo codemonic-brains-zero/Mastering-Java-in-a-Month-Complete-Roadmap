@@ -1,0 +1,206 @@
+[
+  {
+    "id": "01",
+    "title": "Introduction to Java",
+    "markdown": "mastering-java/chapter-01-introduction-to-java/chapter-01-introduction-to-java.md",
+    "page": "mastering-java/chapter-01-introduction-to-java/chapter-01-introduction-to-java.html"
+  },
+  {
+    "id": "02",
+    "title": "Variables, Data Types, and Operators",
+    "markdown": "mastering-java/chapter-02-variables-data-types-and-operators/chapter-02-variables-data-types-and-operators.md",
+    "page": "mastering-java/chapter-02-variables-data-types-and-operators/chapter-02-variables-data-types-and-operators.html"
+  },
+  {
+    "id": "03",
+    "title": "Control Flow and Arrays",
+    "markdown": "mastering-java/chapter-03-control-flow-and-arrays/chapter-03-control-flow-and-arrays.md",
+    "page": "mastering-java/chapter-03-control-flow-and-arrays/chapter-03-control-flow-and-arrays.html"
+  },
+  {
+    "id": "04",
+    "title": "Strings and Text Processing",
+    "markdown": "mastering-java/chapter-04-strings-and-text-processing/chapter-04-strings-and-text-processing.md",
+    "page": "mastering-java/chapter-04-strings-and-text-processing/chapter-04-strings-and-text-processing.html"
+  },
+  {
+    "id": "05",
+    "title": "Methods and Object-Oriented Programming",
+    "markdown": "mastering-java/chapter-05-methods-and-object-oriented-programming/chapter-05-methods-and-object-oriented-programming.md",
+    "page": "mastering-java/chapter-05-methods-and-object-oriented-programming/chapter-05-methods-and-object-oriented-programming.html"
+  },
+  {
+    "id": "06",
+    "title": "Packages, Imports, and Java Language Features",
+    "markdown": "mastering-java/chapter-06-packages-imports-and-java-language-features/chapter-06-packages-imports-and-java-language-features.md",
+    "page": "mastering-java/chapter-06-packages-imports-and-java-language-features/chapter-06-packages-imports-and-java-language-features.html"
+  },
+  {
+    "id": "07",
+    "title": "Exception Handling",
+    "markdown": "mastering-java/chapter-07-exception-handling/chapter-07-exception-handling.md",
+    "page": "mastering-java/chapter-07-exception-handling/chapter-07-exception-handling.html"
+  },
+  {
+    "id": "08",
+    "title": "Wrapper Classes and Core APIs",
+    "markdown": "mastering-java/chapter-08-wrapper-classes-and-core-apis/chapter-08-wrapper-classes-and-core-apis.md",
+    "page": "mastering-java/chapter-08-wrapper-classes-and-core-apis/chapter-08-wrapper-classes-and-core-apis.html"
+  },
+  {
+    "id": "09",
+    "title": "Collections Framework",
+    "markdown": "mastering-java/chapter-09-collections-framework/chapter-09-collections-framework.md",
+    "page": "mastering-java/chapter-09-collections-framework/chapter-09-collections-framework.html"
+  },
+  {
+    "id": "10",
+    "title": "Functional Java and Streams",
+    "markdown": "mastering-java/chapter-10-functional-java-and-streams/chapter-10-functional-java-and-streams.md",
+    "page": "mastering-java/chapter-10-functional-java-and-streams/chapter-10-functional-java-and-streams.html"
+  },
+  {
+    "id": "11",
+    "title": "Java I/O, Files, and Serialization",
+    "markdown": "mastering-java/chapter-11-java-io-files-and-serialization/chapter-11-java-io-files-and-serialization.md",
+    "page": "mastering-java/chapter-11-java-io-files-and-serialization/chapter-11-java-io-files-and-serialization.html"
+  },
+  {
+    "id": "12",
+    "title": "Multithreading and Concurrency",
+    "markdown": "mastering-java/chapter-12-multithreading-and-concurrency/chapter-12-multithreading-and-concurrency.md",
+    "page": "mastering-java/chapter-12-multithreading-and-concurrency/chapter-12-multithreading-and-concurrency.html"
+  },
+  {
+    "id": "13",
+    "title": "JVM Internals and Performance",
+    "markdown": "mastering-java/chapter-13-jvm-internals-and-performance/chapter-13-jvm-internals-and-performance.md",
+    "page": "mastering-java/chapter-13-jvm-internals-and-performance/chapter-13-jvm-internals-and-performance.html"
+  },
+  {
+    "id": "14",
+    "title": "Applets and AWT - Essentials Only",
+    "markdown": "mastering-java/chapter-14-applets-and-awt-essentials-only/chapter-14-applets-and-awt-essentials-only.md",
+    "page": "mastering-java/chapter-14-applets-and-awt-essentials-only/chapter-14-applets-and-awt-essentials-only.html"
+  },
+  {
+    "id": "15",
+    "title": "Java Networking",
+    "markdown": "mastering-java/chapter-15-java-networking/chapter-15-java-networking.md",
+    "page": "mastering-java/chapter-15-java-networking/chapter-15-java-networking.html"
+  },
+  {
+    "id": "16",
+    "title": "JDBC - Java Database Connectivity",
+    "markdown": "mastering-java/chapter-16-jdbc-java-database-connectivity/chapter-16-jdbc-java-database-connectivity.md",
+    "page": "mastering-java/chapter-16-jdbc-java-database-connectivity/chapter-16-jdbc-java-database-connectivity.html"
+  },
+  {
+    "id": "17",
+    "title": "Unit Testing with JUnit",
+    "markdown": "mastering-java/chapter-17-unit-testing-with-junit/chapter-17-unit-testing-with-junit.md",
+    "page": "mastering-java/chapter-17-unit-testing-with-junit/chapter-17-unit-testing-with-junit.html"
+  },
+  {
+    "id": "18",
+    "title": "Build Tools and Professional Java Development",
+    "markdown": "mastering-java/chapter-18-build-tools-and-professional-java-development/chapter-18-build-tools-and-professional-java-development.md",
+    "page": "mastering-java/chapter-18-build-tools-and-professional-java-development/chapter-18-build-tools-and-professional-java-development.html"
+  },
+  {
+    "id": "19",
+    "title": "Servlets and JSP",
+    "markdown": "mastering-java/chapter-19-servlets-and-jsp/chapter-19-servlets-and-jsp.md",
+    "page": "mastering-java/chapter-19-servlets-and-jsp/chapter-19-servlets-and-jsp.html"
+  },
+  {
+    "id": "20",
+    "title": "Jakarta EE and Enterprise Java",
+    "markdown": "mastering-java/chapter-20-jakarta-ee-and-enterprise-java/chapter-20-jakarta-ee-and-enterprise-java.md",
+    "page": "mastering-java/chapter-20-jakarta-ee-and-enterprise-java/chapter-20-jakarta-ee-and-enterprise-java.html"
+  },
+  {
+    "id": "21",
+    "title": "Spring Framework and Spring Boot",
+    "markdown": "mastering-java/chapter-21-spring-framework-and-spring-boot/chapter-21-spring-framework-and-spring-boot.md",
+    "page": "mastering-java/chapter-21-spring-framework-and-spring-boot/chapter-21-spring-framework-and-spring-boot.html"
+  },
+  {
+    "id": "22",
+    "title": "Hibernate and ORM",
+    "markdown": "mastering-java/chapter-22-hibernate-and-orm/chapter-22-hibernate-and-orm.md",
+    "page": "mastering-java/chapter-22-hibernate-and-orm/chapter-22-hibernate-and-orm.html"
+  },
+  {
+    "id": "23",
+    "title": "REST APIs and Backend Architecture",
+    "markdown": "mastering-java/chapter-23-rest-apis-and-backend-architecture/chapter-23-rest-apis-and-backend-architecture.md",
+    "page": "mastering-java/chapter-23-rest-apis-and-backend-architecture/chapter-23-rest-apis-and-backend-architecture.html"
+  },
+  {
+    "id": "24",
+    "title": "Microservices and Distributed Systems",
+    "markdown": "mastering-java/chapter-24-microservices-and-distributed-systems/chapter-24-microservices-and-distributed-systems.md",
+    "page": "mastering-java/chapter-24-microservices-and-distributed-systems/chapter-24-microservices-and-distributed-systems.html"
+  },
+  {
+    "id": "25",
+    "title": "Advanced Java Design and Architecture",
+    "markdown": "mastering-java/chapter-25-advanced-java-design-and-architecture/chapter-25-advanced-java-design-and-architecture.md",
+    "page": "mastering-java/chapter-25-advanced-java-design-and-architecture/chapter-25-advanced-java-design-and-architecture.html"
+  },
+  {
+    "id": "26",
+    "title": "Security and Secure Java Development",
+    "markdown": "mastering-java/chapter-26-security-and-secure-java-development/chapter-26-security-and-secure-java-development.md",
+    "page": "mastering-java/chapter-26-security-and-secure-java-development/chapter-26-security-and-secure-java-development.html"
+  },
+  {
+    "id": "27",
+    "title": "Performance, Scalability, and Observability",
+    "markdown": "mastering-java/chapter-27-performance-scalability-and-observability/chapter-27-performance-scalability-and-observability.md",
+    "page": "mastering-java/chapter-27-performance-scalability-and-observability/chapter-27-performance-scalability-and-observability.html"
+  },
+  {
+    "id": "28",
+    "title": "DevOps, Deployment, and Cloud-Native Java",
+    "markdown": "mastering-java/chapter-28-devops-deployment-and-cloud-native-java/chapter-28-devops-deployment-and-cloud-native-java.md",
+    "page": "mastering-java/chapter-28-devops-deployment-and-cloud-native-java/chapter-28-devops-deployment-and-cloud-native-java.html"
+  },
+  {
+    "id": "29",
+    "title": "Modern Java and the Latest Language Features",
+    "markdown": "mastering-java/chapter-29-modern-java-and-the-latest-language-features/chapter-29-modern-java-and-the-latest-language-features.md",
+    "page": "mastering-java/chapter-29-modern-java-and-the-latest-language-features/chapter-29-modern-java-and-the-latest-language-features.html"
+  },
+  {
+    "id": "30",
+    "title": "Reactive and Asynchronous Java",
+    "markdown": "mastering-java/chapter-30-reactive-and-asynchronous-java/chapter-30-reactive-and-asynchronous-java.md",
+    "page": "mastering-java/chapter-30-reactive-and-asynchronous-java/chapter-30-reactive-and-asynchronous-java.html"
+  },
+  {
+    "id": "31",
+    "title": "GraalVM and Modern Runtime Technologies",
+    "markdown": "mastering-java/chapter-31-graalvm-and-modern-runtime-technologies/chapter-31-graalvm-and-modern-runtime-technologies.md",
+    "page": "mastering-java/chapter-31-graalvm-and-modern-runtime-technologies/chapter-31-graalvm-and-modern-runtime-technologies.html"
+  },
+  {
+    "id": "32",
+    "title": "Advanced Testing and Quality Engineering",
+    "markdown": "mastering-java/chapter-32-advanced-testing-and-quality-engineering/chapter-32-advanced-testing-and-quality-engineering.md",
+    "page": "mastering-java/chapter-32-advanced-testing-and-quality-engineering/chapter-32-advanced-testing-and-quality-engineering.html"
+  },
+  {
+    "id": "33",
+    "title": "Data Structures, Algorithms, and Problem Solving",
+    "markdown": "mastering-java/chapter-33-data-structures-algorithms-and-problem-solving/chapter-33-data-structures-algorithms-and-problem-solving.md",
+    "page": "mastering-java/chapter-33-data-structures-algorithms-and-problem-solving/chapter-33-data-structures-algorithms-and-problem-solving.html"
+  },
+  {
+    "id": "34",
+    "title": "Projects and Portfolio",
+    "markdown": "mastering-java/chapter-34-projects-and-portfolio/chapter-34-projects-and-portfolio.md",
+    "page": "mastering-java/chapter-34-projects-and-portfolio/chapter-34-projects-and-portfolio.html"
+  }
+]
