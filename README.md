@@ -1,6 +1,6 @@
 # Mastering Java in a Month
 
-An interactive Java learning roadmap with keyword search across all chapter lessons, detailed notes, and JVM/JRE/JDK diagrams.
+An interactive Java learning roadmap with detailed notes and JVM/JRE/JDK diagrams.
 
 ## Live site
 
@@ -176,4 +176,4 @@ An interactive Java learning roadmap with keyword search across all chapter less
 - Each named chapter HTML page opens the shared UI in [`mastering-java/shared/index.html`](mastering-java/shared/index.html); lesson content stays in Markdown.
 - Chapter 2–34 visual diagrams are SVG files in `mastering-java/shared/assets/`.
 
-The root `index.html` is the interactive roadmap: chapter names link to their lessons, and hovering a chapter (or selecting **Topics** on touch screens) reveals topic links that open the matching chapter at that section. Its keyword search looks through all numbered lesson sections and shows the full content for matching topics. Every chapter has a **Roadmap index** link back to the homepage. `mastering-java/shared/chapters.json` supplies the landing page's chapter routes and Markdown sources; numbered lesson headings receive stable topic anchors in the shared chapter UI. Chapters 1–34 have Previous/Next navigation.
+The root `index.html` is the interactive roadmap: chapter names link to their lessons, and hovering a chapter (or selecting **Topics** on touch screens) reveals topic links that open the matching chapter at that section. Each chapter has a keyword search directly below its heading; it searches all numbered lesson sections and shows the full content for matching topics. Every chapter has a **Roadmap index** link back to the homepage. `mastering-java/shared/chapters.json` supplies the landing page's chapter routes and Markdown sources; numbered lesson headings receive stable topic anchors in the shared chapter UI. Chapters 1–34 have Previous/Next navigation.

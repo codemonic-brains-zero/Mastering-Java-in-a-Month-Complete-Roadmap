@@ -36,6 +36,31 @@ hr{border:0;border-top:1px solid #263b32}
 .chapter-navigation span{opacity:.48}
 .roadmap-index-link{display:inline-flex;align-items:center;margin-bottom:.8rem;padding:.45rem .7rem;border:1px solid rgba(112,234,255,.34);border-radius:7px;background:rgba(112,234,255,.06);color:#9beeff!important;font:600 11px ui-monospace,monospace;letter-spacing:.04em}
 .roadmap-index-link:hover{border-color:#8beaff;box-shadow:0 0 16px #70eaff22;color:#eaffff!important}
+.lesson-search{position:relative;z-index:2;width:calc(100% - clamp(160px, 30vw, 560px));max-width:1120px;margin:1.25rem auto 0;padding:1rem 1.2rem;border:1px solid #45ffad45;border-radius:10px;background:rgba(8,18,22,.94);box-shadow:0 8px 28px #0005,0 0 22px #45ffad0a}
+.lesson-search-form{display:flex;gap:.65rem}
+.lesson-search-input{flex:1;min-width:0;padding:.8rem .9rem!important;border-color:#45ffad55!important;border-radius:7px!important;background:#050d11!important;color:#e5fff2!important}
+.lesson-search-input::placeholder{color:#87a99a}
+.lesson-search-input:focus{outline:2px solid #45ffad80;outline-offset:2px;border-color:#45ffad!important}
+.lesson-search-clear,.lesson-search-more{padding:.65rem .9rem!important;border-radius:7px!important;font:600 11px ui-monospace,monospace!important}
+.lesson-search-status{min-height:1.5em;margin:.65rem 0 0;color:#9ab9a9;font-size:.8rem}
+.lesson-search-results{display:grid;gap:.75rem;margin-top:.8rem}
+.lesson-search-result{overflow:hidden;border:1px solid #45ffad30;border-radius:8px;background:#050d11}
+.lesson-search-result-heading{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.65rem .85rem;border-bottom:1px solid #45ffad24;background:#45ffad08}
+.lesson-search-result-heading a{color:#e5fff2;font-weight:700}
+.lesson-search-result-heading a:hover{color:var(--green)}
+.lesson-search-chapter-label{flex:none;color:var(--green);font:600 10px ui-monospace,monospace;letter-spacing:.06em}
+.lesson-search-content{padding:.7rem .9rem;color:#b8d2c6;font-size:.86rem}
+.lesson-search-content>:first-child{margin-top:0}
+.lesson-search-content>:last-child{margin-bottom:0}
+.lesson-search-content h1,.lesson-search-content h2,.lesson-search-content h3,.lesson-search-content h4{font-size:1.05rem}
+.lesson-search-content table{display:block;max-width:100%;overflow:auto;border-collapse:collapse}
+.lesson-search-content th,.lesson-search-content td{padding:.4rem .6rem;border:1px solid #45ffad30;text-align:left}
+.lesson-search-content pre{max-width:100%;overflow:auto}
+.lesson-search-more{justify-self:center}
+.lesson-search-empty{padding:.8rem;border:1px dashed #45ffad40;border-radius:7px;color:#9ab9a9;text-align:center}
+.lesson-search-visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:900px){.lesson-search{width:calc(100% - 48px);margin-top:1rem}}
+@media(max-width:600px){.lesson-search{width:92vw;padding:.75rem}.lesson-search-form{gap:.45rem}.lesson-search-clear{padding:.55rem .65rem!important}}
 #sourceEditor{width:100%;height:360px;min-height:260px;border:1px solid #315342;border-radius:10px;overflow:hidden;font-family:"JetBrains Mono",Consolas,monospace;font-size:14px;line-height:1.6;background:#080d13!important;box-shadow:inset 0 0 22px rgba(69,255,173,.035),0 0 20px rgba(69,255,173,.045)!important}#source{display:none!important}
 #output,.output,.output-panel{background:#07121a!important;color:#8ffff0!important;border:1px solid #52f7ff50!important;border-radius:12px}
 footer{color:var(--muted)}
@@ -669,6 +694,15 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
     </div>
   </div>
 </header>
+<section class="lesson-search" aria-label="Search all Java lessons">
+  <form id="lesson-search-form" class="lesson-search-form" role="search">
+    <label class="lesson-search-visually-hidden" for="lesson-search-input">Search all chapter topics and lesson content</label>
+    <input id="lesson-search-input" class="lesson-search-input" type="search" placeholder="Search every chapter by keyword…" autocomplete="off">
+    <button id="lesson-search-clear" class="lesson-search-clear" type="button">Clear</button>
+  </form>
+  <p id="lesson-search-status" class="lesson-search-status" role="status" aria-live="polite">Loading searchable lesson content…</p>
+  <div id="lesson-search-results" class="lesson-search-results"></div>
+</section>
 <main>
   <article id="chapter" class="chapter"><p class="muted">Loading chapter notes…</p></article>
 </main>
@@ -922,6 +956,18 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
   const currentChapter = chapters[chapterId];
   const siteRoot = new URL('../../', window.location.href);
   const chapter = document.getElementById('chapter');
+  const lessonSearchInput = document.getElementById('lesson-search-input');
+  const lessonSearchForm = document.getElementById('lesson-search-form');
+  const lessonSearchClear = document.getElementById('lesson-search-clear');
+  const lessonSearchStatus = document.getElementById('lesson-search-status');
+  const lessonSearchResults = document.getElementById('lesson-search-results');
+  const lessonSearchPageSize = 25;
+  let lessonSearchIndex = [];
+  let lessonSearchMatches = [];
+  let lessonSearchVisible = 0;
+  let lessonSearchReady = false;
+  let failedLessonSearchChapters = 0;
+  let lessonSearchTimer;
   const heroTag = document.querySelector('.hero-copy .tag');
   const heroTitle = document.querySelector('.hero-copy h1');
   const chapterFooter = document.getElementById('chapterFooter');
@@ -943,6 +989,113 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
     const rendered = marked.parse(text);
     return DOMPurify.sanitize(rendered);
   }
+  function parseLessonTopics(chapterId,lesson,markdown){
+    const headings=Array.from(markdown.matchAll(/^##\s+(\d+)\.\s+(.+)$/gm));
+    return headings.map(function(match,index){
+      const number=match[1];
+      const title=match[2].replace(/`([^`]+)`/g,'$1').replace(/\*\*(.*?)\*\*/g,'$1').replace(/\*([^*]+)\*/g,'$1');
+      const start=match.index+match[0].length;
+      const end=index+1<headings.length?headings[index+1].index:markdown.length;
+      const content=markdown.slice(start,end).trim();
+      return {chapterId,chapterTitle:lesson.title,chapterMarkdown:lesson.markdown,number,title,markdown:content,searchText:(lesson.title+' '+title+' '+content).toLowerCase()};
+    });
+  }
+  function resolveLessonLinks(container,markdownPath){
+    const markdownBase=new URL(markdownPath,siteRoot);
+    container.querySelectorAll('a[href],img[src]').forEach(function(node){
+      const attribute=node.hasAttribute('href')?'href':'src';
+      try{
+        const resolved=new URL(node.getAttribute(attribute),markdownBase);
+        if(resolved.protocol==='http:'||resolved.protocol==='https:') node.setAttribute(attribute,resolved.href);
+        else node.removeAttribute(attribute);
+      }catch(error){
+        console.error('Could not resolve a lesson link in search results:',error);
+        node.removeAttribute(attribute);
+      }
+    });
+  }
+  function renderLessonSearch(append){
+    const terms=lessonSearchInput.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    if(!terms.length){
+      lessonSearchResults.replaceChildren();
+      lessonSearchStatus.textContent=lessonSearchReady?'Search for a keyword to find complete matching topics across every chapter.':'Loading searchable lesson content…';
+      return;
+    }
+    if(!lessonSearchReady){
+      lessonSearchStatus.textContent='Loading lessons. Your search will appear as soon as the index is ready.';
+      return;
+    }
+    if(!append){
+      lessonSearchMatches=lessonSearchIndex.filter(function(topic){return terms.every(function(term){return topic.searchText.includes(term);});});
+      lessonSearchVisible=0;
+      lessonSearchResults.replaceChildren();
+    }
+    const end=Math.min(lessonSearchVisible+lessonSearchPageSize,lessonSearchMatches.length);
+    const fragment=document.createDocumentFragment();
+    for(let index=lessonSearchVisible;index<end;index++){
+      const topic=lessonSearchMatches[index];
+      const result=document.createElement('article');
+      result.className='lesson-search-result';
+      const heading=document.createElement('div');
+      heading.className='lesson-search-result-heading';
+      const link=document.createElement('a');
+      link.href=new URL('mastering-java/shared/index.html?chapter='+encodeURIComponent(topic.chapterId)+'#topic-'+topic.number,siteRoot).href;
+      link.target='_top';
+      link.textContent=topic.number+'. '+topic.title;
+      const chapterLabel=document.createElement('span');
+      chapterLabel.className='lesson-search-chapter-label';
+      chapterLabel.textContent='CHAPTER '+Number(topic.chapterId);
+      heading.append(link,chapterLabel);
+      const content=document.createElement('div');
+      content.className='lesson-search-content';
+      content.innerHTML=renderPart(topic.markdown);
+      resolveLessonLinks(content,topic.chapterMarkdown);
+      result.append(heading,content);
+      fragment.appendChild(result);
+    }
+    lessonSearchResults.appendChild(fragment);
+    lessonSearchVisible=end;
+    lessonSearchStatus.textContent=lessonSearchMatches.length+' matching topic'+(lessonSearchMatches.length===1?'':'s')+' across all chapters'+(lessonSearchMatches.length>lessonSearchPageSize?'; showing '+lessonSearchVisible+' so far.':'')+(failedLessonSearchChapters?'; content failed to load for '+failedLessonSearchChapters+' chapter'+(failedLessonSearchChapters===1?'':'s')+'.':'');
+    lessonSearchResults.querySelectorAll('.lesson-search-more').forEach(function(button){button.remove();});
+    if(!lessonSearchMatches.length){
+      const empty=document.createElement('p');
+      empty.className='lesson-search-empty';
+      empty.textContent='No matching topics found. Try a shorter or different keyword.';
+      lessonSearchResults.appendChild(empty);
+    }else if(lessonSearchVisible<lessonSearchMatches.length){
+      const more=document.createElement('button');
+      more.type='button';
+      more.className='lesson-search-more';
+      more.textContent='Show more results ('+(lessonSearchMatches.length-lessonSearchVisible)+' remaining)';
+      more.addEventListener('click',function(){more.remove();renderLessonSearch(true);});
+      lessonSearchResults.appendChild(more);
+    }
+  }
+  async function loadLessonSearchIndex(){
+    const lessons=Object.keys(chapters).map(function(id){return {id,title:chapters[id].title,markdown:chapters[id].markdown};});
+    await Promise.all(lessons.map(async function(lesson){
+      try{
+        const response=await fetch(new URL(lesson.markdown,siteRoot));
+        if(!response.ok) throw new Error('Could not load lesson content ('+response.status+').');
+        const markdown=await response.text();
+        lessonSearchIndex.push.apply(lessonSearchIndex,parseLessonTopics(lesson.id,lesson,markdown));
+      }catch(error){
+        failedLessonSearchChapters++;
+        console.error('Search indexing failed for Chapter '+Number(lesson.id)+':',error);
+      }
+    }));
+    lessonSearchIndex.sort(function(a,b){return Number(a.chapterId)-Number(b.chapterId)||Number(a.number)-Number(b.number);});
+    lessonSearchReady=true;
+    lessonSearchStatus.textContent=failedLessonSearchChapters?'Some lesson content could not be loaded. Search results may be incomplete.':'Search for a keyword to find complete matching topics across every chapter.';
+    if(lessonSearchInput.value.trim()) renderLessonSearch(false);
+  }
+  lessonSearchForm.addEventListener('submit',function(event){event.preventDefault();renderLessonSearch(false);});
+  lessonSearchInput.addEventListener('input',function(){clearTimeout(lessonSearchTimer);lessonSearchTimer=setTimeout(function(){renderLessonSearch(false);},120);});
+  lessonSearchClear.addEventListener('click',function(){lessonSearchInput.value='';renderLessonSearch(false);lessonSearchInput.focus();});
+  loadLessonSearchIndex().catch(function(error){
+    console.error('The lesson search index could not be loaded:',error);
+    lessonSearchStatus.textContent='Search content could not be loaded. Refresh the page to try again.';
+  });
   async function renderMermaidDiagrams(){
     const items = Array.from(chapter.querySelectorAll('h2, pre > code.language-mermaid, pre > code[class*="mermaid"]'));
     const blocks = [];
