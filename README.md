@@ -118,6 +118,7 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
     |   +-- chapter-34-projects-and-portfolio.md
     +-- shared/
         +-- index.html
+        +-- chapters.json
         +-- assets/
             +-- java-primitive-types.svg
             +-- operator-evaluation.svg
@@ -175,4 +176,4 @@ An interactive Java learning roadmap with chapter notes, JVM/JRE/JDK diagrams, a
 - Each named chapter HTML page opens the shared UI in [`mastering-java/shared/index.html`](mastering-java/shared/index.html); lesson content stays in Markdown.
 - Chapter 2–34 visual diagrams are SVG files in `mastering-java/shared/assets/`.
 
-The root page redirects directly to Chapter 1's named HTML page. Chapters 1–34 have Previous/Next navigation.
+The root `index.html` is the interactive roadmap: chapter names link to their lessons, and hovering a chapter (or selecting **Topics** on touch screens) reveals topic links that open the matching chapter at that section. `mastering-java/shared/chapters.json` supplies the landing page's chapter routes and Markdown sources; numbered lesson headings receive stable topic anchors in the shared chapter UI. Chapters 1–34 have Previous/Next navigation.

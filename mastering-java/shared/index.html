@@ -1112,6 +1112,12 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
     if(!window.__javaMotionObserver){window.__javaMotionObserver=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('motion-visible');window.__javaMotionObserver.unobserve(entry.target);}});},{threshold:.12,rootMargin:'0px 0px -35px 0px'});}
     chapter.querySelectorAll('h2,.blueprint-figure,pre,table,blockquote').forEach(function(el){if(el.dataset.motionObserved)return;el.dataset.motionObserved='1';el.classList.add('motion-item');window.__javaMotionObserver.observe(el);});
   }
+  function addTopicAnchors(){
+    chapter.querySelectorAll('h2').forEach(function(heading){
+      const match=heading.textContent.trim().match(/^(\d+)\.\s/);
+      if(match) heading.id='topic-'+match[1];
+    });
+  }
   if (!currentChapter) {
     chapter.innerHTML = '<p class="status error">This chapter page has not been added yet.</p>';
   } else {
@@ -1138,6 +1144,14 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
       heroEditorDock.appendChild(playground);
     }
     chapter.appendChild(sourceLink);
+    addTopicAnchors();
+    const topicId=window.location.hash.slice(1);
+    if(/^topic-\d+$/.test(topicId)){
+      const topicHeading=document.getElementById(topicId);
+      if(topicHeading) requestAnimationFrame(function(){
+        topicHeading.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+      });
+    }
     const navigation = document.createElement('nav');
     navigation.className = 'chapter-navigation';
     navigation.setAttribute('aria-label', 'Chapter navigation');
