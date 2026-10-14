@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Learn Java with Chapter 1 notes and an inline Java compiler playground.">
+  <meta name="description" content="Read Java chapter notes, diagrams, and topic-by-topic explanations.">
   <title>Chapter 1: Introduction to Java | Mastering Java</title>
   <style>
 :root{color-scheme:dark;--bg:#070b10;--panel:rgba(10,17,24,.82);--line:rgba(66,255,173,.25);--text:#e1f5ed;--muted:#8aa79c;--green:#42ffad;--pink:#ff4fd8;--cyan:#52f7ff;--purple:#a98bff;--yellow:#f7ef78}
@@ -34,6 +34,8 @@ hr{border:0;border-top:1px solid #263b32}
 .chapter-navigation a,.chapter-navigation span{display:inline-flex;align-items:center;min-height:42px;padding:.55rem .9rem;border:1px solid #42ffad70;border-radius:10px;background:linear-gradient(135deg,#123a2c,#0d201b);color:#cffff0}
 .chapter-navigation a:hover{border-color:var(--green);box-shadow:0 0 18px #42ffad20}
 .chapter-navigation span{opacity:.48}
+.roadmap-index-link{display:inline-flex;align-items:center;margin-bottom:.8rem;padding:.45rem .7rem;border:1px solid rgba(112,234,255,.34);border-radius:7px;background:rgba(112,234,255,.06);color:#9beeff!important;font:600 11px ui-monospace,monospace;letter-spacing:.04em}
+.roadmap-index-link:hover{border-color:#8beaff;box-shadow:0 0 16px #70eaff22;color:#eaffff!important}
 #sourceEditor{width:100%;height:360px;min-height:260px;border:1px solid #315342;border-radius:10px;overflow:hidden;font-family:"JetBrains Mono",Consolas,monospace;font-size:14px;line-height:1.6;background:#080d13!important;box-shadow:inset 0 0 22px rgba(69,255,173,.035),0 0 20px rgba(69,255,173,.045)!important}#source{display:none!important}
 #output,.output,.output-panel{background:#07121a!important;color:#8ffff0!important;border:1px solid #52f7ff50!important;border-radius:12px}
 footer{color:var(--muted)}
@@ -660,53 +662,19 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
 <header class="hero-header">
   <div class="hero-layout">
     <div class="hero-copy">
+      <a class="roadmap-index-link" href="../../index.html" target="_top">← Roadmap index</a>
       <span class="tag">Mastering Java · Chapter 1</span>
       <h1>Introduction to Java</h1>
-      <p>Read the chapter and practise Java in the same page.</p>
-      <p>The editor is built into this learning page; GitHub's own Markdown preview cannot run interactive editors.</p>
-    </div>
-    <div class="hero-editor-dock" id="heroEditorDock" aria-label="Java code editor">
-
+      <p>Read the chapter lessons, examples, and diagrams.</p>
     </div>
   </div>
 </header>
 <main>
   <article id="chapter" class="chapter"><p class="muted">Loading chapter notes…</p></article>
-    <section class="playground" id="playground" aria-label="Java code editor">
-  <h2>Java Playground</h2>
-  <p class="muted">Edit the example and run it. Compilation and execution are handled by the Judge0 Java service.</p>
-  <div class="editor-toolbar">
-    <div class="compiler-options"><span class="compiler-label">Compiler</span><button type="button" id="compilerPickerButton" class="compiler-picker" aria-haspopup="dialog" aria-controls="compilerPicker"><span id="selectedCompilerName">Java</span><span aria-hidden="true">⌄</span></button><select id="language" aria-label="Choose programming language" tabindex="-1" aria-hidden="true"><option value="62">Java</option><option value="71">Python 3</option><option value="54">C++</option><option value="50">C</option><option value="63">JavaScript (Node.js)</option><option value="51">C#</option></select><span class="muted">Choose a language for this editor</span></div>
-    <div class="buttons">
-      <button id="reset">Reset code</button>
-      <button id="run" class="primary">▶ Run Java</button>
-    </div>
-  </div>
-  <div id="sourceEditor" aria-label="Java source code"></div><textarea id="source" aria-label="Java source code">public class Main {
-  public static void main(String[] args) {
-      System.out.println("Hello, Java!");
-  }
-}</textarea>
-  <div class="editor-toolbar"><strong>Output</strong><span id="status" class="status" role="status">Ready when you are.</span></div>
-  <pre id="output" class="output">Your program's output will appear here.</pre>
-  <p class="note">Execution uses a public third-party service and may be rate-limited or temporarily unavailable. Do not submit passwords, API keys, personal information, or sensitive code. Programs run in a sandbox with service-defined limits.</p>
-  <div id="compilerPicker" class="compiler-modal" hidden role="dialog" aria-modal="true" aria-labelledby="compilerPickerTitle">
-    <div class="compiler-modal-backdrop" data-close-compiler-picker></div>
-    <div class="compiler-modal-card">
-      <div class="compiler-modal-heading"><div><span class="modal-kicker">ENVIRONMENT SELECTOR</span><h3 id="compilerPickerTitle">Choose your compiler</h3><p>Select a language to load it into the same editor.</p></div><button type="button" id="closeCompilerPicker" class="modal-close" aria-label="Close compiler options">×</button></div>
-      <label class="compiler-search-label" for="compilerSearch">SEARCH ALL AVAILABLE LANGUAGES</label>
-      <input id="compilerSearch" class="compiler-search" type="search" placeholder="Search Java, Rust, Kotlin, COBOL…" autocomplete="off">
-      <p id="compilerListStatus" class="compiler-list-status" role="status">Loading all available languages…</p>
-      <div id="compilerChoiceGrid" class="compiler-choice-grid" aria-live="polite"></div>
-      <p class="compiler-modal-footnote">Languages are loaded from the active Judge0 runtimes. Choosing one updates the same editor.</p>
-    </div>
-  </div>
-  </section>
 </main>
 <footer id="chapterFooter">Mastering Java in a Month</footer>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.6/purify.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.36.2/ace.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.3/dist/mermaid.min.js"></script>
 <script>
 (function(){
@@ -953,9 +921,7 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
   const chapterId = new URLSearchParams(window.location.search).get('chapter') || '01';
   const currentChapter = chapters[chapterId];
   const siteRoot = new URL('../../', window.location.href);
-  const marker = '<!-- INLINE_JAVA_EDITOR -->';
   const chapter = document.getElementById('chapter');
-  const playground = document.getElementById('playground');
   const heroTag = document.querySelector('.hero-copy .tag');
   const heroTitle = document.querySelector('.hero-copy h1');
   const chapterFooter = document.getElementById('chapterFooter');
@@ -973,42 +939,6 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
     sourceAnchor.textContent = 'View the original Markdown file on GitHub ↗';
     sourceLink.appendChild(sourceAnchor);
   }
-  const defaultCode = document.getElementById('source').value;
-  const languageSelect = document.getElementById('language');
-  const templates = {
-    '62':'public class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello, Java!");\n    }\n}',
-    '71':'print("Hello, Python!")',
-    '54':'#include <iostream>\nusing namespace std;\nint main() {\n    cout << "Hello, C++!" << endl;\n    return 0;\n}',
-    '50':'#include <stdio.h>\nint main(void) {\n    printf("Hello, C!\\n");\n    return 0;\n}',
-    '63':'console.log("Hello, JavaScript!");',
-    '51':'using System;\nclass Program {\n    static void Main() {\n        Console.WriteLine("Hello, C#!");\n    }\n}'
-  };
-  const initialTemplate = templates['62'];
-  const preferredLanguageIds = {'Java':62,'Python':71,'C++':54,'C':50,'JavaScript':63,'C#':51,'PHP':68,'Go':60,'Rust':73,'Ruby':72,'Kotlin':78,'Swift':83,'SQL':82};
-  const popularLanguageOrder = ['Java','Python','JavaScript','C','C++','C#','PHP','SQL','Go','Rust','Kotlin','Ruby','Swift'];
-  function templateForLanguage(name){
-    const key = baseLanguageName(name).toLowerCase();
-    const examples = {
-      'java':templates['62'],
-      'python':'print("Hello, Python!")',
-      'javascript':'console.log("Hello, JavaScript!");',
-      'c':templates['50'],
-      'c++':templates['54'],
-      'c#':templates['51'],
-      'php':'<?php\necho "Hello, PHP!";\n?>',
-      'go':'package main\n\nimport "fmt"\n\nfunc main() {\n    fmt.Println("Hello, Go!")\n}',
-      'rust':'fn main() {\n    println!("Hello, Rust!");\n}',
-      'ruby':'puts "Hello, Ruby!"',
-      'kotlin':'fun main() {\n    println("Hello, Kotlin!")\n}',
-      'swift':'print("Hello, Swift!")',
-      'sql':'SELECT \'Hello, SQL!\' AS message;'
-    };
-    return examples[key] || '';
-  }
-  const output = document.getElementById('output');
-  const status = document.getElementById('status');
-  const runButton = document.getElementById('run');
-  let editor;
   function renderPart(text){
     const rendered = marked.parse(text);
     return DOMPurify.sanitize(rendered);
@@ -1126,23 +1056,9 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
     if(!response.ok) throw new Error('Could not load the chapter Markdown (' + response.status + ').');
     return response.text();
   }).then(function(md){
-    const parts = md.split(marker);
-    if(parts.length > 1){
-      chapter.innerHTML = renderPart(parts[0]);
-      addChapterBlueprints();
-      animateChapterEntrance();
-      heroEditorDock.appendChild(playground);
-      const after = document.createElement('div');
-      after.innerHTML = renderPart(parts.slice(1).join(marker));
-      while(after.firstChild) chapter.appendChild(after.firstChild);
-      addChapterBlueprints();
-      animateChapterEntrance();
-    } else {
-      chapter.innerHTML = renderPart(md);
-      addChapterBlueprints();
-      animateChapterEntrance();
-      heroEditorDock.appendChild(playground);
-    }
+    chapter.innerHTML = renderPart(md.replace(/<!-- INLINE_JAVA_EDITOR -->/g,''));
+    addChapterBlueprints();
+    animateChapterEntrance();
     chapter.appendChild(sourceLink);
     addTopicAnchors();
     const topicId=window.location.hash.slice(1);
@@ -1179,230 +1095,10 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
     chapter.appendChild(navigation);
     renderMermaidDiagrams();
   }).catch(function(error){
-    chapter.innerHTML = '<p class="status error">Chapter notes could not be loaded. You can still use the editor below. Open the <a href="https://github.com/codemonic-brains-zero/Mastering-Java-in-a-Month-Complete-Roadmap/blob/main/' + currentChapter.markdown + '">Markdown chapter on GitHub</a> instead.</p>';
-    heroEditorDock.appendChild(playground);
+    chapter.innerHTML = '<p class="status error">Chapter notes could not be loaded. Open the <a href="https://github.com/codemonic-brains-zero/Mastering-Java-in-a-Month-Complete-Roadmap/blob/main/' + currentChapter.markdown + '">Markdown chapter on GitHub</a> instead.</p>';
     chapter.appendChild(sourceLink);
   });
   }
-  const heroEditorDock = document.getElementById('heroEditorDock');
-  if(window.ace){
-    editor = ace.edit('sourceEditor');
-    requestAnimationFrame(function(){ if(editor) editor.resize(); });
-    editor.setTheme('ace/theme/tomorrow_night');
-    editor.session.setMode('ace/mode/java');
-    editor.setOptions({fontSize:'14px',showPrintMargin:false,showGutter:true,highlightActiveLine:true,highlightSelectedWord:true,tabSize:4,useSoftTabs:true,wrap:false,scrollPastEnd:0});
-    editor.session.setValue(document.getElementById('source').value);
-  }
-  function setStatus(message,kind){
-    status.textContent = message;
-    status.className = 'status' + (kind ? ' ' + kind : '');
-  }
-  function getCode(){ return editor ? editor.getValue() : document.getElementById('source').value; }
-  const playgroundTitle = playground.querySelector('h2');
-  const pickerButton = document.getElementById('compilerPickerButton');
-  const picker = document.getElementById('compilerPicker');
-  const selectedCompilerName = document.getElementById('selectedCompilerName');
-  const compilerChoiceGrid = document.getElementById('compilerChoiceGrid');
-  const compilerSearch = document.getElementById('compilerSearch');
-  const compilerListStatus = document.getElementById('compilerListStatus');
-  const languageNames = {'62':'Java','71':'Python','54':'C++','50':'C','63':'JavaScript','51':'C#','68':'PHP','60':'Go','73':'Rust','72':'Ruby','78':'Kotlin','83':'Swift','82':'SQL'};
-  const languageBaseNames = {'62':'Java','71':'Python','54':'C++','50':'C','63':'JavaScript','51':'C#','68':'PHP','60':'Go','73':'Rust','72':'Ruby','78':'Kotlin','83':'Swift','82':'SQL'};
-  let activeLanguages = [{id:62,name:'Java'},{id:71,name:'Python'},{id:63,name:'JavaScript'},{id:50,name:'C'},{id:54,name:'C++'},{id:51,name:'C#'}];
-  function baseLanguageName(name){
-    return String(name || 'Code').replace(/\s*\([^)]*\)\s*$/,'').trim() || 'Code';
-  }
-  function canonicalLanguage(name){
-    const n = baseLanguageName(name).toLowerCase();
-    const aliases = {'c++':'C++','cpp':'C++','c':'C','java':'Java','python':'Python','python 3':'Python','javascript':'JavaScript','node.js':'JavaScript','c#':'C#','csharp':'C#','php':'PHP','go':'Go','golang':'Go','rust':'Rust','ruby':'Ruby','kotlin':'Kotlin','swift':'Swift','sql':'SQL'};
-    return aliases[n] || '';
-  }
-  function editorMode(languageId){
-    const name = canonicalLanguage(languageNames[String(languageId)] || '');
-    const modes = {'Java':'java','Python':'python','C++':'c_cpp','C':'c_cpp','JavaScript':'javascript','C#':'csharp','Ruby':'ruby','Go':'golang','Rust':'rust','PHP':'php','Swift':'swift','Kotlin':'kotlin','SQL':'sql'};
-    return 'ace/mode/' + (modes[name] || 'text');
-  }
-  function updateLanguageLabels(){
-    const id = String(languageSelect.value);
-    const fullName = languageNames[id] || 'Code';
-    const baseName = languageBaseNames[id] || baseLanguageName(fullName);
-    selectedCompilerName.textContent = fullName;
-    runButton.textContent = '▶ Run ' + baseName;
-    playgroundTitle.textContent = baseName + ' Playground';
-    playground.setAttribute('aria-label',baseName + ' code editor');
-    document.getElementById('source').setAttribute('aria-label',baseName + ' source code');
-    compilerChoiceGrid.querySelectorAll('[data-language]').forEach(function(option){
-      const active = option.dataset.language === id;
-      option.classList.toggle('active',active);
-      option.setAttribute('aria-pressed',String(active));
-    });
-  }
-  function renderLanguageChoices(){
-    const query = compilerSearch.value.trim().toLowerCase();
-    const filtered = activeLanguages.filter(function(language){
-      return language.name.toLowerCase().includes(query) || String(language.id).includes(query);
-    });
-    compilerChoiceGrid.replaceChildren();
-    filtered.forEach(function(language){
-      const id = String(language.id);
-      const base = baseLanguageName(language.name);
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'compiler-choice' + (id === String(languageSelect.value) ? ' active' : '');
-      button.dataset.language = id;
-      button.setAttribute('aria-pressed',String(id === String(languageSelect.value)));
-      const icon = document.createElement('span');
-      icon.className = 'choice-icon';
-      icon.textContent = base.slice(0,3).toUpperCase();
-      const label = document.createElement('span');
-      const strong = document.createElement('strong');
-      strong.textContent = language.name;
-      const small = document.createElement('small');
-      small.textContent = 'Language ID ' + id;
-      label.append(strong,small);
-      const arrow = document.createElement('span');
-      arrow.className = 'choice-arrow';
-      arrow.textContent = '↗';
-      button.append(icon,label,arrow);
-      button.addEventListener('click',function(){selectLanguage(id);});
-      compilerChoiceGrid.appendChild(button);
-    });
-    compilerListStatus.textContent = filtered.length + ' language runtime' + (filtered.length === 1 ? '' : 's') + (query ? ' found' : ' available');
-  }
-  function openCompilerPicker(){
-    picker.hidden = false;
-    document.body.style.overflow = 'hidden';
-    compilerSearch.value = '';
-    renderLanguageChoices();
-    compilerSearch.focus();
-  }
-  function closeCompilerPicker(){
-    picker.hidden = true;
-    document.body.style.overflow = '';
-    pickerButton.focus();
-  }
-  function selectLanguage(selectedLanguage){
-    const changed = String(selectedLanguage) !== String(languageSelect.value);
-    languageSelect.value = String(selectedLanguage);
-    if(changed){
-      const nameForTemplate = languageBaseNames[String(selectedLanguage)] || languageNames[String(selectedLanguage)] || '';
-      const nextCode = templateForLanguage(nameForTemplate);
-      if(editor){
-        editor.session.setMode(editorMode(selectedLanguage));
-        editor.setValue(nextCode,-1);
-      } else {
-        document.getElementById('source').value = nextCode;
-      }
-      output.textContent = 'Your program\'s output will appear here.';
-      const name = baseLanguageName(languageNames[String(selectedLanguage)] || 'code');
-      setStatus(nextCode ? 'Ready to run ' + name + '.' : 'Selected ' + name + '. Write your code in the editor, then run it.','');
-    }
-    updateLanguageLabels();
-    renderLanguageChoices();
-    closeCompilerPicker();
-    if(editor) editor.focus();
-  }
-  pickerButton.addEventListener('click',openCompilerPicker);
-  document.getElementById('closeCompilerPicker').addEventListener('click',closeCompilerPicker);
-  picker.querySelectorAll('[data-close-compiler-picker]').forEach(function(el){el.addEventListener('click',closeCompilerPicker);});
-  compilerSearch.addEventListener('input',renderLanguageChoices);
-  document.addEventListener('keydown',function(event){
-    if(event.key === 'Escape' && !picker.hidden) closeCompilerPicker();
-  });
-  languageSelect.addEventListener('change',function(){selectLanguage(languageSelect.value);});
-  function loadAvailableLanguages(){
-    fetch('https://ce.judge0.com/languages')
-      .then(function(response){if(!response.ok) throw new Error('Language service returned HTTP ' + response.status);return response.json();})
-      .then(function(languages){
-        if(!Array.isArray(languages) || !languages.length) throw new Error('No active languages returned');
-        const byFamily = new Map();
-        languages.filter(function(language){return language && Number.isFinite(Number(language.id)) && language.name;}).forEach(function(runtime){
-          const family = canonicalLanguage(runtime.name);
-          if(!family) return;
-          const candidate = {id:Number(runtime.id),name:family,runtimeName:String(runtime.name)};
-          const current = byFamily.get(family);
-          if(!current || candidate.id === preferredLanguageIds[family]) byFamily.set(family,candidate);
-        });
-        const curated = popularLanguageOrder.map(function(name){return byFamily.get(name);}).filter(Boolean);
-        if(!curated.some(function(language){return language.name === 'Java';})){
-          curated.unshift({id:62,name:'Java',runtimeName:'Java (OpenJDK)'});
-        }
-        activeLanguages = curated;
-        activeLanguages.forEach(function(language){
-          languageNames[String(language.id)] = language.name;
-          languageBaseNames[String(language.id)] = language.name;
-        });
-        if(!activeLanguages.some(function(language){return String(language.id) === String(languageSelect.value);})) languageSelect.value = String(activeLanguages[0].id);
-        languageSelect.replaceChildren();
-        activeLanguages.forEach(function(language){
-          const option = document.createElement('option');
-          option.value = String(language.id);
-          option.textContent = language.name;
-          languageSelect.appendChild(option);
-        });
-        updateLanguageLabels();
-        renderLanguageChoices();
-      })
-      .catch(function(){
-        compilerListStatus.textContent = 'Showing popular languages; the runtime list could not be refreshed.';
-        renderLanguageChoices();
-      });
-  }
-  updateLanguageLabels();
-  renderLanguageChoices();
-  loadAvailableLanguages();
-    document.getElementById('reset').addEventListener('click',function(){
-    const resetCode = templateForLanguage(languageBaseNames[languageSelect.value] || languageNames[languageSelect.value] || 'Java') || defaultCode;
-    if(editor) editor.setValue(resetCode,-1); else document.getElementById('source').value = resetCode;
-    output.textContent = 'Your program\'s output will appear here.';
-    setStatus('Code reset.','');
-  });
-  runButton.addEventListener('click',async function(){
-    const source = getCode().trim();
-    if(!source){const selectedName = languageBaseNames[String(languageSelect.value)] || languageNames[String(languageSelect.value)] || 'program';setStatus('Write some ' + selectedName + ' code first.','error');return;}
-    runButton.disabled = true;
-    output.textContent = '';
-    setStatus('Submitting code…','');
-    try{
-      const response = await fetch('https://ce.judge0.com/submissions?base64_encoded=false&wait=false',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({source_code:source,language_id:Number(languageSelect.value),stdin:'',cpu_time_limit:3,wall_time_limit:5})
-      });
-      if(!response.ok) throw new Error('Execution service returned HTTP ' + response.status + '.');
-      const submission = await response.json();
-      if(!submission.token) throw new Error(submission.error || 'The execution service did not return a submission token.');
-      const runningLanguage = languageBaseNames[String(languageSelect.value)] || languageNames[String(languageSelect.value)] || 'Code';
-      setStatus(runningLanguage + ' is compiling/running…','');
-      let result = null;
-      for(let attempt=0;attempt<30;attempt++){
-        await new Promise(resolve=>setTimeout(resolve,1000));
-        const check = await fetch('https://ce.judge0.com/submissions/' + encodeURIComponent(submission.token) + '?base64_encoded=false&fields=stdout,stderr,compile_output,message,status');
-        if(!check.ok) throw new Error('Could not retrieve execution result (HTTP ' + check.status + ').');
-        result = await check.json();
-        const state = result.status && result.status.id;
-        if(state !== 1 && state !== 2) break;
-        setStatus('Queued or running… (' + (attempt+1) + 's)','');
-      }
-      if(!result || !result.status || result.status.id === 1 || result.status.id === 2){
-        setStatus('Still processing. Please try again in a moment.','error');
-        output.textContent = 'The execution service has not finished within 30 seconds.';
-      } else {
-        const pieces = [];
-        if(result.stdout) pieces.push(result.stdout);
-        if(result.compile_output) pieces.push('Compiler output:\n' + result.compile_output);
-        if(result.stderr) pieces.push('Error output:\n' + result.stderr);
-        if(result.message) pieces.push('Message:\n' + result.message);
-        output.textContent = pieces.join('\n') || '(Program finished with no output.)';
-        const successful = result.status.id === 3;
-        setStatus(result.status.description + (result.time ? ' · ' + result.time + 's' : ''),successful?'ok':'error');
-      }
-    }catch(error){
-      setStatus('Could not run code.','error');
-      output.textContent = String(error.message || error) + '\n\nCheck your internet connection, or the public execution service may be busy or unavailable.';
-    }finally{
-      runButton.disabled = false;
-    }
-  });
 })();
 </script>
 </body>

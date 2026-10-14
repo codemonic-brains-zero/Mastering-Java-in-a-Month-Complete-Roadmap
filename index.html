@@ -26,6 +26,34 @@
     .roadmap-meta{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:1.65rem}
     .roadmap-meta span{padding:.38rem .7rem;border:1px solid rgba(112,234,255,.24);border-radius:999px;background:#70eaff0a;color:#bceafa;font:600 11px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.04em}
     main{width:min(1220px,92vw);margin:2rem auto 5rem}
+    .search-panel{margin:1.5rem 0 2.5rem;padding:clamp(1rem,3vw,1.6rem);border:1px solid var(--edge);border-radius:14px;background:linear-gradient(145deg,rgba(7,30,47,.97),rgba(4,20,34,.98));box-shadow:0 2px 0 rgba(180,246,255,.09),0 10px 34px #0005,0 0 22px rgba(69,200,255,.055)}
+    .search-panel h2{margin:0 0 .35rem;font-size:clamp(1.2rem,2.5vw,1.65rem);letter-spacing:-.035em}
+    .search-panel>p{margin:0 0 1rem;color:var(--muted);font-size:.9rem}
+    .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .search-form{display:flex;gap:.65rem}
+    .search-input{flex:1;min-width:0;padding:.9rem 1rem;border:1px solid rgba(112,234,255,.35);border-radius:8px;background:#031522;color:var(--ink);font:inherit;box-shadow:inset 0 2px 14px #0005}
+    .search-input::placeholder{color:#789aaa}
+    .search-input:focus{outline:2px solid rgba(112,234,255,.6);outline-offset:2px;border-color:var(--cyan)}
+    .search-clear,.search-more{padding:.75rem 1rem;border:1px solid rgba(112,234,255,.34);border-radius:8px;background:#082237;color:#cceefa;font:600 12px ui-monospace,SFMono-Regular,Consolas,monospace;cursor:pointer}
+    .search-clear:hover,.search-more:hover{border-color:var(--cyan);box-shadow:0 0 16px rgba(112,234,255,.13)}
+    .search-status{min-height:1.5em;margin:.8rem 0 0;color:#9bbdce;font-size:.82rem}
+    .search-results{display:grid;gap:.85rem;margin-top:1rem}
+    .search-result{overflow:hidden;border:1px solid rgba(112,234,255,.24);border-radius:10px;background:rgba(3,17,28,.88);box-shadow:0 8px 22px #0003}
+    .search-result-heading{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.8rem 1rem;border-bottom:1px solid rgba(112,234,255,.16);background:rgba(112,234,255,.035)}
+    .search-result-heading a{color:#e5f9ff;font-weight:700}
+    .search-result-heading a:hover{color:var(--cyan)}
+    .search-result-chapter{flex:none;color:var(--cyan);font:600 10px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.06em}
+    .search-result-content{padding:.85rem 1rem;color:#c0d8e2;font-size:.9rem}
+    .search-result-content>:first-child{margin-top:0}
+    .search-result-content>:last-child{margin-bottom:0}
+    .search-result-content h1,.search-result-content h2,.search-result-content h3,.search-result-content h4{color:#e5f9ff;font-size:1.1rem}
+    .search-result-content a{color:var(--cyan);text-decoration:underline}
+    .search-result-content pre{overflow:auto;padding:.8rem;border:1px solid rgba(112,234,255,.16);border-radius:7px;background:#020d16;color:#d8f6ff}
+    .search-result-content code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+    .search-result-content table{display:block;max-width:100%;overflow:auto;border-collapse:collapse}
+    .search-result-content th,.search-result-content td{padding:.45rem .65rem;border:1px solid rgba(112,234,255,.2);text-align:left}
+    .search-more{justify-self:center;margin-top:.3rem}
+    .search-empty{padding:1rem;border:1px dashed rgba(112,234,255,.25);border-radius:8px;color:var(--muted);text-align:center}
     .roadmap-heading{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin:0 0 1rem}
     .roadmap-heading h2{margin:0;font-size:clamp(1.35rem,2.6vw,2rem);letter-spacing:-.035em}
     .roadmap-heading p{margin:0;color:var(--muted);font-size:.85rem}
@@ -65,7 +93,7 @@
   <header class="hero">
     <span class="eyebrow">Complete Java Learning Path</span>
     <h1>Master Java,<br>one chapter at a time.</h1>
-    <p>Explore the full roadmap from Java fundamentals to modern runtimes, cloud deployment, and portfolio projects. Open a chapter, or reveal its topics and jump straight to the one you need.</p>
+    <p>Explore the full roadmap from Java fundamentals to modern runtimes, cloud deployment, and portfolio projects. Search any keyword to find detailed explanations across all lessons.</p>
     <div class="roadmap-meta" aria-label="Roadmap size">
       <span id="chapter-count">34 CHAPTERS</span>
       <span id="topic-count">LOADING TOPICS…</span>
@@ -73,6 +101,17 @@
     </div>
   </header>
   <main>
+    <section class="search-panel" aria-labelledby="search-title">
+      <h2 id="search-title">Search every Java lesson</h2>
+      <p>Type a keyword or a few words. Results include the complete matching topic from any chapter, not just its title.</p>
+      <form id="lesson-search-form" class="search-form" role="search">
+        <label class="visually-hidden" for="lesson-search">Search all chapter topics and lesson content</label>
+        <input id="lesson-search" class="search-input" type="search" placeholder="Try “threads”, “JVM”, “collections”, or “Docker”" autocomplete="off">
+        <button id="lesson-search-clear" class="search-clear" type="button">Clear</button>
+      </form>
+      <p id="search-status" class="search-status" role="status" aria-live="polite">Loading lesson content for keyword search…</p>
+      <div id="search-results" class="search-results"></div>
+    </section>
     <div class="roadmap-heading">
       <h2>Java roadmap</h2>
       <p>Hover a chapter to preview topics · Select “Topics” on touch screens</p>
@@ -82,11 +121,24 @@
     </section>
   </main>
   <footer>Mastering Java in a Month · Follow the roadmap at your own pace.</footer>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.6/purify.min.js"></script>
   <script>
     (function(){
       const siteRoot = new URL('.', window.location.href);
       const grid = document.getElementById('chapter-grid');
       const topicCount = document.getElementById('topic-count');
+      const searchInput = document.getElementById('lesson-search');
+      const searchForm = document.getElementById('lesson-search-form');
+      const searchClear = document.getElementById('lesson-search-clear');
+      const searchStatus = document.getElementById('search-status');
+      const searchResults = document.getElementById('search-results');
+      const pageSize = 25;
+      let searchIndex = [];
+      let visibleResults = 0;
+      let searchReady = false;
+      let failedSearchChapters = 0;
+      let searchTimer;
 
       function makeElement(tag, className, text){
         const element = document.createElement(tag);
@@ -97,11 +149,13 @@
 
       function addTopicLinks(chapter, list, markdown){
         const headingPattern = /^##\s+(\d+)\.\s+(.+)$/gm;
-        let match;
-        let count = 0;
-        while((match = headingPattern.exec(markdown)) !== null){
+        const headings = Array.from(markdown.matchAll(headingPattern));
+        const topics = headings.map(function(match,index){
           const number = match[1];
           const title = match[2].replace(/`([^`]+)`/g,'$1').replace(/\*\*(.*?)\*\*/g,'$1').replace(/\*([^*]+)\*/g,'$1');
+          const start = match.index + match[0].length;
+          const end = index + 1 < headings.length ? headings[index + 1].index : markdown.length;
+          const content = markdown.slice(start,end).trim();
           const item = makeElement('li');
           const link = makeElement('a');
           link.href = new URL('mastering-java/shared/index.html?chapter=' + encodeURIComponent(chapter.id) + '#topic-' + number, siteRoot).href;
@@ -109,9 +163,64 @@
           link.append(topicNumber,document.createTextNode(title));
           item.appendChild(link);
           list.appendChild(item);
-          count += 1;
+          return {chapterId:chapter.id,chapterTitle:chapter.title,chapterMarkdown:chapter.markdown,number,title,markdown:content,searchText:(title+' '+content).toLocaleLowerCase()};
+        });
+        return topics;
+      }
+
+      function renderSearchResults(append){
+        const terms=searchInput.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
+        if(!terms.length){searchResults.replaceChildren();searchStatus.textContent=searchReady?'Search chapter names, topic titles, and lesson explanations with any keyword.':'Loading lesson content for keyword search…';return;}
+        if(!searchReady){searchStatus.textContent='Loading lesson content. Your search will appear as soon as it is ready.';return;}
+        const matches=searchIndex.filter(function(topic){return terms.every(function(term){return topic.searchText.includes(term);});});
+        if(!append){visibleResults=0;searchResults.replaceChildren();}
+        const start=visibleResults;
+        const end=Math.min(start+pageSize,matches.length);
+        const fragment=document.createDocumentFragment();
+        for(let index=start;index<end;index++){
+          const topic=matches[index];
+          const result=makeElement('article','search-result');
+          const heading=makeElement('div','search-result-heading');
+          const link=makeElement('a');
+          link.href=new URL('mastering-java/shared/index.html?chapter='+encodeURIComponent(topic.chapterId)+'#topic-'+topic.number,siteRoot).href;
+          link.textContent=topic.number+'. '+topic.title;
+          const chapterLabel=makeElement('span','search-result-chapter','CHAPTER '+Number(topic.chapterId));
+          heading.append(link,chapterLabel);
+          const content=makeElement('div','search-result-content');
+          if(window.marked&&window.DOMPurify){
+            content.innerHTML=window.DOMPurify.sanitize(window.marked.parse(topic.markdown));
+            const markdownBase=new URL(topic.chapterMarkdown,siteRoot);
+            content.querySelectorAll('a[href],img[src]').forEach(function(node){
+              const attribute=node.hasAttribute('href')?'href':'src';
+              try{
+                const resolved=new URL(node.getAttribute(attribute),markdownBase);
+                if(resolved.protocol==='http:'||resolved.protocol==='https:') node.setAttribute(attribute,resolved.href);
+                else node.removeAttribute(attribute);
+              }catch(error){
+                console.error('Could not resolve a lesson link in search results:',error);
+                node.removeAttribute(attribute);
+              }
+            });
+          }else{
+            const plain=makeElement('p','',topic.markdown.replace(/[`*_>#]/g,'').trim());
+            content.appendChild(plain);
+          }
+          result.append(heading,content);
+          fragment.appendChild(result);
         }
-        return count;
+        searchResults.appendChild(fragment);
+        visibleResults=end;
+        searchStatus.textContent=matches.length+' matching topic'+(matches.length===1?'':'s')+' across all chapters'+(matches.length>pageSize?'; showing '+visibleResults+' so far.':'')+(failedSearchChapters?'; lesson content failed to load for '+failedSearchChapters+' chapter'+(failedSearchChapters===1?'':'s')+'.':'');
+        const oldMore=searchResults.querySelector('.search-more');
+        if(oldMore)oldMore.remove();
+        if(matches.length===0){
+          searchResults.appendChild(makeElement('p','search-empty','No matching topics found. Try a shorter or different keyword.'));
+        }else if(visibleResults<matches.length){
+          const more=makeElement('button','search-more','Show more results ('+(matches.length-visibleResults)+' remaining)');
+          more.type='button';
+          more.addEventListener('click',function(){more.remove();renderSearchResults(true);});
+          searchResults.appendChild(more);
+        }
       }
 
       function createCard(chapter){
@@ -164,16 +273,26 @@
             if(!response.ok) throw new Error('Could not load chapter topics (' + response.status + ').');
             const markdown = await response.text();
             entry.list.replaceChildren();
-            const count = addTopicLinks(entry.chapter,entry.list,markdown);
-            totalTopics += count;
-            if(count === 0) throw new Error('No numbered topics were found in this chapter.');
+            const topics = addTopicLinks(entry.chapter,entry.list,markdown);
+            searchIndex.push.apply(searchIndex,topics);
+            totalTopics += topics.length;
+            if(topics.length === 0) throw new Error('No numbered topics were found in this chapter.');
           }catch(error){
+            failedSearchChapters += 1;
             console.error('Roadmap topics failed for Chapter ' + Number(entry.chapter.id) + ':',error);
             entry.list.replaceChildren(makeElement('li','topics-error','Topics could not be loaded. Try refreshing this page.'));
           }
         }));
+        searchIndex.sort(function(a,b){return Number(a.chapterId)-Number(b.chapterId)||Number(a.number)-Number(b.number);});
+        searchReady=true;
         topicCount.textContent = totalTopics + ' TOPICS';
+        if(failedSearchChapters) searchStatus.textContent='Some lesson content could not be loaded. Search results may be incomplete.';
+        renderSearchResults(false);
       }
+
+      searchForm.addEventListener('submit',function(event){event.preventDefault();renderSearchResults(false);});
+      searchInput.addEventListener('input',function(){clearTimeout(searchTimer);searchTimer=setTimeout(function(){renderSearchResults(false);},120);});
+      searchClear.addEventListener('click',function(){searchInput.value='';renderSearchResults(false);searchInput.focus();});
 
       loadRoadmap().catch(function(error){
         console.error('The Java roadmap could not be loaded:',error);
