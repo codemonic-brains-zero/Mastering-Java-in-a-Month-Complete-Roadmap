@@ -643,6 +643,109 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
   .chapter .mermaid.jvm-diagram .node polygon,
   .chapter .mermaid.jvm-diagram .flowchart-link{animation:none!important}
 }
+/* Search field aligned with the notes panel, visible without an outline border. */
+.lesson-search{
+  position:relative!important;
+  z-index:2!important;
+  width:min(1120px,92vw)!important;
+  max-width:1120px!important;
+  margin:1.25rem auto 0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.lesson-search-form{display:flex!important;width:100%!important;margin:0!important;gap:0!important}
+.lesson-search-control{position:relative!important;width:100%!important;min-width:0!important}
+.lesson-search-icon{
+  position:absolute!important;
+  z-index:1!important;
+  left:1rem!important;
+  top:50%!important;
+  display:grid!important;
+  place-items:center!important;
+  color:#7faec2!important;
+  opacity:.9!important;
+  transform:translateY(-50%)!important;
+  pointer-events:none!important;
+}
+.lesson-search-input{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  padding:1rem 3.15rem 1rem 3.1rem!important;
+  border:0!important;
+  border-radius:11px!important;
+  outline:none!important;
+  background:linear-gradient(110deg,rgba(8,29,44,.94),rgba(5,19,31,.94))!important;
+  color:#e7faff!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035),inset 0 -2px 0 rgba(112,234,255,.16),0 12px 28px rgba(0,0,0,.2)!important;
+  font:500 15px/1.5 Inter,ui-sans-serif,system-ui,sans-serif!important;
+  transition:background .2s ease,box-shadow .2s ease!important;
+  appearance:none!important;
+  -webkit-appearance:none!important;
+}
+.lesson-search-input::placeholder{color:#8faebd!important;opacity:1!important}
+.lesson-search-input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
+.lesson-search-control:focus-within .lesson-search-input{
+  background:linear-gradient(110deg,rgba(9,34,51,.98),rgba(5,21,34,.98))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),inset 0 -2px 0 #70eaff,0 14px 32px rgba(0,0,0,.24),0 0 28px rgba(112,234,255,.09)!important;
+}
+.lesson-search .lesson-search-clear{
+  position:absolute!important;
+  z-index:2!important;
+  right:.55rem!important;
+  top:50%!important;
+  display:grid!important;
+  width:2.15rem!important;
+  height:2.15rem!important;
+  place-items:center!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:50%!important;
+  outline:none;
+  background:transparent!important;
+  color:#8fb3c3!important;
+  box-shadow:none!important;
+  font:400 24px/1 ui-sans-serif,system-ui,sans-serif!important;
+  cursor:pointer!important;
+  transform:translateY(-50%)!important;
+  transition:color .16s ease,background .16s ease!important;
+}
+.lesson-search .lesson-search-clear[hidden]{display:none!important}
+.lesson-search .lesson-search-clear:hover{
+  color:#e7faff!important;
+  background:rgba(112,234,255,.09)!important;
+  transform:translateY(-50%)!important;
+}
+.lesson-search .lesson-search-clear:focus-visible{
+  outline:2px solid rgba(112,234,255,.8)!important;
+  outline-offset:2px!important;
+}
+.lesson-search-visually-hidden{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
+@media(max-width:900px){
+  .lesson-search{width:min(760px,92vw)!important;margin-top:1rem!important}
+}
+@media(max-width:600px){
+  .lesson-search{width:92vw!important;margin-top:.75rem!important}
+  .lesson-search-input{padding:.9rem 3rem .9rem 2.85rem!important;font-size:14px!important}
+  .lesson-search-icon{left:.85rem!important}
+  .lesson-search .lesson-search-clear{right:.35rem!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .lesson-search-input,.lesson-search .lesson-search-clear{transition:none!important}
+}
 </style>
 </head>
 <body>
@@ -697,10 +800,18 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
 <section class="lesson-search" aria-label="Search all Java lessons">
   <form id="lesson-search-form" class="lesson-search-form" role="search">
     <label class="lesson-search-visually-hidden" for="lesson-search-input">Search all chapter topics and lesson content</label>
-    <input id="lesson-search-input" class="lesson-search-input" type="search" placeholder="Search every chapter by keyword…" autocomplete="off">
-    <button id="lesson-search-clear" class="lesson-search-clear" type="button">Clear</button>
+    <div class="lesson-search-control">
+      <span class="lesson-search-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="19" height="19" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="10.8" cy="10.8" r="6.6" stroke="currentColor" stroke-width="1.8"/>
+          <path d="m15.7 15.7 4.1 4.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <input id="lesson-search-input" class="lesson-search-input" type="search" placeholder="Search every chapter by keyword…" autocomplete="off" aria-label="Search all Java lessons">
+      <button id="lesson-search-clear" class="lesson-search-clear" type="button" aria-label="Clear search" title="Clear search" hidden>&times;</button>
+    </div>
   </form>
-  <p id="lesson-search-status" class="lesson-search-status" role="status" aria-live="polite">Search every chapter by keyword; lesson content loads when you start searching.</p>
+  <p id="lesson-search-status" class="lesson-search-visually-hidden" role="status" aria-live="polite"></p>
   <div id="lesson-search-results" class="lesson-search-results"></div>
 </section>
 <main>
@@ -1110,8 +1221,17 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
     if(lessonSearchReady) renderLessonSearch(false);
   }
   lessonSearchForm.addEventListener('submit',function(event){event.preventDefault();searchLessonContent();});
-  lessonSearchInput.addEventListener('input',function(){clearTimeout(lessonSearchTimer);lessonSearchTimer=setTimeout(searchLessonContent,120);});
-  lessonSearchClear.addEventListener('click',function(){lessonSearchInput.value='';renderLessonSearch(false);lessonSearchInput.focus();});
+  lessonSearchInput.addEventListener('input',function(){
+    lessonSearchClear.hidden=!lessonSearchInput.value.length;
+    clearTimeout(lessonSearchTimer);
+    lessonSearchTimer=setTimeout(searchLessonContent,120);
+  });
+  lessonSearchClear.addEventListener('click',function(){
+    lessonSearchInput.value='';
+    lessonSearchClear.hidden=true;
+    renderLessonSearch(false);
+    lessonSearchInput.focus();
+  });
   let mermaidLoadPromise = null;
   function loadMermaid(){
     if(window.mermaid) return Promise.resolve();
