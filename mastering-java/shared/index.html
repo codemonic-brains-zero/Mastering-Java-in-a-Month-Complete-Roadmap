@@ -807,7 +807,7 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
           <path d="m15.7 15.7 4.1 4.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
         </svg>
       </span>
-      <input id="lesson-search-input" class="lesson-search-input" type="search" placeholder="Search every chapter by keyword…" autocomplete="off" aria-label="Search all Java lessons">
+      <input id="lesson-search-input" class="lesson-search-input" type="search" placeholder="Search chapter titles and topic headings…" autocomplete="off" aria-label="Search all Java lessons">
       <button id="lesson-search-clear" class="lesson-search-clear" type="button" aria-label="Clear search" title="Clear search" hidden>&times;</button>
     </div>
   </form>
@@ -1108,7 +1108,7 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
       const start=match.index+match[0].length;
       const end=index+1<headings.length?headings[index+1].index:markdown.length;
       const content=markdown.slice(start,end).trim();
-      return {chapterId,chapterTitle:lesson.title,chapterMarkdown:lesson.markdown,number,title,markdown:content,searchText:(lesson.title+' '+title+' '+content).toLowerCase()};
+      return {chapterId,chapterTitle:lesson.title,chapterMarkdown:lesson.markdown,number,title,markdown:content,searchText:(lesson.title+' '+title).toLowerCase()};
     });
   }
   function resolveLessonLinks(container,markdownPath){
