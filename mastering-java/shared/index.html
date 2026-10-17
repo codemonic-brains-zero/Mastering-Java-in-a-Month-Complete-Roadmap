@@ -36,12 +36,12 @@ hr{border:0;border-top:1px solid #263b32}
 .chapter-navigation span{opacity:.48}
 .roadmap-index-link{display:inline-flex;align-items:center;margin-bottom:.8rem;padding:.45rem .7rem;border:1px solid rgba(112,234,255,.34);border-radius:7px;background:rgba(112,234,255,.06);color:#9beeff!important;font:600 11px ui-monospace,monospace;letter-spacing:.04em}
 .roadmap-index-link:hover{border-color:#8beaff;box-shadow:0 0 16px #70eaff22;color:#eaffff!important}
-.lesson-search{position:relative;z-index:2;width:calc(100% - clamp(160px, 30vw, 560px));max-width:1120px;margin:1.25rem auto 0;padding:1rem 1.2rem;border:1px solid #45ffad45;border-radius:10px;background:rgba(8,18,22,.94);box-shadow:0 8px 28px #0005,0 0 22px #45ffad0a}
+.lesson-search{position:relative;z-index:2;width:min(1120px, calc(100vw - clamp(160px, 30vw, 560px)));max-width:1120px;margin:1.25rem auto 0;padding:1rem 1.2rem;border:1px solid #45ffad45;border-radius:10px;background:rgba(8,18,22,.94);box-shadow:0 8px 28px #0005,0 0 22px #45ffad0a}
 .lesson-search-form{display:flex;gap:.65rem}
 .lesson-search-input{flex:1;min-width:0;padding:.8rem .9rem!important;border-color:#45ffad55!important;border-radius:7px!important;background:#050d11!important;color:#e5fff2!important}
 .lesson-search-input::placeholder{color:#87a99a}
 .lesson-search-input:focus{outline:2px solid #45ffad80;outline-offset:2px;border-color:#45ffad!important}
-.lesson-search-clear,.lesson-search-more{padding:.65rem .9rem!important;border-radius:7px!important;font:600 11px ui-monospace,monospace!important}
+.lesson-search-clear,.lesson-search-more{padding:.65rem .9rem!important;border-radius:7px!important;font:600 11px ui-monospace,monospace!important}.lesson-search-clear{padding:.15rem .4rem!important;border:0!important;background:transparent!important;box-shadow:none!important;color:var(--green)!important;font-size:1.35rem!important;line-height:1!important}
 .lesson-search-status{min-height:1.5em;margin:.65rem 0 0;color:#9ab9a9;font-size:.8rem}
 .lesson-search-results{display:grid;gap:.75rem;margin-top:.8rem}
 .lesson-search-result{overflow:hidden;border:1px solid #45ffad30;border-radius:8px;background:#050d11}
@@ -794,26 +794,27 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
       <span class="tag">Mastering Java · Chapter 1</span>
       <h1>Introduction to Java</h1>
       <p>Read the chapter lessons, examples, and diagrams.</p>
+      <section class="lesson-search" aria-label="Search all Java lessons">
+        <form id="lesson-search-form" class="lesson-search-form" role="search">
+          <label class="lesson-search-visually-hidden" for="lesson-search-input">Search all chapter topics and lesson content</label>
+          <div class="lesson-search-control">
+            <span class="lesson-search-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="19" height="19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10.8" cy="10.8" r="6.6" stroke="currentColor" stroke-width="1.8"/>
+                <path d="m15.7 15.7 4.1 4.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <input id="lesson-search-input" class="lesson-search-input" type="search" placeholder="Search chapter titles and topic headings…" autocomplete="off" aria-label="Search all Java lessons">
+            <button id="lesson-search-clear" class="lesson-search-clear" type="button" aria-label="Clear search" title="Clear search" hidden>&times;</button>
+          </div>
+        </form>
+        <p id="lesson-search-status" class="lesson-search-visually-hidden" role="status" aria-live="polite"></p>
+        <div id="lesson-search-results" class="lesson-search-results"></div>
+      </section>
     </div>
   </div>
 </header>
-<section class="lesson-search" aria-label="Search all Java lessons">
-  <form id="lesson-search-form" class="lesson-search-form" role="search">
-    <label class="lesson-search-visually-hidden" for="lesson-search-input">Search all chapter topics and lesson content</label>
-    <div class="lesson-search-control">
-      <span class="lesson-search-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="19" height="19" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="10.8" cy="10.8" r="6.6" stroke="currentColor" stroke-width="1.8"/>
-          <path d="m15.7 15.7 4.1 4.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-        </svg>
-      </span>
-      <input id="lesson-search-input" class="lesson-search-input" type="search" placeholder="Search chapter titles and topic headings…" autocomplete="off" aria-label="Search all Java lessons">
-      <button id="lesson-search-clear" class="lesson-search-clear" type="button" aria-label="Clear search" title="Clear search" hidden>&times;</button>
-    </div>
-  </form>
-  <p id="lesson-search-status" class="lesson-search-visually-hidden" role="status" aria-live="polite"></p>
-  <div id="lesson-search-results" class="lesson-search-results"></div>
-</section>
+
 <main>
   <article id="chapter" class="chapter"><p class="muted">Loading chapter notes…</p></article>
 </main>
@@ -1066,6 +1067,7 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
   const currentChapter = chapters[chapterId];
   const siteRoot = new URL('../../', window.location.href);
   const chapter = document.getElementById('chapter');
+  const chapterMain = document.querySelector('main');
   const lessonSearchInput = document.getElementById('lesson-search-input');
   const lessonSearchForm = document.getElementById('lesson-search-form');
   const lessonSearchClear = document.getElementById('lesson-search-clear');
@@ -1213,7 +1215,9 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
     return lessonSearchIndexPromise;
   }
   function searchLessonContent(){
-    if(!lessonSearchInput.value.trim()){
+    const hasQuery=Boolean(lessonSearchInput.value.trim());
+    if(chapterMain) chapterMain.hidden=hasQuery;
+    if(!hasQuery){
       renderLessonSearch(false);
       return;
     }
@@ -1223,12 +1227,14 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
   lessonSearchForm.addEventListener('submit',function(event){event.preventDefault();searchLessonContent();});
   lessonSearchInput.addEventListener('input',function(){
     lessonSearchClear.hidden=!lessonSearchInput.value.length;
+    if(chapterMain) chapterMain.hidden=Boolean(lessonSearchInput.value.trim());
     clearTimeout(lessonSearchTimer);
     lessonSearchTimer=setTimeout(searchLessonContent,120);
   });
   lessonSearchClear.addEventListener('click',function(){
     lessonSearchInput.value='';
     lessonSearchClear.hidden=true;
+    if(chapterMain) chapterMain.hidden=false;
     renderLessonSearch(false);
     lessonSearchInput.focus();
   });
