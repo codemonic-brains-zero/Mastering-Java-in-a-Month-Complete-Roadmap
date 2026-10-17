@@ -122,18 +122,43 @@ name.append(" SE"); // allowed: the object changes
 
 ## 23. Primitive data types
 
-Java has eight primitive types. They store simple values directly rather than references to objects.
+Java defines eight primitive types. The size and range below are the language-level sizes/ranges normally taught for these types. The default values apply to **fields and array elements**, not to local variables inside methods (local variables must be assigned before use).
 
-| Type | Typical use | Example |
-|---|---|---|
-| `byte` | Small signed whole numbers | `byte level = 7;` |
-| `short` | Short-range signed whole numbers | `short year = 2026;` |
-| `int` | General-purpose whole numbers | `int population = 120_000;` |
-| `long` | Larger whole numbers | `long distance = 5_000_000_000L;` |
-| `float` | Single-precision decimal approximation | `float ratio = 0.75F;` |
-| `double` | Double-precision decimal approximation | `double average = 82.5;` |
-| `char` | One UTF-16 code unit | `char initial = 'J';` |
-| `boolean` | `true` or `false` | `boolean ready = true;` |
+| Primitive type | Size | Range / possible values | Default value for fields and array elements | Example |
+|---|---:|---|---|---|
+| \`byte\` | 1 byte (8 bits) | -128 to 127 | \`0\` | \`byte level = 7;\` |
+| \`short\` | 2 bytes (16 bits) | -32,768 to 32,767 | \`0\` | \`short year = 2026;\` |
+| \`int\` | 4 bytes (32 bits) | -2,147,483,648 to 2,147,483,647 | \`0\` | \`int count = 42;\` |
+| \`long\` | 8 bytes (64 bits) | -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807 | \`0L\` | \`long distance = 5_000_000_000L;\` |
+| \`float\` | 4 bytes (32-bit IEEE 754) | Approx. ±1.4 × 10⁻⁴⁵ to ±3.4028235 × 10³⁸ for nonzero finite values; about 6–7 decimal digits of precision | \`0.0f\` | \`float ratio = 0.75f;\` |
+| \`double\` | 8 bytes (64-bit IEEE 754) | Approx. ±4.9 × 10⁻³²⁴ to ±1.7976931348623157 × 10³⁰⁸ for nonzero finite values; about 15–16 decimal digits of precision | \`0.0d\` (usually written \`0.0\`) | \`double average = 82.5;\` |
+| \`char\` | 2 bytes (16-bit UTF-16 code unit) | \`'\\u0000'\` (0) to \`'\\uffff'\` (65,535) | \`'\\u0000'\` | \`char initial = 'J';\` |
+| \`boolean\` | No precisely specified storage size in the Java language | \`true\` or \`false\` | \`false\` | \`boolean ready = true;\` |
+
+**Important notes:**
+- The floating-point ranges above describe approximate IEEE 754 values. \`float\` and \`double\` also support positive/negative zero, infinities, and \`NaN\`; they are not exact decimal types.
+- Java does not define a portable byte size for \`boolean\` storage. Its only language-level values are \`true\` and \`false\`.
+- A \`char\` holds one UTF-16 code unit, not necessarily one complete visible Unicode character.
+- The default value for a reference-type field or array element is \`null\`.
+- **Local variables have no automatically usable default value.** The compiler requires a local variable to be definitely assigned before it is read.
+
+**Example — field defaults versus local variables:**
+\`\`\`java
+class Defaults {
+    int count;           // default: 0
+    boolean active;      // default: false
+    String name;         // default: null
+    char letter;         // default: '\\u0000'
+
+    void show() {
+        int localCount;
+        // System.out.println(localCount); // compile-time error: not initialized
+        localCount = 0;
+        System.out.println(localCount);
+    }
+}
+\`\`\`
+
 
 Integer types are signed. `int` is the usual choice for whole-number calculations; use `long` when the possible range exceeds `int`. `float` and `double` represent approximate binary floating-point values, so they are not suitable for every exact-decimal use. `char` is not a general-purpose Unicode grapheme type: some visible characters require more than one UTF-16 code unit.
 
@@ -509,6 +534,108 @@ class ReadQuantity {
 `Integer.parseInt` throws `NumberFormatException` when the line is not an integer. `readLine()` can throw `IOException`, which the example declares with `throws IOException`; another design is to catch and report the error. For more involved applications, specify a character encoding explicitly when constructing a reader.
 
 **Key takeaway:** `BufferedReader` gives you text; parse and validate that text before using it as a number.
+
+## Interview questions and answers
+
+### 1. Does Java have global variables? If not, why?
+
+Java does not allow a variable declaration at the top level outside a type. Use an instance field for per-object state, or a \`static\` field for class-level state. Prefer constants or explicitly passed dependencies over mutable global-like state because shared mutable data can make programs harder to test and reason about.
+
+**Example:**
+\`\`\`java
+class Settings {
+    static final int MAX_USERS = 100;
+}
+\`\`\`
+
+### 2. What is the difference between a local variable, an instance variable, and a static variable?
+
+A local variable is declared inside a method or block and must be initialized before it is read. An instance variable belongs to each object. A static variable belongs to the class and is shared by its instances.
+
+**Example:**
+\`\`\`java
+class Counter {
+    static int totalCounters;
+    int value;
+
+    Counter(int value) {
+        this.value = value;
+        totalCounters++;
+    }
+
+    void printNext() {
+        int next = value + 1;
+        System.out.println(next);
+    }
+}
+\`\`\`
+
+### 3. Why does a local variable not receive a default value?
+
+Java requires local variables to be definitely assigned before use. This catches a class of mistakes at compile time. Fields and array elements do receive defaults, such as \`0\`, \`false\`, and \`null\`.
+
+**Example:** \`int number; System.out.println(number);\` does not compile until \`number\` is assigned a value.
+
+### 4. Why is \`String\` a reference type instead of a primitive type?
+
+\`String\` is a class with behavior and methods, such as \`length()\`, \`substring()\`, and \`equals()\`. A \`String\` variable holds a reference to a String object (or \`null\`), while primitive types hold primitive values.
+
+**Example:**
+\`\`\`java
+String language = "Java";
+System.out.println(language.length()); // 4
+\`\`\`
+
+### 5. What is the difference between \`=\` and \`==\`?
+
+\`=\` assigns a value to a variable. \`==\` compares primitive values, or checks whether two references point to the same object. Use \`.equals()\` to compare object contents when the class defines meaningful equality.
+
+**Example:**
+\`\`\`java
+int score = 10;
+System.out.println(score == 10); // true
+\`\`\`
+
+### 6. What is the difference between \`&&\` and \`&\`?
+
+For boolean expressions, \`&&\` short-circuits: if the left side is false, Java does not evaluate the right side. \`&\` evaluates both boolean operands. With integral operands, \`&\` performs bitwise AND.
+
+**Example:**
+\`\`\`java
+int[] numbers = {10};
+int index = 2;
+if (index >= 0 && index < numbers.length) {
+    System.out.println(numbers[index]);
+} // the array access is skipped when the bounds check fails
+\`\`\`
+
+### 7. What is the difference between pre-increment and post-increment?
+
+Both \`++x\` and \`x++\` increase \`x\` by one. Prefix increment produces the updated value; postfix increment produces the old value as the expression result.
+
+**Example:**
+\`\`\`java
+int x = 5;
+int old = x++;       // old = 5, x = 6
+int updated = ++x;   // x = 7, updated = 7
+\`\`\`
+
+## Practical exercises
+
+Complete these tasks in Eclipse or from the command line. Each task should be a small, runnable Java program unless it asks for an explanation.
+
+1. Declare one variable of each primitive type and print its value.
+2. Create a class with fields of all eight primitive types. Print their default values, then explain why the same approach does not work for uninitialized local variables.
+3. Write a program that reads two integers and prints their sum, difference, product, quotient, and remainder. Decide how to handle a divisor of zero.
+4. Convert a \`double\` value such as \`19.99\` to an \`int\`. Explain why the result is truncated rather than rounded.
+5. Check whether a number is within the range 1 through 100 using relational and logical operators.
+6. Use a ternary operator to print whether a student passed a test with a pass mark of 40. Rewrite it with \`if\`/\`else\` and compare readability.
+7. Demonstrate prefix and postfix increment with separate variables and predict the output before running the program.
+8. Use bitwise OR to combine two flags, bitwise AND to check a flag, and bitwise complement to clear a flag.
+9. Calculate \`2 + 3 * 4\` and \`(2 + 3) * 4\`. Explain how precedence and parentheses change the result.
+10. Create a \`Counter\` class with an instance field and a static field. Make two objects and demonstrate which value is shared.
+11. Write a program that accepts two command-line arguments, converts them to integers, and prints their sum. Handle missing or invalid arguments.
+12. Build a small bill calculator that stores item price, quantity, subtotal, tax percentage, and final total using appropriate data types.
 
 ## Chapter 2 coverage check
 
