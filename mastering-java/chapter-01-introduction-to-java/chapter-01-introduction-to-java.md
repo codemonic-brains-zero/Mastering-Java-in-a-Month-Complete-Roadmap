@@ -14,7 +14,17 @@ Main.java --javac--> Main.class (bytecode) --JVM--> program runs
 ## 2. History of Java
 
 **Example:** A simple history timeline is Green Project (early 1990s) → Oak (early language name) → Java (publicly announced in 1995).
-Java began at Sun Microsystems in the early 1990s as part of the Green Project, which explored software for consumer electronic devices. James Gosling was a key designer; Mike Sheridan and Patrick Naughton were also important early contributors. Oak is the best-documented early name; the name was later changed to Java. Sun announced Java publicly in 1995, and Java 1.0 was released on 23 January 1996. Some secondary sources mention GreenTalk and `.gt` in early naming accounts, but accounts of that stage are not consistent, so treat that detail as an uncertain historical report rather than an established fact.
+Java began at Sun Microsystems in the early 1990s as part of the Green Project, which explored software for consumer electronic devices. The Green Team included James Gosling, Patrick Naughton, and Mike Sheridan; Gosling designed the early language. Oak is the best-documented early language name, and it was later renamed Java. Sun announced Java publicly in 1995, and Java 1.0 was released on 23 January 1996. Some secondary sources mention GreenTalk and `.gt` in early naming accounts, but the stronger commonly cited histories document Oak; treat GreenTalk and `.gt` as unconfirmed historical claims rather than established facts.
+
+### When did Java first work with the web?
+
+The answer depends on whether “first version” means an early public preview or the first production release:
+
+- **Early public/pre-release Java — HotJava 1.0 Alpha 2/Alpha 3 (1995):** early HotJava browser distributions included a Java implementation and demonstrated executable Java applets in web pages. This happened before the final Java 1.0 production release. The Java Almanac's [pre-Java 1.0 history](https://javaalmanac.io/jdk/pre1.0/) documents the early HotJava distributions and their dates.
+- **Public announcement — 23 May 1995:** Sun announced Java alongside the HotJava browser at SunWorld. The web had become a major use case for Java, even though the Green Project originally targeted consumer devices. See Oracle's [brief history of Java](https://www.oracle.com/a/ocom/docs/dc/ww-brief-history-java-infographic.pdf).
+- **First production release — Java 1.0, 23 January 1996:** Java 1.0 included applet-related tooling, including the Applet Viewer, and supported the applet model used by compatible browsers of that era. It was **not** the first time Java had appeared in a web context; it was the first production release after the earlier previews.
+
+So, if you mean “which version first demonstrated Java on the web?”, the answer is the **pre-1.0 HotJava alpha releases in 1995**. If you mean “which production Java release supported web applets?”, the answer is **Java 1.0 in 1996**. Java did not start as a web language in the original Green Project; the web pivot came later.
 
 **Naming evolution example:** In a simplified timeline: Green Project → Oak → Java. The name Java is commonly associated with coffee from the Indonesian island of Java; the familiar coffee-cup logo reflects that association.
 
