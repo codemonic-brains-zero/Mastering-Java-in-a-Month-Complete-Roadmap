@@ -1116,7 +1116,8 @@ main[hidden]{display:none!important;visibility:hidden!important}
       const start=match.index+match[0].length;
       const end=index+1<headings.length?headings[index+1].index:markdown.length;
       const content=markdown.slice(start,end).trim();
-      const searchableBody=content;\n      return {chapterId,chapterTitle:lesson.title,chapterMarkdown:lesson.markdown,number,title,markdown:content,searchText:(lesson.title+' '+title+' '+searchableBody).toLowerCase()};
+      const searchableBody=content;
+      return {chapterId,chapterTitle:lesson.title,chapterMarkdown:lesson.markdown,number,title,markdown:content,searchText:(lesson.title+' '+title+' '+searchableBody).toLowerCase()};
     });
   }
   function resolveLessonLinks(container,markdownPath){
