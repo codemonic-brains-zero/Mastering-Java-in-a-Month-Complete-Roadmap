@@ -3,15 +3,21 @@
 ## 1. What is Java?
 Java is a high-level, general-purpose, class-based programming language and platform. Java source code is compiled into bytecode, which a compatible Java Virtual Machine (JVM) executes.
 
+**Example:** A file named `Main.java` can be compiled into `Main.class`; a compatible JVM can then execute that bytecode on Windows, Linux, or macOS.
+
 ~~~text
 Main.java --javac--> Main.class (bytecode) --JVM--> program runs
 ~~~
 
 ## 2. History of Java
-Java began at Sun Microsystems in the early 1990s as part of the Green Project, which explored software for consumer electronic devices. James Gosling was a key designer. Oak is the best-documented early name; the name was later changed to Java. Sun announced Java publicly in 1995, and Java 1.0 was released on 23 January 1996. Some secondary sources mention GreenTalk and .gt in early naming accounts, but accounts of that stage are not consistent.
+Java began at Sun Microsystems in the early 1990s as part of the Green Project, which explored software for consumer electronic devices. James Gosling was a key designer; Mike Sheridan and Patrick Naughton were also important early contributors. Oak is the best-documented early name; the name was later changed to Java. Sun announced Java publicly in 1995, and Java 1.0 was released on 23 January 1996. Some secondary sources mention GreenTalk and `.gt` in early naming accounts, but accounts of that stage are not consistent, so treat that detail as an uncertain historical report rather than an established fact.
+
+**Naming evolution example:** In a simplified timeline: Green Project → Oak → Java. The name Java is commonly associated with coffee from the Indonesian island of Java; the familiar coffee-cup logo reflects that association.
 
 ## 3. Why Java was created
-The project sought portability across different devices, reliability, security, and a productive programming environment. C and C++ already existed and remain useful; Java offered a different balance with bytecode, a managed runtime, garbage collection, and a broad standard library.
+The project sought portability across different devices, reliability, security, and a productive programming environment. C and C++ already existed and remain useful; Java offered a different balance with bytecode, a managed runtime, garbage collection, and a broad standard library. Java avoids explicit pointer arithmetic and direct memory-address manipulation in ordinary application code, reducing some memory-corruption risks without eliminating every security or memory-management problem.
+
+**Example:** In Java, a developer normally works with object references such as `Dog pet = new Dog();` rather than manually moving a pointer through memory as in C.
 
 ## 4. Features
 - Object-oriented programming with classes, objects, encapsulation, inheritance, and polymorphism.
@@ -23,14 +29,20 @@ The project sought portability across different devices, reliability, security, 
 - Runtime class loading and JIT optimization.
 These features reduce some risks but do not make programs automatically bug-free, secure, or faster in every situation.
 
+**Example:** A Java server can handle requests with threads, use JDBC to access a database, and rely on garbage collection to reclaim unreachable objects.
+
 ## 5. Applications
 Java is used for backend services, enterprise systems, APIs, Android codebases, desktop applications, data processing, cloud services, developer tools, and some embedded environments. Java itself is not a database; Java programs can connect to databases using drivers and APIs.
+
+**Example:** A banking application may use Java for business rules, an HTTP API to communicate with a browser, and a relational database to store accounts and transactions.
 
 ## 6. Java editions
 - Java SE: core language and standard libraries for general-purpose development.
 - Jakarta EE: specifications and APIs for enterprise and server applications. It was formerly Java EE; many migrated APIs use the jakarta.* namespace.
 - Java ME: technologies for certain constrained or embedded devices.
 They serve different needs and are not interchangeable labels.
+
+**Example:** A command-line calculator typically needs Java SE; an enterprise server may use Jakarta EE APIs; a constrained embedded device may use Java ME where supported.
 
 ## 7. Java versions, release history, and what changed
 
@@ -86,6 +98,8 @@ javac -version
 
 For example, records became a final feature in Java 16, and virtual threads became final in Java 21. Code using either feature will not compile on older language levels that do not support it. In Eclipse, a project set to Java 17 can reject newer syntax even if a newer JDK is installed. Set the project's JRE/JDK and compiler compliance level intentionally, and check library/deployment compatibility before upgrading.
 
+**Example:** Code using local-variable type inference with `var` needs Java 10 or later as its source level; a project configured for Java 8 will reject that syntax.
+
 ## 8. Install and verify the JDK
 For development, install a JDK, which includes the compiler and runtime components. Common distributions include Eclipse Temurin, Oracle JDK, and Amazon Corretto. On Windows, if a command is not found, locate the actual JDK installation and check whether its bin directory is on PATH, then open a new terminal. You have already installed Eclipse Temurin and verified both commands, so you can continue to the examples.
 
@@ -96,12 +110,16 @@ where java
 where javac
 ~~~
 
-On macOS or Linux, use which java and which javac.
+On macOS or Linux, use `which java` and `which javac`.
+
+**Example:** `javac -version` should print a compiler version. If the command is not found, verify the JDK installation and PATH rather than installing only a runtime.
 
 ## 9. IDE and command line
 An IDE such as Eclipse combines a code editor, project/build tools, run controls, debugger, and console. The editor is where you write code; the compiler translates source; the launcher starts the program; the console displays output and diagnostics. Eclipse may compile automatically when you save, depending on settings.
 
 In Eclipse: open the Java project, open or create a class under the source folder, write code, save, choose Run As > Java Application, and read the Console.
+
+**Example:** Create `Main.java`, add a `main` method that prints `Hello`, save, then select **Run As → Java Application**. The Console should display `Hello`.
 
 ## 10. Structure of a Java program
 Create a file named Main.java:
@@ -404,6 +422,8 @@ javac compiles the source file; java launches the class named Main. If javac is 
 ## 17. Write Once, Run Anywhere
 The same compiled bytecode can run on different platforms when each has a compatible JVM and the required libraries. This is the goal behind Java's WORA phrase, not a guarantee that every program is free of operating-system-specific assumptions.
 
+**Example:** `Main.class` can generally run on Windows and Linux if both systems have a compatible Java runtime and the application does not depend on OS-specific files or native libraries.
+
 ## 18. Workflow
 1. Understand the task.
 2. Create a project or source file.
@@ -442,6 +462,91 @@ Plan -> Edit -> Save -> Compile -> Fix errors
 - JDK supplies development tools; JRE is the runtime concept.
 - Java's portability depends on compatible runtimes and dependencies.
 
+## Interview questions and answers
+
+### 1. Why does Java eliminate explicit pointers?
+
+Java does not expose C-style pointers or pointer arithmetic to ordinary application code. Instead, reference variables hold managed references to objects. This reduces risks such as arbitrary memory access, pointer arithmetic errors, and many memory-corruption bugs. Java still uses references, and problems such as \`NullPointerException\`, resource leaks, and unsafe native-code issues remain possible.
+
+**Example:**
+\`\`\`java
+String language = "Java";
+System.out.println(language.length());
+\`\`\`
+
+### 2. What is the difference between a \`.class\` file and an \`.exe\` file?
+
+A Java \`.class\` file normally contains JVM bytecode and requires a compatible Java runtime. A Windows \`.exe\` file is a native executable or launcher format understood by Windows; it may contain machine code, packaged runtime components, or launch another program. The formats are not directly interchangeable.
+
+**Example:** Compile \`Main.java\` with \`javac Main.java\` to create \`Main.class\`, then run it with \`java Main\`. You do not run it as \`Main.exe\`.
+
+### 3. Why does Java not support standalone functions?
+
+In Java, executable methods are declared inside a class, interface, enum, or record; Java does not provide free-standing functions at the top level. A method can be an instance method or a static method. This design associates behavior with a type, while static methods can still be called without creating an object.
+
+**Example:**
+\`\`\`java
+class Calculator {
+    static int add(int a, int b) {
+        return a + b;
+    }
+}
+// Call: Calculator.add(2, 3)
+\`\`\`
+
+### 4. What is the difference between a function and a method?
+
+A **function** is a general term for a callable unit of code. A **method** is a callable unit declared as a member of a type. Languages such as C allow functions outside classes; Java expresses ordinary declared behavior through methods.
+
+**Example:** \`Calculator.add(2, 3)\` calls the static method \`add\` declared inside \`Calculator\`.
+
+### 5. Who allocates memory in Java?
+
+The JVM manages memory for a Java program. When code evaluates \`new\`, the runtime allocates storage for the object, typically on the heap, and runs its constructor. Method-call frames and local variables are commonly associated with each thread's JVM stack, although implementation details can vary. The garbage collector may reclaim heap memory when objects are no longer reachable; it does not replace closing files or sockets.
+
+**Example:**
+\`\`\`java
+Dog pet = new Dog(); // the JVM allocates and initializes a Dog object
+\`\`\`
+
+### 6. Does Java have global variables? If not, why?
+
+Java has no variables declared at the top level outside a type. A class can declare a \`static\` field, which belongs to the class and is accessible according to its access rules. Use mutable static state carefully because it can make testing and concurrency harder.
+
+**Example:**
+\`\`\`java
+class AppConfig {
+    static final int MAX_RETRIES = 3;
+}
+\`\`\`
+
+### 7. Why is the \`main\` method static?
+
+In the traditional Java application entry point, the launcher needs to invoke \`main\` before an application object exists. Making it \`static\` allows it to be called on the class without first constructing an instance.
+
+**Example:**
+\`\`\`java
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Program started");
+    }
+}
+\`\`\`
+
+The standard entry-point form used in this course is \`public static void main(String[] args)\`. Newer Java releases also provide other launch forms, but this classic form remains widely used and important for interviews.
+
+## Practical exercises
+
+Try these without copying a finished solution first:
+
+1. Write a \`Main\` class that prints your name, target job role, and three reasons you are learning Java.
+2. Compile a class with \`javac\`, list the generated files, and explain what the \`.java\` and \`.class\` files contain.
+3. Run the same \`.class\` file on another machine or operating system with a compatible runtime, if available. Record the environment assumptions.
+4. Create a \`Calculator\` class with static \`add\`, \`subtract\`, and \`multiply\` methods, then call them from \`main\`.
+5. Create a \`Student\` class and instantiate two objects. Add one instance field and one static field; observe which values are shared.
+6. Deliberately remove a semicolon and change the public class name without changing the filename. Read the compiler errors, then fix both problems.
+7. Explain the path from source code to bytecode to execution in your own words, and draw the steps in a diagram.
+
 ## 21. Practice questions
 1. Define Java.
 2. What was the Green Project?
@@ -458,7 +563,10 @@ Plan -> Edit -> Save -> Compile -> Fix errors
 13. Why might output not change after editing source?
 14. Create a program that prints your name.
 15. Remove a semicolon, observe the compiler error, fix it, and compile again.
-16. Run java -version and javac -version and record the versions.
+16. Run `java -version` and `javac -version` and record the versions.
+17. Explain why Java references are not the same as directly manipulable C-style pointers.
+18. Compare a Java `.class` file with a Windows `.exe` file.
+19. Explain why the classic `main` method is static.
 
 ## Further reading
 - Oracle, A Brief History of Java: https://education.oracle.com/file/general/4955_BriefHistoryOfJava_7.pdf
