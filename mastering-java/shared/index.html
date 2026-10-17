@@ -746,6 +746,11 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
 @media(prefers-reduced-motion:reduce){
   .lesson-search-input,.lesson-search .lesson-search-clear{transition:none!important}
 }
+
+/* Center search across the full header and enforce hiding despite legacy display rules. */
+.lesson-search{display:block!important;position:relative!important;left:auto!important;transform:none!important;width:min(760px,calc(100vw - 48px))!important;max-width:760px!important;margin:1.25rem auto 0!important}
+.lesson-search-form,.lesson-search-control{width:100%!important;max-width:none!important}
+main[hidden]{display:none!important;visibility:hidden!important}
 </style>
 </head>
 <body>
@@ -794,25 +799,26 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
       <span class="tag">Mastering Java · Chapter 1</span>
       <h1>Introduction to Java</h1>
       <p>Read the chapter lessons, examples, and diagrams.</p>
-      <section class="lesson-search" aria-label="Search all Java lessons">
-        <form id="lesson-search-form" class="lesson-search-form" role="search">
-          <label class="lesson-search-visually-hidden" for="lesson-search-input">Search all chapter topics and lesson content</label>
-          <div class="lesson-search-control">
-            <span class="lesson-search-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="19" height="19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="10.8" cy="10.8" r="6.6" stroke="currentColor" stroke-width="1.8"/>
-                <path d="m15.7 15.7 4.1 4.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-              </svg>
-            </span>
-            <input id="lesson-search-input" class="lesson-search-input" type="search" placeholder="Search chapter titles and topic headings…" autocomplete="off" aria-label="Search all Java lessons">
-            <button id="lesson-search-clear" class="lesson-search-clear" type="button" aria-label="Clear search" title="Clear search" hidden>&times;</button>
-          </div>
-        </form>
-        <p id="lesson-search-status" class="lesson-search-visually-hidden" role="status" aria-live="polite"></p>
-        <div id="lesson-search-results" class="lesson-search-results"></div>
-      </section>
+
     </div>
   </div>
+  <section class="lesson-search" aria-label="Search all Java lessons">
+    <form id="lesson-search-form" class="lesson-search-form" role="search">
+      <label class="lesson-search-visually-hidden" for="lesson-search-input">Search all chapter topics and lesson content</label>
+      <div class="lesson-search-control">
+        <span class="lesson-search-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.8" cy="10.8" r="6.6" stroke="currentColor" stroke-width="1.8"/>
+            <path d="m15.7 15.7 4.1 4.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <input id="lesson-search-input" class="lesson-search-input" type="search" placeholder="Search every chapter, topic, explanation, or code example…" autocomplete="off" aria-label="Search all Java lessons">
+        <button id="lesson-search-clear" class="lesson-search-clear" type="button" aria-label="Clear search" title="Clear search" hidden>&times;</button>
+      </div>
+    </form>
+    <p id="lesson-search-status" class="lesson-search-visually-hidden" role="status" aria-live="polite"></p>
+    <div id="lesson-search-results" class="lesson-search-results"></div>
+  </section>
 </header>
 
 <main>
@@ -1110,7 +1116,7 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
       const start=match.index+match[0].length;
       const end=index+1<headings.length?headings[index+1].index:markdown.length;
       const content=markdown.slice(start,end).trim();
-      return {chapterId,chapterTitle:lesson.title,chapterMarkdown:lesson.markdown,number,title,markdown:content,searchText:(lesson.title+' '+title).toLowerCase()};
+      const searchableBody=content.replace(/[*_>#()\[\]{}.,:;!?|]/g,' ').replace(/https?:\S+/g,' ').replace(/\s+/g,' ');\n      return {chapterId,chapterTitle:lesson.title,chapterMarkdown:lesson.markdown,number,title,markdown:content,searchText:(lesson.title+' '+title+' '+searchableBody).toLowerCase()};
     });
   }
   function resolveLessonLinks(container,markdownPath){
@@ -1131,7 +1137,7 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
     const terms=lessonSearchInput.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
     if(!terms.length){
       lessonSearchResults.replaceChildren();
-      lessonSearchStatus.textContent=lessonSearchReady?'Search for a keyword to find complete matching topics across every chapter.':'Loading searchable lesson content…';
+      lessonSearchStatus.textContent=lessonSearchReady?'Searches every chapter, including topic explanations, examples, and code.':'Loading searchable lesson content…';
       return;
     }
     if(!lessonSearchReady){
@@ -1199,7 +1205,7 @@ main{display:block!important;width:min(1120px,92vw)!important;max-width:1120px!i
     }));
     lessonSearchIndex.sort(function(a,b){return Number(a.chapterId)-Number(b.chapterId)||Number(a.number)-Number(b.number);});
     lessonSearchReady=true;
-    lessonSearchStatus.textContent=failedLessonSearchChapters?'Some lesson content could not be loaded. Search results may be incomplete.':'Search for a keyword to find complete matching topics across every chapter.';
+    lessonSearchStatus.textContent=failedLessonSearchChapters?'Some lesson content could not be loaded. Search results may be incomplete.':'Searches every chapter, including topic explanations, examples, and code.';
     if(lessonSearchInput.value.trim()) renderLessonSearch(false);
   }
   function ensureLessonSearchIndex(){
