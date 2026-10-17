@@ -12,6 +12,8 @@ Main.java --javac--> Main.class (bytecode) --JVM--> program runs
 ~~~
 
 ## 2. History of Java
+
+**Example:** A simple history timeline is Green Project (early 1990s) → Oak (early language name) → Java (publicly announced in 1995).
 Java began at Sun Microsystems in the early 1990s as part of the Green Project, which explored software for consumer electronic devices. James Gosling was a key designer; Mike Sheridan and Patrick Naughton were also important early contributors. Oak is the best-documented early name; the name was later changed to Java. Sun announced Java publicly in 1995, and Java 1.0 was released on 23 January 1996. Some secondary sources mention GreenTalk and `.gt` in early naming accounts, but accounts of that stage are not consistent, so treat that detail as an uncertain historical report rather than an established fact.
 
 **Naming evolution example:** In a simplified timeline: Green Project → Oak → Java. The name Java is commonly associated with coffee from the Indonesian island of Java; the familiar coffee-cup logo reflects that association.
@@ -476,6 +478,8 @@ Plan -> Edit -> Save -> Compile -> Fix errors
 ~~~
 
 ## 19. Common errors
+
+**Example:** If `javac Main.java` reports `';' expected`, inspect the indicated source line, add the missing semicolon, save, and compile again.
 - javac is not recognized: verify JDK installation and PATH; open a new terminal after changes.
 - Public class/file mismatch: rename the file or class so names match.
 - ';' expected: inspect the indicated line and nearby lines for a missing semicolon or syntax issue.
@@ -498,88 +502,90 @@ Plan -> Edit -> Save -> Compile -> Fix errors
 
 ### 1. Why does Java eliminate explicit pointers?
 
-Java does not expose C-style pointers or pointer arithmetic to ordinary application code. Instead, reference variables hold managed references to objects. This reduces risks such as arbitrary memory access, pointer arithmetic errors, and many memory-corruption bugs. Java still uses references, and problems such as \`NullPointerException\`, resource leaks, and unsafe native-code issues remain possible.
+Java does not expose C-style pointers or pointer arithmetic to ordinary application code. Instead, reference variables hold managed references to objects. This reduces risks such as arbitrary memory access, pointer arithmetic errors, and many memory-corruption bugs. Java still uses references, and problems such as `NullPointerException`, resource leaks, and unsafe native-code issues remain possible.
 
 **Example:**
-\`\`\`java
+```java
 String language = "Java";
 System.out.println(language.length());
-\`\`\`
+```
 
-### 2. What is the difference between a \`.class\` file and an \`.exe\` file?
+### 2. What is the difference between a `.class` file and an `.exe` file?
 
-A Java \`.class\` file normally contains JVM bytecode and requires a compatible Java runtime. A Windows \`.exe\` file is a native executable or launcher format understood by Windows; it may contain machine code, packaged runtime components, or launch another program. The formats are not directly interchangeable.
+A Java `.class` file normally contains JVM bytecode and requires a compatible Java runtime. A Windows `.exe` file is a native executable or launcher format understood by Windows; it may contain machine code, packaged runtime components, or launch another program. The formats are not directly interchangeable.
 
-**Example:** Compile \`Main.java\` with \`javac Main.java\` to create \`Main.class\`, then run it with \`java Main\`. You do not run it as \`Main.exe\`.
+**Example:** Compile `Main.java` with `javac Main.java` to create `Main.class`, then run it with `java Main`. You do not run it as `Main.exe`.
 
 ### 3. Why does Java not support standalone functions?
 
 In Java, executable methods are declared inside a class, interface, enum, or record; Java does not provide free-standing functions at the top level. A method can be an instance method or a static method. This design associates behavior with a type, while static methods can still be called without creating an object.
 
 **Example:**
-\`\`\`java
+```java
 class Calculator {
     static int add(int a, int b) {
         return a + b;
     }
 }
 // Call: Calculator.add(2, 3)
-\`\`\`
+```
 
 ### 4. What is the difference between a function and a method?
 
 A **function** is a general term for a callable unit of code. A **method** is a callable unit declared as a member of a type. Languages such as C allow functions outside classes; Java expresses ordinary declared behavior through methods.
 
-**Example:** \`Calculator.add(2, 3)\` calls the static method \`add\` declared inside \`Calculator\`.
+**Example:** `Calculator.add(2, 3)` calls the static method `add` declared inside `Calculator`.
 
 ### 5. Who allocates memory in Java?
 
-The JVM manages memory for a Java program. When code evaluates \`new\`, the runtime allocates storage for the object, typically on the heap, and runs its constructor. Method-call frames and local variables are commonly associated with each thread's JVM stack, although implementation details can vary. The garbage collector may reclaim heap memory when objects are no longer reachable; it does not replace closing files or sockets.
+The JVM manages memory for a Java program. When code evaluates `new`, the runtime allocates storage for the object, typically on the heap, and runs its constructor. Method-call frames and local variables are commonly associated with each thread's JVM stack, although implementation details can vary. The garbage collector may reclaim heap memory when objects are no longer reachable; it does not replace closing files or sockets.
 
 **Example:**
-\`\`\`java
+```java
 Dog pet = new Dog(); // the JVM allocates and initializes a Dog object
-\`\`\`
+```
 
 ### 6. Does Java have global variables? If not, why?
 
-Java has no variables declared at the top level outside a type. A class can declare a \`static\` field, which belongs to the class and is accessible according to its access rules. Use mutable static state carefully because it can make testing and concurrency harder.
+Java has no variables declared at the top level outside a type. A class can declare a `static` field, which belongs to the class and is accessible according to its access rules. Use mutable static state carefully because it can make testing and concurrency harder.
 
 **Example:**
-\`\`\`java
+```java
 class AppConfig {
     static final int MAX_RETRIES = 3;
 }
-\`\`\`
+```
 
-### 7. Why is the \`main\` method static?
+### 7. Why is the `main` method static?
 
-In the traditional Java application entry point, the launcher needs to invoke \`main\` before an application object exists. Making it \`static\` allows it to be called on the class without first constructing an instance.
+In the traditional Java application entry point, the launcher needs to invoke `main` before an application object exists. Making it `static` allows it to be called on the class without first constructing an instance.
 
 **Example:**
-\`\`\`java
+```java
 public class Main {
     public static void main(String[] args) {
         System.out.println("Program started");
     }
 }
-\`\`\`
+```
 
-The standard entry-point form used in this course is \`public static void main(String[] args)\`. Newer Java releases also provide other launch forms, but this classic form remains widely used and important for interviews.
+The standard entry-point form used in this course is `public static void main(String[] args)`. Newer Java releases also provide other launch forms, but this classic form remains widely used and important for interviews.
 
 ## Practical exercises
 
 Try these without copying a finished solution first:
 
-1. Write a \`Main\` class that prints your name, target job role, and three reasons you are learning Java.
-2. Compile a class with \`javac\`, list the generated files, and explain what the \`.java\` and \`.class\` files contain.
-3. Run the same \`.class\` file on another machine or operating system with a compatible runtime, if available. Record the environment assumptions.
-4. Create a \`Calculator\` class with static \`add\`, \`subtract\`, and \`multiply\` methods, then call them from \`main\`.
-5. Create a \`Student\` class and instantiate two objects. Add one instance field and one static field; observe which values are shared.
+1. Write a `Main` class that prints your name, target job role, and three reasons you are learning Java.
+2. Compile a class with `javac`, list the generated files, and explain what the `.java` and `.class` files contain.
+3. Run the same `.class` file on another machine or operating system with a compatible runtime, if available. Record the environment assumptions.
+4. Create a `Calculator` class with static `add`, `subtract`, and `multiply` methods, then call them from `main`.
+5. Create a `Student` class and instantiate two objects. Add one instance field and one static field; observe which values are shared.
 6. Deliberately remove a semicolon and change the public class name without changing the filename. Read the compiler errors, then fix both problems.
 7. Explain the path from source code to bytecode to execution in your own words, and draw the steps in a diagram.
 
 ## 21. Practice questions
+
+**Example:** For “What is bytecode?”, explain it in your own words and illustrate `Main.java` → `javac` → `Main.class` → JVM.
 1. Define Java.
 2. What was the Green Project?
 3. What early name is best documented in Java's history?
