@@ -644,6 +644,91 @@ class ReadQuantity {
 
 **Key takeaway:** `BufferedReader` gives you text; parse and validate that text before using it as a number.
 
+## Operator reference tables
+
+These tables collect the operators covered above for quick revision.
+
+### Arithmetic operators
+
+| Operator | Name | Description | Example (`int a = 10, b = 3`) | Result |
+|---|---|---|---|---:|
+| `+` | Addition | Adds values; can also concatenate strings | `a + b` | `13` |
+| `-` | Subtraction | Subtracts the right operand from the left | `a - b` | `7` |
+| `*` | Multiplication | Multiplies values | `a * b` | `30` |
+| `/` | Division | Integer operands produce an integer quotient | `a / b` | `3` |
+| `%` | Remainder | Returns the remainder after division | `a % b` | `1` |
+
+### Relational operators
+
+| Operator | Meaning | Example | Result |
+|---|---|---|---|
+| `==` | Equal to | `10 == 10` | `true` |
+| `!=` | Not equal to | `10 != 3` | `true` |
+| `>` | Greater than | `10 > 3` | `true` |
+| `<` | Less than | `10 < 3` | `false` |
+| `>=` | Greater than or equal to | `10 >= 10` | `true` |
+| `<=` | Less than or equal to | `3 <= 10` | `true` |
+
+### Logical operators
+
+| Operator | Name | Meaning | Example | Result |
+|---|---|---|---|---|
+| `&&` | Logical AND | Both conditions must be true | `(5 > 3 && 8 > 5)` | `true` |
+| `||` | Logical OR | At least one condition is true | `(5 > 3 || 8 < 5)` | `true` |
+| `!` | Logical NOT | Reverses a boolean value | `!(5 > 3)` | `false` |
+
+### Assignment operators
+
+| Operator | Meaning | Example | Equivalent form |
+|---|---|---|---|
+| `=` | Assign | `a = 10` | `a = 10` |
+| `+=` | Add and assign | `a += 5` | `a = a + 5` |
+| `-=` | Subtract and assign | `a -= 5` | `a = a - 5` |
+| `*=` | Multiply and assign | `a *= 5` | `a = a * 5` |
+| `/=` | Divide and assign | `a /= 5` | `a = a / 5` |
+| `%=` | Remainder and assign | `a %= 5` | `a = a % 5` |
+
+### Unary operators
+
+| Operator | Name | Example | Notes |
+|---|---|---|---|
+| `++x` | Prefix increment | `int y = ++x;` | Increments first, then yields the new value |
+| `x++` | Postfix increment | `int y = x++;` | Yields the old value, then increments |
+| `--x` / `x--` | Decrement | `x--;` | Decreases by one |
+| `!` | Logical NOT | `!ready` | Inverts a boolean |
+| `-` | Unary minus | `-x` | Negates a numeric value |
+| `~` | Bitwise complement | `~mask` | Flips each bit of an integral value |
+
+### Bitwise and shift operators
+
+| Operator | Name | What it does |
+|---|---|---|
+| `&` | Bitwise AND | Result bit is 1 when both corresponding bits are 1 |
+| `|` | Bitwise OR | Result bit is 1 when either corresponding bit is 1 |
+| `^` | Bitwise XOR | Result bit is 1 when corresponding bits differ |
+| `~` | Bitwise complement | Flips every bit |
+| `<<` | Left shift | Shifts bits left, filling low bits with zero |
+| `>>` | Signed right shift | Shifts right while preserving the sign bit |
+| `>>>` | Unsigned right shift | Shifts right while filling high bits with zero |
+
+**Shift examples:** `5 << 1` produces `10`; `16 >> 2` produces `4`; `-1 >>> 1` produces `2147483647` for an `int`.
+
+### Common operator precedence (highest to lowest for these groups)
+
+1. Postfix: `x++`, `x--`
+2. Unary: `++x`, `--x`, `+`, `-`, `!`, `~`
+3. Multiplicative: `*`, `/`, `%`
+4. Additive: `+`, `-`
+5. Shift: `<<`, `>>`, `>>>`
+6. Relational and type test: `<`, `<=`, `>`, `>=`, `instanceof`
+7. Equality: `==`, `!=`
+8. Bitwise AND, XOR, OR: `&`, `^`, `|`
+9. Logical AND, OR: `&&`, `||`
+10. Conditional: `? :`
+11. Assignment: `=`, `+=`, `-=`, `*=`, `/=`, `%=`
+
+Use parentheses when they make the intended grouping clearer.
+
 ## Interview questions and answers
 
 ### 1. Does Java have global variables? If not, why?
@@ -751,89 +836,3 @@ Complete these tasks in Eclipse or from the command line. Each task should be a 
 All 26 topics listed for Chapter 2 in the master roadmap are covered above. Several related details are included alongside their parent topics so the chapter stays aligned with the approved outline: integer overflow during promotion, floating-point approximation, `String` equality, `null`, input validation, and the `Scanner.nextInt()`/`nextLine()` boundary.
 
 The roadmap does not currently list a dedicated section for enums, local-variable type inference (`var`), or exact decimal arithmetic with `BigDecimal`. These are useful follow-up topics, but are left out of this chapter until they are added to the syllabus.
-
-## Operator reference tables
-
-These tables collect the operators covered above for quick revision.
-
-### Arithmetic operators
-
-| Operator | Name | Description | Example (`int a = 10, b = 3`) | Result |
-|---|---|---|---|---:|
-| `+` | Addition | Adds values; can also concatenate strings | `a + b` | `13` |
-| `-` | Subtraction | Subtracts the right operand from the left | `a - b` | `7` |
-| `*` | Multiplication | Multiplies values | `a * b` | `30` |
-| `/` | Division | Integer operands produce an integer quotient | `a / b` | `3` |
-| `%` | Remainder | Returns the remainder after division | `a % b` | `1` |
-
-### Relational operators
-
-| Operator | Meaning | Example | Result |
-|---|---|---|---|
-| `==` | Equal to | `10 == 10` | `true` |
-| `!=` | Not equal to | `10 != 3` | `true` |
-| `>` | Greater than | `10 > 3` | `true` |
-| `<` | Less than | `10 < 3` | `false` |
-| `>=` | Greater than or equal to | `10 >= 10` | `true` |
-| `<=` | Less than or equal to | `3 <= 10` | `true` |
-
-### Logical operators
-
-| Operator | Name | Meaning | Example | Result |
-|---|---|---|---|---|
-| `&&` | Logical AND | Both conditions must be true | `(5 > 3 && 8 > 5)` | `true` |
-| `||` | Logical OR | At least one condition is true | `(5 > 3 || 8 < 5)` | `true` |
-| `!` | Logical NOT | Reverses a boolean value | `!(5 > 3)` | `false` |
-
-### Assignment operators
-
-| Operator | Meaning | Example | Equivalent form |
-|---|---|---|---|
-| `=` | Assign | `a = 10` | `a = 10` |
-| `+=` | Add and assign | `a += 5` | `a = a + 5` |
-| `-=` | Subtract and assign | `a -= 5` | `a = a - 5` |
-| `*=` | Multiply and assign | `a *= 5` | `a = a * 5` |
-| `/=` | Divide and assign | `a /= 5` | `a = a / 5` |
-| `%=` | Remainder and assign | `a %= 5` | `a = a % 5` |
-
-### Unary operators
-
-| Operator | Name | Example | Notes |
-|---|---|---|---|
-| `++x` | Prefix increment | `int y = ++x;` | Increments first, then yields the new value |
-| `x++` | Postfix increment | `int y = x++;` | Yields the old value, then increments |
-| `--x` / `x--` | Decrement | `x--;` | Decreases by one |
-| `!` | Logical NOT | `!ready` | Inverts a boolean |
-| `-` | Unary minus | `-x` | Negates a numeric value |
-| `~` | Bitwise complement | `~mask` | Flips each bit of an integral value |
-
-### Bitwise and shift operators
-
-| Operator | Name | What it does |
-|---|---|---|
-| `&` | Bitwise AND | Result bit is 1 when both corresponding bits are 1 |
-| `|` | Bitwise OR | Result bit is 1 when either corresponding bit is 1 |
-| `^` | Bitwise XOR | Result bit is 1 when corresponding bits differ |
-| `~` | Bitwise complement | Flips every bit |
-| `<<` | Left shift | Shifts bits left, filling low bits with zero |
-| `>>` | Signed right shift | Shifts right while preserving the sign bit |
-| `>>>` | Unsigned right shift | Shifts right while filling high bits with zero |
-
-**Shift examples:** `5 << 1` produces `10`; `16 >> 2` produces `4`; `-1 >>> 1` produces `2147483647` for an `int`.
-
-### Common operator precedence (highest to lowest for these groups)
-
-1. Postfix: `x++`, `x--`
-2. Unary: `++x`, `--x`, `+`, `-`, `!`, `~`
-3. Multiplicative: `*`, `/`, `%`
-4. Additive: `+`, `-`
-5. Shift: `<<`, `>>`, `>>>`
-6. Relational and type test: `<`, `<=`, `>`, `>=`, `instanceof`
-7. Equality: `==`, `!=`
-8. Bitwise AND, XOR, OR: `&`, `^`, `|`
-9. Logical AND, OR: `&&`, `||`
-10. Conditional: `? :`
-11. Assignment: `=`, `+=`, `-=`, `*=`, `/=`, `%=`
-
-Use parentheses when they make the intended grouping clearer.
-
