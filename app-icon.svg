@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#05090d"/>
+  <path d="M62 105h388M62 407h388" stroke="#45ffad" stroke-opacity=".32" stroke-width="8"/>
+  <path d="M110 154h72v204h-72z" fill="#45ffad" opacity=".12"/>
+  <path d="M140 178v156m-28-128 28-28 28 28m-28 100 28 28-28 28" fill="none" stroke="#45ffad" stroke-linecap="round" stroke-linejoin="round" stroke-width="15"/>
+  <text x="215" y="278" fill="#e5fff2" font-family="monospace" font-size="104" font-weight="700">J</text>
+  <text x="286" y="278" fill="#45ffad" font-family="monospace" font-size="104" font-weight="700">V</text>
+  <text x="256" y="352" fill="#8aa79c" font-family="monospace" font-size="27" text-anchor="middle" letter-spacing="5">MASTER JAVA</text>
+</svg>
