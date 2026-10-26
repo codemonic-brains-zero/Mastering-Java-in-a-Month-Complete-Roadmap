@@ -4,6 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Read Java chapter notes, diagrams, and topic-by-topic explanations.">
+  <meta name="theme-color" content="#45ffad">
+  <link rel="manifest" href="../../manifest.json">
+  <link rel="icon" href="../../app-icon.svg" type="image/svg+xml">
   <title>Chapter 1: Introduction to Java | Mastering Java</title>
   <style>
 :root{color-scheme:dark;--bg:#070b10;--panel:rgba(10,17,24,.82);--line:rgba(66,255,173,.25);--text:#e1f5ed;--muted:#8aa79c;--green:#42ffad;--pink:#ff4fd8;--cyan:#52f7ff;--purple:#a98bff;--yellow:#f7ef78}
@@ -1420,5 +1423,41 @@ main[hidden]{display:none!important;visibility:hidden!important}
   }
 })();
 </script>
+<script>
+(function () {
+  const manifestLink = document.querySelector('link[rel="manifest"]');
+  if (!manifestLink) return;
+  const appRoot = new URL('./', manifestLink.href);
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = 'Install app';
+  button.setAttribute('aria-label', 'Install Mastering Java as an app');
+  button.style.cssText = 'position:fixed;z-index:10000;right:16px;bottom:16px;padding:12px 16px;border:1px solid #45ffad;border-radius:10px;background:#0b2119;color:#e5fff2;font:600 13px ui-monospace,monospace;box-shadow:0 8px 28px #0009,0 0 18px #45ffad24;cursor:pointer;display:none';
+  document.body.appendChild(button);
+  let installPrompt = null;
+  window.addEventListener('beforeinstallprompt', function (event) {
+    event.preventDefault();
+    installPrompt = event;
+    button.style.display = 'block';
+  });
+  button.addEventListener('click', async function () {
+    if (!installPrompt) {
+      button.textContent = 'Use browser menu → Install app';
+      window.setTimeout(function () { button.textContent = 'Install app'; }, 3500);
+      return;
+    }
+    installPrompt.prompt();
+    await installPrompt.userChoice;
+    installPrompt = null;
+    button.style.display = 'none';
+  });
+  window.addEventListener('appinstalled', function () { button.style.display = 'none'; });
+  if ('serviceWorker' in navigator && location.protocol === 'https:') {
+    navigator.serviceWorker.register(new URL('service-worker.js', appRoot).href, { scope: appRoot.pathname })
+      .catch(function (error) { console.error('PWA offline support could not be enabled:', error); });
+  }
+})();
+</script>
+
 </body>
 </html>
